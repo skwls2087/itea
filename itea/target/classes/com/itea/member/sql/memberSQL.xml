@@ -18,7 +18,16 @@
 		from member
 		where mmail=#{mmail} and mpw=#{mpw}
 	</select>
-	
+	<!-- 글수정 
+		<update id="modify" parameterType="memberDTO">
+		update member
+		set	btitle 		= #{title},
+				bContent	= #{content},
+				bPw				= #{pw}	
+		where bno=#{no}
+		
+		</update>
+	 -->
 </mapper>
 
 

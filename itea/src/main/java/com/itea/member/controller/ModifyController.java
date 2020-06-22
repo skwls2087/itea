@@ -20,15 +20,16 @@ public class ModifyController {
 	@Autowired
 	ModifyService modifySV;
 	
-	//정보수정 폼 보여주기
+//	//정보수정 폼 보여주기
 	@RequestMapping("member/modifyFrm")
-	public void modifyFrm() {
-		//1.파라미터 받기  mno=회원번호,
-		int mno=
-		//2.비즈니스 로직수행
-		//3.Model
-		//4.View
-	}
-	
+	public void modifyFrm(HttpServletRequest request) {
+//		//1.파라미터 받기  mno=회원번호,
+//		int mno=Integer.parseInt(request.getParameter("mno"));
+//		//2.비즈니스 로직수행
+//		MemberDTO mDto=modifySV.modify(mno);
+//		//3.Model
+//		//4.View
+//	}
+	}	
 	
 }

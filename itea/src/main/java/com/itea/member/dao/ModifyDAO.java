@@ -11,12 +11,10 @@ public class ModifyDAO extends SqlSessionDaoSupport {
 	@Autowired
 	SqlSessionTemplate session;
 	
-	//로그인처리 요청담당  함수
-	public MemberDTO login(MemberDTO mdto) {
-
-		MemberDTO member=session.selectOne("member.login",mdto);
-		
-		return member;
-	}
+//	public MemberDTO modify(int mno) {
+//		session.update("member.modify",mno);
+//		return null;
+//	
+//	}
 	
 }
