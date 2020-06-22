@@ -14,9 +14,9 @@
 	<!-- 회원수 조회 -->
 	<!-- select쿼리의 실행결과의  컬럼수가    1개이면    자바의 데이터타입을 지정 -->
 	<select id="login" resultType="memberDTO">
-		select mno as no, mnick as nick 
+		select *
 		from member
-		where mmail=#{mail} and mpw=#{pw}
+		where mmail=#{mmail} and mpw=#{mpw}
 	</select>
 	
 </mapper>

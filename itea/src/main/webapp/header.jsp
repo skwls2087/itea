@@ -16,6 +16,11 @@
 <!-- font-family: 'Black Han Sans', sans-serif; -->
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 
+
+<!-- JSTL선언 -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <style>
 #main-logo{font-family: 'Do Hyeon', sans-serif; font-size:30px;}
 #nav-join{float:right}
@@ -47,14 +52,31 @@
         <a class="nav-link" href="#">Q&A</a>
       </li>
     </ul>
-    <ul class="navbar-nav navbar-right">
-      <li class="nav-item m-1">
-        <a class="nav-link" href="#">회원가입</a>
-      </li>
-      <li class="nav-item m-1">
-        <a class="nav-link" href="<%= request.getContextPath()%>/loginFrm.co">로그인</a>
-      </li>
+    
+    <ul class="navbar-right">
+	    <c:if test="${empty MNO}님">
+	      <li class="nav-item m-1">
+	        <a class="nav-link" href="#">회원가입</a>
+	      </li>
+	      <li class="nav-item m-1">
+	        <a class="nav-link" href="<%= request.getContextPath()%>/loginFrm.co">로그인</a>
+	      </li>
+	     </c:if>
+	     <c:if test="${!empty MNO}">
+	     
+	      <li class="nav-item m-1">
+	      <div class="container mt-1"> 
+		        <div class="dropdown"> 
+			        <a class="btn btn-primary dropdown-toggle" href="#" data-toggle="dropdown"> ${MNICK} </a> 
+			        <div class="dropdown-menu"> 
+				        <a class="dropdown-item" href="#">정보수정</a> 
+				        <a class="dropdown-item" href="#">로그아웃</a> 
+			        </div> 
+		        </div> 
+	        </div>
+	      </li>
+	      
+	     </c:if>
     </ul>
-
   </div>
 </nav>

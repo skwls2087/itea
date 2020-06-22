@@ -12,11 +12,11 @@ public class LoginDAO extends SqlSessionDaoSupport {
 	SqlSessionTemplate session;
 	
 	//로그인처리 요청담당  함수
-	public void login(MemberDTO mdto) {
+	public MemberDTO login(MemberDTO mdto) {
 
-		System.out.println("DAO옴!");
-		session.selectOne("member.login",mdto);
+		MemberDTO member=session.selectOne("member.login",mdto);
 		
+		return member;
 	}
 	
 }
