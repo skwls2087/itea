@@ -17,15 +17,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 
 
-<!-- JSTL선언 -->
+<!-- JSTL 선언 -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<!-- 네이버 아이디찾기 링크 -->
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+
+<!-- 제이쿼리 선언 -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 <style>
 #main-logo{font-family: 'Do Hyeon', sans-serif; font-size:30px;}
 #nav-join{float:right;}
 #mNick{color:white;}
-.container{padding-left: 0px;margin-left:0px;}
+#right-nav .container{padding-left: 0px;margin-left:0px;}
 .dropdown-menu{left:-80px;}
 </style>
 </head>
@@ -70,13 +75,13 @@
 	     <!-- 로그인시 -->
 	     <c:if test="${!empty MNO}">
 	     
-	      <li class="nav-item m-1">
+	      <li class="nav-item m-1" id="right-nav">
 	      <div class="container"> 
 		        <div class="dropdown"> 
 			        <a id="mNick" class="dropdown-toggle" href="#" data-toggle="dropdown"> ${MNICK}님 </a> 
 			        <div class="dropdown-menu"> 
 				        <a class="dropdown-item" href="#">정보수정</a> 
-				        <a class="dropdown-item" href="#">로그아웃</a> 
+				        <a class="dropdown-item" href="<%= request.getContextPath()%>/member/logoutProc.co">로그아웃</a> 
 			        </div> 
 		        </div> 
 	        </div>
