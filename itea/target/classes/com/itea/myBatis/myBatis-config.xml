@@ -22,6 +22,16 @@
 		<mapper resource="/com/itea/member/sql/memberSQL.xml"/>
 	</mappers>
 	
+	<!-- 아이디 찾기 -->
+	<select id="find_id" parameterType="String" resultType="String">
+		select id from member where email = #{email}
+	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="update_pw" parameterType="member">
+		update member set pw = #{pw} where id = #{id}
+	</update>
+	
 </configuration>
 
 

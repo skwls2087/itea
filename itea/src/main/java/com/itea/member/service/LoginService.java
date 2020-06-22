@@ -1,8 +1,8 @@
 package com.itea.member.service;
 
-import java.util.HashMap;
+import java.io.PrintWriter;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,55 @@ public class LoginService {
 	
 	@Autowired
 	LoginDAO loginDAO;
+	
+	// 비밀번호 찾기
+		public void find_pw(HttpServletResponse response, MemberDTO member) throws Exception {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			// 이름이 없으면
+			if(loginDAO.check_name(member.getMname(),response)==0) {
+				out.print("이름이 없습니다.");
+				out.close();
+			}
+			// 가입에 사용한 이메일이 아니면
+			else if(!member.getMid().equals(loginDAO.login(member.getMid()))) {
+				out.print("잘못된 이메일 입니다.");
+				out.close();
+			}else {
+				// 임시 비밀번호 생성
+				String pw = "";
+				for (int i = 0; i < 12; i++) {
+					pw += (char) ((Math.random() * 26) + 97);
+				}
+				member.setMpw(pw);
+				// 비밀번호 변경
+				loginDAO.update_pw(member);
+				// 비밀번호 변경 메일 발송
+				send_mail(member, "find_pw");
+				
+				out.print("이메일로 임시 비밀번호를 발송하였습니다.");
+				out.close();
+			}
+		}
+	
+	// 아이디 찾기
+		public String find_id(HttpServletResponse response, String email) throws Exception {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			String id = loginDAO.find_id(email);
+			
+			if (id == null) {
+				out.println("<script>");
+				out.println("alert('가입된 아이디가 없습니다.');");
+				out.println("history.go(-1);");
+				out.println("</script>");
+				out.close();
+				return null;
+			} else {
+				return id;
+			}
+		}
+		
 	
 	//로그인처리 요청담당  함수
 	public void login() {

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!-- 아이디 찾기 -->
+	<select id="searchId" resultType="String">
+		select ifnull(user_id, 0) from userinfo 
+        where user_name = #{user_name} and user_phone = #{user_phone} and user_key = 'Y'
+	</select>
+
+<!-- 회원 임시 비밀번호-->
+	<update id="searchPassword" parameterType="Map">
+		update userinfo set user_pw = #{param3} where user_id = #{param1} and user_email = #{param2}
+	</update>
+</beans>
