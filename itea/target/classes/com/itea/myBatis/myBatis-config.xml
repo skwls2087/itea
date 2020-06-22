@@ -11,7 +11,12 @@
 		<!-- 일반화 키 사용여부 -->
 		<setting name="useGeneratedKeys" value="true" />
 		<!-- 기본 질의 실행 방식 -->
-		<setting name="defaultExecutorType" value="REUSE" />		
+		<setting name="defaultExecutorType" value="REUSE" />	
+		
+		<setting name="aggressiveLazyLoading" value="true" />
+		<setting name="multipleResultSetsEnabled" value="true" />
+		<setting name="useColumnLabel" value="true" />
+		<setting name="defaultStatementTimeout" value="5000" />	
 	</settings>
 	
 	<typeAliases>  

@@ -10,8 +10,28 @@
 <!-- myBatis-config.xml의     mapper로 반드시 등록되어야 한다 --> 
 <mapper namespace="member">
 
-	 
-	<!-- 회원수 조회 -->
+	<!-- 아이디(이메일) 중복 검사 조예인-->
+	<select id="check_mmail" parameterType="string" resultType="int">
+		select count(*) from member where mmail = #{mmail}
+	</select>
+
+		<!-- 아이디 찾기 조예인-->
+	<select id="find_id" parameterType="string" resultType="string">
+		select mmail from member 
+		where mname = #{mname} 
+			and mphone = #{mphone}
+	</select>
+	
+	<!-- 비밀번호 변경 조예인-->
+	<update id="update_pw" parameterType="memberDTO">
+		update member set mpw = #{mpw} 
+		where mmail = #{mmail}
+			and mname = #{mname}
+	</update>
+	
+
+	
+	<!-- 회원수 조회 신나진-->
 	<!-- select쿼리의 실행결과의  컬럼수가    1개이면    자바의 데이터타입을 지정 -->
 	<select id="login" resultType="memberDTO">
 		select *
