@@ -14,7 +14,10 @@
 		<setting name="defaultExecutorType" value="REUSE" />		
 	</settings>
 	
-	<typeAliases>          
+	<typeAliases>  
+    <typeAlias type="com.itea.member.dto.MemberDTO"  alias="memberDTO"/>
+		<typeAlias type="java.lang.Integer" alias="int"/> 
+		<typeAlias type="java.lang.String" alias="string"/>  
 	</typeAliases>	
 	
 	<mappers>
