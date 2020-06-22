@@ -30,12 +30,16 @@ public class LoginController {
 	public String loginProc(MemberDTO mdto, HttpSession session,
 			HttpServletRequest request,HttpServletResponse response) throws IOException {
 		
-		System.out.println("컨트롤러옴!");
+		//해당 이메일과 비밀번호가 존재하는지 검색
+		MemberDTO member=loginSV.login(mdto);
 		
-		loginSV.login();
+		if(member==null) { //일치하는 회원 없음 -> 로그인폼으로 다시 이동
+			return "member/login";
+		}else{ //일치하는 회원 존재함 -> 회원정보를 가지고 메인화면으로 이동
+			session.setAttribute("MNO", member.getMno());
+			session.setAttribute("MNICK", member.getMnick());
+		}
 		
-		response.sendRedirect(".");
-		
-		return "member/login";
+		return "../../index";
 	}
 }
