@@ -4,75 +4,83 @@ import java.sql.Date;
 
 public class MemberDTO {
 	
-	private int mno;
-	private String mmail;
-	private String mpw;
-	private String mname;
-	private String mnick;
-	private String msex;
-	private String mbirth;
-	private String mgradu;
-	private Date mdate;
+	//db에는 앞에 m이 붙은 이름으로 저장됨(ex.mno)
+	private int no;
+	private String mail;
+	private String pw;
+	private String name;
+	private String phone;
+	private String nick;
+	private String sex;
+	private String birth;
+	private String gradu;
+	private Date date;
 	
-	public int getMno() {
-		return mno;
+	public int getNo() {
+		return no;
 	}
-	public void setMno(int mno) {
-		this.mno = mno;
+	public void setNo(int no) {
+		this.no = no;
 	}
-	public String getMmail() {
-		return mmail;
+	public String getMail() {
+		return mail;
 	}
-	public void setMmail(String mmail) {
-		this.mmail = mmail;
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
-	public String getMpw() {
-		return mpw;
+	public String getPw() {
+		return pw;
 	}
-	public void setMpw(String mpw) {
-		this.mpw = mpw;
+	public void setPw(String pw) {
+		this.pw = pw;
 	}
-	public String getMname() {
-		return mname;
+	public String getName() {
+		return name;
 	}
-	public void setMname(String mname) {
-		this.mname = mname;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getMnick() {
-		return mnick;
+	public String getPhone() {
+		return phone;
 	}
-	public void setMnick(String mnick) {
-		this.mnick = mnick;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
-	public String getMsex() {
-		return msex;
+	public String getNick() {
+		return nick;
 	}
-	public void setMsex(String msex) {
-		this.msex = msex;
+	public void setNick(String nick) {
+		this.nick = nick;
 	}
-	public String getMbirth() {
-		return mbirth;
+	public String getSex() {
+		return sex;
 	}
-	public void setMbirth(String mbirth) {
-		this.mbirth = mbirth;
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
-	public String getMgradu() {
-		return mgradu;
+	public String getBirth() {
+		return birth;
 	}
-	public void setMgradu(String mgradu) {
-		this.mgradu = mgradu;
+	public void setBirth(String birth) {
+		this.birth = birth;
 	}
-	public Date getMdate() {
-		return mdate;
+	public String getGradu() {
+		return gradu;
 	}
-	public void setMdate(Date mdate) {
-		this.mdate = mdate;
+	public void setGradu(String gradu) {
+		this.gradu = gradu;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	
 	@Override
 	public String toString() {
-		return "MemberDTO [mno=" + mno + ", mmail=" + mmail + ", mpw=" + mpw + ", mname=" + mname + ", mnick=" + mnick
-				+ ", msex=" + msex + ", mbirth=" + mbirth + ", mgradu=" + mgradu + ", mdate=" + mdate + "]";
+		return "MemberDTO [no=" + no + ", mail=" + mail + ", pw=" + pw + ", name=" + name + ", phone=" + phone
+				+ ", nick=" + nick + ", sex=" + sex + ", birth=" + birth + ", gradu=" + gradu + ", date=" + date + "]";
 	}
 	
 }
