@@ -17,12 +17,11 @@ public class LoginService {
 	LoginDAO loginDAO;
 	
 	//로그인처리 요청담당  함수
-	public void login() {
-
-		loginDAO.login();
+	public void login(MemberDTO mdto) {
 		
 		System.out.println("서비스옴!");
 		
+		loginDAO.login(mdto);
+		
 	}
-
 }

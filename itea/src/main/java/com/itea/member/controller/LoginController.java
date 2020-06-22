@@ -31,8 +31,10 @@ public class LoginController {
 			HttpServletRequest request,HttpServletResponse response) throws IOException {
 		
 		System.out.println("컨트롤러옴!");
+		System.out.println(mdto);
 		
-		loginSV.login();
+		//해당 이메일과 비밀번호가 존재하는지 검색
+		loginSV.login(mdto);
 		
 		response.sendRedirect(".");
 		
