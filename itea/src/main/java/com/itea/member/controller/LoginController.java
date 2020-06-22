@@ -20,13 +20,12 @@ public class LoginController {
 	LoginService loginSV;
 	
 	//로그인 폼 보여주기
-	@RequestMapping("loginFrm")
-	public String loginFrm() {
-		return "member/login";
+	@RequestMapping("member/loginFrm")
+	public void loginFrm() {
 	}
 	
 	//로그인 로직 수행
-	@RequestMapping("loginProc")
+	@RequestMapping("member/loginProc")
 	public String loginProc(MemberDTO mdto, HttpSession session,
 			HttpServletRequest request,HttpServletResponse response) throws IOException {
 		
