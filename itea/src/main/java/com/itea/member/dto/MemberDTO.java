@@ -1,16 +1,30 @@
 package com.itea.member.dto;
 
+import java.sql.Date;
+
 public class MemberDTO {
 	
-	private String mid;
+	private int mno;
+	private String mmail;
 	private String mpw;
 	private String mname;
+	private String mnick;
+	private String msex;
+	private String mbirth;
+	private String mgradu;
+	private Date mdate;
 	
-	public String getMid() {
-		return mid;
+	public int getMno() {
+		return mno;
 	}
-	public void setMid(String mid) {
-		this.mid = mid;
+	public void setMno(int mno) {
+		this.mno = mno;
+	}
+	public String getMmail() {
+		return mmail;
+	}
+	public void setMmail(String mmail) {
+		this.mmail = mmail;
 	}
 	public String getMpw() {
 		return mpw;
@@ -24,10 +38,41 @@ public class MemberDTO {
 	public void setMname(String mname) {
 		this.mname = mname;
 	}
+	public String getMnick() {
+		return mnick;
+	}
+	public void setMnick(String mnick) {
+		this.mnick = mnick;
+	}
+	public String getMsex() {
+		return msex;
+	}
+	public void setMsex(String msex) {
+		this.msex = msex;
+	}
+	public String getMbirth() {
+		return mbirth;
+	}
+	public void setMbirth(String mbirth) {
+		this.mbirth = mbirth;
+	}
+	public String getMgradu() {
+		return mgradu;
+	}
+	public void setMgradu(String mgradu) {
+		this.mgradu = mgradu;
+	}
+	public Date getMdate() {
+		return mdate;
+	}
+	public void setMdate(Date mdate) {
+		this.mdate = mdate;
+	}
 	
 	@Override
 	public String toString() {
-		return "member [mid=" + mid + ", mpw=" + mpw + ", mname=" + mname + "]";
+		return "MemberDTO [mno=" + mno + ", mmail=" + mmail + ", mpw=" + mpw + ", mname=" + mname + ", mnick=" + mnick
+				+ ", msex=" + msex + ", mbirth=" + mbirth + ", mgradu=" + mgradu + ", mdate=" + mdate + "]";
 	}
 	
 }
