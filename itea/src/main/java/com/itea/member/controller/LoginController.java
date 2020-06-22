@@ -49,12 +49,13 @@ public class LoginController {
 	}
 
 	//로그인 폼 보여주기
-	@RequestMapping("member/loginFrm")
-	public void loginFrm() {
+	@RequestMapping("loginFrm")
+	public String loginFrm() {
+		return "member/login";
 	}
 	
 	//로그인 로직 수행
-	@RequestMapping("member/loginProc")
+	@RequestMapping("loginProc")
 	public String loginProc(MemberDTO mdto, HttpSession session,
 			HttpServletRequest request,HttpServletResponse response) throws IOException {
 		
