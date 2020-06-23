@@ -14,12 +14,17 @@
 <script>
 $(function(){
 	$("#findBtn").click(function(){
-		var $mphone1 = $("#mphone1").val();
+		var phone1 = $("#mphone1").val();
+		var phone2 = $("#mphone2").val();
+		var phone3 = $("#mphone3").val();
 		var phone1 = document.frm.mphone1.value;
 		var phone2 = document.frm.mphone2.value;
 		var phone3 = document.frm.mphone3.value;
 		var phone = phone1 +"-" + phone2 +"-" + phone3;
-		document.getElementById("mphone").value = phone;
+		$('#mphone').value = phone;
+		document.getElementById('contents'); 
+		var contents = $('#contents'); 
+
 	});
 });
 </script>

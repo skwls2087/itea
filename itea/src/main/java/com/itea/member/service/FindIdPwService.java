@@ -40,10 +40,10 @@ public class FindIdPwService {
 			out.close();
 			return null;
 		} else {
-			out.println("<script>");
-			out.println("alert('아이디는'+${mmail}+'입니다.');");
-			out.println("</script>");
-			out.close();
+			//out.println("<script>");
+			//out.println("alert('아이디는'+${mmail}+'입니다.');");
+			//out.println("</script>");
+			//out.close();
 			return mmail;
 		}
 	}
@@ -61,6 +61,7 @@ public class FindIdPwService {
 
 		// 가입에 사용한 이메일이 아니면
 		//else if(!member.getEmail().equals(manager.login(member.getId()).getEmail())) {
+
 		else if(!member.getMmail().equals(loginDAO.login(member.getMmail()))) {
 			out.print("잘못된 아이디 입니다.");
 			out.close();
