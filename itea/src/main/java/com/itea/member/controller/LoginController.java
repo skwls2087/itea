@@ -8,10 +8,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itea.member.dto.MemberDTO;
 import com.itea.member.service.LoginService;
+import com.itea.snslogin.SNSLogin;
+import com.itea.snslogin.SnsValue;
 
 @Controller
 public class LoginController {
@@ -19,12 +22,18 @@ public class LoginController {
 	@Autowired
 	LoginService loginSV;
 	
+	@Autowired
+	SnsValue naverSns;
+	
 	//로그인 폼 보여주기
 	@RequestMapping("member/loginFrm")
-	public void loginFrm() {
+	public void loginFrm(Model model) {
+		
+		SNSLogin snsLogin=new SNSLogin(naverSns);
+		model.addAttribute("naver_url",snsLogin.getNaverAuthURL());
 	}
 	
-	//로그인 로직 수행
+	//이메일 로그인 로직 수행
 	@RequestMapping("member/loginProc")
 	public String loginProc(MemberDTO mdto, HttpSession session,
 			HttpServletRequest request,HttpServletResponse response) throws IOException {
@@ -49,6 +58,17 @@ public class LoginController {
 		System.out.println("로그아웃 됨");
 		return "../../index";
 	}
+	
+	//sns로그인
+	@RequestMapping("member/snsloginProc")
+	public String snsLogin(Model model) throws IOException {
+		
+		SNSLogin snsLogin=new SNSLogin(naverSns);
+		model.addAttribute("naver_url",snsLogin.getNaverAuthURL());
+		
+		return "../../index";
+	}
+	
 }
 
 
