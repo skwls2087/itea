@@ -13,11 +13,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $(function(){
-	var phone1=$("#mphone1").value;
-	var phone2=$("#mphone1").value;
-	var phone3=$("#mphone1").value;
+	var phone1=$("#mphone1").val();
+	var phone2=$("#mphone2").val();
+	var phone3=$("#mphone3").val();
 	var phone=phone1+"-"+phone2+"-"+phone3;
-	$("#mphone").value=phone;
+	$("#mphone").val()=phone;
 });
 </script>
 </head>

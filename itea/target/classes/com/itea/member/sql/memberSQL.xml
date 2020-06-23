@@ -10,13 +10,8 @@
 <!-- myBatis-config.xml의     mapper로 반드시 등록되어야 한다 --> 
 <mapper namespace="member">
 
-	<!-- 아이디(이메일) 중복 검사 조예인-->
-	<select id="check_mmail" parameterType="string" resultType="int">
-		select count(*) from member where mmail = #{mmail}
-	</select>
-
-		<!-- 아이디 찾기 조예인-->
-	<select id="find_id" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	<!-- 아이디 찾기 조예인-->
+	<select id="find_id" parameterType="Hashmap" resultType="Hashmap">
 		select mmail from member 
 		where mname = #{mname} 
 			and mphone = #{mphone}

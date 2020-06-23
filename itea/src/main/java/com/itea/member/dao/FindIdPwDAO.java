@@ -1,6 +1,5 @@
 package com.itea.member.dao;
 
-import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
@@ -32,6 +31,11 @@ public class FindIdPwDAO {
 	@Transactional
 	public int update_pw(MemberDTO member) throws Exception{
 		return session.update("member.update_pw", member);
+	}
+
+	//이름 확인
+	public int check_name(String mname, HttpServletResponse response) {
+		return 0;
 	}
 
 	

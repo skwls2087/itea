@@ -11,7 +11,7 @@
 	$(function(){
 		$("#findBtn").click(function(){
 			$.ajax({
-				url : "../member/find_pw.do",
+				url : "../member/find_pw.co",
 				type : "POST",
 				data : {
 					id : $("#id").val(),
@@ -34,12 +34,12 @@
 			</div>
 			<div>
 				<p>
-					<label>ID</label>
-					<input class="w3-input" type="text" id="id" name="id" required>
+					<label>이름</label>
+					<input class="w3-input" type="text" id="mname" name="mname" required>
 				</p>
 				<p>
-					<label>Email</label>
-					<input class="w3-input" type="text" id="email" name="email" required>
+					<label>아이디</label>
+					<input class="w3-input" type="text" id="mmail" name="mmail" required>
 				</p>
 				<p class="w3-center">
 					<button type="button" id=findBtn class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">find</button>
