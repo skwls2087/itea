@@ -19,6 +19,8 @@
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" name="mpw" id="inputPassword" class="form-control" placeholder="Password" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit">이메일 로그인</button>
+      	<a href="./find_id_form.co">아이디찾기</a> 
+      	<a href="./find_pw_form.co">비밀번호찾기</a>
       </form>
       	<br/><hr><br/>
       	
