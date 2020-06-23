@@ -10,11 +10,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
-	$(function(){
-		$("#loginBtn").click(function(){
-			location.href='../member/loginFrm.co';
-		})
+$(function(){
+	$("#loginBtn").click(function(){
+		location.href='../member/loginFrm.co';
 	})
+})
 </script>
 <title>아이디 찾기</title>
 </head>

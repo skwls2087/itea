@@ -13,18 +13,21 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $(function(){
-	var phone1=$("#mphone1").val();
-	var phone2=$("#mphone2").val();
-	var phone3=$("#mphone3").val();
-	var phone=phone1+"-"+phone2+"-"+phone3;
-	$("#mphone").val()=phone;
+	$("#findBtn").click(function(){
+		var $mphone1 = $("#mphone1").val();
+		var phone1 = document.frm.mphone1.value;
+		var phone2 = document.frm.mphone2.value;
+		var phone3 = document.frm.mphone3.value;
+		var phone = phone1 +"-" + phone2 +"-" + phone3;
+		document.getElementById("mphone").value = phone;
+	});
 });
 </script>
 </head>
 <body>
 	<div class="w3-content w3-margin-top">
 		<div class="w3-container w3-card-4">
-			<form action="../member/find_id.co" method="POST">
+			<form action="../member/find_id.co" method="POST" id="find_id">
 				<div class="w3-center w3-large w3-margin-top w3-margin-bottom">
 					<h3>아이디 찾기</h3>
 				</div>
