@@ -33,7 +33,7 @@ public class LoginController {
 		MemberDTO member=loginSV.login(mdto);
 		
 		if(member==null) { //일치하는 회원 없음 -> 로그인폼으로 다시 이동
-			return "member/login";
+			return "member/loginFrm";
 		}else{ //일치하는 회원 존재함 -> 회원정보를 가지고 메인화면으로 이동
 			session.setAttribute("MNO", member.getMno());
 			session.setAttribute("MNICK", member.getMnick());
@@ -41,4 +41,15 @@ public class LoginController {
 		
 		return "../../index";
 	}
+	
+	//로그아웃 로직 수행
+	@RequestMapping("member/logoutProc")
+	public String logoutProc(HttpSession session) {
+		session.invalidate();
+		System.out.println("로그아웃 됨");
+		return "../../index";
+	}
 }
+
+
+
