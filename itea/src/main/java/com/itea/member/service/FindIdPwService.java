@@ -4,8 +4,8 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.itea.member.dao.FindIdPwDAO;
@@ -41,7 +41,7 @@ public class FindIdPwService {
 			return null;
 		} else {
 			out.println("<script>");
-			out.println("alert('아이디는'+mmail+'입니다.');");
+			out.println("alert('아이디는'+${mmail}+'입니다.');");
 			out.println("</script>");
 			out.close();
 			return mmail;
@@ -57,9 +57,11 @@ public class FindIdPwService {
 			out.print("이름이 없습니다.");
 			out.close();
 		}
+		//manager.login(member.getId()).getEmail())) {
+
 		// 가입에 사용한 이메일이 아니면
-		else if(!member.getMmail().equals(loginDAO.login(member.getMmail()) {
-			out.print("잘못된 이메일 입니다.");
+		else if(!member.getMmail().equals(loginDAO.login(member.getMmail())) {
+			out.print("잘못된 아이디 입니다.");
 			out.close();
 		}else {
 			// 임시 비밀번호 생성
@@ -77,6 +79,50 @@ public class FindIdPwService {
 			out.close();
 		}
 	}
+	
 		
+	// 이메일 발송
+	public void send_mail(MemberDTO member, String div) throws Exception {
+		// Mail Server 설정
+		String charSet = "utf-8";
+		String hostSMTP = "smtp.naver.com";
+		String hostSMTPid = "이메일 입력";
+		String hostSMTPpwd = "비밀번호 입력";
+
+		// 보내는 사람 EMail, 제목, 내용
+		String fromEmail = "이메일 입력";
+		String fromName = "Spring Homepage";
+		String subject = "";
+		String msg = "";
+		
+		if(div.equals("find_pw")) {
+			subject = "Spring Homepage 임시 비밀번호 입니다.";
+			msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
+			msg += "<h3 style='color: blue;'>";
+			msg += member.getMname() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
+			msg += "<p>임시 비밀번호 : ";
+			msg += member.getMpw() + "</p></div>";
+		}
+		// 받는 사람 E-Mail 주소
+		String mail = member.getMmail();
+		try {
+			HtmlEmail email = new HtmlEmail();
+			email.setDebug(true);
+			email.setCharset(charSet);
+			email.setSSL(true);
+			email.setHostName(hostSMTP);
+			email.setSmtpPort(587);
+
+			email.setAuthentication(hostSMTPid, hostSMTPpwd);
+			email.setTLS(true);
+			email.addTo(mail, charSet);
+			email.setFrom(fromEmail, fromName, charSet);
+			email.setSubject(subject);
+			email.setHtmlMsg(msg);
+			email.send();
+		} catch (Exception e) {
+			System.out.println("메일발송 실패 : " + e);
+		}
+	}
 	
 }
