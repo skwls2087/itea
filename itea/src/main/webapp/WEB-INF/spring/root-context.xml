@@ -12,7 +12,7 @@
   
   <!--	컨넥션 풀 설정을 위한 작업 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
         <property name="url" value="jdbc:mysql://192.168.56.93:3306/itea?characterEncoding=utf8&amp;serverTimezone=UTC&amp;autoReconnection=true"></property>
         <property name="username" value="root"></property>   
         <property name="password" value="1234"></property>
@@ -45,10 +45,13 @@
 	<bean id ="loginDAO" class = "com.itea.member.dao.LoginDAO">
 		<property name ="sqlSessionTemplate" ref  ="sqlSession"/> 
 	</bean>
+	<bean id ="modifyDAO" class = "com.itea.member.dao.ModifyDAO">
+		<property name ="sqlSessionTemplate" ref  ="sqlSession"/> 
+	</bean>
 	
 	<!-- Service -->
 	<bean id="loginSV" class="com.itea.member.service.LoginService"/>
-	
+	<bean id="modifySV" class="com.itea.member.service.ModifyService"/>
 </beans>
 
 

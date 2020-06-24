@@ -26,5 +26,15 @@
       	<hr><br/>
       	
      	<!-- sns계정으로 로그인하기 -->
+
 		  <!-- 1.네이버 -->
 		  <a href="${naver_url}"><img height="50" src="${pageContext.request.contextPath}/resources/img/naverlogin.jpg"/></a>
+
+			 <!-- 2.카카오 -->  
+			 
+		
+			 <!-- 3.구글 -->
+			 
+			
+			 <!-- 4.페이스북 -->
+
