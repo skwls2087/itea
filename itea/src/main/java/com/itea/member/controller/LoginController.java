@@ -77,7 +77,7 @@ public class LoginController {
 	
 	//네이버 로그인 성공시 callback호출 메소드
 	@RequestMapping(value = "/callback")
-	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
+	public String callback(HttpServletRequest request,Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
 		
 		System.out.println("여기는 callback");
 		
@@ -118,7 +118,7 @@ public class LoginController {
 			
 		}else { //회원이 아니면 회원가입페이지로 이동
 			
-			request.setAttribute("noticePage",noticePage);
+			request.setAttribute("mmail",email);
 			return "/member/joinFrmSNS";
 		}
 		
