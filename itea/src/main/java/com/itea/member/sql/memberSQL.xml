@@ -12,7 +12,7 @@
 	
 	<!-- 아이디 찾기 조예인-->
 	<select id="find_id" resultType="string" parameterType="memberDTO">
-		select mmail from member 
+		select mclass,mmail from member 
     where mname = #{mname} and mphone = #{mphone}
 	</select>
 	

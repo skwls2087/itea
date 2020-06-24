@@ -27,10 +27,11 @@ $(function(){
 			</div>
 			<div>
 				<h5>
-					${fn:substring(mmail,0,4) }
-					<c:foreach begin="1" end="${fn:length(mmail)-4}">
+					${mdto.mmail}
+					${fn:substring(mmail,0,4)}
+				<%--	<c:foreach begin="1" end="${fn:length(mmail)-4}">
 						*
-					</c:foreach>
+					</c:foreach>--%>
 				</h5>
 				<p class="w3-center">
 					<button type="button" id=loginBtn class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">Login</button>

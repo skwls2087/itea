@@ -1,5 +1,7 @@
 package com.itea.member.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,9 +20,11 @@ public class FindIdPwDAO {
 	}
 	
 	// 아이디 찾기
-	public String find_id(MemberDTO mdto) throws Exception{
+	public ArrayList<MemberDTO> find_id(MemberDTO mdto) throws Exception{
 		System.out.println("dao들어옴");
-		return session.selectOne("member.find_id", mdto);
+		ArrayList<MemberDTO> list = null;
+		list = (ArrayList)session.selectList("member.find_id", mdto);
+		return list;
 	}
 	
 	// 비밀번호 변경

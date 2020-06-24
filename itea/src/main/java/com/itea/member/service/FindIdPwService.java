@@ -1,6 +1,7 @@
 package com.itea.member.service;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.itea.member.dao.FindIdPwDAO;
 import com.itea.member.dao.LoginDAO;
 import com.itea.member.dto.MemberDTO;
+
+import summer.com.dto.FileBoardDTO;
 
 public class FindIdPwService {
 	
@@ -40,11 +43,14 @@ public class FindIdPwService {
 
 
 	// 아이디 찾기
-	public String find_id(HttpServletResponse response, MemberDTO mdto) throws Exception {
+	public ArrayList find_id(HttpServletResponse response, MemberDTO mdto) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		System.out.println("서비스들어옴");
 		System.out.println(mdto);
+		
+		ArrayList<MemberDTO> list = ;
+		
 		String mmail=findidpwDAO.find_id(mdto);
 		System.out.println(mmail);
 		
