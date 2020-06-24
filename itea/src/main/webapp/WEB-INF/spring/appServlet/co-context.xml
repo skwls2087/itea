@@ -24,21 +24,6 @@
 
 
 	<!-- 네이버로 login -->
-	<beans:bean id="naverClientID" class="java.lang.String">
-	   <beans:constructor-arg value="68tNfP0GUh1VB4b0suSF" />
-    </beans:bean>
-	<beans:bean id="naverClientSecret" class="java.lang.String">
-		<beans:constructor-arg value="3QjSoLMavZ" />
-	</beans:bean>
-	<beans:bean id="naverRedirectUrl" class="java.lang.String">
-		<beans:constructor-arg value="http://localhost:8080/spring/" />
-	</beans:bean>
-
-	<beans:bean id="naverSns" class="com.itea.snslogin.SnsValue">
-		<beans:constructor-arg value="naver" />
-		<beans:constructor-arg ref="naverClientID" />
-		<beans:constructor-arg ref="naverClientSecret" />
-		<beans:constructor-arg ref="naverRedirectUrl" />
-	</beans:bean>
+	<beans:bean id="naverLoginBO" class="com.itea.snslogin.NaverLoginBO" />
 	
 </beans:beans>
