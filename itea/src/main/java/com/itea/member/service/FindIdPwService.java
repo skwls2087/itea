@@ -48,6 +48,7 @@ public class FindIdPwService {
 		
 		ArrayList<MemberDTO> list = findidpwDAO.find_id(mdto);
 		
+		System.out.println(list);
 		if (list == null || list.size()==0) {
 			out.println("<script>");
 			out.println("alert('가입된 아이디가 없습니다.');");

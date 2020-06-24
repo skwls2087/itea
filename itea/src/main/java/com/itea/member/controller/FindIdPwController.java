@@ -39,7 +39,7 @@ public class FindIdPwController {
 		String mphone = request.getParameter("mphone");
 
 		ArrayList<MemberDTO> list = findidpwSV.find_id(response,mdto);
-		
+
 		request.setAttribute("LIST", list);
 		
 		return "/member/find_id";

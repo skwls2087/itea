@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" trimDirectiveWhitespaces = "true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
@@ -44,8 +44,8 @@ $(function(){
 						</c:when>
 					</c:choose><br/>
 					<br/>
-					${fn:substring(mmail,0,4)}
-					<c:forEach var="i" begin="1" end="${fn:indexOf(mmail,'@')-4}">
+					${fn:substring(mmail,0,3)}
+					<c:forEach var="i" begin="1" end="${fn:indexOf(mmail,'@')-3}">
 						<c:forEach var="j" items="*">
 							*
 		        </c:forEach>
