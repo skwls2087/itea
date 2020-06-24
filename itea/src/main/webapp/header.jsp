@@ -65,7 +65,7 @@
     	 <!-- 비로그인시 -->
 	     <c:if test="${empty MNO}">
 	      <li class="nav-item m-1">
-	        <a class="nav-link" href="#">회원가입</a>
+	        <a class="nav-link" href="<%= request.getContextPath()%>/member/joinFrm.co">회원가입</a>
 	      </li>
 	      <li class="nav-item m-1">
 	        <a class="nav-link" href="<%= request.getContextPath()%>/member/loginFrm.co">로그인</a>
