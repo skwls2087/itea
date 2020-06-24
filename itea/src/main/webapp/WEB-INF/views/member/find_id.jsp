@@ -29,6 +29,7 @@ $(function(){
 				<h5>
 					${fn:substring(mmail,0,4) }
 					<c:foreach begin="1" end="${fn:length(mmail)-4}">
+						*
 					</c:foreach>
 				</h5>
 				<p class="w3-center">

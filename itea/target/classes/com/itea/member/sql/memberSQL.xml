@@ -11,12 +11,10 @@
 <mapper namespace="member">
 	
 	<!-- 아이디 찾기 조예인-->
-	<select id="find_id" resultType="memberDTO" parameterType="memberDTO">
-		select ifnull(mmail, 0) from member 
-    where mname = #{mname} 
-    	and mphone = #{mphone}
+	<select id="find_id" resultType="string" parameterType="memberDTO">
+		select mmail from member 
+    where mname = #{mname} and mphone = #{mphone}
 	</select>
-	
 	
 	<!-- 비밀번호 변경 조예인-->
 	<update id="update_pw" parameterType="memberDTO">

@@ -16,7 +16,11 @@ public class FindIdPwService {
 	
 	@Autowired
 	SqlSessionTemplate session;
+	
+	@Autowired
 	FindIdPwDAO findidpwDAO;
+	
+	@Autowired
 	LoginDAO loginDAO;
 	
 	
@@ -36,12 +40,15 @@ public class FindIdPwService {
 
 
 	// 아이디 찾기
-	public MemberDTO find_id(HttpServletResponse response, MemberDTO mdto) throws Exception {
+	public String find_id(HttpServletResponse response, MemberDTO mdto) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		String member=findidpwDAO.find_id(mdto);
+		System.out.println("서비스들어옴");
+		System.out.println(mdto);
+		String mmail=findidpwDAO.find_id(mdto);
+		System.out.println(mmail);
 		
-		if (member == null) {
+		if (mmail == null || mmail.length()==0) {
 			out.println("<script>");
 			out.println("alert('가입된 아이디가 없습니다.');");
 			out.println("history.go(-1);");
@@ -51,7 +58,7 @@ public class FindIdPwService {
 			return null;
 		} else {
 			System.out.println("아이디가 있음");
-			return member;
+			return mmail;
 		}
 	}
 	
