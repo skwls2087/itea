@@ -26,7 +26,7 @@ $(function(){
 <body>
 	<div class="w3-content w3-margin-top">
 		<div class="w3-container w3-card-4">
-			<form action="../member/find_id.co" method="get" id="find_id">
+			<form action="../member/find_id.co" method="post" id="find_id">
 				<div class="w3-center w3-large w3-margin-top w3-margin-bottom">
 					<h3>아이디 찾기</h3>
 				</div>

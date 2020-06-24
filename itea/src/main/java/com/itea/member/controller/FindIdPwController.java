@@ -28,10 +28,8 @@ public class FindIdPwController {
 	
 	
 	// 아이디 찾기
-	@RequestMapping("/find_id.co")
-	public String find_id(MemberDTO mdto, HttpSession session,
-			HttpServletResponse response) 
-					throws Exception{
+	@RequestMapping("/find_id")
+	public String find_id(MemberDTO mdto,HttpServletResponse response) throws Exception{
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
@@ -47,7 +45,7 @@ public class FindIdPwController {
 			out.close();
 			return null;
 		} else { //일치하는 회원 존재함
-			return "/find_id.co";
+			return "/find_id";
 		}
 	}
 	
