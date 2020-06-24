@@ -10,12 +10,27 @@
 <!-- myBatis-config.xml의     mapper로 반드시 등록되어야 한다 --> 
 <mapper namespace="member">
 
-	<!-- 아이디 찾기 조예인-->
+	<!-- 아이디 찾기 조예인
 	<select id="find_id" parameterType="Hashmap" resultType="Hashmap">
 		select mmail from member 
 		where mname = #{mname} 
 			and mphone = #{mphone}
+	</select>-->
+	
+	<!-- 아이디 찾기 
+	<select id="find_id" resultType="string">
+		select ifnull(mmail, 0) from member 
+    where mname = #{mname} 
+    	and mphone = #{mphone}
+	</select>-->
+	
+	<!-- 아이디 찾기 -->
+	<select id="find_id" resultType="memberDTO">
+		select ifnull(mmail, 0) from member 
+    where mname = #{mname} 
+    	and mphone = #{mphone}
 	</select>
+	
 	
 	<!-- 비밀번호 변경 조예인-->
 	<update id="update_pw" parameterType="memberDTO">

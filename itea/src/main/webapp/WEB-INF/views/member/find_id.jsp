@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -26,7 +27,9 @@ $(function(){
 			</div>
 			<div>
 				<h5>
-					${ mmail }
+					${fn:substring(mmail,0,4) }
+					<c:foreach begin="1" end="${fn:length(mmail)-4}">
+					</c:foreach>
 				</h5>
 				<p class="w3-center">
 					<button type="button" id=loginBtn class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">Login</button>

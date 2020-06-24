@@ -6,6 +6,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.mail.HtmlEmail;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.itea.member.dao.FindIdPwDAO;
@@ -15,10 +16,17 @@ import com.itea.member.dto.MemberDTO;
 public class FindIdPwService {
 	
 	@Autowired
+	SqlSessionTemplate session;
 	FindIdPwDAO findidpwDAO;
 	LoginDAO loginDAO;
 	
 	// 아이디 찾기
+	public MemberDTO find_id(MemberDTO mdto) throws Exception {
+		MemberDTO member=findidpwDAO.find_id(mdto);
+		return member;
+	}
+	
+	/*// 아이디 찾기
 	public String find_id(HttpServletResponse response, MemberDTO mdto) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
@@ -46,7 +54,21 @@ public class FindIdPwService {
 			//out.close();
 			return mmail;
 		}
-	}
+	}*/
+	
+/*	// 아이디 찾기
+		public String find_id(String mname, String mphone) {
+
+			findidpwDAO = session.getMapper(FindIdPwDAO.class);
+			String result = "";
+			try {
+				result = findidpwDAO.find_id_Dao(mname, mphone);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return result;
+		}
+	*/
 	
 	// 비밀번호 찾기
 	public void find_pw(HttpServletResponse response, MemberDTO member) throws Exception {
@@ -62,7 +84,7 @@ public class FindIdPwService {
 		// 가입에 사용한 이메일이 아니면
 		//else if(!member.getEmail().equals(manager.login(member.getId()).getEmail())) {
 
-		else if(!member.getMmail().equals(loginDAO.login(member.getMmail()))) {
+		else if(!member.getMmail().equals(loginDAO.login(member))) {
 			out.print("잘못된 아이디 입니다.");
 			out.close();
 		}else {

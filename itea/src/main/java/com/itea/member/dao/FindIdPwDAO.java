@@ -21,10 +21,16 @@ public class FindIdPwDAO {
 	}
 	
 	// 아이디 찾기
-	public HashMap find_id(HashMap map) throws Exception{
-		HashMap result = (HashMap)session.selectOne("member.find_id", map);
-		return result;
+	public MemberDTO find_id(MemberDTO mdto) throws Exception{
+		MemberDTO member = session.selectOne("member.find_id", mdto);
+		return member;
 	}
+	
+	/*public String find_id_Dao(String mname,String mphone) throws Exception{
+		String find_id(@Param("mname")String mname, @Param("mname")String mphone); 
+		return session.selectOne("member.find_id", mmail);
+
+	}*/
 	
 	// 비밀번호 변경
 	public int update_pw(MemberDTO member) throws Exception{
