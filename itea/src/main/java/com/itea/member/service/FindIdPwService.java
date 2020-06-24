@@ -19,91 +19,52 @@ public class FindIdPwService {
 	FindIdPwDAO findidpwDAO;
 	LoginDAO loginDAO;
 	
-	// 아이디 찾기
-	public MemberDTO find_id(MemberDTO mdto) throws Exception {
-		MemberDTO member=findidpwDAO.find_id(mdto);
-		return member;
-	}
 	
-	/*// 아이디 찾기
+	// 아이디 중복 검사(AJAX)
+	public void check_name(String name, HttpServletResponse response) throws Exception {
+		PrintWriter out = response.getWriter();
+		out.println(findidpwDAO.check_name(name));
+		out.close();
+	}
+
+	// 이메일 중복 검사(AJAX)
+	public void check_email(String email, HttpServletResponse response) throws Exception {
+		PrintWriter out = response.getWriter();
+		out.println(findidpwDAO.check_email(email));
+		out.close();
+	}
+
+
+	// 아이디 찾기
 	public String find_id(HttpServletResponse response, MemberDTO mdto) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
+		String mmail = findidpwDAO.find_id(mdto);
 		
-		//MemberDTO member=findidpwDAO.find_id(mdto);
+		//해당 이메일과 비밀번호가 존재하는지 검색
+		MemberDTO member=loginSV.login(mdto);
 		
-		HashMap map = new HashMap();
-		map.put("mname", mdto.getMname());  //유저입력이름
-		map.put("mphone", mdto.getMphone()); //유저입력휴대폰번호
+		if(member==null) { //일치하는 회원 없음 -> 로그인폼으로 다시 이동
+			return "member/loginFrm";
+		}else{ //일치하는 회원 존재함 -> 회원정보를 가지고 메인화면으로 이동
+			session.setAttribute("MNO", member.getMno());
+			session.setAttribute("MNICK", member.getMnick());
+		}
 		
-		HashMap result = findidpwDAO.find_id(map);
-		String mmail = mdto.getMmail();
-		
-		if (result == null || result.size()==0) {
+		if (mmail == null) {
 			out.println("<script>");
 			out.println("alert('가입된 아이디가 없습니다.');");
 			out.println("history.go(-1);");
 			out.println("</script>");
 			out.close();
+			System.out.println("아이디 x");
 			return null;
 		} else {
-			//out.println("<script>");
-			//out.println("alert('아이디는'+${mmail}+'입니다.');");
-			//out.println("</script>");
-			//out.close();
+			System.out.println("아이디가 있음");
 			return mmail;
-		}
-	}*/
-	
-/*	// 아이디 찾기
-		public String find_id(String mname, String mphone) {
-
-			findidpwDAO = session.getMapper(FindIdPwDAO.class);
-			String result = "";
-			try {
-				result = findidpwDAO.find_id_Dao(mname, mphone);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return result;
-		}
-	*/
-	
-	// 비밀번호 찾기
-	public void find_pw(HttpServletResponse response, MemberDTO member) throws Exception {
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		// 이름이 없으면
-		if(findidpwDAO.check_name(member.getMname(),response)==0) {
-			out.print("이름이 없습니다.");
-			out.close();
-		}
-		//manager.login(member.getId()).getEmail())) {
-
-		// 가입에 사용한 이메일이 아니면
-		//else if(!member.getEmail().equals(manager.login(member.getId()).getEmail())) {
-
-		else if(!member.getMmail().equals(loginDAO.login(member))) {
-			out.print("잘못된 아이디 입니다.");
-			out.close();
-		}else {
-			// 임시 비밀번호 생성
-			String pw = "";
-			for (int i = 0; i < 12; i++) {
-				pw += (char) ((Math.random() * 26) + 97);
-			}
-			member.setMpw(pw);
-			// 비밀번호 변경
-			findidpwDAO.update_pw(member);
-			// 비밀번호 변경 메일 발송
-			send_mail(member, "find_pw");
-			
-			out.print("이메일로 임시 비밀번호를 발송하였습니다.");
-			out.close();
 		}
 	}
 	
-		
 	// 이메일 발송
 	public void send_mail(MemberDTO member, String div) throws Exception {
 		// Mail Server 설정
@@ -147,5 +108,37 @@ public class FindIdPwService {
 			System.out.println("메일발송 실패 : " + e);
 		}
 	}
+	
+	// 비밀번호 찾기
+	public void find_pw(HttpServletResponse response, MemberDTO member) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		// 이름이 없으면
+		if(findidpwDAO.check_name(member.getMname())==0) {
+			out.print("아이디가 없습니다.");
+			out.close();
+		}
+		// 가입에 사용한 이메일이 아니면
+		else if(!member.getMmail().equals(loginDAO.login(member))) {
+			out.print("잘못된 이메일 입니다.");
+			out.close();
+		}else {
+			// 임시 비밀번호 생성
+			String pw = "";
+			for (int i = 0; i < 12; i++) {
+				pw += (char) ((Math.random() * 26) + 97);
+			}
+			member.setMpw(pw);
+			// 비밀번호 변경
+			findidpwDAO.update_pw(member);
+			// 비밀번호 변경 메일 발송
+			send_mail(member, "find_pw");
+			
+			out.print("이메일로 임시 비밀번호를 발송하였습니다.");
+			out.close();
+		}
+	}
+	
+
 	
 }

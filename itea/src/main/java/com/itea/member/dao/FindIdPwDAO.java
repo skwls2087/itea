@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.itea.member.dto.MemberDTO;
 
@@ -19,26 +20,28 @@ public class FindIdPwDAO {
 	}
 	
 	// 아이디 찾기
-	public MemberDTO find_id(MemberDTO mdto) throws Exception{
-		MemberDTO member = session.selectOne("member.find_id", mdto);
-		return member;
+	public String find_id(MemberDTO mdto) throws Exception{
+		return session.selectOne("member.find_id", mdto);
 	}
 	
-	/*public String find_id_Dao(String mname,String mphone) throws Exception{
-		String find_id(@Param("mname")String mname, @Param("mname")String mphone); 
-		return session.selectOne("member.find_id", mmail);
-
-	}*/
-	
 	// 비밀번호 변경
+	@Transactional
 	public int update_pw(MemberDTO member) throws Exception{
 		return session.update("member.update_pw", member);
 	}
-
-	//이름 확인
-	public int check_name(String mname, HttpServletResponse response) {
-		return 0;
+	
+	
+	// 이름 중복 검사
+	public int check_name(String name) throws Exception{
+		return session.selectOne("member.check_name", name);
 	}
+	
+	// 이메일 중복 검사
+	public int check_email(String email) throws Exception{
+		return session.selectOne("member.check_email", email);
+	}
+
+
 	
 
 }
