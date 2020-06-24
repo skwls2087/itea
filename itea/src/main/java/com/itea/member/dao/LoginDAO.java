@@ -18,5 +18,12 @@ public class LoginDAO extends SqlSessionDaoSupport {
 		
 		return member;
 	}
+
+	public MemberDTO snsLogin(String email) {
+		
+		MemberDTO Member=session.selectOne("member.naverLogin",email);
+		
+		return Member;
+	}
 	
 }

@@ -110,13 +110,20 @@ public class LoginController {
 		String email = (String)response_obj.get("email");
 		System.out.println("이메일="+email);
 		
-		String id = (String)response_obj.get("id");
-		System.out.println("아이디="+id);
+		//해당 이메일이 회원 테이블에 있는지 검색
+		MemberDTO member=loginSV.naverLogin(email);
 		
-		session.setAttribute("ID",id);
+		if(member!=null) { //회원이면 로그인 처리 완료
+			return "../../index";
+			
+		}else { //회원이 아니면 회원가입페이지로 이동
+			
+			request.setAttribute("noticePage",noticePage);
+			return "/member/joinFrmSNS";
+		}
 		
-		model.addAttribute("result", apiResult);
-		return "../../index";
+		//model.addAttribute("result", apiResult);
+		
 	}
 	
 }

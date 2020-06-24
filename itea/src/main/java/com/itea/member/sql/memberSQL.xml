@@ -11,12 +11,18 @@
 <mapper namespace="member">
 
 	 
-	<!-- 회원수 조회 -->
-	<!-- select쿼리의 실행결과의  컬럼수가    1개이면    자바의 데이터타입을 지정 -->
+	<!-- id와 pw가 전부 일치하는 회원 조회 -->
 	<select id="login" resultType="memberDTO">
 		select *
 		from member
 		where mmail=#{mmail} and mpw=#{mpw}
+	</select>
+	
+	<!-- 이메일이 일치하는 회원 조회 -->
+	<select id="snsLogin" resultType="memberDTO">
+		select *
+		from member
+		where mmail=#{email}
 	</select>
 	
 	<!-- 회원가입 -->
