@@ -11,10 +11,17 @@ public class ModifyDAO extends SqlSessionDaoSupport {
 	@Autowired
 	SqlSessionTemplate session;
 	
-//	public MemberDTO modify(int mno) {
-//		session.update("member.modify",mno);
-//		return null;
-//	
-//	}
+	public MemberDTO modifyInfo(int mno) {
+		return (MemberDTO)session.selectOne("member.modifyInfo",mno);
+	}
+	
+	
+	public MemberDTO modify(MemberDTO mDto) {
+		session.update("member.modify",mDto);
+		return null;
+	
+	}
+
+
 	
 }

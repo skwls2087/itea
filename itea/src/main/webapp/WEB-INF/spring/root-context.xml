@@ -41,6 +41,9 @@
 	<bean id ="loginDAO" class = "com.itea.member.dao.LoginDAO">
 		<property name ="sqlSessionTemplate" ref  ="sqlSession"/> 
 	</bean>
+	<bean id ="modifyDAO" class = "com.itea.member.dao.ModifyDAO">
+		<property name ="sqlSessionTemplate" ref  ="sqlSession"/> 
+	</bean>
 	
 	<!-- Service -->
 	<bean id="loginSV" class="com.itea.member.service.LoginService"/>

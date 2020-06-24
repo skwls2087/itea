@@ -9,12 +9,18 @@ import com.itea.member.dto.MemberDTO;
 @Service
 public class ModifyService {
 	
-//	@Autowired
-//	ModifyDAO mDao;
-//	
-//
-//	public MemberDTO modify(int mno) {
-//		MemberDTO mDto= mDao.modify(mno);
-//		return mDto;
-//	}
+	@Autowired
+	ModifyDAO mDao;
+	
+	public MemberDTO modifyInfo(int mno) {
+		MemberDTO mDto = mDao.modifyInfo(mno);
+		return mDto;
+	}
+
+	public MemberDTO modify(MemberDTO mDto) {
+		mDto= mDao.modify(mDto);
+		return mDto;
+	}
+
+
 }
