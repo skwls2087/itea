@@ -36,7 +36,7 @@
 			//비밀번호 일치여부
 			if($("#mpw").val()!=$("#mpw1").val()){
 				alert("비밀번호가 일치하지 않습니다.")
-				$("#mpw1").val()==null;
+				$("#mpw1").val("");
 				$("#mpw1").focus();
 				return false;
 			}
@@ -44,14 +44,14 @@
 			//이름 입력 여부
 			if($("#mname").val().length==0){
 				alert("이름을 입력하지 않았습니다.")
-				$("#mpw").focus();
+				$("#mname").focus();
 				return false;
 			}
 			
 			//닉네임 입력 여부
 			if($("#mnick").val().length==0){
 				alert("닉네임을 입력하지 않았습니다.")
-				$("#mpw").focus();
+				$("#mnick").focus();
 				return false;
 			}
 			
