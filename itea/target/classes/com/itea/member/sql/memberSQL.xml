@@ -18,6 +18,22 @@
 		from member
 		where mmail=#{mmail} and mpw=#{mpw}
 	</select>
+	<!--정보수정 폼 불러오기  -->
+		<select id="modifyInfo" resultType="memberDTO">
+			select *
+			from member
+			where mno= #{mno}
+		</select>
+	<!--회원정보 수정--> 
+		<update id="modify" parameterType="memberDTO" >
+		update member
+		set	mpw 		= #{mpw},
+				mnick		= #{mnick},
+				mphone	= #{mphone},
+				mgradu	= #{mgradu}	
+		where mno=    #{mno}
+		</update>
+		
 	
 	<!-- 회원가입 일반-->
 	<insert id="joinProc" parameterType="memberDTO">
