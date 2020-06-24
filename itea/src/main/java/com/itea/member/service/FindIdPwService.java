@@ -36,22 +36,12 @@ public class FindIdPwService {
 
 
 	// 아이디 찾기
-	public String find_id(HttpServletResponse response, MemberDTO mdto) throws Exception {
+	public MemberDTO find_id(HttpServletResponse response, MemberDTO mdto) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		String mmail = findidpwDAO.find_id(mdto);
+		String member=findidpwDAO.find_id(mdto);
 		
-		//해당 이메일과 비밀번호가 존재하는지 검색
-		MemberDTO member=loginSV.login(mdto);
-		
-		if(member==null) { //일치하는 회원 없음 -> 로그인폼으로 다시 이동
-			return "member/loginFrm";
-		}else{ //일치하는 회원 존재함 -> 회원정보를 가지고 메인화면으로 이동
-			session.setAttribute("MNO", member.getMno());
-			session.setAttribute("MNICK", member.getMnick());
-		}
-		
-		if (mmail == null) {
+		if (member == null) {
 			out.println("<script>");
 			out.println("alert('가입된 아이디가 없습니다.');");
 			out.println("history.go(-1);");
@@ -61,7 +51,7 @@ public class FindIdPwService {
 			return null;
 		} else {
 			System.out.println("아이디가 있음");
-			return mmail;
+			return member;
 		}
 	}
 	
