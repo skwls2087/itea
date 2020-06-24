@@ -54,6 +54,9 @@
       <li class="nav-item  m-2">
         <a class="nav-link" href="#">Q&A</a>
       </li>
+      <li class="nav-item  m-2">
+        <a class="nav-link" href="./member/find_id_form.co">아이디찾기</a>
+      </li>
     </ul>
     
     <ul class="navbar-nav navbar-right">

@@ -22,13 +22,13 @@ public class FindIdPwController {
 	FindIdPwService findidpwService;
 	
 	// 아이디 찾기 폼
-	@RequestMapping("/find_id_form")
+	@RequestMapping("/find_id_form.co")
 	public void find_id_form() throws Exception{
 	}
 	
 	
 	// 아이디 찾기
-	@RequestMapping("/find_id")
+	@RequestMapping("/find_id.co")
 	public String find_id(MemberDTO mdto, HttpSession session,
 			HttpServletResponse response) 
 					throws Exception{
@@ -73,12 +73,12 @@ public class FindIdPwController {
 
 	
 	// 비밀번호 찾기 폼
-	@RequestMapping("/find_pw_form")
+	@RequestMapping("/find_pw_form.co")
 	public void find_pw_form() throws Exception{
 	}
 	
 	// 비밀번호 찾기
-	@RequestMapping(value = "/find_pw", method = RequestMethod.POST)
+	@RequestMapping(value = "/find_pw.co", method = RequestMethod.POST)
 	public void find_pw(@ModelAttribute MemberDTO member, HttpServletResponse response) throws Exception{
 		findidpwService.find_pw(response, member);
 	}
