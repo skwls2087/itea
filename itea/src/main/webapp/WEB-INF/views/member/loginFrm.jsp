@@ -41,7 +41,21 @@
 			  <a href="<%=apiURL%>"><img height="50" src="${pageContext.request.contextPath}/resources/img/naverlogin.jpg"/></a>
 			  
 			<!-- 2. Kakao/Daum -->
-			
+			<a id="login-form-btn" href="javascript:loginFormWithKakao()">
+  				<img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222" />
+			</a>
+			<script type="text/javascript">
+  			// input your appkey
+  				Kakao.init('cbcf1139dc760ede7c25db96a9eae901')
+  				function loginFormWithKakao() {
+    				Kakao.Auth.loginForm({
+    					success: function(authObj) {
+    						alert(JSON.stringify(authObj))},
+    						fail: function(err) {
+    							alert(JSON.stringify(err))},
+					})
+  				}
+			</script>
 			
 			<!-- 3. Google -->
 			
