@@ -1,7 +1,5 @@
 package com.itea.member.dao;
 
-import java.util.HashMap;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.mybatis.spring.SqlSessionTemplate;
