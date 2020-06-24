@@ -33,7 +33,6 @@ public class FindIdPwDAO {
 		return session.update("member.update_pw", member);
 	}
 	
-	
 	// 이름 중복 검사
 	public int check_name(String name) throws Exception{
 		return session.selectOne("member.check_name", name);

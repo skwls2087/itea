@@ -34,12 +34,9 @@ public class FindIdPwController {
 			(HttpServletResponse response,
 			HttpServletRequest request,
 			MemberDTO mdto) throws Exception{
-	
 		String mname  =  request.getParameter("mname");
 		String mphone = request.getParameter("mphone");
-
 		ArrayList<MemberDTO> list = findidpwSV.find_id(response,mdto);
-
 		request.setAttribute("LIST", list);
 		
 		return "/member/find_id";
@@ -47,13 +44,13 @@ public class FindIdPwController {
 	}
 	
 	// 비밀번호 찾기 폼
-	@RequestMapping(value = "/find_pw_form.co")
+	@RequestMapping("/find_pw_form.co")
 	public String find_pw_form() throws Exception{
 		return "/member/find_pw_form";
 	}
 	
 	// 비밀번호 찾기
-	@RequestMapping(value = "/find_pw.do", method = RequestMethod.POST)
+	@RequestMapping("/find_pw")
 	public void find_pw(@ModelAttribute MemberDTO member, HttpServletResponse response) throws Exception{
 		findidpwSV.find_pw(response, member);
 	}

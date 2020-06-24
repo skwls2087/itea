@@ -111,6 +111,7 @@ public class FindIdPwService {
 	public void find_pw(HttpServletResponse response, MemberDTO member) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
+		
 		// 이름이 없으면
 		if(findidpwDAO.check_name(member.getMname())==0) {
 			out.print("아이디가 없습니다.");
