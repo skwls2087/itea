@@ -26,6 +26,7 @@
       	<hr><br/>
       	
      	<!-- sns계정으로 로그인하기 -->
+<<<<<<< Updated upstream
 			<!-- 1.네이버 -->
 			<%
 			    String clientId = "68tNfP0GUh1VB4b0suSF";//애플리케이션 클라이언트 아이디값";
@@ -61,3 +62,17 @@
 			
 			
 			<!-- 4. FaceBook -->  
+=======
+
+		  <!-- 1.네이버 -->
+		  <a href="${naver_url}"><img height="50" src="${pageContext.request.contextPath}/resources/img/naverlogin.jpg"/></a>
+
+		  <!-- 2.카카오 -->  
+			 
+		
+		  <!-- 3.구글 -->
+			 
+			
+
+
+>>>>>>> Stashed changes
