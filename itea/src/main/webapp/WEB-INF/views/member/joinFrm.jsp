@@ -36,6 +36,7 @@
 			//비밀번호 일치여부
 			if($("#mpw").val()!=$("#mpw1").val()){
 				alert("비밀번호가 일치하지 않습니다.")
+				$("#mpw1").val()==null;
 				$("#mpw1").focus();
 				return false;
 			}
@@ -80,7 +81,7 @@
 			}
 			
 			//성별 입력 여부
-			if($("#msex1").val().length==0 && $("#msex1").val().length==0){
+			if(!($("#msex1").checked) && !($("#msex2").checked)){
 				alert("성별을 선택하지 않았습니다.")
 				return false;
 			}
