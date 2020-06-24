@@ -33,14 +33,43 @@
 	</select>
 
 
+<<<<<<< HEAD
 	<!-- 회원수 조회 신나진-->
 	<!-- select쿼리의 실행결과의  컬럼수가    1개이면    자바의 데이터타입을 지정 -->
+=======
+	<!-- 로그인 -->
+	<!-- id와 pw가 전부 일치하는 회원 조회 -->
+>>>>>>> master
 	<select id="login" resultType="memberDTO">
 		select *
 		from member
 		where mmail=#{mmail} and mpw=#{mpw}
 	</select>
+	<!--정보수정 폼 불러오기  -->
+		<select id="modifyInfo" resultType="memberDTO">
+			select *
+			from member
+			where mno= #{mno}
+		</select>
+	<!--회원정보 수정--> 
+		<update id="modify" parameterType="memberDTO" >
+		update member
+		set	mpw 		= #{mpw},
+				mnick		= #{mnick},
+				mphone	= #{mphone},
+				mgradu	= #{mgradu}	
+		where mno=    #{mno}
+		</update>
+		
 	
+	<!-- 이메일이 일치하는 회원 조회 -->
+	<select id="snsLogin" resultType="memberDTO">
+		select *
+		from member
+		where mmail=#{email}
+	</select>
+	
+	<!-- 회원가입 -->
 	<!-- 회원가입 일반-->
 	<insert id="joinProc" parameterType="memberDTO">
 		insert into member(mmail,mpw,mname,mnick,mphone,mbirth,msex,mgradu)

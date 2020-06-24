@@ -19,4 +19,11 @@ public class LoginService {
 		
 		return member;
 	}
+
+	public MemberDTO naverLogin(String email) {
+		
+		MemberDTO member=loginDAO.snsLogin(email);
+		
+		return member;
+	}
 }

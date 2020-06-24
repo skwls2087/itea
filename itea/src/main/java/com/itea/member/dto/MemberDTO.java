@@ -6,6 +6,7 @@ public class MemberDTO {
 	
 	//sql문과 파라미터를
 	private int mno;
+	private int mclass;
 	private String mmail;
 	private String mpw;
 	private String mname;

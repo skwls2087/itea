@@ -45,13 +45,22 @@
 	<bean id ="loginDAO" class = "com.itea.member.dao.LoginDAO">
 		<property name ="sqlSessionTemplate" ref  ="sqlSession"/> 
 	</bean>
+<<<<<<< HEAD
 	<bean id="findidpwDAO" class="com.itea.member.dao.FindIdPwDAO">
 		<property name="sqlSessionTemplate" ref ="sqlSession"/> 
+=======
+	<bean id ="modifyDAO" class = "com.itea.member.dao.ModifyDAO">
+		<property name ="sqlSessionTemplate" ref  ="sqlSession"/> 
+>>>>>>> master
 	</bean>
 	
 	<!-- Service -->
 	<bean id="loginSV" class="com.itea.member.service.LoginService"/>
+<<<<<<< HEAD
 	<bean id="findidpwService" class="com.itea.member.service.FindIdPwService"/>
+=======
+	<bean id="modifySV" class="com.itea.member.service.ModifyService"/>
+>>>>>>> master
 </beans>
 
 
