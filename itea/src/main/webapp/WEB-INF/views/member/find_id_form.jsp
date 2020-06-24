@@ -14,11 +14,11 @@
 <script>
 $(function(){
 	$("#findBtn").click(function(){
-		var phone1 = $("#mphone1").val();
-		var phone2 = $("#mphone2").val();
-		var phone3 = $("#mphone3").val();
-		var phone = phone1 +"-" + phone2 +"-" + phone3;
-		$('#mphone').val() = phone;
+		var mphone1 = $("#mphone1").val();
+		var mphone2 = $("#mphone2").val();
+		var mphone3 = $("#mphone3").val();
+		var mphone = mphone1 +"-" + mphone2 +"-" + mphone3;
+		document.getElementById("mphone").value=mphone;
 	});
 });
 </script>
@@ -36,10 +36,10 @@ $(function(){
 						<input class="w3-input-sm" type="text" id="mname" name="mname" required>
 					</p>
 					<p>
-						<label>휴대폰번호</label>
-						<input class="w3-input-sm" type="text" id="mphone1" name="mphone" required>
-						-<input class="w3-input-sm" type="text" id="mphone2" name="mphone" required>
-						-<input class="w3-input-sm" type="text" id="mphone3" name="mphone" required>
+						<input type="hidden" id="mphone" name="mphone"/>
+						<input class="w3-input-sm" type="text" id="mphone1" name="mphone1" required>
+						-<input class="w3-input-sm" type="text" id="mphone2" name="mphone2" required>
+						-<input class="w3-input-sm" type="text" id="mphone3" name="mphone3" required>
 					</p>
 					<p class="w3-center">
 						<button type="submit" id=findBtn class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">find</button>
