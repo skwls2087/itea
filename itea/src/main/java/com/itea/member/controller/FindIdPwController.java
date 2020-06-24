@@ -18,7 +18,7 @@ import com.itea.member.service.FindIdPwService;
 public class FindIdPwController {
 	
 	@Autowired
-	FindIdPwService findidpwService;
+	FindIdPwService findidpwSV;
 	
 	// 아이디 찾기 폼
 	@RequestMapping(value = "/find_id_form.co")
@@ -36,7 +36,7 @@ public class FindIdPwController {
 		String mname  =  request.getParameter("mname");
 		String mphone = request.getParameter("mphone");
 
-		findidpwService.find_id(response,mdto);
+		findidpwSV.find_id(response,mdto);
 		
 		return "/member/find_id";
 		
@@ -51,7 +51,7 @@ public class FindIdPwController {
 	// 비밀번호 찾기
 	@RequestMapping(value = "/find_pw.do", method = RequestMethod.POST)
 	public void find_pw(@ModelAttribute MemberDTO member, HttpServletResponse response) throws Exception{
-		findidpwService.find_pw(response, member);
+		findidpwSV.find_pw(response, member);
 	}
 	
 	

@@ -13,8 +13,6 @@ import com.itea.member.dao.FindIdPwDAO;
 import com.itea.member.dao.LoginDAO;
 import com.itea.member.dto.MemberDTO;
 
-import summer.com.dto.FileBoardDTO;
-
 public class FindIdPwService {
 	
 	@Autowired
@@ -43,18 +41,16 @@ public class FindIdPwService {
 
 
 	// 아이디 찾기
-	public ArrayList find_id(HttpServletResponse response, MemberDTO mdto) throws Exception {
+	public ArrayList<MemberDTO> find_id(HttpServletResponse response, MemberDTO mdto) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		System.out.println("서비스들어옴");
 		System.out.println(mdto);
 		
-		ArrayList<MemberDTO> list = ;
+		ArrayList<MemberDTO> list = findidpwDAO.find_id(mdto);
+		System.out.println(list);
 		
-		String mmail=findidpwDAO.find_id(mdto);
-		System.out.println(mmail);
-		
-		if (mmail == null || mmail.length()==0) {
+		if (list == null || list.size()==0) {
 			out.println("<script>");
 			out.println("alert('가입된 아이디가 없습니다.');");
 			out.println("history.go(-1);");
@@ -64,7 +60,7 @@ public class FindIdPwService {
 			return null;
 		} else {
 			System.out.println("아이디가 있음");
-			return mmail;
+			return list;
 		}
 	}
 	

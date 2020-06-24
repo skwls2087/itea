@@ -9,7 +9,7 @@
 
   <!-- 자동주입을 위한 선언 -->
   <context:annotation-config/>
-  
+
   <!--	컨넥션 풀 설정을 위한 작업 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
@@ -45,22 +45,17 @@
 	<bean id ="loginDAO" class = "com.itea.member.dao.LoginDAO">
 		<property name ="sqlSessionTemplate" ref  ="sqlSession"/> 
 	</bean>
-<<<<<<< HEAD
 	<bean id="findidpwDAO" class="com.itea.member.dao.FindIdPwDAO">
 		<property name="sqlSessionTemplate" ref ="sqlSession"/> 
-=======
+	</bean>
 	<bean id ="modifyDAO" class = "com.itea.member.dao.ModifyDAO">
 		<property name ="sqlSessionTemplate" ref  ="sqlSession"/> 
->>>>>>> master
 	</bean>
 	
 	<!-- Service -->
 	<bean id="loginSV" class="com.itea.member.service.LoginService"/>
-<<<<<<< HEAD
 	<bean id="findidpwService" class="com.itea.member.service.FindIdPwService"/>
-=======
 	<bean id="modifySV" class="com.itea.member.service.ModifyService"/>
->>>>>>> master
 </beans>
 
 

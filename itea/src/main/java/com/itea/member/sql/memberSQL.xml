@@ -11,8 +11,8 @@
 <mapper namespace="member">
 	
 	<!-- 아이디 찾기 조예인-->
-	<select id="find_id" resultType="string" parameterType="memberDTO">
-		select mclass,mmail from member 
+	<select id="find_id" resultType="memberDTO" parameterType="memberDTO">
+		select mclass, mmail from member 
     where mname = #{mname} and mphone = #{mphone}
 	</select>
 	

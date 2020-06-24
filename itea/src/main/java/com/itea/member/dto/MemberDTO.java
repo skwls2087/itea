@@ -23,6 +23,13 @@ public class MemberDTO {
 	public void setMno(int mno) {
 		this.mno = mno;
 	}
+	
+	public int getMclass() {
+		return mclass;
+	}
+	public void setMclass(int mclass) {
+		this.mclass = mclass;
+	}
 	public String getMmail() {
 		return mmail;
 	}
