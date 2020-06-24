@@ -70,7 +70,8 @@
     
 <div class="container">
 <table class="table">
-	<form id="join" method="post" action="../member/joinProc.co">
+	<form id="join" method="post" action="../member/joinProcSNS.co">
+		<input type="hidden" id="mmail" name="mmail" value="${mmail}"/>
 		<tr>
 			<th><label for="mname">이름</label></th>
 			<td><input type="text" id="mname" name="mname"/></td>

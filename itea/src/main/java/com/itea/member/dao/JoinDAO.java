@@ -14,4 +14,8 @@ public class JoinDAO extends SqlSessionDaoSupport{
 	public void joinProc(MemberDTO mDto) {
 		session.insert("member.joinProc", mDto);
 	}
+
+	public void joinProcSNS(MemberDTO mDto) {
+		session.insert("member.joinProcSNS",mDto);
+	}
 }
