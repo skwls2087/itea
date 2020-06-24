@@ -15,7 +15,7 @@
 
 	  <!-- 이메일로 로그인하기 -->
       <form class="form-signin" method="post" action="<%= request.getContextPath()%>/member/loginProc.co">
-        <h2 class="form-signin-heading">Login</h2>
+        <h2 class="form-signin-heading">로그인</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" name="mmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>

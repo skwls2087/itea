@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    
 <script>
 	$(function(){
 		$("#rBtn").click(function(){
@@ -85,25 +85,20 @@
 				alert("성별을 선택하지 않았습니다.")
 				return false;
 			}
-			
-			
-			
-
-			
-			
 		})
-		
-		
-		
 	})
-	
-
 </script>
 
+<style>
+.form-signup-heading{margin: 31px 0px;}
+</style>
 
 <div class="container">
-<table class="table">
-	<form id="join" method="post" action="../member/joinProc.co">
+
+
+	<form id="join" class="form-signup" method="post" action="../member/joinProc.co">
+	<h2 class="form-signup-heading">회원가입</h2>
+	<table class="table">
 		<tr>
 			<th><label for="mmail">이메일</label></th>
 			<td><input type="email" id="mmail" name="mmail"/></td>
@@ -128,9 +123,9 @@
 			<th>전화번호</th>
 			<td>
 				<input type="hidden" id="mphone" name="mphone"/>
-				<input type="text" id="mphone1" name="mphone1" maxlength="3"/>
-				-<input type="text" id="mphone2" name="mphone2" maxlength="4"/>-
-				<input type="text" id="mphone3" name="mphone3" maxlength="4"/>
+				<input type="text" style="width:100px;" id="mphone1" name="mphone1" maxlength="3"/>
+				- <input type="text" style="width:100px;" id="mphone2" name="mphone2" maxlength="4"/> -
+				<input type="text" style="width:100px;" id="mphone3" name="mphone3" maxlength="4"/>
 			</td>
 		</tr>
 		<tr>
@@ -140,8 +135,8 @@
 		<tr>
 			<th>성별</th>
 			<td>
-				<input type="radio" id="msex1" name="msex" value="남"/>남
-				<input type="radio" id="msex2" name="msex" value="여"/>여
+				<input type="radio" id="msex1" name="msex" value="남"/> 남&nbsp&nbsp
+				<input type="radio" id="msex2" name="msex" value="여"/> 여
 			</td>
 		</tr>
 		<tr>
@@ -159,10 +154,11 @@
 		</tr>
 		<tr>
 			<td colspan="2" class="text-center">
-				<input type="submit" id="sBtn" value="가입"/>
-				<input type="button" id="rBtn" value="취소"/>
+				<input type="submit" class="btn btn-outline-primary" id="sBtn" value="가입"/>
+				<input type="button" class="btn btn-outline-primary" id="rBtn" value="취소"/>
 			</td>
 		</tr>
+		</table>
 	</form>
-</table>
+
 </div>
