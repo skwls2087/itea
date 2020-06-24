@@ -84,12 +84,11 @@ public class MemberDTO {
 	public void setMdate(Date mdate) {
 		this.mdate = mdate;
 	}
-	
 	@Override
 	public String toString() {
-		return "MemberDTO [mno=" + mno + ", mmail=" + mmail + ", mpw=" + mpw + ", mname=" + mname + ", mphone=" + mphone
-				+ ", mnick=" + mnick + ", msex=" + msex + ", mbirth=" + mbirth + ", mgradu=" + mgradu + ", mdate="
-				+ mdate + "]";
+		return "MemberDTO [mno=" + mno + ", mclass=" + mclass + ", mmail=" + mmail + ", mpw=" + mpw + ", mname=" + mname
+				+ ", mphone=" + mphone + ", mnick=" + mnick + ", msex=" + msex + ", mbirth=" + mbirth + ", mgradu="
+				+ mgradu + ", mdate=" + mdate + "]";
 	}
 	
 }

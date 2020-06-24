@@ -39,16 +39,14 @@ public class FindIdPwService {
 		out.close();
 	}
 
-
 	// 아이디 찾기
-	public ArrayList<MemberDTO> find_id(HttpServletResponse response, MemberDTO mdto) throws Exception {
+	public ArrayList find_id(HttpServletResponse response, MemberDTO mdto) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		System.out.println("서비스들어옴");
 		System.out.println(mdto);
 		
 		ArrayList<MemberDTO> list = findidpwDAO.find_id(mdto);
-		System.out.println(list);
 		
 		if (list == null || list.size()==0) {
 			out.println("<script>");

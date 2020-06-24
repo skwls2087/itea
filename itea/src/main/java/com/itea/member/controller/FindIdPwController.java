@@ -1,5 +1,7 @@
 package com.itea.member.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,7 +23,7 @@ public class FindIdPwController {
 	FindIdPwService findidpwSV;
 	
 	// 아이디 찾기 폼
-	@RequestMapping(value = "/find_id_form.co")
+	@RequestMapping("/find_id_form.co")
 	public String find_id_form() throws Exception{
 		return "/member/find_id_form";
 	}
@@ -36,7 +38,9 @@ public class FindIdPwController {
 		String mname  =  request.getParameter("mname");
 		String mphone = request.getParameter("mphone");
 
-		findidpwSV.find_id(response,mdto);
+		ArrayList<MemberDTO> list = findidpwSV.find_id(response,mdto);
+		
+		request.setAttribute("LIST", list);
 		
 		return "/member/find_id";
 		
