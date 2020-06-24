@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+
 <script>
 	$(function(){
 		$("#rBtn").click(function(){
@@ -12,34 +14,6 @@
 			var mphone=mphone1+"-"+mphone2+"-"+mphone3
 			document.getElementById("mphone").value=mphone;
 			
-			//아이디 입력여부 검사
-			if($("#mmail").val().length==0){
-				alert("아이디를 입력하지 않았습니다.")
-				$("#mmail").focus();
-				return false;
-			}
-			
-			//비밀번호 입력여부
-			if($("#mpw").val().length==0){
-				alert("비밀번호를 입력하지 않았습니다.")
-				$("#mpw").focus();
-				return false;
-			}
-			
-			//비밀번호 길이 체크
-			if($("#mpw").val().length<4 || $("#mpw").val().length>12){
-				alert("비밀번호는 4~12자리입니다.")
-				$("#mpw").focus();
-				return false;
-			}
-			
-			//비밀번호 일치여부
-			if($("#mpw").val()!=$("#mpw1").val()){
-				alert("비밀번호가 일치하지 않습니다.")
-				$("#mpw1").val("");
-				$("#mpw1").focus();
-				return false;
-			}
 			
 			//이름 입력 여부
 			if($("#mname").val().length==0){
@@ -86,36 +60,18 @@
 				return false;
 			}
 			
-			
-			
-
-			
-			
 		})
-		
-		
 		
 	})
 	
 
 </script>
 
-
+    
 <div class="container">
 <table class="table">
-	<form id="join" method="post" action="../member/joinProc.co">
-		<tr>
-			<th><label for="mmail">이메일</label></th>
-			<td><input type="email" id="mmail" name="mmail"/></td>
-		</tr>
-		<tr>
-			<th><label for="mpw">비밀번호</label></th>
-			<td><input type="password" id="mpw" name="mpw"/></td>
-		</tr>
-		<tr>
-			<th><label for="mpw1">비밀번호확인</label></th>
-			<td><input type="password" id="mpw1" name="mpw1"/></td>
-		</tr>
+	<form id="join" method="post" action="../member/joinProcSNS.co">
+		<input type="hidden" id="mmail" name="mmail" value="${mmail}"/>
 		<tr>
 			<th><label for="mname">이름</label></th>
 			<td><input type="text" id="mname" name="mname"/></td>
