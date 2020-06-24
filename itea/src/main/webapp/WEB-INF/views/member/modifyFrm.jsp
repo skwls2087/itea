@@ -39,6 +39,10 @@ $(function(){
 						alert("수정할 비밀번호를 다시한번 확인부탁드립니다.");
 						return false;		
 					}
+					if(mpw.value.length <4 || mpw.value.length >12){
+						alert("비밀번호는 4자리~12자리 이내로 입력해주세요.");
+						return false;
+					}		
 					
 			alert('지금 입력한 정보로 회원정보를 수정됩니다.');
 		
@@ -81,9 +85,8 @@ $(function(){
 						<td>${mDto.mname}</td>
           </tr>
 					<tr>
-						<th>닉네임</th>
+						<th>닉네임</th><!-- 변경가능 -->
 						<td><input type="text" id="mnick" name="mnick" size="20" value="${mDto.mnick}"></td>
-						<%-- <td>${mDto.mnick}</td> --%>
 					</tr>
 					<tr>
 						<th>생년월일</th>
@@ -102,7 +105,7 @@ $(function(){
 						<th>최종학력</th><!-- 변경가능 -->
 						<td>
 							<select name="mgradu" class="">
-								<option selected value="">미공개</option>
+								<option selected >미공개</option>
 								<option value="mschool">중학교 졸업</option>
 								<option value="hschool">고등학교 졸업</option>
 								<option value="tcollege">전문대 졸업</option>
@@ -118,7 +121,7 @@ $(function(){
 	</form>
 	
 	
-	<c:if test="">
+<%-- 	<c:if test="">
 		<div class="">
 		<h2>회원 정보 수정</h2>
 	</div>
@@ -151,7 +154,7 @@ $(function(){
 					<tr>
 						<th>닉네임</th>
 						<td><input type="text" id="mnick" name="mnick" size="20" value="${mDto.mnick}"></td>
-						<%-- <td>${mDto.mnick}</td> --%>
+						<td>${mDto.mnick}</td>
 					</tr>
 					<tr>
 						<th>생년월일</th>
@@ -184,4 +187,4 @@ $(function(){
         	 	<button type="button" id="sBtn" class="btn btn-secondary">변경하기</button>
 						<button type="button" id="rBtn" class="btn btn-secondary">취소하기</button>
 	</form>
-	</c:if>
+	</c:if> --%>
