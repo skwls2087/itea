@@ -17,8 +17,9 @@ public class JoinController {
 	
 	@RequestMapping("/member/joinFrm")
 	public void joinFrm() {
-
+		
 	}
+	
 	
 	@RequestMapping("/member/joinProc")
 	public void joinProc(MemberDTO mDto) {
