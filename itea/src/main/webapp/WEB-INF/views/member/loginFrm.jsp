@@ -39,3 +39,14 @@
 			    session.setAttribute("state", state);
 			 %>
 			  <a href="<%=apiURL%>"><img height="50" src="${pageContext.request.contextPath}/resources/img/naverlogin.jpg"/></a>
+			  
+			 <!-- 2.카카오 -->  
+			 
+		
+			 <!-- 3.구글 -->
+			 
+			
+			 <!-- 4.페이스북 -->
+			
+			
+			
