@@ -9,8 +9,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
@@ -18,6 +19,7 @@ import com.itea.member.dto.MemberDTO;
 import com.itea.member.service.LoginService;
 import com.itea.snslogin.NaverLoginBO;
 
+@Controller
 public class NaverController {
 	
 	private String apiResult = null;
@@ -29,7 +31,7 @@ public class NaverController {
 	LoginService loginSV;
 	
 	//네이버 로그인 완료시 실행
-	@RequestMapping(value = "/callback")
+	@GetMapping(value = "/callback")
 	public String callback(HttpServletRequest request,Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
 		
 		System.out.println("naver 로그인 성공 - callback");
@@ -62,19 +64,24 @@ public class NaverController {
 		//response의 nickname값 파싱
 		String email = (String)response_obj.get("email");
 		System.out.println("이메일="+email);
-		
-		//code받기
-		String mclass="0";
-		
+
+		MemberDTO mdto=new MemberDTO();
+
+		mdto.setMclass(1);
+		mdto.setMmail(email);
+			
 		//해당 이메일이 회원 테이블에 있는지 검색
-		MemberDTO member=loginSV.snsLogin(email,mclass);
+		MemberDTO member=loginSV.snsLogin(mdto);
 		
 		if(member!=null) { //회원이면 로그인 처리 완료
+			
+			session.setAttribute("MNO", member.getMno());
+			session.setAttribute("MNICK", member.getMnick());
+			
 			return "../../index";
 			
 		}else { //회원이 아니면 회원가입페이지로 이동
-			
-			request.setAttribute("mmail",email);
+			System.out.println("회원아냐");
 			return "/member/joinFrmSNS";
 		}
 		

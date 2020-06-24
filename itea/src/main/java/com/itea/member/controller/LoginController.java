@@ -43,6 +43,8 @@ public class LoginController {
 		
 		System.out.println("이메일로 로그인 로직 수행");
 		
+		mdto.setMclass(1);
+		
 		//해당 이메일과 비밀번호가 존재하는지 검색
 		MemberDTO member=loginSV.login(mdto);
 		

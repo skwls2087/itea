@@ -1,7 +1,5 @@
 package com.itea.member.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,10 +27,12 @@ public class JoinController {
 		
 	}
 	@RequestMapping("member/joinProcSNS")
-	public void joinProcSNS(MemberDTO mDto) {
+	public String joinProcSNS(MemberDTO mDto) {
 		System.out.println("joinProcSNS 진입");
 		System.out.println("mDto"+mDto);
 		jDao.joinProcSNS(mDto);
+		
+		return "../../index";
 	}
 	
 	

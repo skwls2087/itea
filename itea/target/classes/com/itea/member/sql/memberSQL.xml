@@ -15,8 +15,16 @@
 	<select id="login" resultType="memberDTO">
 		select *
 		from member
-		where mmail=#{mmail} and mpw=#{mpw}
+		where mmail=#{mmail} and mpw=#{mpw} and mclass=#{mclass}
 	</select>
+	<!-- 이메일이 일치하는 회원 조회 -->
+	<select id="snsLogin" resultType="memberDTO">
+		select *
+		from member
+		where mmail=#{mmail} and mclass=#{mclass}
+	</select>
+	
+	
 	<!--정보수정 폼 불러오기  -->
 		<select id="modifyInfo" resultType="memberDTO">
 			select *
@@ -33,13 +41,6 @@
 		where mno=    #{mno}
 		</update>
 		
-	
-	<!-- 이메일이 일치하는 회원 조회 -->
-	<select id="snsLogin" resultType="memberDTO">
-		select *
-		from member
-		where mmail=#{email}
-	</select>
 	
 	<!-- 회원가입 -->
 	<!-- 회원가입 일반-->

@@ -71,7 +71,7 @@
     
 <div class="container">
 <table class="table">
-	<form id="join" method="post" action="../member/joinProcSNS.co">
+	<form id="join" method="post" action="<%= request.getContextPath()%>/member/joinProcSNS.co">
 		<input type="hidden" id="mmail" name="mmail" value="${mmail}"/>
 		<tr>
 			<th><label for="mname">이름</label></th>

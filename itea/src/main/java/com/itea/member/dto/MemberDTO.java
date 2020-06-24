@@ -6,6 +6,7 @@ public class MemberDTO {
 	
 	//sql문과 파라미터를
 	private int mno;
+	private int mclass;
 	private String mmail;
 	private String mpw;
 	private String mname;
@@ -21,6 +22,14 @@ public class MemberDTO {
 	}
 	public void setMno(int mno) {
 		this.mno = mno;
+	}
+	
+	
+	public int getMclass() {
+		return mclass;
+	}
+	public void setMclass(int mclass) {
+		this.mclass = mclass;
 	}
 	public String getMmail() {
 		return mmail;
@@ -76,12 +85,13 @@ public class MemberDTO {
 	public void setMdate(Date mdate) {
 		this.mdate = mdate;
 	}
-	
 	@Override
 	public String toString() {
-		return "MemberDTO [mno=" + mno + ", mmail=" + mmail + ", mpw=" + mpw + ", mname=" + mname + ", mphone=" + mphone
-				+ ", mnick=" + mnick + ", msex=" + msex + ", mbirth=" + mbirth + ", mgradu=" + mgradu + ", mdate="
-				+ mdate + "]";
+		return "MemberDTO [mno=" + mno + ", mclass=" + mclass + ", mmail=" + mmail + ", mpw=" + mpw + ", mname=" + mname
+				+ ", mphone=" + mphone + ", mnick=" + mnick + ", msex=" + msex + ", mbirth=" + mbirth + ", mgradu="
+				+ mgradu + ", mdate=" + mdate + "]";
 	}
+	
+	
 	
 }
