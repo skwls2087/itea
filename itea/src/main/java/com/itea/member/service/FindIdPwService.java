@@ -21,23 +21,6 @@ public class FindIdPwService {
 	@Autowired
 	FindIdPwDAO findidpwDAO;
 	
-	@Autowired
-	LoginDAO loginDAO;
-	
-	
-	// 아이디 중복 검사(AJAX)
-	public void check_name(String name, HttpServletResponse response) throws Exception {
-		PrintWriter out = response.getWriter();
-		out.println(findidpwDAO.check_name(name));
-		out.close();
-	}
-
-	// 이메일 중복 검사(AJAX)
-	public void check_email(String email, HttpServletResponse response) throws Exception {
-		PrintWriter out = response.getWriter();
-		out.println(findidpwDAO.check_email(email));
-		out.close();
-	}
 
 	// 아이디 찾기
 	public ArrayList find_id(HttpServletResponse response, MemberDTO mdto) throws Exception {
@@ -111,15 +94,12 @@ public class FindIdPwService {
 	public void find_pw(HttpServletResponse response, MemberDTO member) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
+		MemberDTO mem = findidpwDAO.check(member);
 		
-		// 이름이 없으면
-		if(findidpwDAO.check_name(member.getMname())==0) {
-			out.print("아이디가 없습니다.");
-			out.close();
-		}
-		// 가입에 사용한 이메일이 아니면
-		else if(!member.getMmail().equals(loginDAO.login(member))) {
-			out.print("잘못된 이메일 입니다.");
+		if(mem==null) {
+			System.out.println("name="+member.getMname());
+			System.out.println("name="+mem);
+			out.print("해당 정보가없습니다.");
 			out.close();
 		}else {
 			// 임시 비밀번호 생성
@@ -137,6 +117,28 @@ public class FindIdPwService {
 			out.close();
 		}
 	}
+	
+	public void check(MemberDTO member, HttpServletResponse response) throws Exception {
+		PrintWriter out = response.getWriter();
+		out.println(findidpwDAO.check(member));
+		System.out.println("check"+findidpwDAO.check(member));
+		out.close();
+	}
+	
+	
+	/*// 아이디 중복 검사(AJAX)
+	public void check_name(String mname, HttpServletResponse response) throws Exception {
+		PrintWriter out = response.getWriter();
+		out.println(findidpwDAO.check_name(mname));
+		out.close();
+	}
+
+	// 이메일 중복 검사(AJAX)
+	public void check_email(String mmail, HttpServletResponse response) throws Exception {
+		PrintWriter out = response.getWriter();
+		out.println(findidpwDAO.check_email(mmail));
+		out.close();
+	}*/
 	
 
 	

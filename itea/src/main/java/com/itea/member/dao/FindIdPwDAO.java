@@ -33,17 +33,23 @@ public class FindIdPwDAO {
 		return session.update("member.update_pw", member);
 	}
 	
-	// 이름 중복 검사
-	public int check_name(String name) throws Exception{
-		return session.selectOne("member.check_name", name);
+	public MemberDTO check(MemberDTO member) throws Exception{
+		System.out.println(member);
+		return session.selectOne("member.check", member);
 	}
 	
-	// 이메일 중복 검사
-	public int check_email(String email) throws Exception{
-		return session.selectOne("member.check_email", email);
+	/*// 이름 중복 검사
+	public int check_name(String mname) throws Exception{
+		System.out.println(mname);
+		return session.selectOne("member.check_name", mname);
 	}
-
-
+	
+	
+	// 이메일 중복 검사
+	public int check_email(String mmail) throws Exception{
+		System.out.println(mmail);
+		return session.selectOne("member.check_email", mmail);
+	}*/
 	
 
 }

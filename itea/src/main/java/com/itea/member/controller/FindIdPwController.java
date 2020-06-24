@@ -9,11 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.itea.member.dto.MemberDTO;
 import com.itea.member.service.FindIdPwService;
-
 
 @Controller
 @RequestMapping("/member")
@@ -38,9 +36,7 @@ public class FindIdPwController {
 		String mphone = request.getParameter("mphone");
 		ArrayList<MemberDTO> list = findidpwSV.find_id(response,mdto);
 		request.setAttribute("LIST", list);
-		
 		return "/member/find_id";
-		
 	}
 	
 	// 비밀번호 찾기 폼
