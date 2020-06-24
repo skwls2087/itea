@@ -20,9 +20,9 @@ public class LoginService {
 		return member;
 	}
 
-	public MemberDTO naverLogin(String email) {
+	public MemberDTO snsLogin(MemberDTO mdto) {
 		
-		MemberDTO member=loginDAO.snsLogin(email);
+		MemberDTO member=loginDAO.snsLogin(mdto);
 		
 		return member;
 	}
