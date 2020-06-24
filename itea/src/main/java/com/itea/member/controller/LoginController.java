@@ -93,6 +93,8 @@ public class LoginController {
 		"response":{"id":"33666449","nickname":"shinn****","age":"20-29","gender":"M","email":"sh@naver.com","name":"\uc2e0\ubc94\ud638"}}
 		**/
 		
+		System.out.println("apiresult"+apiResult);
+		
 		//2. String형식인 apiResult를 json형태로 바꿈
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(apiResult);
@@ -108,8 +110,10 @@ public class LoginController {
 		String email = (String)response_obj.get("email");
 		System.out.println("이메일="+email);
 		
-		session.setAttribute("NO", 111);
-		session.setAttribute("MNICK", email);
+		String id = (String)response_obj.get("id");
+		System.out.println("아이디="+id);
+		
+		session.setAttribute("ID",id);
 		
 		model.addAttribute("result", apiResult);
 		return "../../index";

@@ -30,11 +30,9 @@ public class NaverLoginBO {
 	/* 네이버 아이디로 인증 URL 생성 Method */
 	public String getAuthorizationUrl(HttpSession session) {
 		
-		System.out.println("여기들어옴");
-		
 		/* 세션 유효성 검증을 위하여 난수를 생성 */
 		String state = generateRandomString();
-		System.out.println(state);
+		
 		/* 생성한 난수 값을 session에 저장 */
 		setSession(session,state);
 		/* Scribe에서 제공하는 인증 URL 생성 기능을 이용하여 네아로 인증 URL 생성 */
@@ -44,8 +42,6 @@ public class NaverLoginBO {
 		.callback(REDIRECT_URI)
 		.state(state) //앞서 생성한 난수값을 인증 URL생성시 사용함
 		.build(NaverLoginApi.instance());
-		
-		System.out.println(oauthService);
 		
 		return oauthService.getAuthorizationUrl();
 	}
@@ -87,6 +83,7 @@ public class NaverLoginBO {
 	
 	/* Access Token을 이용하여 네이버 사용자 프로필 API를 호출 */
 	public String getUserProfile(OAuth2AccessToken oauthToken) throws IOException{
+		
 		OAuth20Service oauthService =new ServiceBuilder()
 		.apiKey(CLIENT_ID)
 		.apiSecret(CLIENT_SECRET)
@@ -94,6 +91,7 @@ public class NaverLoginBO {
 		OAuthRequest request = new OAuthRequest(Verb.GET, PROFILE_API_URL, oauthService);
 		oauthService.signRequest(oauthToken, request);
 		Response response = request.send();
+		
 		return response.getBody();
 	}
 }

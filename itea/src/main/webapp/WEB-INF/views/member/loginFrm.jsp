@@ -26,6 +26,5 @@
       	<hr><br/>
       	
      	<!-- sns계정으로 로그인하기 -->
-     	${naver_url}
 		  <!-- 1.네이버 -->
 		  <a href="${naver_url}"><img height="50" src="${pageContext.request.contextPath}/resources/img/naverlogin.jpg"/></a>
