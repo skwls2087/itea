@@ -24,8 +24,15 @@ public class JoinController {
 	public void joinProc(MemberDTO mDto) {
 		System.out.println("joinProc 진입");
 		System.out.println("mDto"+mDto);
-		
 		jDao.joinProc(mDto);
 		
 	}
+	@RequestMapping("member/joinProcSNS")
+	public void joinProcSNS(MemberDTO mDto) {
+		System.out.println("joinProcSNS 진입");
+		System.out.println("mDto"+mDto);
+		jDao.joinProcSNS(mDto);
+	}
+	
+	
 }
