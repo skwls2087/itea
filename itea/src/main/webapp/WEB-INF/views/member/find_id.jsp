@@ -52,9 +52,9 @@ $(function(){
         	</c:forEach>
         	<c:set var="email" value="${fn:indexOf(mmail,'@')}"/>
         	<c:set var="len" value="${fn:length(mmail)}"/>
-        	${fn:substring(mmail,email,len)}
+        	${fn:substring(mmail,email,len)}<br/><br/>
+				</c:forEach><br/>
 				</h5>
-				</c:forEach>
 				<p class="w3-center">
 					<button type="button" id=loginBtn class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">Login</button>
 					<button type="button" onclick="history.go(-1);" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round">Cancel</button>
