@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 =======
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 >>>>>>> Stashed changes
 
