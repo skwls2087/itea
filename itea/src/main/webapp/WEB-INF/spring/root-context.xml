@@ -38,6 +38,10 @@
 	<!-- DI선언 -->
 	
 	<!-- DAO -->
+	<bean id="joinDAO" class="com.itea.member.dao.JoinDAO">
+		<property name="sqlSessionTemplate" ref ="sqlSession"/>
+	</bean>
+	
 	<bean id ="loginDAO" class = "com.itea.member.dao.LoginDAO">
 		<property name ="sqlSessionTemplate" ref  ="sqlSession"/> 
 	</bean>

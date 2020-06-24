@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    <%@ page import="java.net.URLEncoder" %>
+<%@ page import="java.security.SecureRandom" %>
+<%@ page import="java.math.BigInteger" %>
 <style>
 	.form-signin{
 		max-width:300px;
@@ -19,12 +21,21 @@
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" name="mpw" id="inputPassword" class="form-control" placeholder="Password" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit">이메일 로그인</button>
-      	<a href="./find_id_form.co">아이디찾기</a> 
-      	<a href="./find_pw_form.co">비밀번호찾기</a>
+        &nbsp &nbsp &nbsp <a href="#">아이디찾기</a>&nbsp &nbsp &nbsp &nbsp &nbsp  <a href="#">비밀번호찾기</a>
       </form>
-      	<br/><hr><br/>
+      	<hr><br/>
       	
      	<!-- sns계정으로 로그인하기 -->
-			<a href="${url}"><img style="width:300px;" src="${pageContext.request.contextPath}/resources/img/naverlogin.jpg"/></a>
-			
-      
+			<!-- 1.네이버 -->
+			<%
+			    String clientId = "68tNfP0GUh1VB4b0suSF";//애플리케이션 클라이언트 아이디값";
+			    String redirectURI = URLEncoder.encode("http://localhost:9000/spring", "UTF-8");
+			    SecureRandom random = new SecureRandom();
+			    String state = new BigInteger(130, random).toString();
+			    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+			    apiURL += "&client_id=" + clientId;
+			    apiURL += "&redirect_uri=" + redirectURI;
+			    apiURL += "&state=" + state;
+			    session.setAttribute("state", state);
+			 %>
+			  <a href="<%=apiURL%>"><img height="50" src="${pageContext.request.contextPath}/resources/img/naverlogin.jpg"/></a>
