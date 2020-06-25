@@ -47,9 +47,11 @@ $(function(){
 						return false;
 					} 		
 			}	
-			/* // 변경날짜와 지금 날짜를 비교하여 30일 이후에만 수정이 됨.
+			/*// 변경날짜와 지금 날짜를 비교하여 30일 이후에만 수정이 됨.
 			var changedDate= ${mDto.mnickdate};
-			var date= new Date();
+			
+			var date= ${now};
+			alert(date)
 			var changedDateArray = changedDate.split("-");
 			var dateArray = date.split("-");
 			var changed_date = new Date(changedDateArray[0],Number(changedDateArray[1])-1,changedDateArray[2]);
@@ -58,10 +60,10 @@ $(function(){
 					if(between_day<=30){
 					alert("닉네임 변경은 30일 이후에 가능합니다.")
 					return false;
-					}   		 */
+					}   		
 			alert('지금 입력한 정보로 회원정보를 수정됩니다.');
 		$("#modifyFrm").submit();
-	});
+	});*/
 	$("#rBtn").click(function(){
 		 alert('정보수정페이지를 나가시겠습니까?');
 			
@@ -82,6 +84,7 @@ $(function(){
 				<input type="hidden" name="mno" value="${mDto.mno}"/>
 		<table  class=""  >
 			<tbody>
+			${mDto.modifydate}
 					<tr>
 						<th>아이디</th>
             <td>${mDto.mmail}</td>
