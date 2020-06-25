@@ -22,5 +22,9 @@ public class ModifyService {
 		return mDto;
 	}
 
+	public void delete(int mno) {
+		mDao.delete(mno);
+	}
+
 
 }

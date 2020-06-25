@@ -23,5 +23,12 @@ public class ModifyDAO extends SqlSessionDaoSupport {
 	}
 
 
+	public void delete(int mno) {
+		session.delete("member.delete",mno);
+		
+	
+	}
+
+
 	
 }
