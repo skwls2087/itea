@@ -19,11 +19,12 @@ public class LoginDAO extends SqlSessionDaoSupport {
 		return member;
 	}
 
-	public MemberDTO snsLogin(String email) {
+	public MemberDTO snsLogin(MemberDTO mdto) {
 		
-		MemberDTO Member=session.selectOne("member.snsLogin",email);
+		MemberDTO member=session.selectOne("member.snsLogin",mdto);
 		
-		return Member;
+		System.out.println("sql후"+member);
+		return member;
 	}
 	
 }

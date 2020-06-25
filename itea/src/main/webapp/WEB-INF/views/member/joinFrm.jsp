@@ -81,7 +81,7 @@
 			}
 			
 			//성별 입력 여부
-			if(!($("#msex1").checked) && !($("#msex2").checked)){
+			if ( ! $('input[name="msex"]:checked').val() ){
 				alert("성별을 선택하지 않았습니다.")
 				return false;
 			}
