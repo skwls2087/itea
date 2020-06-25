@@ -33,8 +33,6 @@
 	<!-- 모든페이지와 header연결하기 -->
 	  <jsp-config>
 	    <jsp-property-group>
-	    
-	    
 	      <url-pattern>*.jsp</url-pattern>
 	      <include-prelude>/header.jsp</include-prelude>
 	      <include-coda>/footer.jsp</include-coda>
