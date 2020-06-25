@@ -7,7 +7,6 @@
 	th{font-family: 'Noto Sans KR', sans-serif;}
 	#join-table{max-width:540px;}
 	#mail-button{height:30px;width:50px;padding:0px;font-family: 'Noto Sans KR', sans-serif;}
-	#joincode{display:none}
 </style>
 
 <div class="container">
@@ -18,11 +17,12 @@
 		<tr>
 			<th><label for="mmail">이메일</label></th>
 			<td><input type="email" id="mmail" name="mmail"/>
-					<input type="hidden" id="authCode" />
+					<input type="hidden" id="authCode" /></td>
 			<!-- <button id="mail-button" type="button" class="btn btn-outline-secondary" 
 					onclick="window.open('address','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');">인증</button> -->
 					<button id="mail-button" type="button" class="btn btn-outline-secondary" 
-					onclick="checkMail()" >인증</button></td>
+					onclick="checkMail()">인증</button>
+			</td>
 		</tr>
 		<tr id="joincode">
 			<th>인증번호</th>

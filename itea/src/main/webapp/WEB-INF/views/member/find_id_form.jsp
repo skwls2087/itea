@@ -37,9 +37,9 @@ $(function(){
 					</p>
 					<p><label>휴대폰번호</label><br/>
 						<input type="hidden" id="mphone" name="mphone"/>
-						<input class="w3-input-sm" type="text" id="mphone1" name="mphone1" maxlength="3" required>
-						- <input class="w3-input-sm" type="text" id="mphone2" name="mphone2"  maxlength="4" required>
-						- <input class="w3-input-sm" type="text" id="mphone3" name="mphone3"  maxlength="4" required>
+						<input class="w3-input-sm" type="text" id="mphone1" name="mphone1" required>
+						- <input class="w3-input-sm" type="text" id="mphone2" name="mphone2" required>
+						- <input class="w3-input-sm" type="text" id="mphone3" name="mphone3" required>
 					</p>
 					<p class="w3-center">
 						<button type="submit" id=findBtn class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">find</button>
