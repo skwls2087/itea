@@ -163,6 +163,26 @@
 		  <version>1.3.2</version>
 		</dependency>
 		
+		<!-- 네아로 -->
+		<dependency> 
+			<groupId>com.github.scribejava</groupId> 
+			<artifactId>scribejava-apis</artifactId> 
+			<version>5.6.0</version> 
+		</dependency>
+		
+		<dependency> 
+			<groupId>com.github.scribejava</groupId> 
+			<artifactId>scribejava-core</artifactId> 
+			<version>2.8.1</version> 
+		</dependency>
+		
+   <!-- Java Mail API -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.3</version>
+		</dependency>
+
 		<!-- smtp -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -181,19 +201,7 @@
 			<artifactId>mail</artifactId>
 			<version>1.4</version>
 		</dependency>
-		
-		<!-- 네아로 -->
-		<dependency> 
-			<groupId>com.github.scribejava</groupId> 
-			<artifactId>scribejava-apis</artifactId> 
-			<version>5.6.0</version> 
-		</dependency>
-		
-		<dependency> 
-			<groupId>com.github.scribejava</groupId> 
-			<artifactId>scribejava-core</artifactId> 
-			<version>2.8.1</version> 
-		</dependency>
+
 		
 		<!-- 제이슨 파싱 -->
 		<dependency>
@@ -202,7 +210,8 @@
 			<version>1.1.1</version>
 		</dependency>
 		
-		<!-- 메일 발송을 위함  -->
+
+			<!-- 메일 발송을 위함  -->
 		<dependency> 
 			<groupId>org.springframework</groupId> 
 			<artifactId>spring-context-support</artifactId> 
