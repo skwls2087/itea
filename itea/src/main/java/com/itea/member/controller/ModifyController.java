@@ -1,15 +1,13 @@
 package com.itea.member.controller;
 
-import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -50,6 +48,7 @@ public class ModifyController {
 		System.out.println("회원번호"+mDto.getMno());
 //		//2.비즈니스 로직수행
 			modifySV.modify(mDto);
+			
 //		//3.Model
 			session.setAttribute("MNICK", mDto.getMnick());
 //		//4.View

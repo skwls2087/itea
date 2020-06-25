@@ -1,6 +1,6 @@
 package com.itea.member.dto;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class MemberDTO {
 	
@@ -17,6 +17,8 @@ public class MemberDTO {
 	private String mgradu;
 	private Date mdate;
 	private Date mnickdate;
+	private long modifydate;
+	
 	public int getMno() {
 		return mno;
 	}
@@ -88,8 +90,21 @@ public class MemberDTO {
 		return mnickdate;
 	}
 	public void setMnickdate(Date mnickdate) {
+		Date now=new Date();
+		
+		System.out.println(now);
+		System.out.println(mnickdate);
+
+		long diffDay = (now.getTime() - mnickdate.getTime())/ (24 * 60 * 60 * 1000);                                              
+		modifydate=diffDay;  
+
 		this.mnickdate = mnickdate;
 	}
+	
+	public long getModifydate() {
+		return modifydate;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberDTO [mno=" + mno + ", mclass=" + mclass + ", mmail=" + mmail + ", mpw=" + mpw + ", mname=" + mname
