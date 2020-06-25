@@ -23,6 +23,7 @@ public class MemberDTO {
 	public void setMno(int mno) {
 		this.mno = mno;
 	}
+
 	public String getMmail() {
 		return mmail;
 	}
@@ -91,18 +92,10 @@ public class MemberDTO {
 	}
 	@Override
 	public String toString() {
-		return "MemberDTO [mno=" + mno + ", mclass=" + mclass + ", mmail=" + 
-
-mmail + ", mpw=" + mpw + ", mname=" + mname
-				+ ", mphone=" + mphone + ", mnick=" + mnick + ", msex=" + 
-
-msex + ", mbirth=" + mbirth + ", mgradu="
-				+ mgradu + ", mdate=" + mdate + ", mnickdate=" + 
-
-mnickdate + "]";
+		return "MemberDTO [mno=" + mno + ", mclass=" + mclass + ", mmail=" + mmail + ", mpw=" + mpw + ", mname=" + mname
+				+ ", mphone=" + mphone + ", mnick=" + mnick + ", msex=" + msex + ", mbirth=" + mbirth + ", mgradu="
+				+ mgradu + ", mdate=" + mdate + ", mnickdate=" + mnickdate + "]";
 	}
-	
-	
 	
 	
 }

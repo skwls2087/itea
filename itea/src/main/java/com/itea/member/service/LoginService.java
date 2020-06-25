@@ -26,4 +26,5 @@ public class LoginService {
 		
 		return member;
 	}
+	
 }
