@@ -182,6 +182,32 @@
 			<artifactId>json-simple</artifactId>
 			<version>1.1.1</version>
 		</dependency>
+		
+		<!-- 메일 발송을 위함  -->
+		<dependency> 
+			<groupId>org.springframework</groupId> 
+			<artifactId>spring-context-support</artifactId> 
+			<version>${org.springframework-version}</version> 
+		</dependency>
+		
+		<dependency> 
+			<groupId>com.sun.mail</groupId> 
+			<artifactId>javax.mail</artifactId> 
+			<version>1.5.6</version> 
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+
+		<!-- 메일인증 라이브러리 -->
+		<dependency>
+         <groupId>javax.mail</groupId>
+         <artifactId>mail</artifactId>
+         <version>1.4.7</version>
+     </dependency>
 
 	</dependencies>
     <build>
