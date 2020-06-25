@@ -50,7 +50,6 @@ public class ModifyController {
 		System.out.println("회원번호"+mDto.getMno());
 //		//2.비즈니스 로직수행
 			modifySV.modify(mDto);
-			
 //		//3.Model
 			session.setAttribute("MNICK", mDto.getMnick());
 //		//4.View
