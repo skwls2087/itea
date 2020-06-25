@@ -8,22 +8,20 @@
 		margin:40px auto;
 		}
 	.form-signin>*{margin:10px;}
-	#login-main{text-align:center}
 	
 </style>
 
-<div class="container" id="login-main">
+<div class="container">
 
 	  <!-- 이메일로 로그인하기 -->
       <form class="form-signin" method="post" action="<%= request.getContextPath()%>/member/loginProc.co">
-        <h2 class="form-signin-heading">로그인</h2>
+        <h2 class="form-signin-heading">Login</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" name="mmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" name="mpw" id="inputPassword" class="form-control" placeholder="Password" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit">이메일 로그인</button>
-        &nbsp &nbsp &nbsp <a href="<%= request.getContextPath()%>/member/find_id_form.co">아이디찾기</a>
-        	&nbsp &nbsp &nbsp &nbsp &nbsp  <a href="<%= request.getContextPath()%>/member/find_pw_form.co">비밀번호찾기</a>
+        &nbsp &nbsp &nbsp <a href="#">아이디찾기</a>&nbsp &nbsp &nbsp &nbsp &nbsp  <a href="#">비밀번호찾기</a>
       </form>
       	<hr><br/>
       	
