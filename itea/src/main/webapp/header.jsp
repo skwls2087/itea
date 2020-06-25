@@ -15,8 +15,7 @@
 <!-- 구글폰트-굵은글씨표현 -->
 <!-- font-family: 'Black Han Sans', sans-serif; -->
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
-<!-- 얇은 글씨 -->
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+
 
 <!-- JSTL 선언 -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
