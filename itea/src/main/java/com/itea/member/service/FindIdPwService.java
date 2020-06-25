@@ -2,6 +2,7 @@ package com.itea.member.service;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -46,16 +47,19 @@ public class FindIdPwService {
 		}
 	}
 	
+	
+	
 	// 이메일 발송
 	public void send_mail(MemberDTO member, String div) throws Exception {
 		// Mail Server 설정
 		String charSet = "utf-8";
-		String hostSMTP = "smtp.naver.com";
-		String hostSMTPid = "chokate96@naver.com";
-		String hostSMTPpwd = "whdPdls0714$$";
+		String hostSMTP = "smtp.gmail.com";
+		int hostPort = 587;
+		String hostSMTPid = "iteaweb20@gmail.com";
+		String hostSMTPpwd = "ynbetrfjiktgsyzh";
 
 		// 보내는 사람 EMail, 제목, 내용
-		String fromEmail = "chokate96@naver.com";
+		String fromEmail = "iteaweb20@gmail.com";
 		String fromName = "Spring Homepage";
 		String subject = "";
 		String msg = "";
@@ -76,7 +80,7 @@ public class FindIdPwService {
 			email.setCharset(charSet);
 			email.setSSL(true);
 			email.setHostName(hostSMTP);
-			email.setSmtpPort(587);
+			email.setSmtpPort(hostPort);
 
 			email.setAuthentication(hostSMTPid, hostSMTPpwd);
 			email.setTLS(true);

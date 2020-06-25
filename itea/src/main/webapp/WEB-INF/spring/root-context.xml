@@ -56,6 +56,7 @@
 	<bean id="loginSV" class="com.itea.member.service.LoginService"/>
 	<bean id="findidpwSV" class="com.itea.member.service.FindIdPwService"/>
 	<bean id="modifySV" class="com.itea.member.service.ModifyService"/>
+	
 </beans>
 
 

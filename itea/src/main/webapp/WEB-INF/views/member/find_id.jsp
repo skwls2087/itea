@@ -34,13 +34,16 @@ $(function(){
 							일반
 						</c:when>
 						<c:when test="${list.mclass==2}">
-							네이버
+							<img src="${pageContext.request.contextPath}/resources/img/naver-logo.png" 
+							width="100"/>
 						</c:when>
 						<c:when test="${list.mclass==3}">
-							카카오
+							<img src="${pageContext.request.contextPath}/resources/img/kakao-logo.jpg"
+							width="100"/>
 						</c:when>
 						<c:when test="${list.mclass==4}">
-							구글
+							<img src="${pageContext.request.contextPath}/resources/img/google-logo.png"
+							width="100"/>
 						</c:when>
 					</c:choose><br/>
 					<br/>

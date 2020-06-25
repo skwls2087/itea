@@ -23,11 +23,6 @@ public class MemberDTO {
 	public void setMno(int mno) {
 		this.mno = mno;
 	}
-	
-<<<<<<< HEAD
-=======
-	
->>>>>>> master
 	public int getMclass() {
 		return mclass;
 	}
@@ -94,7 +89,6 @@ public class MemberDTO {
 				+ ", mphone=" + mphone + ", mnick=" + mnick + ", msex=" + msex + ", mbirth=" + mbirth + ", mgradu="
 				+ mgradu + ", mdate=" + mdate + "]";
 	}
-	
 	
 	
 }
