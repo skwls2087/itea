@@ -8,10 +8,11 @@
 		margin:40px auto;
 		}
 	.form-signin>*{margin:10px;}
+	#login-main{text-align:center}
 	
 </style>
 
-<div class="container">
+<div class="container" id="login-main">
 
 	  <!-- 이메일로 로그인하기 -->
       <form class="form-signin" method="post" action="<%= request.getContextPath()%>/member/loginProc.co">

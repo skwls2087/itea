@@ -55,6 +55,12 @@
 		values(#{mmail},#{mname},#{mnick},#{mphone},#{mbirth},#{msex},#{mgradu})
 	</insert>
 	
+	<!-- 메일에 해당하는 회원 수 -->
+	<select id="mailCheck" parameterType="memberDTO" resultType="int">
+		select count(*)
+		from member
+		where mmail=#{mmail} and mclass=#{mclass}
+	</select>
 </mapper>
 
 

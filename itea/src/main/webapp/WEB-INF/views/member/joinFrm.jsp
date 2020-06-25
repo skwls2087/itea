@@ -1,107 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     
-<script>
-	$(function(){
-		$("#rBtn").click(function(){
-			location.href="../index.jsp"
-		})
-		$("#join").submit(function(){
-			var mphone1=$("#mphone1").val();
-			var mphone2=$("#mphone2").val();
-			var mphone3=$("#mphone3").val();
-			var mphone=mphone1+"-"+mphone2+"-"+mphone3
-			document.getElementById("mphone").value=mphone;
-			
-			//아이디 입력여부 검사
-			if($("#mmail").val().length==0){
-				alert("아이디를 입력하지 않았습니다.")
-				$("#mmail").focus();
-				return false;
-			}
-			
-			//비밀번호 입력여부
-			if($("#mpw").val().length==0){
-				alert("비밀번호를 입력하지 않았습니다.")
-				$("#mpw").focus();
-				return false;
-			}
-			
-			//비밀번호 길이 체크
-			if($("#mpw").val().length<4 || $("#mpw").val().length>12){
-				alert("비밀번호는 4~12자리입니다.")
-				$("#mpw").focus();
-				return false;
-			}
-			
-			//비밀번호 일치여부
-			if($("#mpw").val()!=$("#mpw1").val()){
-				alert("비밀번호가 일치하지 않습니다.")
-				$("#mpw1").val("");
-				$("#mpw1").focus();
-				return false;
-			}
-			
-			//이름 입력 여부
-			if($("#mname").val().length==0){
-				alert("이름을 입력하지 않았습니다.")
-				$("#mname").focus();
-				return false;
-			}
-			
-			//닉네임 입력 여부
-			if($("#mnick").val().length==0){
-				alert("닉네임을 입력하지 않았습니다.")
-				$("#mnick").focus();
-				return false;
-			}
-			
-			//전화번호 입력여부 
-			if($("#mphone1").val().length==0){
-				alert("전화번호를 입력하지 않았습니다.")
-				$("#mphone1").focus();
-				return false;
-			}
-			
-			if($("#mphone2").val().length==0){
-				alert("전화번호를 입력하지 않았습니다.")
-				$("#mphone2").focus();
-				return false;
-			}
-			
-			if($("#mphone3").val().length==0){
-				alert("전화번호를 입력하지 않았습니다.")
-				$("#mphone3").focus();
-				return false;
-			}
-			//생년월일 입력 여부
-			if($("#mbirth").val().length==0){
-				alert("생년월일을 입력하지 않았습니다.")
-				$("#mbirth").focus();
-				return false;
-			}
-			
-			//성별 입력 여부
-			if ( ! $('input[name="msex"]:checked').val() ){
-				alert("성별을 선택하지 않았습니다.")
-				return false;
-			}
-		})
-	})
-</script>
+<script src="${pageContext.request.contextPath}/resources/js/join.js" type="text/javascript"></script>
 
 <style>
-.form-signup-heading{margin: 31px 0px;}
+	.form-signup-heading{margin: 31px 0px;}
+	th{font-family: 'Noto Sans KR', sans-serif;}
+	#join-table{max-width:540px;}
+	#mail-button{height:30px;width:50px;padding:0px;font-family: 'Noto Sans KR', sans-serif;}
 </style>
 
 <div class="container">
 
-
 	<form id="join" class="form-signup" method="post" action="../member/joinProc.co">
 	<h2 class="form-signup-heading">회원가입</h2>
-	<table class="table">
+	<table id="join-table" class="table">
 		<tr>
 			<th><label for="mmail">이메일</label></th>
-			<td><input type="email" id="mmail" name="mmail"/></td>
+			<td><input type="email" id="mmail" name="mmail"/>
+					<input type="hidden" id="authCode" /></td>
+			<!-- <button id="mail-button" type="button" class="btn btn-outline-secondary" 
+					onclick="window.open('address','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');">인증</button> -->
+					<button id="mail-button" type="button" class="btn btn-outline-secondary" 
+					onclick="checkMail()">인증</button>
+			</td>
+		</tr>
+		<tr id="joincode">
+			<th>인증번호</th>
+			<td>
+				<input type='number' name="inputCode" id="inputCode" class="form-control"
+							placeholder="코드를 입력하세요"/>
+				<input type="button" value="확인" class="btn btn-primary btn-sm" onclick="checkJoinCode()">
+			</td>
 		</tr>
 		<tr>
 			<th><label for="mpw">비밀번호</label></th>
@@ -123,9 +52,9 @@
 			<th>전화번호</th>
 			<td>
 				<input type="hidden" id="mphone" name="mphone"/>
-				<input type="text" style="width:100px;" id="mphone1" name="mphone1" maxlength="3"/>
-				- <input type="text" style="width:100px;" id="mphone2" name="mphone2" maxlength="4"/> -
-				<input type="text" style="width:100px;" id="mphone3" name="mphone3" maxlength="4"/>
+				<input type="text" style="width:80px;" id="mphone1" name="mphone1" maxlength="3"/>
+				- <input type="text" style="width:80px;" id="mphone2" name="mphone2" maxlength="4"/> -
+				<input type="text" style="width:80px;" id="mphone3" name="mphone3" maxlength="4"/>
 			</td>
 		</tr>
 		<tr>

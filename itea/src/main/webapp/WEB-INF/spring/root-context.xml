@@ -51,7 +51,9 @@
 	
 	<!-- Service -->
 	<bean id="loginSV" class="com.itea.member.service.LoginService"/>
+	<bean id="joinSV" class="com.itea.member.service.JoinService"/>
 	<bean id="modifySV" class="com.itea.member.service.ModifyService"/>
+	
 </beans>
 
 
