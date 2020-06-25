@@ -22,22 +22,22 @@
 		where mmail = #{mmail}
 	</update>
 	
-	<!-- 중복 검사 -->
-	<select id="check" parameterType="memberDTO" resultType="memberDTO">
-		select * from member where mname = #{mname} and mmail = #{mmail}
-	</select>
+	<!-- 중복 검사-->
+	<select id="check" parameterType="memberDTO" resultType="int">
+		select count(*) from member 
+		where mname = #{mname} and mmail = #{mmail}
+	</select> 
 	
-	<!-- 이름 중복 검사 
+	<!-- 이름 중복 검사
 	<select id="check_name" parameterType="string" resultType="int">
 		select count(*) from member where mname = #{mname}
-	</select>
+	</select>-->
 	
 	<!-- 이메일 중복 검사
 	<select id="check_email" parameterType="string" resultType="int">
 		select count(*) from member where mmail = #{mmail}
 	</select>-->
 	
-
 	<!-- 회원수 조회 신나진-->
 	<!-- select쿼리의 실행결과의  컬럼수가    1개이면    자바의 데이터타입을 지정 -->
 	<!-- 로그인 -->

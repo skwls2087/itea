@@ -14,8 +14,8 @@ $(function(){
 			url : "../member/find_pw.co",
 			type : "POST",
 			data : {
-				name : $("#mname").val(),
-				email : $("#mmail").val()
+				mname : $("#mname").val(),
+				mmail : $("#mmail").val()
 			},
 			success : function(result) {
 				alert(result);
@@ -27,6 +27,7 @@ $(function(){
 <title>비밀번호 찾기</title>
 </head>
 <body>
+<form id="find_pw" name="find_pw" method="post" action="../member/find_pw.co">
 	<div class="w3-content w3-container w3-margin-top">
 		<div class="w3-container w3-card-4">
 			<div class="w3-center w3-large w3-margin-top">
@@ -48,5 +49,6 @@ $(function(){
 			</div>
 		</div>
 	</div>
+	</form>
 </body>
 </html>

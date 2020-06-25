@@ -51,11 +51,11 @@ public class FindIdPwService {
 		// Mail Server 설정
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.naver.com";
-		String hostSMTPid = "이메일 입력";
-		String hostSMTPpwd = "비밀번호 입력";
+		String hostSMTPid = "chokate96@naver.com";
+		String hostSMTPpwd = "whdPdls0714$$";
 
 		// 보내는 사람 EMail, 제목, 내용
-		String fromEmail = "이메일 입력";
+		String fromEmail = "chokate96@naver.com";
 		String fromName = "Spring Homepage";
 		String subject = "";
 		String msg = "";
@@ -69,7 +69,7 @@ public class FindIdPwService {
 			msg += member.getMpw() + "</p></div>";
 		}
 		// 받는 사람 E-Mail 주소
-		String mail = member.getMmail();
+		String mmail = member.getMmail();
 		try {
 			HtmlEmail email = new HtmlEmail();
 			email.setDebug(true);
@@ -80,7 +80,7 @@ public class FindIdPwService {
 
 			email.setAuthentication(hostSMTPid, hostSMTPpwd);
 			email.setTLS(true);
-			email.addTo(mail, charSet);
+			email.addTo(mmail, charSet);
 			email.setFrom(fromEmail, fromName, charSet);
 			email.setSubject(subject);
 			email.setHtmlMsg(msg);
@@ -94,11 +94,9 @@ public class FindIdPwService {
 	public void find_pw(HttpServletResponse response, MemberDTO member) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		MemberDTO mem = findidpwDAO.check(member);
-		
-		if(mem==null) {
-			System.out.println("name="+member.getMname());
-			System.out.println("name="+mem);
+		int mem = findidpwDAO.check(member);
+		System.out.println("find_pw SV="+mem);
+		if(mem==0) {
 			out.print("해당 정보가없습니다.");
 			out.close();
 		}else {
@@ -108,36 +106,43 @@ public class FindIdPwService {
 				pw += (char) ((Math.random() * 26) + 97);
 			}
 			member.setMpw(pw);
+			System.out.println("새로운pw="+pw);
 			// 비밀번호 변경
-			findidpwDAO.update_pw(member);
+			int npw = findidpwDAO.update_pw(member);
+			System.out.println("새로운pw="+npw);
 			// 비밀번호 변경 메일 발송
 			send_mail(member, "find_pw");
-			
 			out.print("이메일로 임시 비밀번호를 발송하였습니다.");
 			out.close();
 		}
 	}
 	
-	public void check(MemberDTO member, HttpServletResponse response) throws Exception {
-		PrintWriter out = response.getWriter();
+	public int check(MemberDTO member) throws Exception {
+		/*PrintWriter out = response.getWriter();
 		out.println(findidpwDAO.check(member));
-		System.out.println("check"+findidpwDAO.check(member));
-		out.close();
+		out.close();*/
+		int mem=findidpwDAO.check(member);
+		System.out.println("check sv="+mem);
+		return mem;
 	}
 	
 	
 	/*// 아이디 중복 검사(AJAX)
-	public void check_name(String mname, HttpServletResponse response) throws Exception {
+	public int check_name(int mname, HttpServletResponse response) throws Exception {
 		PrintWriter out = response.getWriter();
 		out.println(findidpwDAO.check_name(mname));
 		out.close();
+		mname = findidpwDAO.check_name(mname);
+		return mname;
 	}
 
 	// 이메일 중복 검사(AJAX)
-	public void check_email(String mmail, HttpServletResponse response) throws Exception {
+	public int check_email(int mmail, HttpServletResponse response) throws Exception {
 		PrintWriter out = response.getWriter();
 		out.println(findidpwDAO.check_email(mmail));
 		out.close();
+		mmail = findidpwDAO.check_email(mmail);
+		return mmail;
 	}*/
 	
 
