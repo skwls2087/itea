@@ -47,7 +47,7 @@ $(function(){
 						return false;
 					} 		
 			}	
-			// 변경날짜와 지금 날짜를 비교하여 30일 이후에만 수정이 됨.
+			/* // 변경날짜와 지금 날짜를 비교하여 30일 이후에만 수정이 됨.
 			var changedDate= ${mDto.mnickdate};
 			var date= new Date();
 			var changedDateArray = changedDate.split("-");
@@ -58,7 +58,7 @@ $(function(){
 					if(between_day<=30){
 					alert("닉네임 변경은 30일 이후에 가능합니다.")
 					return false;
-					}   		
+					}   		 */
 			alert('지금 입력한 정보로 회원정보를 수정됩니다.');
 		$("#modifyFrm").submit();
 	});

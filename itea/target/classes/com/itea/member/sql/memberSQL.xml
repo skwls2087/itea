@@ -25,7 +25,7 @@
 	</select>
 	
 	
-	<!--정보수정 폼 불러오기  -->
+		<!--정보수정 폼 불러오기  -->
 		<select id="modifyInfo" resultType="memberDTO">
 			select *
 			from member
@@ -34,13 +34,22 @@
 	<!--회원정보 수정--> 
 		<update id="modify" parameterType="memberDTO" >
 		update member
-		set	mpw 		= #{mpw},
-				mnick		= #{mnick},
+		set	mnick		= #{mnick},
 				mphone	= #{mphone},
-				mgradu	= #{mgradu}	
-		where mno=    #{mno}
+				mgradu	= #{mgradu},
+				mnickdate = CURDATE(),
+		      mpw = case when mclass=1 then #{mpw}
+				end	
+		where mno=  #{mno};
 		</update>
-		
+	<!-- 회원탈퇴하기 -->	
+	<delete id="delete" parameterType="memberDTO">
+	DELETE 
+	FROM member
+	WHERE mno=#{mno}
+	</delete>
+
+
 	
 	<!-- 회원가입 -->
 	<!-- 회원가입 일반-->
