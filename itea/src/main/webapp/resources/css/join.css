@@ -1,6 +1,9 @@
 .form-signup-heading{
 	margin: 31px 0px;
 }
+#join{
+	font-family: 'Noto Sans KR', sans-serif;
+}
 th{
 	font-family: 'Noto Sans KR', sans-serif;
 }
@@ -14,7 +17,7 @@ th{
 	font-family: 'Noto Sans KR', sans-serif;
 }
 
-/*ÆË¾÷ °ü¸®*/
+/*ï¿½Ë¾ï¿½ ï¿½ï¿½ï¿½ï¿½*/
 #myModal{
 	font-family: 'Noto Sans KR', sans-serif;
 	text-align:left;

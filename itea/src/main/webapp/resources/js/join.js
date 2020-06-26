@@ -1,14 +1,12 @@
 //회원가입 유효성 검사(태강)
 $(function(){
 	
-	mailCheck=false;
-	
-	var already="<c:out value='${already}'/>";
-	alert(already)
-	
+	//취소눌렀을때
 	$("#rBtn").click(function(){
 		location.href="../index.jsp"
 	})
+	
+	//가입눌렀을때
 	$("#join").submit(function(){
 		var mphone1=$("#mphone1").val();
 		var mphone2=$("#mphone2").val();
@@ -97,18 +95,51 @@ $(function(){
 			return false;
 		}
 	})
-})
 
-//이메일 인증(나진)
-function sendMail() {
-	var email = document.getElementById("memail");
-	var email2 = document.getElementById("memail2");
-	var content = document.getElementById("authCode");
-	if(email.value==''){	
-		alert("이메일은 필수입니다");
+
+//이메일 인증 눌렀을때(나진)
+$("#check_mail").click(function() {
+
+	var email = document.getElementById("mmail").value;
+	var email2 = document.getElementById("mmail2").value;
+
+	
+	//이메일 입력 유효성 확인
+	if(email==''||email2==''){	
+		alert("이메일을 정확히 입력해주세요");
 		email.focus();
 		return false;
 	}
+	
+	var mmail = email+"@"+email2;
+	
+	//이메일 중복확인
+	$.ajax({
+		url : 'checkMail.co?email='+ mmail,
+		type : 'post',
+		success : function(data) {
+			console.log("1 = 중복o / 0 = 중복x : "+ data);							
+			
+			if (data == 1) {
+					//이메일이 이미 존재할 때 -> 사용불가
+					alert("이미 사용중인 메일입니다.")
+				} else {
+					//이메일이 존재하지 않을 때 -> 사용가능
+					
+					
+				}
+			}, error : function() {
+					console.log("실패");
+			}
+		})
+
+
+	})
+
+
+//이메일 인증(나진)
+/*function sendMail() {
+
 	
 	var mid = document.getElementById("mid");
 	var memail = document.getElementById("memail");
@@ -148,4 +179,5 @@ function checkAuthCode() {
 	}
 }
 
-	
+	*/
+})

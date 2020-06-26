@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itea.member.dao.JoinDAO;
 import com.itea.member.dto.MemberDTO;
@@ -42,7 +43,8 @@ public class JoinController {
 
     //이메일이 존재하는 이메일인지 확인
     @RequestMapping("member/checkMail")
-	public String doPost(HttpServletRequest request) throws Exception {
+    @ResponseBody
+	public int doPost(HttpServletRequest request) throws Exception {
 		
     	System.out.println("컨트롤러왔어욤!!이메일");
     	String email=request.getParameter("email");
@@ -51,13 +53,11 @@ public class JoinController {
 		int isMail=joinSV.checkMail(email);
 		
 		if(isMail==0) {
-			//service.sendMail(title, content, email);
-			//request.setAttribute("sendMail", true);
-			request.setAttribute("email", email);
-			return "/member/joinProc";
+
+			return 0;
 		}else {
 			
-			return "/member/joinProc";
+			return 1;
 		}
     }
 	
