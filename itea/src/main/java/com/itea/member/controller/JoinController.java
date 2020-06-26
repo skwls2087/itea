@@ -26,10 +26,13 @@ public class JoinController {
 	}
 	
 	@RequestMapping("/member/joinProc")
-	public void joinProc(MemberDTO mDto) {
+	public String joinProc(MemberDTO mDto) {
 		System.out.println("joinProc 진입");
 		System.out.println("mDto"+mDto);
+		mDto.setMclass(1);
 		jDao.joinProc(mDto);
+		
+		return "member/loginFrm";
 		
 	}
 	@RequestMapping("member/joinProcSNS")
@@ -41,21 +44,42 @@ public class JoinController {
 		return "../../index";
 	}
 
-    //이메일이 존재하는 이메일인지 확인
+    //이메일이 존재하는 이메일인지 확인하고 인증코드 발송
     @RequestMapping("member/checkMail")
     @ResponseBody
-	public int doPost(HttpServletRequest request) throws Exception {
+	public int checkMail(HttpServletRequest request) throws Exception {
 		
-    	System.out.println("컨트롤러왔어욤!!이메일");
     	String email=request.getParameter("email");
-		System.out.println(email);
     	
 		int isMail=joinSV.checkMail(email);
 		
-		if(isMail==0) {
-
+		if(isMail==0) {//같은 이메일이 없으면 -> 코드번호 전송
+			
+			String scode=joinSV.getCode();//코드생성
+			joinSV.sendMail(scode,email);//메일전송
+			
+			int code=Integer.parseInt(scode);
+			
+			return code;
+		}else {//같은 이메일이 있으면 -> 1 전송
+			
+			return 1;
+		}
+    }
+    
+    //이메일이 존재하는 이메일인지 확인하고 인증코드 발송
+    @RequestMapping("member/checkNick")
+    @ResponseBody
+	public int checkNick(HttpServletRequest request) throws Exception {
+		
+    	String mnick=request.getParameter("nick");
+    	
+		int isNick=joinSV.checkNick(mnick);
+		
+		if(isNick==0) {//같은 닉네임이 없을 때
+			
 			return 0;
-		}else {
+		}else {//같은 닉네임이 있을 때
 			
 			return 1;
 		}

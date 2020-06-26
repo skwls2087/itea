@@ -20,9 +20,12 @@ public class JoinDAO extends SqlSessionDaoSupport{
 	}
 
 	public int checkMail(String mail) {
-		System.out.println(mail);
 		int isMail=session.selectOne("member.mailCheck",mail);
-		System.out.println("dao야"+isMail);
 		return isMail;
+	}
+
+	public int checkNick(String mnick) {
+		int isNick=session.selectOne("member.nickCheck",mnick);
+		return isNick;
 	}
 }

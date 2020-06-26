@@ -8,7 +8,7 @@ th{
 	font-family: 'Noto Sans KR', sans-serif;
 }
 #join-table{
-	max-width:540px;
+	max-width:600px;
 }
 #mail-button{
 	height:30px;
@@ -16,18 +16,18 @@ th{
 	padding:0px;
 	font-family: 'Noto Sans KR', sans-serif;
 }
-
-/*�˾� ����*/
-#myModal{
-	font-family: 'Noto Sans KR', sans-serif;
-	text-align:left;
+#check_code,#check_mail,#check_nickname{
+	height: 30px;
+    padding: 0px 14px;
+    margin: 0px 7px;
 }
-#pop-header{
-	font-size:20px;
+#checkCODE{
+	margin-top:10px;
 }
-#pop-main{
-	font-size:10px;
-}
-#pop-footer{
-	font-size:7px;
+#email2{
+	height:30px;
+	width:130px;
+	display:inline-block;
+    margin: 0px;
+    padding: 0px 5px;
 }

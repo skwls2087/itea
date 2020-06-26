@@ -1,6 +1,8 @@
 //회원가입 유효성 검사(태강)
 $(function(){
 	
+	var isnick=false;
+
 	//취소눌렀을때
 	$("#rBtn").click(function(){
 		location.href="../index.jsp"
@@ -16,14 +18,7 @@ $(function(){
 		
 		//아이디 입력여부 검사
 		if($("#mmail").val().length==0){
-			alert("아이디를 입력하지 않았습니다.")
-			$("#mmail").focus();
-			return false;
-		}
-		
-		//아이디 입력여부 검사
-		if(mailCheck==false){
-			alert("이메일 인증을 완료해주세요")
+			alert("메일 인증을 완료해주세요")
 			$("#mmail").focus();
 			return false;
 		}
@@ -58,8 +53,8 @@ $(function(){
 		}
 		
 		//닉네임 입력 여부
-		if($("#mnick").val().length==0){
-			alert("닉네임을 입력하지 않았습니다.")
+		if(!isnick){
+			alert("닉네임 중복확인을 해주세요")
 			$("#mnick").focus();
 			return false;
 		}
@@ -97,87 +92,108 @@ $(function(){
 	})
 
 
-//이메일 인증 눌렀을때(나진)
-$("#check_mail").click(function() {
+	//이메일 인증 눌렀을때(나진)
+	$("#check_mail").click(function() {
 
-	var email = document.getElementById("mmail").value;
-	var email2 = document.getElementById("mmail2").value;
-
+		var email = document.getElementById("email").value;
+		var email2 = document.getElementById("email2").value;
 	
-	//이메일 입력 유효성 확인
-	if(email==''||email2==''){	
-		alert("이메일을 정확히 입력해주세요");
-		email.focus();
-		return false;
-	}
-	
-	var mmail = email+"@"+email2;
-	
-	//이메일 중복확인
-	$.ajax({
-		url : 'checkMail.co?email='+ mmail,
-		type : 'post',
-		success : function(data) {
-			console.log("1 = 중복o / 0 = 중복x : "+ data);							
-			
-			if (data == 1) {
-					//이메일이 이미 존재할 때 -> 사용불가
-					alert("이미 사용중인 메일입니다.")
-				} else {
-					//이메일이 존재하지 않을 때 -> 사용가능
-					
-					$("#mail-button").click()
+		
+		//이메일 입력 유효성 확인
+		if(email==''||email2==''){	
+			alert("이메일을 정확히 입력해주세요");
+			email.focus();
+			return false;
+		}
+		
+		var mmail = email+"@"+email2;
+		
+		//이메일 중복확인 후 코드 전송
+		$.ajax({
+			url : 'checkMail.co?email='+ mmail,
+			type : 'post',
+			success : function(data) {					
+				
+				if (data == 1) {
+						//이메일이 이미 존재할 때 -> 사용불가
+						alert("이미 사용중인 메일입니다.")
+					} else {
+						//이메일이 존재하지 않을 때 -> 사용가능(코드값 data로 받기)
+						
+						$("#checkCODE").css('display','');
+						$("#check_mail").html('재전송');
+						$("#realcode").val(data);
+					}
+				}, error : function() {
+						console.log("실패");
 				}
-			}, error : function() {
-					console.log("실패");
-			}
 		})
-
-
 	})
 
-
-//이메일 인증(나진)
-/*function sendMail() {
-
+	//인증번호 확인 눌렀을 때(나진)
+	$("#check_code").click(function() {
 	
-	var mid = document.getElementById("mid");
-	var memail = document.getElementById("memail");
-	var authCode = document.getElementById("authCode");
-	var code = "";
-	for (var i=0; i < 6; i++) {
-		code += Math.floor(Math.random() * 10);
-	}
+		var realcode = document.getElementById("realcode").value;
+		var usercode = document.getElementById("usercode").value;
 	
-	authCode.value = code;
-
-	var xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			document.getElementById("auth").className = "";
+		//이메일 입력 유효성 확인
+		if(realcode!=usercode){	
+			alert("인증코드가 다릅니다");
+			usercode.focus();
+			return false;
+		}else{
+			
+			var mail=$("#email").val()+"@"+$("#email2").val();
+			$("#mmail").val(mail);
+			$("#mmail").attr("readonly",true);
+			$("#mmail").css('display','');
+			$("#email-input").css('display','none');
+			
+			alert("인증이 완료되었습니다");
 		}
-	}
-	xhttp.open("post", "checkMail.co", true);
-	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("title=메디큐이메일인증&content="+content.value+"&email="+email.value+"@"+email2.value+"&authCode="+code);
+	
+	})
+	
+	//닉네임 중복확인(나진)
+	$("#check_nickname").click(function() {
+	
+		var nick = document.getElementById("mnick").value;
+		
+		//이메일 입력 유효성 확인
+		if(nick==''){	
+			alert("닉네임을 정확히 입력해주세요");
+			email.focus();
+			return false;
+		}
+		
+		//닉네임 DB확인
+		$.ajax({
+			url : 'checkNick.co?nick='+ nick,
+			type : 'post',
+			success : function(data) {					
+				
+				if (data == 1) {
+						//닉네임 이미 사용중일 때
+						alert("이미 사용중인 닉네임입니다.")
+					} else {
+						//닉네임을 사용 가능할때
+						var result = confirm('사용가능한 닉네임입니다. 사용하시겠습니까?'); 
+						
+						if(result) { //yes 
+							$("#mnick").attr("readonly",true);
+							$("#check_nickname").css('display','none');
+							
+							isnick=true;
+						} else {
+							//no 
+							return false;
+						}
 
-	return false;
-}
-
-function checkAuthCode() {
-	console.log("checkAuthCode()");
-	var authCode = document.getElementById("authCode");
-	console.log(authCode);
-	authCode2 = document.getElementById("authCode2");
-	console.log(authCode2);
-	var checkAuthCodeResult = document.getElementById("checkAuthCodeResult");
-	console.log(checkAuthCodeResult);
-	if(authCode.value == authCode2.value){
-		checkAuthCodeResult.innerHTML = "인증완료";
-	} else {
-		checkAuthCodeResult.innerHTML = "인증 번호가 다릅니다";
-	}
-}
-
-	*/
+					}
+				}, error : function() {
+						console.log("실패");
+				}
+		})
+	
+	})
 })

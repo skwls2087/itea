@@ -10,20 +10,28 @@
 		<h2 class="form-signup-heading">회원가입</h2>
 	<table id="join-table" class="table">
 
-		<!-- 이메일을 입력한다. 인증을 누르면 유효성검사&중복검사& -->
+		<!-- 이메일을 입력한다. 인증을 누르면 유효성검사&중복검사 -->
 		<tr>
-			<th><label for="mmail">이메일</label></th>
+			<th><label for="email">이메일</label></th>
 			<td>
-			<input type="text" id="mmail" name="mmail" style="width:80px"/>&nbsp;@
-				<select id="mmail2" name="mmail2" >
-				    <option value ="">선택하세요</option>
-				    <option value ="naver.com" >naver.com</option>
-				    <option value="gmail.com">gmail.com</option>
-				    <option value ="hanmail.net">daum.net</option>
-				    <option value ="nate.com">nate.com</option> 
-				    <option value ="yahoo.com">yahoo.com</option>
-			    </select>
-	   			<button type="button" id="check_mail">인증</button>
+			<input type="text" id="mmail" name="mmail" value="" style="display:none;"/>
+			<div id="email-input">
+				<input type="text" id="email" name="email" style="width:120px"/>&nbsp;@
+					<select id="email2" name="email2"  class="form-control" >
+					    <option value ="">선택하세요</option>
+					    <option value ="naver.com" >naver.com</option>
+					    <option value="gmail.com">gmail.com</option>
+					    <option value ="hanmail.net">daum.net</option>
+					    <option value ="nate.com">nate.com</option> 
+				    </select>
+		   			<button type="button" class="btn btn-outline-secondary" id="check_mail">인증</button><br/>
+	   			<!-- 인증코드 입력란 -->
+	   			<div id="checkCODE" style="display:none;">
+	   				<input type="hidden" value="" id="realcode" name="realcode"/>
+	   				<input type="text" id="usercode" name="usercode" style="width:200px;" placeholder="인증번호를 입력하세요"/>
+		   			<button type="button" class="btn btn-secondary" id="check_code">확인</button>
+	   			</div>
+   			</div>
 			</td>
 		</tr>
 	
@@ -41,7 +49,8 @@
 		</tr>
 		<tr>
 			<th><label for="mnick">닉네임</label></th>
-			<td><input type="text" id="mnick" name="mnick"/></td>
+			<td><input type="text" id="mnick" name="mnick" style="width:200px;"/>
+			<button class="btn btn-outline-secondary" type="button" id="check_nickname">중복확인</button></td>
 		</tr>
 		<tr>
 			<th>전화번호</th>
@@ -84,26 +93,5 @@
 		</tr>
 		</table>
 	</form>
-	
-	<button id="mail-button" type="button" style="display:none" data-toggle="modal" data-target="#myModal"/>
-					
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-body">
-        	<span id="pop-header">이메일 인증코드</span><br/>
-        	<span id="pop-main">아이티어에 오신것을 환영합니다.<br/>
-        	아래의 인증코드를 올바르게 입력하시면 가입이 정상적으로 완료됩니다.<br/></span>
- 
-  				<input type="text" id="authCode" />
-  				<button type="button" id="mverify" onclick="checkAuthCode()">인증하기</button>
-				<span id="checkAuthCodeResult"></span>
-	
-        	<input type="text" id="mname" name="mname"/><br/>
-        	<span id="pop-footer">본 메일은 발신전용이며, 문의에 대한 회신은 처리되지 않습니다. 궁금하신 사항은 Q&A 게시판으로 문의주시기 바랍니다.</span>
-	      </div>
-	    </div>
-	  </div>
-	  </div>
 
 </div>
