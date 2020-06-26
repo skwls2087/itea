@@ -1,4 +1,4 @@
-package com.itea.snslogin;
+package com.itea.member.util;
 
 
 import java.io.IOException;

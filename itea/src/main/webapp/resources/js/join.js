@@ -1,5 +1,11 @@
 //회원가입 유효성 검사(태강)
 $(function(){
+	
+	mailCheck=false;
+	
+	var already="<c:out value='${already}'/>";
+	alert(already)
+	
 	$("#rBtn").click(function(){
 		location.href="../index.jsp"
 	})
@@ -13,6 +19,13 @@ $(function(){
 		//아이디 입력여부 검사
 		if($("#mmail").val().length==0){
 			alert("아이디를 입력하지 않았습니다.")
+			$("#mmail").focus();
+			return false;
+		}
+		
+		//아이디 입력여부 검사
+		if(mailCheck==false){
+			alert("이메일 인증을 완료해주세요")
 			$("#mmail").focus();
 			return false;
 		}
@@ -87,48 +100,24 @@ $(function(){
 })
 
 //이메일 인증(나진)
-//이메일 유효성 검사
-function checkMail() {
-	
+function sendMail() {
+	var email = document.getElementById("memail");
+	var email2 = document.getElementById("memail2");
 	var content = document.getElementById("authCode");
-
-	var email = document.getElementById("mmail");
 	if(email.value==''){	
-		alert("이메일을 입력해주세요");
+		alert("이메일은 필수입니다");
 		email.focus();
 		return false;
 	}
 	
-	//메일이 이미 가입된 메일인지 확인하기
-	var xhttp=new XMLHttpRequest();
-	xhttp.onreadystatechange=function(){
-		if(xhttp.readyState==4){
-			var data=JSON.parse(xhttp.responseText);
-			if(data!=null){
-				alert("이미 가입한 메일입니다.");
-				$("#joincode").css("display","none");
-			}else{
-				sendMail(email);
-				$("#joincode").css("display","");
-			}
-		}
-	}
-	xhttp.open("POST",'checkMail.co',true);
-	xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=UTF-8")
-	xhttp.send('email='+email.value);
-	return false;
-	
-}
-
-function sendMail(email){
-//난수코드 생성=code
+	var mid = document.getElementById("mid");
+	var memail = document.getElementById("memail");
+	var authCode = document.getElementById("authCode");
 	var code = "";
 	for (var i=0; i < 6; i++) {
 		code += Math.floor(Math.random() * 10);
 	}
 	
-	//생성된 난수 hidden으로 보내기
-	var authCode = document.getElementById("authCode");
 	authCode.value = code;
 
 	var xhttp = new XMLHttpRequest();
@@ -137,13 +126,26 @@ function sendMail(email){
 			document.getElementById("auth").className = "";
 		}
 	}
-	xhttp.open("POST", "/member/mailConfirm.co", true);
+	xhttp.open("post", "checkMail.co", true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	xhttp.send("title=아이티어 이메일인증&content="+content.value+"&email="+email.value+"&authCode="+code);
+	xhttp.send("title=메디큐이메일인증&content="+content.value+"&email="+email.value+"@"+email2.value+"&authCode="+code);
 
-	//location.href="/member/mailConfirm.co?title=메디큐이메일인증"+"&content="+content.value+"&email="+email.value+"@"+email2.value+"&authCode="+code;
-	
 	return false;
-	
 }
+
+function checkAuthCode() {
+	console.log("checkAuthCode()");
+	var authCode = document.getElementById("authCode");
+	console.log(authCode);
+	authCode2 = document.getElementById("authCode2");
+	console.log(authCode2);
+	var checkAuthCodeResult = document.getElementById("checkAuthCodeResult");
+	console.log(checkAuthCodeResult);
+	if(authCode.value == authCode2.value){
+		checkAuthCodeResult.innerHTML = "인증완료";
+	} else {
+		checkAuthCodeResult.innerHTML = "인증 번호가 다릅니다";
+	}
+}
+
 	

@@ -19,9 +19,9 @@ public class JoinDAO extends SqlSessionDaoSupport{
 		session.insert("member.joinProcSNS",mDto);
 	}
 
-	public int checkMail(MemberDTO mDto) {
-		System.out.println(mDto);
-		int isMail=session.insert("member.mailCheck",mDto);
+	public int checkMail(String mail) {
+		System.out.println(mail);
+		int isMail=session.selectOne("member.mailCheck",mail);
 		System.out.println("dao야"+isMail);
 		return isMail;
 	}

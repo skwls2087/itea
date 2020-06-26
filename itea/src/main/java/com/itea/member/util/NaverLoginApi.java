@@ -1,4 +1,4 @@
-package com.itea.snslogin;
+package com.itea.member.util;
 
 import com.github.scribejava.core.builder.api.DefaultApi20;
 

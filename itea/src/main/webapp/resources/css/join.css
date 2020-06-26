@@ -1,0 +1,30 @@
+.form-signup-heading{
+	margin: 31px 0px;
+}
+th{
+	font-family: 'Noto Sans KR', sans-serif;
+}
+#join-table{
+	max-width:540px;
+}
+#mail-button{
+	height:30px;
+	width:50px;
+	padding:0px;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+/*ÆË¾÷ °ü¸®*/
+#myModal{
+	font-family: 'Noto Sans KR', sans-serif;
+	text-align:left;
+}
+#pop-header{
+	font-size:20px;
+}
+#pop-main{
+	font-size:10px;
+}
+#pop-footer{
+	font-size:7px;
+}

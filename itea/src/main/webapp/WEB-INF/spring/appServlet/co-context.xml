@@ -23,6 +23,6 @@
 	<context:component-scan base-package="com.itea" />
 
 	<!-- 네이버로 login -->
-	<beans:bean id="naverLoginBO" class="com.itea.snslogin.NaverLoginBO" />
+	<beans:bean id="naverLoginBO" class="com.itea.member.util.NaverLoginBO" />
 	
 </beans:beans>

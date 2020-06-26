@@ -48,16 +48,17 @@ public class JoinController {
     	String email=request.getParameter("email");
 		System.out.println(email);
     	
-		MemberDTO mDto=new MemberDTO();
+		int isMail=joinSV.checkMail(email);
 		
-		mDto.setMmail(email);
-		mDto.setMclass(1);
-		
-		int isMail=joinSV.checkMail(mDto);
-		
-		System.out.println(isMail);
-    	
-		return null;
+		if(isMail==0) {
+			//service.sendMail(title, content, email);
+			//request.setAttribute("sendMail", true);
+			request.setAttribute("email", email);
+			return "/member/joinProc";
+		}else {
+			
+			return "/member/joinProc";
+		}
     }
 	
 }
