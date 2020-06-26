@@ -1,6 +1,8 @@
 package com.itea.member.dto;
 
-import java.util.Date;
+import java.sql.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class MemberDTO {
    
@@ -89,9 +91,10 @@ public class MemberDTO {
    public Date getMnickdate() {
       return mnickdate;
    }
+   
    public void setMnickdate(Date mnickdate) {
-      Date now=new Date();
-      
+	   Calendar cal=new GregorianCalendar();
+	   Date now=new Date(cal.getTimeInMillis());	      
       System.out.println(now);
       System.out.println(mnickdate);
 
@@ -99,6 +102,7 @@ public class MemberDTO {
       modifydate=diffDay;  
 
       this.mnickdate = mnickdate;
+      
    }
    
    public long getModifydate() {

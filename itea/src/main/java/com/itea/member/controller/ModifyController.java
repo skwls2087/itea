@@ -1,12 +1,15 @@
 package com.itea.member.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,17 +45,21 @@ public class ModifyController {
 	@RequestMapping("member/modify")
 	public ModelAndView modify(HttpSession session,
 			ModelAndView mv,
-			MemberDTO mDto
+			MemberDTO mDto,@DateTimeFormat(pattern="yyyy-MM-dd") Date mnickdate
 			) {
 		System.out.println("정보수정함수 진입");
 		//1.파라미터 받기  mno=회원번호,
 		int mno= (Integer) session.getAttribute("MNO");
-		System.out.println("회원번호"+mDto.getMno());
-//		//2.비즈니스 로직수행
+		//Date mnickdate=(Date) session.getAttribute("mnickdate");
+		//System.out.println("회원번호"+mDto.getMno());
+		//SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+	/*	String mnickdate=sdf.format(mnickdate);*/
+
+		//		//2.비즈니스 로직수행
 			modifySV.modify(mDto);
 			
 //		//3.Model
-			session.setAttribute("MNICK", mDto.getMnick());
+			session.setAttribute("MNICK",mDto.getMnick() );
 //		//4.View
 			RedirectView rv = new RedirectView("../index.jsp");
 			mv.setView(rv);	
