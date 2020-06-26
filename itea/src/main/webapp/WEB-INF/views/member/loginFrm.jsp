@@ -9,8 +9,20 @@
 		}
 	.form-signin>*{margin:10px;}
 	#login-main{text-align:center}
-	
 </style>
+<script>
+	function onSignIn(googleUser) {
+	  var profile = googleUser.getBasicProfile();
+	  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+	  console.log('Name: ' + profile.getName());
+	  console.log('Image URL: ' + profile.getImageUrl());
+	  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+	}
+</script>
+<!-- Google 로그인 연동 
+클라이언트 ID : 584214475923-h11r93ahrdof9blc3oseuljnjn8uhso6.apps.googleusercontent.com -->
+<meta name="google-signin-client_id" content="584214475923-h11r93ahrdof9blc3oseuljnjn8uhso6.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 
 <div class="container" id="login-main">
 
@@ -29,14 +41,15 @@
       	
      	<!-- sns계정으로 로그인하기 -->
 
-		  <!-- 1.네이버 -->
-		  <a href="${naver_url}"><img height="50" src="${pageContext.request.contextPath}/resources/img/naverlogin.jpg"/></a>
+		 <!-- 1.네이버 -->
+		 <a href="${naver_url}"><img height="50" src="${pageContext.request.contextPath}/resources/img/naverlogin.jpg"/></a>
 
-			 <!-- 2.카카오 -->  
+		 <!-- 2.카카오 -->  
 			 
 		
-			 <!-- 3.구글 -->
+		 <!-- 3.구글 -->
+		 <div class="g-signin2" data-onsuccess="onSignIn"></div>	 
 			 
 			
-			 <!-- 4.페이스북 -->
+		 <!-- 4.페이스북 -->
 
