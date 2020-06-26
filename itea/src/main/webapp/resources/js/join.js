@@ -126,7 +126,7 @@ $("#check_mail").click(function() {
 				} else {
 					//이메일이 존재하지 않을 때 -> 사용가능
 					
-					
+					$("#mail-button").click()
 				}
 			}, error : function() {
 					console.log("실패");
