@@ -21,3 +21,10 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+<<<<<<< Updated upstream
+=======
+itea/target/m2e-wtp/web-resources/META-INF/maven/com.itea/spring/pom.properties
+itea/target/m2e-wtp/web-resources/META-INF/maven/com.itea/spring/pom.xml
+itea/target/m2e-wtp/web-resources/META-INF/maven/com.itea/spring/pom.properties
+/.metadata/
+>>>>>>> Stashed changes
