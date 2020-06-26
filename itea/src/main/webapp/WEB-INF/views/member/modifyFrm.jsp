@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<!-- css참조 -->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/modify.css">
+    
 <script>
 $(function(){
 	$("#mgradu").val("${mDto.mgradu}").change();
@@ -63,12 +67,10 @@ $(function(){
 });
 </script>
 	<div class="container">
-		<h2>회원 정보 수정</h2>
-	</div>
-	<form id="modifyFrm" action="../member/modify.co"
-											 method="post">
-				<input type="hidden" name="mno" value="${mDto.mno}"/>
-		<table  class="table"  >
+		<form id="modifyFrm" class="form-signup" method="post" action="../member/modify.co">
+		<h2 class="form-signup-heading">회원 정보 수정</h2>
+		<table id="modify-table" class="table">
+			<input type="hidden" name="mno" value="${mDto.mno}"/>
 			<tbody>
 					<tr>
 						<th>아이디</th>
@@ -97,11 +99,12 @@ $(function(){
 					</c:if>
 						<th>이름</th>
 						<td>${mDto.mname}</td>
-          </tr>
-          <c:if test="${mDto.modifydate<30}"><!-- 변경불가능 닉네임 변경일이 30일 이전 -->
+	          </tr>
+	          <c:if test="${mDto.modifydate<30}"><!-- 변경불가능 닉네임 변경일이 30일 이전 -->
 					<tr>
 						<th>닉네임</th>
-						<td>${mDto.mnick} 변경은 30일 이후에 가능합니다 (귀하의 변경일은 ${mDto.modifydate}일 전입니다.)</td>
+						<td>${mDto.mnick} <br/>
+						<span id="change-date">닉네임 변경은 마지막 변경일로부터 30일 이후에 가능합니다<br/>(마지막 변경일 : ${mDto.modifydate}일 전)</span></td>
 						
 						<input type="hidden" id="mnick" name="mnick"  value="${mDto.mnick}">
 						<input type="hidden" id="mnickdate" name="mnickdate" value="${mDto.mnickdate}"/>
@@ -129,7 +132,7 @@ $(function(){
 					<tr>
 						<th>최종학력</th><!-- 변경가능 -->
 						<td>
-							<select name="mgradu" id="mgradu" class="form-control">
+							<select name="mgradu" id="mgradu">
 								<option selected >미공개</option>
 								<option value="mschool">중학교 졸업</option>
 								<option value="hschool">고등학교 졸업</option>
