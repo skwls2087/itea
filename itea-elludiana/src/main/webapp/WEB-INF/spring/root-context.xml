@@ -10,7 +10,7 @@
   <!-- 자동주입을 위한 선언 -->
   <context:annotation-config/>
   
-  <!--	컨넥션 풀 설정을 위한 작업 -->
+  <!--	커넥션 풀 설정을 위한 작업 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
         <property name="url" value="jdbc:mysql://192.168.56.93:3306/itea?characterEncoding=utf8&amp;serverTimezone=UTC&amp;autoReconnection=true"></property>
@@ -26,7 +26,7 @@
 			<value>classpath:/com/itea/myBatis/myBatis-config.xml</value>
 	  </property>
 	  
-	   <!-- (중요부분) myBatis와 연결하는 데이터베이스(컨넥션 풀)을 지정-->
+	   <!-- (중요부분)myBatis와 연결하는 데이터베이스(커넥션 풀)을 지정-->
 	  <property name="dataSource" ref="dataSource" />
 	</bean>
 	
@@ -44,7 +44,41 @@
 	
 	<!-- Service -->
 	<bean id="loginSV" class="com.itea.member.service.LoginService"/>
+<<<<<<< Updated upstream:itea-elludiana/src/main/webapp/WEB-INF/spring/root-context.xml
 	
+=======
+
+	<bean id="findidpwSV" class="com.itea.member.service.FindIdPwService"/>
+
+	<bean id="joinSV" class="com.itea.member.service.JoinService"/>
+
+	<bean id="modifySV" class="com.itea.member.service.ModifyService"/>
+	
+	<!-- Google 소셜 로그인 연결 설정 -->
+	<bean id="googleOAuth2Template"
+        class="org.springframework.social.google.connect.GoogleOAuth2Template">
+        <constructor-arg
+            value="584214475923-h11r93ahrdof9blc3oseuljnjn8uhso6.apps.googleusercontent.com" /> <!-- Client ID -->
+        <constructor-arg value="IC3Oq9S8GgQ7wdg4R3AERCW7" /> <!-- Client Pass -->
+    </bean>
+ 
+ 
+    <bean id="googleOAuth2Parameters"
+          class="org.springframework.social.oauth2.OAuth2Parameters">
+        <property name="scope"
+                  value="email"></property> <!-- scope : email 요청(//profile도 가능) -->
+        <property name="redirectUri"
+                  value="http://localhost:8040/google/googleSignInCallback" />
+    </bean>
+ 
+    <bean id="authInfo"
+          class="com.google.test.AuthInfo">
+        <constructor-arg
+            value="584214475923-h11r93ahrdof9blc3oseuljnjn8uhso6.apps.googleusercontent.com" /> <!-- Client ID -->
+        <constructor-arg value="IC3Oq9S8GgQ7wdg4R3AERCW7" /> <!-- Client Pass -->
+ 
+    </bean>
+>>>>>>> Stashed changes:itea/src/main/webapp/WEB-INF/spring/root-context.xml
 </beans>
 
 
