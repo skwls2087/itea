@@ -27,7 +27,6 @@
 		   			<button type="button" class="btn btn-outline-secondary" id="check_mail">인증</button><br/>
 	   			<!-- 인증코드 입력란 -->
 	   			<div id="checkCODE" style="display:none;">
-	   				<input type="hidden" value="" id="realcode" name="realcode"/>
 	   				<input type="text" id="usercode" name="usercode" style="width:200px;" placeholder="인증번호를 입력하세요"/>
 		   			<button type="button" class="btn btn-secondary" id="check_code">확인</button>
 	   			</div>

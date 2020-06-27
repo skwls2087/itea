@@ -63,7 +63,7 @@ public class JoinService {
 		String msg = "";
 		
 		subject = "아이티어에서 보낸 인증번호 입니다";
-		msg += "<div>";
+		msg += "<div align='center' style='font-family:verdana'>";
 		msg += "<h1>인증번호를 알려드립니다.</h1><hr><br/>";
 		msg += "<h3>안녕하세요. 아이티어입니다.<h1>";
 		msg += "<h3>회원님의 회원가입을 진심으로 축하드리며<h1>";

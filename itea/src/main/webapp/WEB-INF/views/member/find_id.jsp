@@ -9,6 +9,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/find.css">
+
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 $(function(){
@@ -21,7 +23,7 @@ $(function(){
 </head>
 <body>
 	<div class="w3-content w3-container w3-margin-top">
-		<div class="w3-container w3-card-4">
+		<div class="w3-container w3-card-4" id="find_container">
 			<div class="w3-center w3-large w3-margin-top">
 				<h3>아이디 찾기 검색결과</h3>
 			</div>
@@ -31,7 +33,7 @@ $(function(){
 				<c:set var="mmail" value="${list.mmail}"/>
 					<c:choose >
 						<c:when test="${list.mclass==1}">
-							일반
+							<span id="join-type">일반 회원가입</span>
 						</c:when>
 						<c:when test="${list.mclass==2}">
 							<img src="${pageContext.request.contextPath}/resources/img/naver-logo.png" 

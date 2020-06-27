@@ -2,6 +2,7 @@
 $(function(){
 	
 	var isnick=false;
+	var realcode=123456789;
 
 	//취소눌렀을때
 	$("#rBtn").click(function(){
@@ -122,7 +123,7 @@ $(function(){
 						
 						$("#checkCODE").css('display','');
 						$("#check_mail").html('재전송');
-						$("#realcode").val(data);
+						realcode=data;
 					}
 				}, error : function() {
 						console.log("실패");
@@ -133,7 +134,6 @@ $(function(){
 	//인증번호 확인 눌렀을 때(나진)
 	$("#check_code").click(function() {
 	
-		var realcode = document.getElementById("realcode").value;
 		var usercode = document.getElementById("usercode").value;
 	
 		//이메일 입력 유효성 확인
