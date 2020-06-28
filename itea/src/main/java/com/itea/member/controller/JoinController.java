@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itea.member.dao.JoinDAO;
@@ -35,6 +36,7 @@ public class JoinController {
 		return "member/loginFrm";
 		
 	}
+	
 	@RequestMapping("member/joinProcSNS")
 	public String joinProcSNS(MemberDTO mDto) {
 		System.out.println("joinProcSNS 진입");
@@ -43,7 +45,15 @@ public class JoinController {
 		
 		return "../../index";
 	}
-
+	
+	@RequestMapping("snsjoin")
+	public String snsjoin(@RequestParam String email,HttpServletRequest request) {
+		
+		request.setAttribute("email", email);
+		
+		return "member/joinFrmSNS";
+	}
+	
     //이메일이 존재하는 이메일인지 확인하고 인증코드 발송
     @RequestMapping("member/checkMail")
     @ResponseBody

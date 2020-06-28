@@ -58,7 +58,7 @@ public class JoinService {
 
 		// 보내는 사람 EMail, 제목, 내용
 		String fromEmail = "iteaweb20@gmail.com";
-		String fromName = "Spring Homepage";
+		String fromName = "아이티어";
 		String subject = "";
 		String msg = "";
 		

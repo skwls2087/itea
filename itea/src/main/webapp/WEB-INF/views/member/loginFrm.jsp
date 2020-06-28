@@ -29,8 +29,21 @@
       	
      	<!-- sns계정으로 로그인하기 -->
 
-		  <!-- 1.네이버 -->
-		  <a href="${naver_url}"><img height="50" src="${pageContext.request.contextPath}/resources/img/naverlogin.jpg"/></a>
+	  <!-- 1.네이버 -->
+		<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+		<div id="naverIdLogin"></div>
+		<script type="text/javascript">
+		   var naverLogin = new naver.LoginWithNaverId(
+		      {
+		         clientId: "68tNfP0GUh1VB4b0suSF",
+		         callbackUrl: "http://localhost:9000/spring/callback.co",
+		         isPopup: false,
+		         loginButton: {color: "green", type: 3, height: 60}
+		      }
+		   );
+		   naverLogin.init();
+		</script>
+
 
 			 <!-- 2.카카오 -->  
 			 

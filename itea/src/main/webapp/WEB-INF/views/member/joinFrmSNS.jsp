@@ -1,10 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<!-- js/css 참조 -->
+<script src="${pageContext.request.contextPath}/resources/js/join.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/join.css">
 
 <div class="container">
 <table class="table">
-	<form id="join" method="post" action="<%= request.getContextPath()%>/member/joinProcSNS.co">
+	<form id="join" class="form-signup" method="post" action="<%= request.getContextPath()%>/member/joinProcSNS.co">
+		<h2 class="form-signup-heading">SNS 회원가입</h2>
+		<span class="join-plus">추가정보를 입력하여 회원가입을 완료해 주세요</span><br/>
 		<input type="hidden" id="mmail" name="mmail" value="${mmail}"/>
+				<tr>
+			<th>이메일</th>
+			<td>${email}</td>
+		</tr>
 		<tr>
 			<th><label for="mname">이름</label></th>
 			<td><input type="text" id="mname" name="mname"/></td>
