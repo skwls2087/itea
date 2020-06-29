@@ -31,8 +31,11 @@ public class ModifyController {
 	int mno= (Integer) session.getAttribute("MNO");
 	//2.비즈니스로직수행
 	MemberDTO mDto = modifySV.modifyInfo(mno);
+	String[] mphone = mDto.getMphone().split("-");
+	
 	//3.Model
 	request.setAttribute("mDto", mDto);
+	request.setAttribute("mphone", mphone);
 	//4.View
 	return "member/modifyFrm";
 	}

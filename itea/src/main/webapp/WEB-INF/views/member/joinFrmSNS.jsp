@@ -50,7 +50,7 @@
 			<th>최종학력(선택)</th>
 			<td>
 				<select name="mgradu">
-					<option value="" selected>선택</option>
+					<option value="" selected>미공개</option>
 					<option value="mschool">중학교 졸업</option>
 					<option value="hschool">고등학교 졸업</option>
 					<option value="tcollege">전문대 졸업</option>

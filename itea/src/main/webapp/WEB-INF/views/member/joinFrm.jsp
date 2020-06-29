@@ -42,6 +42,8 @@
 			<th><label for="mpw1">비밀번호확인</label></th>
 			<td><input type="password" id="mpw1" name="mpw1"/></td>
 		</tr>
+		<th class="alert alert-success" id="alert-success" colspan="2">비밀번호가 일치합니다.</th> 
+		<th class="alert alert-danger" id="alert-danger" colspan="2">비밀번호가 일치하지 않습니다.</th>
 		<tr>
 			<th><label for="mname">이름</label></th>
 			<td><input type="text" id="mname" name="mname"/></td>
@@ -75,7 +77,7 @@
 			<th>최종학력(선택)</th>
 			<td>
 				<select name="mgradu">
-					<option value="" selected>선택</option>
+					<option value="" selected>미공개</option>
 					<option value="mschool">중학교 졸업</option>
 					<option value="hschool">고등학교 졸업</option>
 					<option value="tcollege">전문대 졸업</option>
