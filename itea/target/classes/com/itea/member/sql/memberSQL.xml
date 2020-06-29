@@ -98,8 +98,8 @@
 	
 	<!-- 회원가입 SNS-->
 	<insert id="joinProcSNS" parameterType="memberDTO">
-		insert into member(mmail,mname,mnick,mphone,mbirth,msex,mgradu)
-		values(#{mmail},#{mname},#{mnick},#{mphone},#{mbirth},#{msex},#{mgradu})
+		insert into member(mclass,mmail,mname,mnick,mphone,mbirth,msex,mgradu)
+		values(#{mclass},#{mmail},#{mname},#{mnick},#{mphone},#{mbirth},#{msex},#{mgradu})
 	</insert>
 	
 	<!-- 메일에 해당하는 회원 존재하는지 검색 신나진 -->

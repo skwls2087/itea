@@ -29,8 +29,15 @@
                $.ajax({
        			url : 'joincheck.co?email='+ email,
        			type : 'post',
-       			success : function(data) {					
+       			success : function(data) {		
        				
+       				if(data==1){//이미 회원이면 -> 로그인처리
+       					location.href="snslogin.co";
+       					
+       				}else{//회원이 아니라면 -> 회원가입 추가정보입력페이지로
+       					$("#navermail").val(email);
+       					$("#naverjoin").submit();
+       				}
        				
        				}, error : function() {
        					alert("네이버 로그인에 실패하였습니다.");
@@ -44,3 +51,7 @@
          });
       });
    </script>
+   
+   <form id="naverjoin" method="post" action="snsjoin.co">
+   	<input type="hidden" id="navermail" name="email" value=""/>
+   </form>

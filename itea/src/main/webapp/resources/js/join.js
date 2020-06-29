@@ -91,6 +91,61 @@ $(function(){
 			return false;
 		}
 	})
+	
+	//가입눌렀을때
+	$("#sns-join").submit(function(){
+		
+		var mphone1=$("#mphone1").val();
+		var mphone2=$("#mphone2").val();
+		var mphone3=$("#mphone3").val();
+		var mphone=mphone1+"-"+mphone2+"-"+mphone3
+		document.getElementById("mphone").value=mphone;
+		
+		//이름 입력 여부
+		if($("#mname").val().length==0){
+			alert("이름을 입력하지 않았습니다.")
+			$("#mname").focus();
+			return false;
+		}
+		
+		//닉네임 입력 여부
+		if(!isnick){
+			alert("닉네임 중복확인을 해주세요")
+			$("#mnick").focus();
+			return false;
+		}
+		
+		//전화번호 입력여부 
+		if($("#mphone1").val().length==0){
+			alert("전화번호를 입력하지 않았습니다.")
+			$("#mphone1").focus();
+			return false;
+		}
+		
+		if($("#mphone2").val().length==0){
+			alert("전화번호를 입력하지 않았습니다.")
+			$("#mphone2").focus();
+			return false;
+		}
+		
+		if($("#mphone3").val().length==0){
+			alert("전화번호를 입력하지 않았습니다.")
+			$("#mphone3").focus();
+			return false;
+		}
+		//생년월일 입력 여부
+		if($("#mbirth").val().length==0){
+			alert("생년월일을 입력하지 않았습니다.")
+			$("#mbirth").focus();
+			return false;
+		}
+		
+		//성별 입력 여부
+		if ( ! $('input[name="msex"]:checked').val() ){
+			alert("성별을 선택하지 않았습니다.")
+			return false;
+		}
+	})
 
 
 	//이메일 인증 눌렀을때(나진)

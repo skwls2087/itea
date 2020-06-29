@@ -1,5 +1,6 @@
 .form-signup-heading{
-	margin: 31px 0px;
+	margin-top:30px;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 #join{
 	font-family: 'Noto Sans KR', sans-serif;
@@ -28,10 +29,16 @@ th{
 	height:30px;
 	width:130px;
 	display:inline-block;
-    margin: 0px;
-    padding: 0px 5px;
+  margin: 0px;
+  padding: 0px 5px;
 }
 #join-plus{
 	font-size:15px;
 	color:gray;
+	font-family: 'Noto Sans KR', sans-serif;
+	margin-top:10px;
+	margin-bottom:20px;
+}
+#mphone1,#mphone2,#mphone3{
+	width:80px;
 }

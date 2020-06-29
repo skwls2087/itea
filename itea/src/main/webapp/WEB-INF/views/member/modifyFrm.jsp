@@ -6,9 +6,13 @@
     
 <script>
 $(function(){
+	
+	var isnick=false;
+	
 	$("#mgradu").val("${mDto.mgradu}").change();
 	$("#alert-success").hide(); 
 	$("#alert-danger").hide(); 
+	
 	if(${mDto.mclass==1}){
 	$("input").keyup(function(){
 		  var mpw=$("#mpw").val();
@@ -51,8 +55,14 @@ $(function(){
 						return false;
 					};
 					};
+					
+					//닉네임 입력 여부
+					if(!isnick){
+						alert("닉네임 중복확인을 해주세요")
+						$("#mnick").focus();
+						return false;
+					}
 			
-			alert('지금 입력한 정보로 회원정보를 수정됩니다.');
 		$("#modifyFrm").submit();
 	}); //sBtn 끝
 	$("#rBtn").click(function(){
@@ -64,6 +74,49 @@ $(function(){
 			
 		 	$(location).attr("href","delete.co");
 	});
+	
+	$("#check_nickname").click(function() {
+		
+		var nick = document.getElementById("mnick").value;
+		
+		//이메일 입력 유효성 확인
+		if(nick==''){	
+			alert("닉네임을 정확히 입력해주세요");
+			email.focus();
+			return false;
+		}
+		
+		//닉네임 DB확인
+		$.ajax({
+			url : 'checkNick.co?nick='+ nick,
+			type : 'post',
+			success : function(data) {					
+				
+				if (data == 1) {
+						//닉네임 이미 사용중일 때
+						alert("이미 사용중인 닉네임입니다.")
+					} else {
+						//닉네임을 사용 가능할때
+						var result = confirm('사용가능한 닉네임입니다. 사용하시겠습니까?'); 
+						
+						if(result) { //yes 
+							$("#mnick").attr("readonly",true);
+							$("#check_nickname").css('display','none');
+							
+							isnick=true;
+						} else {
+							//no 
+							return false;
+						}
+
+					}
+				}, error : function() {
+						console.log("실패");
+				}
+		})
+	
+	})
+	
 });
 </script>
 	<div class="container">
@@ -113,7 +166,8 @@ $(function(){
 					<c:if test="${mDto.modifydate>=30}"><!-- 변경가능 닉네임 변경일이 30일 이후  -->
 					<tr>
 						<th>닉네임</th>
-						<td><input type="text" id="mnick" name="mnick" size="20" value="${mDto.mnick}"></td>
+						<td><input type="text" id="mnick" name="mnick" size="20" value="${mDto.mnick}">
+						<button class="btn btn-outline-secondary" type="button" id="check_nickname">중복확인</button></td>
 					</tr>
 					</c:if>
 					<tr>

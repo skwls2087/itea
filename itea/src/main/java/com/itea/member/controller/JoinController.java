@@ -49,6 +49,7 @@ public class JoinController {
 	@RequestMapping("snsjoin")
 	public String snsjoin(@RequestParam String email,HttpServletRequest request) {
 		
+		System.out.println("sns회원가입에 와써요");
 		request.setAttribute("email", email);
 		
 		return "member/joinFrmSNS";

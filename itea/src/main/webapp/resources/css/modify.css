@@ -21,9 +21,17 @@ th{
 	height:30px;
 	width:130px;
 	display:inline-block;
-    margin: 0px;
-    padding: 0px 5px;
+  margin: 0px;
+  padding: 0px 5px;
 }
 #mphone{
 	width:180px;
+}
+#check_nickname{
+	height: 30px;
+  padding: 0px 14px;
+  margin: 0px 7px;
+}
+#mnick{
+	width:150px;
 }

@@ -62,7 +62,8 @@ public class LoginController {
 	
 	//네아로-회원가입 여부 체크하기
 	@RequestMapping(value = "/joincheck")
-	public String joinCheck(@RequestParam String email,HttpServletRequest request,HttpServletResponse response,HttpSession session) throws IOException {
+	@ResponseBody
+	public int joinCheck(@RequestParam String email,HttpServletRequest request,HttpServletResponse response,HttpSession session) throws IOException {
 		
 		MemberDTO mdto=new MemberDTO();
 		
@@ -79,25 +80,20 @@ public class LoginController {
 			session.setAttribute("MNO", member.getMno());
 			session.setAttribute("MNICK", member.getMnick());
 			
-			return ".";
+			return 1;
 			
 		}else { //회원이 아니면 회원가입페이지로 이동
 			System.out.println("회원아냐");
-			
-			request.setAttribute("email", email);
-
-			
-			return "member/joinFrmSNS";
+		
+			return 0;
 		}
 	}
 	
 	//sns로그인
-	@RequestMapping("member/snslogin")
-	public String snslogin(@RequestParam String email,HttpServletRequest request) {
+	@RequestMapping("snslogin")
+	public String snslogin() {
 		
-		request.setAttribute("email", email);
-		
-		return "/index";
+		return "../../index";
 	}
 	
 	//로그아웃 로직 수행
@@ -108,7 +104,7 @@ public class LoginController {
 		
 		System.out.println("로그아웃 됨");
 		
-		return "/index";
+		return "../../index";
 	}
 	
 	

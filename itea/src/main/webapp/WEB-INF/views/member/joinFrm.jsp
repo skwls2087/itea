@@ -6,7 +6,7 @@
 
 <div class="container">
 
-	<form id="join" class="form-signup" method="post" action="../member/joinProc.co">
+	<form id="join" class="form-signup" method="post" action="<%= request.getContextPath()%>/member/joinProc.co">
 		<h2 class="form-signup-heading">회원가입</h2>
 	<table id="join-table" class="table">
 
@@ -55,9 +55,9 @@
 			<th>전화번호</th>
 			<td>
 				<input type="hidden" id="mphone" name="mphone"/>
-				<input type="text" style="width:80px;" id="mphone1" name="mphone1" maxlength="3"/>
-				- <input type="text" style="width:80px;" id="mphone2" name="mphone2" maxlength="4"/> -
-				<input type="text" style="width:80px;" id="mphone3" name="mphone3" maxlength="4"/>
+				<input type="text"  id="mphone1" name="mphone1" maxlength="3"/>
+				- <input type="text"  id="mphone2" name="mphone2" maxlength="4"/> -
+				<input type="text"  id="mphone3" name="mphone3" maxlength="4"/>
 			</td>
 		</tr>
 		<tr>
