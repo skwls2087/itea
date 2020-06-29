@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.itea.member.dto.MemberDTO;
 import com.itea.member.service.LoginService;
-import com.itea.snslogin.NaverLoginBO;
+import com.itea.member.util.NaverLoginBO;
 
 @Controller
 public class NaverController {

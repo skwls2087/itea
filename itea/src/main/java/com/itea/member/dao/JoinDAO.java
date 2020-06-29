@@ -18,4 +18,11 @@ public class JoinDAO extends SqlSessionDaoSupport{
 	public void joinProcSNS(MemberDTO mDto) {
 		session.insert("member.joinProcSNS",mDto);
 	}
+
+	public int checkMail(String mail) {
+		System.out.println(mail);
+		int isMail=session.selectOne("member.mailCheck",mail);
+		System.out.println("dao야"+isMail);
+		return isMail;
+	}
 }

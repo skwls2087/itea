@@ -15,7 +15,8 @@
 <!-- 구글폰트-굵은글씨표현 -->
 <!-- font-family: 'Black Han Sans', sans-serif; -->
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
-
+<!-- 얇은 글씨 -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 
 <!-- JSTL 선언 -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -59,12 +60,6 @@
       <li class="nav-item  m-2">
         <a class="nav-link" href="#">Q&A</a>
       </li>
-      <li class="nav-item  m-2">
-        <a class="nav-link" href="./member/find_id_form.co">아이디찾기</a>
-      </li>
-      <li class="nav-item  m-2">
-        <a class="nav-link" href="./member/find_pw_form.co">비밀번호찾기</a>
-      </li>
     </ul>
     
     <ul class="navbar-nav navbar-right">
@@ -86,7 +81,7 @@
 		        <div class="dropdown"> 
 			        <a id="mNick" class="dropdown-toggle" href="#" data-toggle="dropdown"> ${MNICK}님 </a> 
 			        <div class="dropdown-menu"> 
-				        <a class="dropdown-item" href="#">정보수정</a> 
+				        <a class="dropdown-item" href="<%= request.getContextPath()%>/member/modifyFrm.co">정보수정</a> 
 				        <a class="dropdown-item" href="<%= request.getContextPath()%>/member/logoutProc.co">로그아웃</a> 
 			        </div> 
 		        </div> 

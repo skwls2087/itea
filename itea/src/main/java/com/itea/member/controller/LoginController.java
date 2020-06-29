@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.itea.member.dto.MemberDTO;
 import com.itea.member.service.LoginService;
-import com.itea.snslogin.NaverLoginBO;
+import com.itea.member.util.NaverLoginBO;
 
 @Controller
 public class LoginController {
@@ -61,6 +61,7 @@ public class LoginController {
 	//로그아웃 로직 수행
 	@RequestMapping("member/logoutProc")
 	public String logoutProc(HttpSession session) {
+		
 		session.invalidate();
 		
 		System.out.println("로그아웃 됨");

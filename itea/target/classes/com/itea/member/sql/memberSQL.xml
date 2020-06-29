@@ -38,17 +38,15 @@
 		select count(*) from member where mmail = #{mmail}
 	</select>-->
 	
-	<!-- 회원수 조회 신나진-->
-	<!-- select쿼리의 실행결과의  컬럼수가    1개이면    자바의 데이터타입을 지정 -->
-	<!-- 로그인 -->
-	<!-- id와 pw가 전부 일치하는 회원 조회 -->
 
+	<!-- 로그인 신나진 -->
 	<select id="login" resultType="memberDTO">
 		select *
 		from member
 		where mmail=#{mmail} and mpw=#{mpw} and mclass=#{mclass}
 	</select>
-	<!-- 이메일이 일치하는 회원 조회 -->
+	
+	<!-- 이메일이 일치하는 회원 조회(sns버전) 신나진 -->
 	<select id="snsLogin" resultType="memberDTO">
 		select *
 		from member
@@ -56,7 +54,7 @@
 	</select>
 	
 	
-	<!--정보수정 폼 불러오기  -->
+		<!--정보수정 폼 불러오기  -->
 		<select id="modifyInfo" resultType="memberDTO">
 			select *
 			from member
@@ -64,14 +62,32 @@
 		</select>
 	<!--회원정보 수정--> 
 		<update id="modify" parameterType="memberDTO" >
-		update member
-		set	mpw 		= #{mpw},
-				mnick		= #{mnick},
+		<!-- update member
+		set		mnick		= #{mnick},
 				mphone	= #{mphone},
-				mgradu	= #{mgradu}	
-		where mno=    #{mno}
+				mgradu	= #{mgradu},
+				mnickdate = CURDATE(),
+		      mpw = case when mclass=1 then #{mpw}
+		      mnickdate = case when ((select TIMESTAMPDIFF(DAY,mnickdate,CURDATE())) >=30) then CURDATE()
+		      mnick = case when ((select TIMESTAMPDIFF(DAY,mnickdate,CURDATE())) >=30)  then #{mnick}
+				end	
+		where mno=  #{mno}; -->
+		 update member
+		set	mphone	= #{mphone},
+				mgradu	= #{mgradu},
+		      mpw = case when mclass=1 then #{mpw} end, 
+		      mnickdate = case when (SELECT DATEDIFF(CURDATE(), mnickdate)>30 FROM member WHERE mno= #{mno})=1 then CURDATE() else mnickdate end,
+		      mnick = case when (SELECT DATEDIFF(CURDATE(), mnickdate)>30 FROM member WHERE mno= #{mno})=1  then #{mnick} else mnick end	
+		where mno=  #{mno};
 		</update>
-		
+	<!-- 회원탈퇴하기 -->	
+	<delete id="delete" parameterType="memberDTO">
+	DELETE 
+	FROM member
+	WHERE mno=#{mno}
+	</delete>
+
+
 	
 	<!-- 회원가입 -->
 	<!-- 회원가입 일반-->
@@ -86,6 +102,12 @@
 		values(#{mmail},#{mname},#{mnick},#{mphone},#{mbirth},#{msex},#{mgradu})
 	</insert>
 	
+	<!-- 메일에 해당하는 회원 존재하는지 검색 신나진 -->
+	<select id="mailCheck" parameterType="string" resultType="int">
+		select count(*)
+		from member
+		where mmail=#{mmail} and mclass=1
+	</select>
 </mapper>
 
 
