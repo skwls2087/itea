@@ -34,16 +34,16 @@ $(function(){
 							일반
 						</c:when>
 						<c:when test="${list.mclass==2}">
-							<img src="${pageContext.request.contextPath}/resources/img/naver-logo.png" 
-							width="100"/>
+							<img src="${pageContext.request.contextPath}/resources/img/naver-logo2.png" 
+							width="20"/>
 						</c:when>
 						<c:when test="${list.mclass==3}">
-							<img src="${pageContext.request.contextPath}/resources/img/kakao-logo.jpg"
-							width="100"/>
+							<img src="${pageContext.request.contextPath}/resources/img/kakao-logo3.png"
+							width="20"/>
 						</c:when>
 						<c:when test="${list.mclass==4}">
-							<img src="${pageContext.request.contextPath}/resources/img/google-logo.png"
-							width="100"/>
+							<img src="${pageContext.request.contextPath}/resources/img/google-logo2.png"
+							width="20"/>
 						</c:when>
 					</c:choose><br/>
 					<br/>

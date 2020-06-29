@@ -25,7 +25,7 @@
 	<!-- 중복 검사-->
 	<select id="check" parameterType="memberDTO" resultType="int">
 		select count(*) from member 
-		where mname = #{mname} and mmail = #{mmail}
+		where mname = #{mname} and mmail = #{mmail} and mclass=1
 	</select> 
 	
 	<!-- 이름 중복 검사
@@ -52,7 +52,6 @@
 		from member
 		where mmail=#{mmail} and mclass=#{mclass}
 	</select>
-	
 	
 		<!--정보수정 폼 불러오기  -->
 		<select id="modifyInfo" resultType="memberDTO">

@@ -101,7 +101,7 @@ public class FindIdPwService {
 		int mem = findidpwDAO.check(member);
 		System.out.println("find_pw SV="+mem);
 		if(mem==0) {
-			out.print("해당 정보가없습니다.");
+			out.print("해당 정보가 없습니다. SNS로 로그인하셨다면, 해당 SNS사이트에서 비밀번호 찾기를 해주세요.");
 			out.close();
 		}else {
 			// 임시 비밀번호 생성
