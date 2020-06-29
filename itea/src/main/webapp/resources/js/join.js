@@ -9,6 +9,28 @@ $(function(){
 		location.href="../index.jsp"
 	})
 	
+	//비밀번호 일치여부
+	if($("#mpw").val() == "" && $("#mpw1").val() == ""){
+		$("#alert-success").hide();
+		$("#alert-danger").hide();
+	}
+	$("input").keyup(function(){
+		  var mpw=$("#mpw").val();
+		  var mpw1=$("#mpw1").val();
+		  if(mpw != "" || mpw1 != ""){ 
+			  if(mpw == mpw1){ 
+				$("#alert-success").show();
+			  $("#alert-danger").hide();
+			  }else{ 
+				$("#alert-success").hide();
+			  $("#alert-danger").show();
+			  return false;
+			  }  
+	 		} 
+	});
+	
+	
+	
 	//가입눌렀을때
 	$("#join").submit(function(){
 		var mphone1=$("#mphone1").val();
@@ -38,13 +60,7 @@ $(function(){
 			return false;
 		}
 		
-		//비밀번호 일치여부
-		if($("#mpw").val()!=$("#mpw1").val()){
-			alert("비밀번호가 일치하지 않습니다.")
-			$("#mpw1").val("");
-			$("#mpw1").focus();
-			return false;
-		}
+
 		
 		//이름 입력 여부
 		if($("#mname").val().length==0){
@@ -105,6 +121,19 @@ $(function(){
 		if($("#mname").val().length==0){
 			alert("이름을 입력하지 않았습니다.")
 			$("#mname").focus();
+			return false;
+		}
+		
+		//비밀번호 길이
+		if($("#mpw").val().length<4 || $("#mpw").val().length>12){
+			$("#mpw").focus();
+			return false;
+		}
+		
+		//비밀번호 일치 여부
+		if($("#mpw").val() != $("#mpw1").val()){
+			alert("비밀번호가 일치하지 않습니다.")
+			$("#mpw1").focus();
 			return false;
 		}
 		

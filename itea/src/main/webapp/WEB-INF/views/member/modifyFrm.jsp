@@ -30,13 +30,32 @@ $(function(){
 			});
 	};
 	$("#sBtn").click(function(){
-			var inputtedPhoneNumber = $("#mphone").val();
-			  // 입력 값이 000-0000-0000 형식인지 확인한다.
-		  var phoneNumberRegex = /^[0-9]{3}-[0-9]{4}-[0-9]{4}$/;
-			if(!phoneNumberRegex.test(inputtedPhoneNumber)) {
-			    alert("형식을 000-0000-0000으로 부탁드립니다.");
-			    return false;
-			  };
+			//가입눌렀을때
+			var mphone1=$("#mphone1").val();
+			var mphone2=$("#mphone2").val();
+			var mphone3=$("#mphone3").val();
+			var mphone=mphone1+"-"+mphone2+"-"+mphone3
+			document.getElementById("mphone").value=mphone;
+			
+			//전화번호 입력여부 
+			if($("#mphone1").val().length==0){
+				alert("전화번호를 입력하지 않았습니다.")
+				$("#mphone1").focus();
+				return false;
+			}
+			
+			if($("#mphone2").val().length==0){
+				alert("전화번호를 입력하지 않았습니다.")
+				$("#mphone2").focus();
+				return false;
+			}
+			
+			if($("#mphone3").val().length==0){
+				alert("전화번호를 입력하지 않았습니다.")
+				$("#mphone3").focus();
+				return false;
+			}
+
 			if(${mDto.mclass==1}){
 			var mpw = document.getElementById("mpw");
 			var mpw1 = document.getElementById("mpw1");
@@ -55,13 +74,14 @@ $(function(){
 						return false;
 					};
 					};
-					
+					if(${mDto.modifydate>=30}){}
 					//닉네임 입력 여부
 					if(!isnick){
 						alert("닉네임 중복확인을 해주세요")
 						$("#mnick").focus();
 						return false;
 					}
+					
 			
 		$("#modifyFrm").submit();
 	}); //sBtn 끝
@@ -178,15 +198,19 @@ $(function(){
 					<tr>
 						<th>생년월일</th>
 						<td>${mDto.mbirth}</td>
-          </tr>
+		            </tr>
 					<tr>
 						<th>성별</th>
 						<td>${mDto.msex}</td>
-          </tr>
+		            </tr>
 					<tr>
-						<th>연락처</th><!-- 변경가능 -->
-						<td><input type="text" id="mphone" name="mphone" size="20" value="${mDto.mphone}">
-					  </td>
+						<th>전화번호</th>
+						<td>
+							<input type="hidden" id="mphone" name="mphone")/>
+							<input type="text"  id="mphone1" name="mphone1" size=5 maxlength="3" value="${mphone[0]}"/>
+							- <input type="text"  id="mphone2" name="mphone2" size=5 maxlength="4" value="${mphone[1]}"/> -
+							<input type="text"  id="mphone3" name="mphone3" size=5 maxlength="4" value="${mphone[2]}"/>
+						</td>
 					</tr>
 					<tr>
 						<th>최종학력</th><!-- 변경가능 -->
