@@ -70,9 +70,14 @@ $(function(){
 		 	$(location).attr("href","../index.jsp");
 	});
 	$("#dBtn").click(function(){
-		 alert('돌아올수 없습니다.');
-			
-		 	$(location).attr("href","delete.co");
+		 var result=confirm("탈퇴하시면 활동내역이 모두 삭제됩니다. 정말 탈퇴하시겠습니까?");
+		 if(result){
+			 $(location).attr("href","delete.co");
+		 }
+		 else{
+			 return false;
+		 }
+		 	
 	});
 	
 	$("#check_nickname").click(function() {
@@ -198,8 +203,10 @@ $(function(){
 					</tr>
 			</tbody>
 		</table>
-        	 	<button type="button" id="sBtn" class="btn btn-secondary">변경하기</button>
-						<button type="button" id="rBtn" class="btn btn-secondary">취소하기</button>
-						<button type="button" id="dBtn" class="btn btn-secondary">탈퇴하기</button>
+		<div id="modify-buttons">
+   	 	<button type="button" id="sBtn" class="btn btn-secondary">변경하기</button>
+			<button type="button" id="rBtn" class="btn btn-secondary">취소하기</button>
+			<button type="button" id="dBtn" class="btn btn-outline-danger float-right">탈퇴하기</button>
+		</div>
 	</form>
 	

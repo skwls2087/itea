@@ -31,9 +31,17 @@ $(function(){
 				<h5>
 				<c:forEach var="list" items="${LIST}">
 				<c:set var="mmail" value="${list.mmail}"/>
-					<c:choose >
+					${fn:substring(mmail,0,3)}
+					<c:forEach var="i" begin="1" end="${fn:indexOf(mmail,'@')-3}">
+						<c:forEach var="j" items="*">
+							*
+		        </c:forEach>
+        	</c:forEach>
+        	<c:set var="email" value="${fn:indexOf(mmail,'@')}"/>
+        	<c:set var="len" value="${fn:length(mmail)}"/>
+        	${fn:substring(mmail,email,len)}
+        	<c:choose >
 						<c:when test="${list.mclass==1}">
-							<span id="join-type">일반 회원가입</span>
 						</c:when>
 						<c:when test="${list.mclass==2}">
 							<img src="${pageContext.request.contextPath}/resources/img/naver-logo.png" 
@@ -47,17 +55,8 @@ $(function(){
 							<img src="${pageContext.request.contextPath}/resources/img/google-logo.png"
 							width="100"/>
 						</c:when>
-					</c:choose><br/>
+					</c:choose>
 					<br/>
-					${fn:substring(mmail,0,3)}
-					<c:forEach var="i" begin="1" end="${fn:indexOf(mmail,'@')-3}">
-						<c:forEach var="j" items="*">
-							*
-		        </c:forEach>
-        	</c:forEach>
-        	<c:set var="email" value="${fn:indexOf(mmail,'@')}"/>
-        	<c:set var="len" value="${fn:length(mmail)}"/>
-        	${fn:substring(mmail,email,len)}<br/><br/>
 				</c:forEach><br/>
 				</h5>
 				<p class="w3-center">

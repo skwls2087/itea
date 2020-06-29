@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.itea.member.dao.JoinDAO;
-import com.itea.member.dto.MemberDTO;
+import com.itea.dao.memberDAO;
+import com.itea.dto.MemberDTO;
 import com.itea.member.service.JoinService;
 
 @Controller
 public class JoinController {
 	
 	@Autowired
-	JoinDAO jDao;
+	memberDAO jDao;
 	
 	@Autowired
 	JoinService joinSV;

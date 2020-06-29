@@ -18,14 +18,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.itea.member.dao.JoinDAO;
-import com.itea.member.dto.MemberDTO;
+import com.itea.dao.memberDAO;
+import com.itea.dto.MemberDTO;
 import com.itea.member.util.MailAuthentication;
 
 public class JoinService {
 
 	@Autowired
-	JoinDAO joinDAO;
+	memberDAO joinDAO;
 	
 	//이메일 유무 확인하기
 	public int checkMail(String email) {

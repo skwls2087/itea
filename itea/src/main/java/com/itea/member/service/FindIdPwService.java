@@ -10,9 +10,8 @@ import org.apache.commons.mail.HtmlEmail;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.itea.member.dao.FindIdPwDAO;
-import com.itea.member.dao.LoginDAO;
-import com.itea.member.dto.MemberDTO;
+import com.itea.dao.memberDAO;
+import com.itea.dto.MemberDTO;
 
 public class FindIdPwService {
 	
@@ -20,7 +19,7 @@ public class FindIdPwService {
 	SqlSessionTemplate session;
 	
 	@Autowired
-	FindIdPwDAO findidpwDAO;
+	memberDAO findidpwDAO;
 	
 
 	// 아이디 찾기
@@ -60,7 +59,7 @@ public class FindIdPwService {
 
 		// 보내는 사람 EMail, 제목, 내용
 		String fromEmail = "iteaweb20@gmail.com";
-		String fromName = "Spring Homepage";
+		String fromName = "아이티어";
 		String subject = "";
 		String msg = "";
 		

@@ -1,4 +1,4 @@
-package com.itea.member.dto;
+package com.itea.dto;
 
 import java.sql.Date;
 import java.util.Calendar;

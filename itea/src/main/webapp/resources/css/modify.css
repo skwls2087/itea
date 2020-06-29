@@ -3,6 +3,7 @@
 }
 #modifyFrm{
 	font-family: 'Noto Sans KR', sans-serif;
+	margin-bottom:50px;
 }
 th{
 	font-family: 'Noto Sans KR', sans-serif;
@@ -34,4 +35,7 @@ th{
 }
 #mnick{
 	width:150px;
+}
+#modify-buttons{
+	max-width:600px;
 }

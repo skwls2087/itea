@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.itea.member.dto.MemberDTO;
+import com.itea.dto.MemberDTO;
 import com.itea.member.service.ModifyService;
 
 
