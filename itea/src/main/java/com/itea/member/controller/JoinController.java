@@ -78,7 +78,7 @@ public class JoinController {
 		}
     }
     
-    //이메일이 존재하는 이메일인지 확인하고 인증코드 발송
+    //닉네임이 존재하는 닉네임인지 확인
     @RequestMapping("member/checkNick")
     @ResponseBody
 	public int checkNick(HttpServletRequest request) throws Exception {

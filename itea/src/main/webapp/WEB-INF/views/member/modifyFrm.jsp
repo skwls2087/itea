@@ -88,7 +88,7 @@ $(function(){
 		
 		//닉네임 DB확인
 		$.ajax({
-			url : 'checkNick.co?nick='+ nick,
+			url : 'checkmyNick.co?nick='+ nick,
 			type : 'post',
 			success : function(data) {					
 				

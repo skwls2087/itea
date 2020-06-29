@@ -26,5 +26,10 @@ public class ModifyService {
 		mDao.delete(mno);
 	}
 
+	public int checkNick(MemberDTO mDto) {
+		int isNick=mDao.checkNick(mDto);
+		return isNick;
+	}
+
 
 }

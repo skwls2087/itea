@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -62,6 +63,31 @@ public class ModifyController {
 			return mv;
 		//	}
 	}
+	
+	//닉네임 다른사람이 사용중인지 체크
+    @RequestMapping("member/checkmyNick")
+    @ResponseBody
+	public int checkNick(HttpServletRequest request,HttpSession session) throws Exception {
+		
+    	MemberDTO mDto=new MemberDTO(); 
+    	
+    	String mnick=request.getParameter("nick");
+    	int mno=(Integer) session.getAttribute("MNO");
+    	
+    	mDto.setMno(mno);
+    	mDto.setMnick(mnick);
+    	
+		int isNick=modifySV.checkNick(mDto);
+		
+		if(isNick==0) {//같은 닉네임이 없을 때
+			
+			return 0;
+		}else {//같은 닉네임이 있을 때
+			
+			return 1;
+		}
+    }
+	
 	//회원탈퇴
 	@RequestMapping("member/delete")
 	public String delete(HttpServletRequest request,HttpSession session) {

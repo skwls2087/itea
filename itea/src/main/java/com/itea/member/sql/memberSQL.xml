@@ -86,6 +86,12 @@
 	FROM member
 	WHERE mno=#{mno}
 	</delete>
+	<!-- 닉네임에 해당하는 회원 존재하는지 검색(내 닉네임은 제외) 신나진 -->
+	<select id="mynickCheck" parameterType="memberDTO" resultType="int">
+		select count(*)
+		from member
+		where mnick=#{mnick} and mno!=#{mno}
+	</select>
 
 
 	
@@ -116,6 +122,7 @@
 		where mnick=#{mnick}
 	</select>
 </mapper>
+
 
 
 

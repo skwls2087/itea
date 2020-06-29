@@ -30,4 +30,10 @@ public class ModifyDAO extends SqlSessionDaoSupport {
 	
 	}
 
+
+	public int checkNick(MemberDTO mDto) {
+		int isNick=session.selectOne("member.mynickCheck",mDto);
+		return isNick;
+	}
+
 }
