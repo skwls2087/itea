@@ -7,11 +7,14 @@
 <script>
 $(function(){
 	
-	var isnick=false;
+	var isnick=true;
 	
 	$("#mgradu").val("${mDto.mgradu}").change();
 	$("#alert-success").hide(); 
-	$("#alert-danger").hide(); 
+	$("#alert-danger").hide();
+	
+	$("#checkNick").css('display','none');
+	$("#mnick").attr("readonly",true);
 	
 	if(${mDto.mclass==1}){
 	$("input").keyup(function(){
@@ -80,16 +83,27 @@ $(function(){
 		 	
 	});
 	
-	$("#check_nickname").click(function() {
+	$("#changeNick").click(function() {
+		
+		isnick=false;
+		$("#changeNick").css('display','none');
+		$("#checkNick").css('display','');
+		$("#mnick").attr("readonly",false);
+		
+	});
+	
+	$("#checkNick").click(function() {
 		
 		var nick = document.getElementById("mnick").value;
 		
-		//이메일 입력 유효성 확인
+		//닉네임 입력 유효성 확인
 		if(nick==''){	
 			alert("닉네임을 정확히 입력해주세요");
 			email.focus();
 			return false;
 		}
+		
+		
 		
 		//닉네임 DB확인
 		$.ajax({
@@ -106,7 +120,7 @@ $(function(){
 						
 						if(result) { //yes 
 							$("#mnick").attr("readonly",true);
-							$("#check_nickname").css('display','none');
+							$("#checkNick").css('display','none');
 							
 							isnick=true;
 						} else {
@@ -172,7 +186,8 @@ $(function(){
 					<tr>
 						<th>닉네임</th>
 						<td><input type="text" id="mnick" name="mnick" size="20" value="${mDto.mnick}">
-						<button class="btn btn-outline-secondary" type="button" id="check_nickname">중복확인</button></td>
+						<button class="btn btn-outline-secondary" type="button" id="changeNick">변경</button>
+						<button class="btn btn-outline-secondary" type="button" id="checkNick">중복확인</button></td>
 					</tr>
 					</c:if>
 					<tr>

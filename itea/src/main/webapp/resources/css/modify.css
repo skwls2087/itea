@@ -28,7 +28,7 @@ th{
 #mphone{
 	width:180px;
 }
-#check_nickname{
+#checkNick, #changeNick{
 	height: 30px;
   padding: 0px 14px;
   margin: 0px 7px;

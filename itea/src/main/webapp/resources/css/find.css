@@ -16,3 +16,12 @@
 h3{
 	font-family: 'Noto Sans KR', sans-serif;
 }
+#find_mail{
+	margin:0 auto;
+}
+#find_mail #social{
+	width:30px;
+}
+#find_mail tr{
+  border: 8px solid white;
+}

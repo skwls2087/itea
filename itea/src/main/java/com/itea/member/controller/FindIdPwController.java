@@ -46,11 +46,14 @@ public class FindIdPwController {
 	
 	// 비밀번호 찾기
 	@RequestMapping("/find_pw")
-	public void find_pw(HttpServletResponse response,HttpServletRequest request,MemberDTO member) throws Exception{
+	public String find_pw(HttpServletResponse response,HttpServletRequest request,MemberDTO member) throws Exception{
 		String mname  =  request.getParameter("mname");
 		String mmail = request.getParameter("mmail");
 		System.out.println("controller="+member);
 		findidpwSV.find_pw(response, member);
+		
+		return "/member/loginFrm";
+		
 	}
 	
 		
