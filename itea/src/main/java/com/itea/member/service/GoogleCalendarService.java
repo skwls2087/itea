@@ -51,13 +51,19 @@ public class GoogleCalendarService {
 		}
 	}
 	
+/*	인증된 자격 증명 개체 생성
+	@param HTTP_TRANSPORT The network HTTP Transport.
+	@return An authorized Credential object.
+	@throw IOException If the credentials.json file cannot be found.	*/
 	public static Credential authorize() throws IOException {
+		//클라이언트 암호 로드
 		InputStream in = GoogleCalendarService.class
 				.getResourceAsStream("/client_secret.json");
 		
 		GoogleClientSecrets clientSecrets 
 			= GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 		
+		//Build flow and 사용자 권한 부여 요청을 trigger.
 		GoogleAuthorizationCodeFlow flow 
 			= new GoogleAuthorizationCodeFlow.Builder(HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
 			.setDataStoreFactory(DATA_STORE_FACTORY)
@@ -81,7 +87,6 @@ public class GoogleCalendarService {
 	//Calendar 조회부분
 	public static void main(String[] args) throws IOException {
 		Calendar service = getCalendarService();
-		
 		String pageToken = null;
 		do {
 			CalendarList calendarList
