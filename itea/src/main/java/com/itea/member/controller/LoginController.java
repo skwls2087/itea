@@ -9,17 +9,17 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.itea.member.dto.MemberDTO;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.itea.dto.MemberDTO;
 import com.itea.member.service.LoginService;
-import com.itea.member.util.NaverLoginBO;
 
 @Controller
 public class LoginController {
-	
-	@Autowired
-	NaverLoginBO naverLoginBO;
-	
+
 	@Autowired
 	LoginService loginSV;
 	
@@ -28,11 +28,6 @@ public class LoginController {
 	public void loginFrm(Model model, HttpSession session) {
 		
 		System.out.println("로그인 폼");
-		
-		/* 네이버 아이디로 로그인 url */
-		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-		System.out.println("네이버:" + naverAuthUrl);
-		model.addAttribute("naver_url", naverAuthUrl);
 		
 	}
 	
@@ -54,6 +49,49 @@ public class LoginController {
 			session.setAttribute("MNO", member.getMno());
 			session.setAttribute("MNICK", member.getMnick());
 		}
+		
+		return "../../index";
+	}
+	
+	//네이버로그인
+	@RequestMapping(value = "/callback")
+	public String loginPOSTNaver(HttpSession session) {
+		
+		return "member/navercallback";
+	}
+	
+	//네아로-회원가입 여부 체크하기
+	@RequestMapping(value = "/joincheck")
+	@ResponseBody
+	public int joinCheck(@RequestParam String email,HttpServletRequest request,HttpServletResponse response,HttpSession session) throws IOException {
+		
+		MemberDTO mdto=new MemberDTO();
+		
+		System.out.println("조인체크");
+		
+		mdto.setMclass(2);
+		mdto.setMmail(email);
+			
+		//해당 이메일이 회원 테이블에 있는지 검색
+		MemberDTO member=loginSV.snsLogin(mdto);
+		
+		if(member!=null) { //회원이면 로그인 처리 완료
+			
+			session.setAttribute("MNO", member.getMno());
+			session.setAttribute("MNICK", member.getMnick());
+			
+			return 1;
+			
+		}else { //회원이 아니면 회원가입페이지로 이동
+			System.out.println("회원아냐");
+		
+			return 0;
+		}
+	}
+	
+	//sns로그인
+	@RequestMapping("snslogin")
+	public String snslogin() {
 		
 		return "../../index";
 	}

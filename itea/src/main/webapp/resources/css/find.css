@@ -1,0 +1,27 @@
+#find_container{
+	max-width:500px;
+	font-family: 'Noto Sans KR', sans-serif;
+	margin:50px auto;
+}
+#mname{
+	width:200px;
+}
+#mphone1, #mphone2, #mphone3{
+	width:100px;
+	
+}
+#mmail{
+	width:300px
+}
+h3{
+	font-family: 'Noto Sans KR', sans-serif;
+}
+#find_mail{
+	margin:0 auto;
+}
+#find_mail #social{
+	width:30px;
+}
+#find_mail tr{
+  border: 8px solid white;
+}

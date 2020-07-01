@@ -10,9 +10,8 @@ import org.apache.commons.mail.HtmlEmail;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.itea.member.dao.FindIdPwDAO;
-import com.itea.member.dao.LoginDAO;
-import com.itea.member.dto.MemberDTO;
+import com.itea.dao.memberDAO;
+import com.itea.dto.MemberDTO;
 
 public class FindIdPwService {
 	
@@ -20,7 +19,7 @@ public class FindIdPwService {
 	SqlSessionTemplate session;
 	
 	@Autowired
-	FindIdPwDAO findidpwDAO;
+	memberDAO findidpwDAO;
 	
 
 	// 아이디 찾기
@@ -60,17 +59,19 @@ public class FindIdPwService {
 
 		// 보내는 사람 EMail, 제목, 내용
 		String fromEmail = "iteaweb20@gmail.com";
-		String fromName = "Spring Homepage";
+		String fromName = "아이티어";
 		String subject = "";
 		String msg = "";
 		
 		if(div.equals("find_pw")) {
-			subject = "Spring Homepage 임시 비밀번호 입니다.";
-			msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
-			msg += "<h3 style='color: blue;'>";
-			msg += member.getMname() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
-			msg += "<p>임시 비밀번호 : ";
-			msg += member.getMpw() + "</p></div>";
+			subject = "아이티어에서 보낸 임시 비밀번호 입니다.";
+			msg += "<div align='center' style=' font-family:verdana'>";
+			msg += "<h1>임시 비밀번호를 알려드립니다.</h1><hr><br/>";
+			msg += "<h3>안녕하세요. 아이티어입니다.<h1>";
+			msg += "<h3>임시 비밀번호를 다음과 같이 알려드립니다.<h1>";
+			msg += "<h3 style='color: red;'>비밀번호를 변경하여 사용하세요.<h3><br/>";
+			msg += "<h3 style='background:#f8f8f8;padding:10px;'>"+member.getMname() + "님의 임시 비밀번호는 "+ member.getMpw() +"입니다.</h3>";
+			msg += "</div>";
 		}
 		// 받는 사람 E-Mail 주소
 		String mmail = member.getMmail();
@@ -101,7 +102,7 @@ public class FindIdPwService {
 		int mem = findidpwDAO.check(member);
 		System.out.println("find_pw SV="+mem);
 		if(mem==0) {
-			out.print("해당 정보가 없습니다. SNS로 로그인하셨다면, 해당 SNS사이트에서 비밀번호 찾기를 해주세요.");
+			out.print("해당 정보가 없습니다.\n 소셜 로그인은 해당사이트에서 비밀번호 찾기를 해주세요.");
 			out.close();
 		}else {
 			// 임시 비밀번호 생성

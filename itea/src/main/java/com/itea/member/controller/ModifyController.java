@@ -1,22 +1,19 @@
 package com.itea.member.controller;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.itea.member.dto.MemberDTO;
+import com.itea.dto.MemberDTO;
 import com.itea.member.service.ModifyService;
 
 
@@ -34,8 +31,11 @@ public class ModifyController {
 	int mno= (Integer) session.getAttribute("MNO");
 	//2.비즈니스로직수행
 	MemberDTO mDto = modifySV.modifyInfo(mno);
+	String[] mphone = mDto.getMphone().split("-");
+	
 	//3.Model
 	request.setAttribute("mDto", mDto);
+	request.setAttribute("mphone", mphone);
 	//4.View
 	return "member/modifyFrm";
 	}
@@ -66,6 +66,31 @@ public class ModifyController {
 			return mv;
 		//	}
 	}
+	
+	//닉네임 다른사람이 사용중인지 체크
+    @RequestMapping("member/checkmyNick")
+    @ResponseBody
+	public int checkNick(HttpServletRequest request,HttpSession session) throws Exception {
+		
+    	MemberDTO mDto=new MemberDTO(); 
+    	
+    	String mnick=request.getParameter("nick");
+    	int mno=(Integer) session.getAttribute("MNO");
+    	
+    	mDto.setMno(mno);
+    	mDto.setMnick(mnick);
+    	
+		int isNick=modifySV.checkNick(mDto);
+		
+		if(isNick==0) {//같은 닉네임이 없을 때
+			
+			return 0;
+		}else {//같은 닉네임이 있을 때
+			
+			return 1;
+		}
+    }
+	
 	//회원탈퇴
 	@RequestMapping("member/delete")
 	public String delete(HttpServletRequest request,HttpSession session) {

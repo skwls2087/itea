@@ -7,10 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.itea.member.dto.MemberDTO;
+import com.itea.dto.MemberDTO;
 import com.itea.member.service.FindIdPwService;
 
 @Controller
@@ -47,11 +46,14 @@ public class FindIdPwController {
 	
 	// 비밀번호 찾기
 	@RequestMapping("/find_pw")
-	public void find_pw(HttpServletResponse response,HttpServletRequest request,MemberDTO member) throws Exception{
+	public String find_pw(HttpServletResponse response,HttpServletRequest request,MemberDTO member) throws Exception{
 		String mname  =  request.getParameter("mname");
 		String mmail = request.getParameter("mmail");
 		System.out.println("controller="+member);
 		findidpwSV.find_pw(response, member);
+		
+		return "/member/loginFrm";
+		
 	}
 	
 		

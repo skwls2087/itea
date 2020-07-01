@@ -9,6 +9,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/find.css">
+
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
 $(function(){
@@ -21,47 +23,53 @@ $(function(){
 </head>
 <body>
 	<div class="w3-content w3-container w3-margin-top">
-		<div class="w3-container w3-card-4">
+		<div class="w3-container w3-card-4" id="find_container">
 			<div class="w3-center w3-large w3-margin-top">
 				<h3>아이디 찾기 검색결과</h3>
 			</div>
 			<div>
-				<h5>
+			<table id="find_mail">
 				<c:forEach var="list" items="${LIST}">
+				<tr>
+				<td id="social">
 				<c:set var="mmail" value="${list.mmail}"/>
-					<c:choose >
+       					<c:choose >
 						<c:when test="${list.mclass==1}">
-							일반
 						</c:when>
 						<c:when test="${list.mclass==2}">
-							<img src="${pageContext.request.contextPath}/resources/img/naver-logo2.png" 
-							width="20"/>
+							&nbsp<img src="${pageContext.request.contextPath}/resources/img/naver-logo.png" 
+							width="15"/>
 						</c:when>
 						<c:when test="${list.mclass==3}">
-							<img src="${pageContext.request.contextPath}/resources/img/kakao-logo3.png"
-							width="20"/>
+							&nbsp<img src="${pageContext.request.contextPath}/resources/img/kakao-logo.png"
+							width="15"/>
 						</c:when>
 						<c:when test="${list.mclass==4}">
-							<img src="${pageContext.request.contextPath}/resources/img/google-logo2.png"
-							width="20"/>
+							&nbsp<img src="${pageContext.request.contextPath}/resources/img/google-logo.png"
+							width="15"/>
 						</c:when>
-					</c:choose><br/>
-					<br/>
+					</c:choose>
+					</td>
+					<td>
 					${fn:substring(mmail,0,3)}
 					<c:forEach var="i" begin="1" end="${fn:indexOf(mmail,'@')-3}">
 						<c:forEach var="j" items="*">
 							*
 		        </c:forEach>
+		        
         	</c:forEach>
         	<c:set var="email" value="${fn:indexOf(mmail,'@')}"/>
         	<c:set var="len" value="${fn:length(mmail)}"/>
-        	${fn:substring(mmail,email,len)}<br/><br/>
+        	${fn:substring(mmail,email,len)}
+				</td>
+					</tr>
 				</c:forEach><br/>
-				</h5>
+				</table>
 				<p class="w3-center">
 					<button type="button" id=loginBtn class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">Login</button>
 					<button type="button" onclick="history.go(-1);" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round">Cancel</button>
 				</p>
+				
 			</div>
 		</div>
 	</div>

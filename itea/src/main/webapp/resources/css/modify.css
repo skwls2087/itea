@@ -1,0 +1,41 @@
+.form-signup-heading{
+	margin: 31px 0px;
+}
+#modifyFrm{
+	font-family: 'Noto Sans KR', sans-serif;
+	margin-bottom:50px;
+}
+th{
+	font-family: 'Noto Sans KR', sans-serif;
+}
+#modify-table{
+	max-width:600px;
+}
+#mpw,#mpw1{
+	width:230px;
+}
+#change-date{
+	color:gray;
+}
+
+#email2{
+	height:30px;
+	width:130px;
+	display:inline-block;
+  margin: 0px;
+  padding: 0px 5px;
+}
+#mphone{
+	width:180px;
+}
+#checkNick, #changeNick{
+	height: 30px;
+  padding: 0px 14px;
+  margin: 0px 7px;
+}
+#mnick{
+	width:150px;
+}
+#modify-buttons{
+	max-width:600px;
+}

@@ -85,20 +85,26 @@
 	FROM member
 	WHERE mno=#{mno}
 	</delete>
+	<!-- 닉네임에 해당하는 회원 존재하는지 검색(내 닉네임은 제외) 신나진 -->
+	<select id="mynickCheck" parameterType="memberDTO" resultType="int">
+		select count(*)
+		from member
+		where mnick=#{mnick} and mno!=#{mno}
+	</select>
 
 
 	
 	<!-- 회원가입 -->
 	<!-- 회원가입 일반-->
 	<insert id="joinProc" parameterType="memberDTO">
-		insert into member(mmail,mpw,mname,mnick,mphone,mbirth,msex,mgradu)
-		values(#{mmail},#{mpw},#{mname},#{mnick},#{mphone},#{mbirth},#{msex},#{mgradu})
+		insert into member(mclass,mmail,mpw,mname,mnick,mphone,mbirth,msex,mgradu)
+		values(#{mclass},#{mmail},#{mpw},#{mname},#{mnick},#{mphone},#{mbirth},#{msex},#{mgradu})
 	</insert>
 	
 	<!-- 회원가입 SNS-->
 	<insert id="joinProcSNS" parameterType="memberDTO">
-		insert into member(mmail,mname,mnick,mphone,mbirth,msex,mgradu)
-		values(#{mmail},#{mname},#{mnick},#{mphone},#{mbirth},#{msex},#{mgradu})
+		insert into member(mclass,mmail,mname,mnick,mphone,mbirth,msex,mgradu)
+		values(#{mclass},#{mmail},#{mname},#{mnick},#{mphone},#{mbirth},#{msex},#{mgradu})
 	</insert>
 	
 	<!-- 메일에 해당하는 회원 존재하는지 검색 신나진 -->
@@ -107,7 +113,15 @@
 		from member
 		where mmail=#{mmail} and mclass=1
 	</select>
+	
+	<!-- 닉네임에 해당하는 회원 존재하는지 검색 신나진 -->
+	<select id="nickCheck" parameterType="string" resultType="int">
+		select count(*)
+		from member
+		where mnick=#{mnick}
+	</select>
 </mapper>
+
 
 
 

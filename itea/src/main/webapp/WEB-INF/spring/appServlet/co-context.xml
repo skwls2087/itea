@@ -9,7 +9,7 @@
 
 	<!-- DI선언된 객체를 자동주입하기 위한 선언 -->
 	<annotation-driven />
-
+	
 	<!-- 컨트롤러를 거치지 않는 파일들 넣기(ex)이미지,CSS,JS 등 -->
 	<resources mapping="/resources/**" location="/resources/" />
 
@@ -21,8 +21,5 @@
 	
 	<!-- 컨트롤러를 검색할 기본경로 지정하기 -->
 	<context:component-scan base-package="com.itea" />
-
-	<!-- 네이버로 login -->
-	<beans:bean id="naverLoginBO" class="com.itea.member.util.NaverLoginBO" />
 	
 </beans:beans>

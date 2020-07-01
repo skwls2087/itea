@@ -3,14 +3,14 @@ package com.itea.member.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.itea.member.dao.ModifyDAO;
-import com.itea.member.dto.MemberDTO;
+import com.itea.dao.memberDAO;
+import com.itea.dto.MemberDTO;
 
 @Service
 public class ModifyService {
 	
 	@Autowired
-	ModifyDAO mDao;
+	memberDAO mDao;
 	
 	public MemberDTO modifyInfo(int mno) {
 		MemberDTO mDto = mDao.modifyInfo(mno);
@@ -24,6 +24,11 @@ public class ModifyService {
 
 	public void delete(int mno) {
 		mDao.delete(mno);
+	}
+
+	public int checkNick(MemberDTO mDto) {
+		int isNick=mDao.checkNick(mDto);
+		return isNick;
 	}
 
 
