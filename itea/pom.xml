@@ -178,7 +178,7 @@
 		
 		<!-- Google API 종합 
 			 Google Login & Calendar 기능  -->
-		<dependency>
+		<!-- <dependency>
             <groupId>com.google.api-client</groupId>
             <artifactId>google-api-client</artifactId>
             <version>1.22.0</version>
@@ -206,7 +206,7 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>4.5.3</version>
-        </dependency>
+        </dependency> -->
         
    		<!-- Java Mail API -->
 		<dependency>

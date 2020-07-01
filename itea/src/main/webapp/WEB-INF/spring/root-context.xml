@@ -30,8 +30,7 @@
 	  <property name="dataSource" ref="dataSource" />
 	</bean>
 	
-	<bean id="sqlSession" 
-	      class="org.mybatis.spring.SqlSessionTemplate">    
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">    
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
 	
@@ -41,6 +40,10 @@
 	<bean id="memberDAO" class="com.itea.dao.memberDAO">
 		<property name="sqlSessionTemplate" ref ="sqlSession"/>
 	</bean>
+	<bean id="qaDAO" class="com.itea.dao.QaDAO">
+		<property name="sqlSessionTemplate" ref ="sqlSession"/>
+	</bean>
+	
 
 	
 	<!-- Service -->
@@ -49,6 +52,9 @@
 	<bean id="findidpwSV" class="com.itea.member.service.FindIdPwService"/>
 	<bean id="joinSV" class="com.itea.member.service.JoinService"/>
 	<bean id="modifySV" class="com.itea.member.service.ModifyService"/>
+	
+	<!-- Q&A 관련 서비스 -->
+	<bean id="qaSV" class="com.itea.qa.service.QaService"/>
 	
 </beans>
 

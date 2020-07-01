@@ -1,0 +1,32 @@
+.qa-heading{
+	margin-top:30px;
+	margin-bottom:30px;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+#qa-container{
+	margin-top:50px;
+}
+#qa-table{
+	width:100%;
+}
+.question-container{
+	height:70px;
+	display:block;
+	
+}
+#question-text{
+	display:inline-block;
+	width:100%;
+}
+#qa-select{
+	width:120px;
+	float:right;
+}
+#q-user-id{
+	width:10%
+}
+
+
+
+
+

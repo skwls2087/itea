@@ -28,11 +28,11 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 <style>
-#main-logo{font-family: 'Do Hyeon', sans-serif; font-size:30px;}
-#nav-join{float:right;}
-#mNick{color:white;}
-#right-nav .container{padding-left: 0px;margin-left:0px;}
-.dropdown-menu{left:-80px;}
+	#main-logo{font-family: 'Do Hyeon', sans-serif; font-size:30px;}
+	#nav-join{float:right;}
+	#mNick{color:white;}
+	#right-nav .container{padding-left: 0px;margin-left:0px;}
+	.dropdown-menu{left:-80px;}
 </style>
 </head>
 <body>
@@ -58,7 +58,7 @@
         <a class="nav-link" href="#">채팅방</a>
       </li>
       <li class="nav-item  m-2">
-        <a class="nav-link" href="#">Q&A</a>
+        <a class="nav-link" href="<%= request.getContextPath()%>/qa/qaFrm.co">Q&A</a>
       </li>
     </ul>
     
