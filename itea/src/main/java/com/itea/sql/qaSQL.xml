@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- xml선언부-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- myBatis-config.xml의     mapper로 반드시 등록되어야 한다 --> 
+<mapper namespace="qa">
+
+	<!-- 질문 등록하기 -->
+	<insert id="insertQuestion" parameterType="qaDTO">
+		insert into qa(qclass,mno,qcont)
+		values(#{qclass},#{mno},#{qcont})
+	</insert>
+	
+</mapper>
+	

@@ -10,7 +10,6 @@
 	width:100%;
 }
 .question-container{
-	height:70px;
 	display:block;
 	
 }
@@ -25,7 +24,10 @@
 #q-user-id{
 	width:10%
 }
-
+#questionTextarea{
+ 	resize: none; 
+ 	height:100px;
+}
 
 
 
