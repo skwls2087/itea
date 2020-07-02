@@ -8,6 +8,7 @@
 }
 #qa-table{
 	width:100%;
+	font-size:15px;
 }
 .question-container{
 	display:block;
@@ -20,6 +21,7 @@
 #qa-select{
 	width:120px;
 	float:right;
+	margin-bottom:5px;
 }
 #q-user-id{
 	width:10%
@@ -28,7 +30,28 @@
  	resize: none; 
  	height:100px;
 }
-
-
-
-
+#question{
+	font-size:15px;
+	padding:0px;
+}
+#answerYET{
+	border:1px solid gray;
+	border-radius:5px;
+	padding:10px;
+	color:gray;
+	text-align:center;
+}
+#answerOK{
+	border:1px solid black;
+	background:#2b904e;
+	border-radius:5px;
+	padding:10px;
+	color:white;
+	text-align:center;
+}
+#admin-answer{
+	font-size:15px;
+}
+#q-nowpage{
+	background:blue;
+}

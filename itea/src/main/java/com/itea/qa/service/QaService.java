@@ -1,9 +1,12 @@
 package com.itea.qa.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.itea.dao.QaDAO;
 import com.itea.dto.QaDTO;
+import com.itea.util.PageUtil;
 
 public class QaService {
 
@@ -16,14 +19,24 @@ public class QaService {
 
 	//페이징관련 정보
 	public PageUtil getPageInfo(int nowPage) {
-		int totalCount= fbDAO.getTotalCnt();
+		int totalCount= qaDAO.getTotalCnt();
 		
-		//PageUtil(보고싶은페이지,   전체게시물수);
-		//PageUtil(int nowPage, int totalCount);
-		PageUtil pInfo = new PageUtil(nowPage, totalCount);
-		//PageUtil객체생성자에서는 내부적으로
-		//	한페이지당 보여주고 싶은 게시물의 개수는 3
-		//	페이지 이동 기능은 3개까지 지정
-		return pInfo;
+		PageUtil pInfo = new PageUtil(nowPage, totalCount,4,10);
+		return pInfo;   
+	}
+
+	public ArrayList<QaDTO> getListView(PageUtil pInfo) {
+
+		
+		int start= 
+			(pInfo.getNowPage()-1)*pInfo.getLineCount()+1;
+		int end  = start+pInfo.getLineCount()-1;
+		
+		QaDTO qaDTO = new QaDTO();
+		qaDTO.setStart(start-1);
+		qaDTO.setEnd(end);
+		
+		ArrayList<QaDTO> list = qaDAO.getListView(qaDTO);
+		return list;
 	}
 }

@@ -11,5 +11,21 @@
 		values(#{qclass},#{mno},#{qcont})
 	</insert>
 	
+	<!-- 질문 전체 개수 구하기 -->
+	<select id="selectQuestionCnt" resultType="int">
+		select count(*) from qa
+	</select>
+	
+	<!-- 해당 페이지에 맞는 질문리스트 구하기 -->
+	<select id="questionList" parameterType="qaDTO" resultType="qaDTO">
+		SELECT q.qno, q.mno, m.mnick, q.qclass, q.qcont, q.qdate, q.acont, q.adate
+		FROM qa AS q
+		JOIN member AS m
+		ON q.mno=m.mno
+		ORDER BY q.qno desc
+		limit #{start}, #{end}
+	</select>
+	
+	
 </mapper>
 	
