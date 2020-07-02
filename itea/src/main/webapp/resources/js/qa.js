@@ -4,7 +4,7 @@ $(function(){
 	//회원이 질문 등록할 때
 	$("#q-submit").click(function(){
 		
-		var qclass=document.getElementById('qa-select').value
+		var qclass=document.getElementById('q-select').value
 		var qcont=document.getElementById('questionTextarea').value
 
 		if(qclass==0){
@@ -16,6 +16,7 @@ $(function(){
 			return false;
 		}
 	});
+	
 	//비회원이 질문 등록할 때
 	$("#q-login").click(function(){
 		alert("로그인 후 이용해주세요")

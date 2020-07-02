@@ -9,21 +9,28 @@
         <div class="panel panel-default">
         <h2 class="qa-heading">Q&A 게시판</h2>
         
-        
-				
-				<!-- 질문 유형으로 필터링 -->
-				<div class="form-group">
-				    <select class="custom-select" id="qa-select">
-				      <option selected="">전체보기</option>
-				      <option value="1">회원서비스</option>
-				      <option value="2">캘린더</option>
-				      <option value="3">자격증소개</option>
-				      <option value="4">문제풀이</option>
-				      <option value="5">채팅</option>
-				    </select>
-				  </div>
+		<div class="form-group">
+		
+			<!-- 질문 유형으로 필터링 -->
+		    <select class="custom-select" id="qa-select">
+		      <option selected="">전체보기</option>
+		      <option value="1">회원서비스</option>
+		      <option value="2">캘린더</option>
+		      <option value="3">자격증소개</option>
+		      <option value="4">문제풀이</option>
+		      <option value="5">채팅</option>
+		    </select>
+		    
+		    <!-- 질문등록 버튼 -->
+		    <c:if test="${MNO!=null}">
+	        	<button type="button" id="q-button" class="btn btn-info" data-toggle="modal" data-target="#myModal">질문하기</button>
+	        </c:if>
+	        <c:if test="${MNO==null}">
+	        	<button type="button" id="q-login">질문하기</button>
+	        </c:if>
+		  </div>
   
-  			<!-- Q&A 테이블 -->
+		<!-- Q&A 테이블 -->
         <table class="table" id="qa-table">
         <tr>
         	<th width="10%">번호</th>
@@ -92,31 +99,36 @@
   				
   				<!-- 이전페이지 -->
   				<c:if test="${PINFO.nowPage ne 1}">
-  				    <li class="page-item disabled">
-					      <a class="page-link" href="<%= request.getContextPath()%>/qa/qaFrm.co?nowPage=${PINFO.nowPage-1}">&laquo;</a>
-					    </li>
+  				    <li class="page-item">
+				      <a class="page-link" href="<%= request.getContextPath()%>/qa/qaFrm.co?nowPage=${PINFO.nowPage-1}">&laquo;</a>
+				    </li>
 					</c:if>
 					<c:if test="${PINFO.nowPage eq 1}">
   				    <li class="page-item disabled">
-					      <a class="page-link" href="#">&laquo;</a>
-					    </li>
+  				    	<a class="page-link" href="#">&laquo;</a>
+				    </li>
 					</c:if>
 					<!-- 페이지 -->
 					<c:forEach var="pg"	 begin="${PINFO.startPage}" end="${PINFO.endPage}">
-						<li id="q-nowpage" class="page-item">
+						<c:if test="${PINFO.nowPage==pg}">
+							<li id="q-nowpage" class="page-item active">
+						</c:if>
+						<c:if test="${PINFO.nowPage!=pg}">
+							<li id="q-nowpage" class="page-item">
+						</c:if>
 				      <a class="page-link" href="<%= request.getContextPath()%>/qa/qaFrm.co?nowPage=${pg}">${pg}</a>
 				    </li>
 					</c:forEach>
 					
 					<!-- 다음페이지 -->
 					<c:if test="${PINFO.nowPage ne PINFO.totalPage}">
-						<li class="page-item">
+					<li class="page-item">
 				      <a class="page-link" href="<%= request.getContextPath()%>/qa/qaFrm.co?nowPage=${PINFO.nowPage+1}">&raquo;</a>
 				    </li>
 					</c:if>
 					<c:if test="${PINFO.nowPage eq PINFO.totalPage}">
-						<li class="page-item">
-				      <a class="page-link" href="#">&raquo;</a>
+					<li class="page-item disabled">
+						<a class="page-link" href="#}">&raquo;</a>
 				    </li>
 					</c:if>
 
@@ -126,38 +138,51 @@
 			</tr>
         </table>
         
-        <!-- 질문등록하기 -->
-        <div class="question-container">
 
-					<form id="question-form" method="post" action="qInsert.co">
-
-
-		        	<div class="form-group">
-						    <select class="custom-select" id="qa-select" name="qclass">
-						      <option selected="" value="0">질문유형</option>
-						      <option value="1">회원서비스</option>
-						      <option value="2">캘린더</option>
-						      <option value="3">자격증소개</option>
-						      <option value="4">문제풀이</option>
-						      <option value="5">채팅</option>
-						    </select>
-						  </div>
-
-		        	<div class="form-group">
-					      <textarea class="form-control" placeholder="질문을 입력해주세요" id="questionTextarea" name="qcont" rows="3"></textarea>
-					    </div>
-
-		        	<c:if test="${MNO!=null}">
-		        		<input type="submit" class="btn btn-info" id="q-submit" value="질문하기"/>
-		        	</c:if>
-		        	<c:if test="${MNO==null}">
-		        		<input type="submit" class="btn btn-info" id="q-login" value="질문하기"/>
-		        	</c:if>
-
-	        </form>
-
-				</div>
-				
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Q&A 게시판</h4>
+          <button type="button" class="close" data-dismiss="modal">×</button>
+        </div>
+        <div class="modal-body">
+        
+        <!-- 질문등록하기 -->
+        <div class="question-container">
+
+			<form id="question-form" method="post" action="qInsert.co">
+
+        	<div class="form-group">
+			    <select class="custom-select" id="q-select" name="qclass">
+			      <option selected="" value="0">질문유형</option>
+			      <option value="1">회원서비스</option>
+			      <option value="2">캘린더</option>
+			      <option value="3">자격증소개</option>
+			      <option value="4">문제풀이</option>
+			      <option value="5">채팅</option>
+			    </select>
+			  </div>
+
+        	<div class="form-group">
+		      <textarea class="form-control" placeholder="질문을 입력해주세요" id="questionTextarea" name="qcont" rows="3"></textarea>
+		    </div>
+
+        <div class="modal-footer">
+      		<input type="submit" class="btn btn-info" id="q-submit" value="질문하기"/>
+        </div>
+      </div>
+      
+      </form>
+			</div>
+        
+        </div>
+    </div>
+  </div>

@@ -9,6 +9,7 @@
 #qa-table{
 	width:100%;
 	font-size:15px;
+	margin-top:10px;
 }
 .question-container{
 	display:block;
@@ -20,7 +21,7 @@
 }
 #qa-select{
 	width:120px;
-	float:right;
+	float:left;
 	margin-bottom:5px;
 }
 #q-user-id{
@@ -37,7 +38,7 @@
 #answerYET{
 	border:1px solid gray;
 	border-radius:5px;
-	padding:10px;
+	padding:5px;
 	color:gray;
 	text-align:center;
 }
@@ -45,7 +46,7 @@
 	border:1px solid black;
 	background:#2b904e;
 	border-radius:5px;
-	padding:10px;
+	padding:5px;
 	color:white;
 	text-align:center;
 }
@@ -54,4 +55,7 @@
 }
 #q-nowpage{
 	background:blue;
+}
+#q-button{
+	float:right;
 }
