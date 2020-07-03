@@ -43,11 +43,10 @@
 	text-align:center;
 }
 #answerOK{
-	border:1px solid black;
-	background:#2b904e;
+	border:1px solid #ea5859;
 	border-radius:5px;
 	padding:5px;
-	color:white;
+	color:#ea5859;
 	text-align:center;
 }
 #admin-answer{
@@ -58,4 +57,11 @@
 }
 #q-button{
 	float:right;
+}
+#q-login{
+	float:right;
+}
+#q-paging{
+	width:150px;
+	margin:0 auto;
 }

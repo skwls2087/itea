@@ -17,6 +17,9 @@ public class QaDTO {
 	private int		start; 		//시작글번호
 	private	int		end;		//끝글번호
 	private int		nowPage;	//보고싶은페이지
+	private int 	size=5;
+	
+	private int logno; //현재 로그인 한 회원번호
 	
 	public int getQno() {
 		return qno;
@@ -85,11 +88,23 @@ public class QaDTO {
 		this.mnick = mnick;
 	}
 	
+	public int getSize() {
+		return size;
+	}
+	public int getLogno() {
+		return logno;
+	}
+	public void setLogno(int logno) {
+		this.logno = logno;
+	}
+
 	@Override
 	public String toString() {
 		return "QaDTO [qno=" + qno + ", qclass=" + qclass + ", mno=" + mno + ", qcont=" + qcont + ", qdate=" + qdate
 				+ ", acont=" + acont + ", adate=" + adate + ", mnick=" + mnick + ", start=" + start + ", end=" + end
-				+ ", nowPage=" + nowPage + "]";
+				+ ", nowPage=" + nowPage + ", size=" + size + "]";
 	}
+
+	
 	
 }

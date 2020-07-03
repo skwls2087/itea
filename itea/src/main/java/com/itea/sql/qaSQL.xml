@@ -7,13 +7,23 @@
 
 	<!-- 질문 등록하기 -->
 	<insert id="insertQuestion" parameterType="qaDTO">
-		insert into qa(qclass,mno,qcont)
-		values(#{qclass},#{mno},#{qcont})
+		insert into qa(qclass,mno,qcont,qdate)
+		values(#{qclass},#{mno},#{qcont},now())
 	</insert>
 	
 	<!-- 질문 전체 개수 구하기 -->
 	<select id="selectQuestionCnt" resultType="int">
 		select count(*) from qa
+	</select>
+	
+	<!-- 내가 작성한 질문 개수 구하기 -->
+	<select id="selectmyQuestionCnt" parameterType="int" resultType="int">
+		select count(*) from qa where mno=#{mno}
+	</select>
+	
+	<!-- 필드에 해당하는 질문 개수 구하기 -->
+	<select id="selectfieldQuestionCnt" parameterType="string" resultType="int">
+		select count(*) from qa where qclass=#{qclass}
 	</select>
 	
 	<!-- 해당 페이지에 맞는 질문리스트 구하기 -->
@@ -23,9 +33,43 @@
 		JOIN member AS m
 		ON q.mno=m.mno
 		ORDER BY q.qno desc
-		limit #{start}, #{end}
+		limit #{start}, #{size}
 	</select>
 	
+	<!-- 해당 페이지에 맞는 선택필드에 맞는 질문리스트 구하기 -->
+	<select id="fieldquestionList" parameterType="qaDTO" resultType="qaDTO">
+		SELECT q.qno, q.mno, m.mnick, q.qclass, q.qcont, q.qdate, q.acont, q.adate
+		FROM qa AS q
+		JOIN member AS m
+		ON q.mno=m.mno
+		WHERE q.qclass=#{qclass}
+		ORDER BY q.qno desc
+		limit #{start}, #{size}
+	</select>
+	
+	<!-- 해당 페이지에 맞는 내가 선택한 질문리스트 구하기 -->
+	<select id="myquestionList" parameterType="qaDTO" resultType="qaDTO">
+		SELECT q.qno, q.mno, m.mnick, q.qclass, q.qcont, q.qdate, q.acont, q.adate
+		FROM qa AS q
+		JOIN member AS m
+		ON q.mno=m.mno
+		WHERE q.mno=#{logno}
+		ORDER BY q.qno desc
+		limit #{start}, #{size}
+	</select>
+	
+	<!-- 질문 삭제 -->
+	<delete id="deleteQuestion" parameterType="int">
+		DELETE FROM qa
+		WHERE qno=#{qno}
+	</delete>
+	
+	<!-- 답변 등록 -->
+	<update id="insertAnswer" parameterType="qaDTO">
+		UPDATE qa
+		SET acont=#{acont},adate=now()
+		WHERE qno=#{qno}
+	</update>
 	
 </mapper>
 	
