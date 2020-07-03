@@ -18,13 +18,14 @@ import com.itea.qa.service.QaService;
 import com.itea.util.PageUtil;
 
 @Controller
+@RequestMapping("/qa")
 public class QaController {
 	
 	@Autowired
 	QaService qaSV;
 	
 	//qa게시판 폼 & 리스트 보여주기
-	@RequestMapping("qa/qaFrm")
+	@RequestMapping("/qaFrm")
 	public ModelAndView listView(@RequestParam(value="nowPage",
 			 							required=false,
 			 							defaultValue="1")  int  nowPage,
@@ -67,7 +68,7 @@ public class QaController {
 	}
 	
 	//질문등록
-	@RequestMapping("qa/qInsert")
+	@RequestMapping("/qInsert")
 	public ModelAndView qInsert(QaDTO qaDTO,HttpSession session,ModelAndView mv) {
 		
 		System.out.println("Q&A 질문 등록하기");
@@ -85,7 +86,7 @@ public class QaController {
 	}
 	
 	//질문삭제
-	@RequestMapping("qa/qDelete")
+	@RequestMapping("/qDelete")
 	public ModelAndView qDelete(@RequestParam("qno") int qno,@RequestParam("nowPage") int page,ModelAndView mv) {
 		
 		System.out.println("Q&A 질문 삭제하기");
@@ -100,7 +101,7 @@ public class QaController {
 	}
 	
 	//질문에 답변하기
-	@RequestMapping("qa/aInsert")
+	@RequestMapping("/aInsert")
 	public ModelAndView aInsert(HttpServletRequest request,QaDTO qaDTO,@RequestParam("nowPage") int page, ModelAndView mv) {
 		
 		System.out.println("Q&A 질문 답변하기");
