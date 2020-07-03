@@ -21,6 +21,7 @@
 	
 	<typeAliases>  
     <typeAlias type="com.itea.dto.MemberDTO"  alias="memberDTO"/>
+    <typeAlias type="com.itea.dto.QaDTO"  alias="qaDTO"/>
 		<typeAlias type="java.lang.Integer" alias="int"/> 
 		<typeAlias type="java.lang.String" alias="string"/>  
 		<typeAlias type="java.util.HashMap" alias="Hashmap"/>  
@@ -28,7 +29,8 @@
 	
 	<mappers>
 		<!-- mappers의 자식요소로서 mapper등록 -->
-		<mapper resource="/com/itea/member/sql/memberSQL.xml"/>
+		<mapper resource="/com/itea/sql/memberSQL.xml"/>
+		<mapper resource="/com/itea/sql/qaSQL.xml"/>
 	</mappers>
 	
 </configuration>
