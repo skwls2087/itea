@@ -28,17 +28,17 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 <style>
-	#main-logo{font-family: 'Do Hyeon', sans-serif; font-size:30px;}
-	#nav-join{float:right;}
-	#mNick{color:white;}
-	#right-nav .container{padding-left: 0px;margin-left:0px;}
-	.dropdown-menu{left:-80px;}
+#main-logo{font-family: 'Do Hyeon', sans-serif; font-size:30px;}
+#nav-join{float:right;}
+#mNick{color:white;}
+#right-nav .container{padding-left: 0px;margin-left:0px;}
+.dropdown-menu{left:-80px;}
 </style>
 </head>
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <a class="navbar-brand " href="<%= request.getContextPath()%>" id="main-logo"><strong>아이티:어</strong></a>
+  <a class="navbar-brand " href="<%= request.getContextPath()%>" id="main-logo"><strong>아이티어</strong></a>
   <button class="navbar-toggler m-2" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -58,7 +58,7 @@
         <a class="nav-link" href="#">채팅방</a>
       </li>
       <li class="nav-item  m-2">
-        <a class="nav-link" href="<%= request.getContextPath()%>/qa/qaFrm.co">Q&A</a>
+        <a class="nav-link" href="#">Q&A</a>
       </li>
     </ul>
     

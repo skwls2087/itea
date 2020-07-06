@@ -1,9 +1,26 @@
 package com.itea.member.service;
 
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
+import java.util.Properties;
 import java.util.Random;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import com.itea.dao.memberDAO;
+import com.itea.dto.MemberDTO;
+import com.itea.member.util.MailAuthentication;
 
 public class JoinService {
 
