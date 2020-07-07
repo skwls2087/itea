@@ -33,6 +33,7 @@
 	#mNick{color:white;}
 	#right-nav .container{padding-left: 0px;margin-left:0px;}
 	.dropdown-menu{left:-80px;}
+	#it-test{color:#78afea;}
 </style>
 </head>
 <body>
@@ -59,6 +60,9 @@
       </li>
       <li class="nav-item  m-2">
         <a class="nav-link" href="<%= request.getContextPath()%>/qa/qaFrm.co">Q&A</a>
+      </li>
+      <li class="nav-item  m-2">
+        <a class="nav-link" id="it-test" href="#">IT연구소</a>
       </li>
     </ul>
     

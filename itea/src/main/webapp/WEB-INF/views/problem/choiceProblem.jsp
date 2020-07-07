@@ -17,7 +17,7 @@
 			<td width="80%"><textarea class="form-control" placeholder="내용을 입력해주세요" rows="3"></textarea> </td>
 			<td width="10%">
 			<div class="custom-control custom-radio">
-		      <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked="">
+		      <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
 		      <label class="custom-control-label" for="customRadio1"></label>
 		    </div>
 		    </td>
@@ -27,7 +27,7 @@
 			<td><textarea class="form-control" placeholder="내용을 입력해주세요" rows="3"></textarea> </td>
 			<td>
 			<div class="custom-control custom-radio">
-		      <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" checked="">
+		      <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
 		      <label class="custom-control-label" for="customRadio2"></label>
 		    </div>
 		    </td>
@@ -36,7 +36,7 @@
 			<td><textarea class="form-control" placeholder="내용을 입력해주세요" rows="3"></textarea> </td>
 			<td>
 			<div class="custom-control custom-radio">
-		      <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input" checked="">
+		      <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
 		      <label class="custom-control-label" for="customRadio3"></label>
 		    </div>
 		    </td>
@@ -45,7 +45,7 @@
 			<td><textarea class="form-control" placeholder="내용을 입력해주세요" rows="3"></textarea> </td>
 			<td>
 			<div class="custom-control custom-radio">
-		      <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input" checked="">
+		      <input type="radio" id="customRadio4" name="customRadio" class="custom-control-input">
 		      <label class="custom-control-label" for="customRadio4"></label>
 		    </div>
 		    </td>

@@ -1,4 +1,4 @@
-/* 문제풀이 메인화면 */
+/* problem-main */
 #problem-main-container{
 	text-align:center;
 }
@@ -25,7 +25,7 @@
 	font-size:30px;
 }
 
-/* 문제내기 : 출제유형 지정 */
+/* problem-create */
 #problem-create{
 	border:1px solid #ced4da;
 	border-radius:10px;
@@ -38,7 +38,7 @@
 	margin-bottom:40px;
 }
 
-/* 문제내기 : 객관식 */
+/* problem-create:choice-problem */
 .choice-Problem{
 	border:1px solid #ced4da;
 	border-radius:10px;
@@ -48,4 +48,24 @@
 	text-align:center;
 }
 
-/*  */
+/* problem-create:short-problem */
+.short-Problem{
+	border:1px solid #ced4da;
+	border-radius:10px;
+	padding:50px 80px;
+	width:800px;
+	margin:50px auto;
+}
+#inputLarge{
+	width:100px;
+	display:inline-block;
+}
+
+/* problem-create:essay-problem */
+.essay-Problem{
+	border:1px solid #ced4da;
+	border-radius:10px;
+	padding:50px 80px;
+	width:800px;
+	margin:50px auto;
+}
