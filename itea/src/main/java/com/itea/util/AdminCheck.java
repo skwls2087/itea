@@ -13,11 +13,12 @@ public class AdminCheck extends HandlerInterceptorAdapter{
 			throws Exception {
 		
 		HttpSession session = request.getSession();
-		int mno = Integer.parseInt((String) session.getAttribute("MNO"));
+//		int mno = Integer.parseInt((String) session.getAttribute("MNO"));
+		String mnick = (String)session.getAttribute("MNICK");
 		
-		if(mno==0) {
-			System.out.println("권한 부족으로 로그인폼 이동 요청");
-			response.sendRedirect("../admin/checkAdminPw.co");
+		if(mnick==null || mnick.length()==0) {
+			System.out.println("권한 부족으로  이동 요청");
+			response.sendRedirect("../admin/memberList.co");
 			return false;
 		}else {
 			return true;

@@ -10,7 +10,7 @@ public class PageUtil {
 	//	꼭 필요한 정보
 	private	int	nowPage;		//	보고싶은 페이지
 	private	int	totalCount;		//	총 데이터 개수
-	private List<MemberDTO> content;	//화면에 출력할 회원 목록 10
+	private List<MemberDTO> content;	//화면에 출력할 회원 목록
 	
 	//	보조적으로 필요한 정보
 	private	int	lineCount;		//	한페이지당 보여주고 싶은 게시물의 개수
@@ -145,6 +145,14 @@ public class PageUtil {
 		this.endPage = endPage;
 	}
 	
+	public List<MemberDTO> getContent() {
+		return content;
+	}
+
+	public void setContent(List<MemberDTO> content) {
+		this.content = content;
+	}
+
 	@Override
 	public String toString() {
 		return "PageUtil [nowPage=" + nowPage + ", totalCount=" + totalCount + ", lineCount=" + lineCount

@@ -33,7 +33,7 @@
 	<select id="memberCnt" resultType="int">
 		select  count(*) as cnt 
 		from 		member
-		where #{column} like #{%value%}
+		where #{column} like #{value}
 	</select>
 	
 	<!-- 관리자 비번 확인 조예인 -->
