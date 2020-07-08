@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- xml선언부-->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<!-- myBatis-config.xml의     mapper로 반드시 등록되어야 한다 --> 
+<mapper namespace="admin">
+
+	<!-- 회원리스트 조예인-->
+	<select id="memberList" parameterType="memberDTO" resultType="memberDTO">
+		select mnick,mmail,mclass,mname,mphone,mdate
+		from member
+		order by mno asc
+		limit #{start},#{end}
+	</select>
+	
+	<!-- 전체게시물 수 조회 -->
+	<select id="totalCnt" resultType="int">
+		select  count(*) as cnt 
+		from 		member
+	</select>
+	
+	<!-- 회원 닉네임 검색 조예인 -->
+	<select id="nickSearch" parameterType="memberDTO" resultType="memberDTO">
+		select mnick,mmail,mclass,mname,mphone,mdate
+		from member
+		where mnick=#{mnick}
+	</select>
+
+	<!-- 회원 이메일 검색 조예인 -->
+	<select id="mailSearch" parameterType="memberDTO" resultType="string">
+		select mnick,mmail,mclass,mname,mphone,mdate
+		from member
+		where mmail=#{mmail}
+	</select>
+	
+	<!-- 관리자 비번 확인 조예인 -->
+	<select id="pwCheck" parameterType="string" resultType="string">
+		select mpw from member where mmail=#{mmail}
+	</select>
+	
+	<!-- 회원탈퇴하기 -->	
+	<delete id="delete" parameterType="memberDTO">
+	DELETE 
+	FROM member
+	WHERE mnick=#{mnick}
+	</delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

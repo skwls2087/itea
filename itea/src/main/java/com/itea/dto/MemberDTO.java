@@ -20,6 +20,8 @@ public class MemberDTO {
    private Date mdate;
    private Date mnickdate;
    private long modifydate;
+   private int start;
+   private int end;
    
    public int getMno() {
       return mno;
@@ -92,7 +94,20 @@ public class MemberDTO {
       return mnickdate;
    }
    
-   public void setMnickdate(Date mnickdate) {
+   
+   public int getStart() {
+	return start;
+	}
+	public void setStart(int start) {
+		this.start = start;
+	}
+	public int getEnd() {
+		return end;
+	}
+	public void setEnd(int end) {
+		this.end = end;
+	}
+public void setMnickdate(Date mnickdate) {
 	   Calendar cal=new GregorianCalendar();
 	   Date now=new Date(cal.getTimeInMillis());	      
       System.out.println(now);
