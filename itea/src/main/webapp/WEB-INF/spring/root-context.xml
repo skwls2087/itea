@@ -13,7 +13,7 @@
   <!--	컨넥션 풀 설정을 위한 작업 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
-        <property name="url" value="jdbc:mysql://192.168.56.93:3306/itea?characterEncoding=utf8&amp;serverTimezone=UTC&amp;autoReconnection=true"></property>
+        <property name="url" value="jdbc:mysql://192.168.56.93:3306/itea3?characterEncoding=utf8&amp;serverTimezone=UTC&amp;autoReconnection=true"></property>
         <property name="username" value="root"></property>   
         <property name="password" value="1234"></property>
     </bean>
@@ -43,6 +43,9 @@
 	<bean id="qaDAO" class="com.itea.dao.QaDAO">
 		<property name="sqlSessionTemplate" ref ="sqlSession"/>
 	</bean>
+	<bean id="licenseDAO" class="com.itea.dao.licenseDAO">
+		<property name="sqlSessionTemplate" ref ="sqlSession"/>
+	</bean>
 	
 
 	
@@ -52,6 +55,8 @@
 	<bean id="findidpwSV" class="com.itea.member.service.FindIdPwService"/>
 	<bean id="joinSV" class="com.itea.member.service.JoinService"/>
 	<bean id="modifySV" class="com.itea.member.service.ModifyService"/>
+	<!--자격증 게시판 서비스  -->
+	<bean id="lService" class="com.itea.license.service.LicenseService"/>
 	
 	<!-- Q&A 관련 서비스 -->
 	<bean id="qaSV" class="com.itea.qa.service.QaService"/>
