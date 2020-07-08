@@ -1,0 +1,53 @@
+/*자격증 소개 리스트*/
+.license-heading{
+	margin-top:10px;
+	margin-bottom:30px;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+#admin-license-insert{
+	font-size:50px;
+}
+#license-detail{
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+/*자격증 등록*/
+#license-container{
+	margin-top:50px;
+}
+#license-table{
+	width:100%;
+	font-size:15px;
+	margin-bottom:20px;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+#license-table textarea{
+	width:100%;
+	margin:10px 0;
+}
+#license-table input{
+	width:80%;
+	height:30px;
+	margin:10px 0;
+}
+.license-head{
+	background:#F2F2F2;
+}
+#license-insert-buttons{
+	text-align:center;
+	width:80px;
+}

@@ -115,5 +115,53 @@ public class QaController {
 		return mv;
 		
 	}
+	
+	//조회수 증가
+	@RequestMapping("/cntUpdate")
+	public ModelAndView cntUpdate(
+			HttpServletRequest request,
+			HttpSession session,
+			ModelAndView mv) {
+		System.out.println("조회수증가요청함수 cntUpdate()진입");
+		
+		//1.파라미터받기
+		int bno  =  Integer.parseInt(request.getParameter("bno"));//글번호
+		int nowPage = Integer.parseInt(request.getParameter("nowPage"));//보고싶은페이지(릴레이용)
+		
+		System.out.println(bno);
+		System.out.println(nowPage);
+		
+		//3.Model
+		mv.addObject("nowPage",nowPage);//보고싶은페이지(릴레이용)
+		mv.addObject("bno",bno); //글번호
+		
+		//4.View  리다이렉트용뷰	: 상세보기
+		RedirectView rv = new RedirectView("../qa/detailView.co");
+		mv.setView(rv);
+		return mv;
+	}
+	
+	//상세보기
+  	//http://localhost:9000/myapp/fileBoard/detailView.co
+	@RequestMapping("/detailView")
+	public ModelAndView detailView(
+			HttpServletRequest request,
+			ModelAndView mv) {
+		System.out.println("상세보기요청함수 detailView()진입");
+		//1.파라미터받기
+		//파라미터	: bno=글번호   nowPage=보고싶은페이지(릴레이용)
+		int nowPage = Integer.parseInt(request.getParameter("nowPage"));//보고싶은페이지(릴레이용)
+
+		System.out.println(nowPage);
+		
+		//3.Model
+		mv.addObject("nowPage", nowPage);//보고싶은페이지(릴레이용)
+		
+		System.out.println("나는"+nowPage);
+
+		//4.View
+		mv.setViewName("/fileBoard/detailView");
+		return mv;
+	}
 
 }
