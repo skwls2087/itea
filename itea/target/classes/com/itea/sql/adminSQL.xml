@@ -11,7 +11,7 @@
 	<select id="memberList" parameterType="memberDTO" resultType="memberDTO">
 		select mnick,mmail,mclass,mname,mphone,mdate
 		from member
-		order by mno asc
+		order by mno desc
 		limit #{start},#{end}
 	</select>
 	

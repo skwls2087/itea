@@ -43,7 +43,9 @@
 	<bean id="qaDAO" class="com.itea.dao.QaDAO">
 		<property name="sqlSessionTemplate" ref ="sqlSession"/>
 	</bean>
-	
+	<bean id="adminDAO" class="com.itea.dao.adminDAO">
+		<property name="sqlSessionTemplate" ref ="sqlSession"/>
+	</bean>
 
 	
 	<!-- Service -->
@@ -55,6 +57,9 @@
 	
 	<!-- Q&A 관련 서비스 -->
 	<bean id="qaSV" class="com.itea.qa.service.QaService"/>
+	
+	<!-- 관리자 서비스 -->
+	<bean id="adminSV" class="com.itea.admin.service.AdminService"/>
 	
 </beans>
 

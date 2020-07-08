@@ -81,6 +81,7 @@
 		        <div class="dropdown"> 
 			        <a id="mNick" class="dropdown-toggle" href="#" data-toggle="dropdown"> ${MNICK}님 </a> 
 			        <div class="dropdown-menu"> 
+			       	  <a class="dropdown-item" href="<%= request.getContextPath()%>/admin/memberList.co">회원관리</a> 
 				        <a class="dropdown-item" href="<%= request.getContextPath()%>/member/modifyFrm.co">정보수정</a> 
 				        <a class="dropdown-item" href="<%= request.getContextPath()%>/member/logoutProc.co">로그아웃</a> 
 			        </div> 
