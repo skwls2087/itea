@@ -47,7 +47,7 @@
   <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item m-2">
-        <a class="nav-link" href="#">자격증소개</a>
+        <a class="nav-link" href="<%= request.getContextPath()%>/license/licenseList.co">자격증소개</a>
       </li>
       <li class="nav-item m-2">
         <a class="nav-link" href="<%= request.getContextPath()%>/problem/problemMain.co">문제풀이</a>
