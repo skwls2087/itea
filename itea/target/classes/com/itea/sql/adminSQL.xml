@@ -21,27 +21,28 @@
 		from 		member
 	</select>
 	
-	<!-- 회원 닉네임 검색 조예인 -->
-	<select id="nickSearch" parameterType="memberDTO" resultType="memberDTO">
+	<!-- 회원 검색 조예인 -->
+	<select id="memberSearch" parameterType="memberDTO" resultType="memberDTO">
 		select mnick,mmail,mclass,mname,mphone,mdate
 		from member
-		where mnick=#{mnick}
+		where #{column} like #{value}
+		limit #{start},#{size}
 	</select>
-
-	<!-- 회원 이메일 검색 조예인 -->
-	<select id="mailSearch" parameterType="memberDTO" resultType="string">
-		select mnick,mmail,mclass,mname,mphone,mdate
-		from member
-		where mmail=#{mmail}
+	
+	<!-- 회원수 검색 수 -->
+	<select id="memberCnt" resultType="int">
+		select  count(*) as cnt 
+		from 		member
+		where #{column} like #{%value%}
 	</select>
 	
 	<!-- 관리자 비번 확인 조예인 -->
-	<select id="pwCheck" parameterType="string" resultType="string">
-		select mpw from member where mmail=#{mmail}
+	<select id="checkAdminPw" parameterType="string" resultType="string">
+		select mpw from member where mnick="관리자"
 	</select>
 	
 	<!-- 회원탈퇴하기 -->	
-	<delete id="delete" parameterType="memberDTO">
+	<delete id="deleteMember" parameterType="string">
 	DELETE 
 	FROM member
 	WHERE mnick=#{mnick}

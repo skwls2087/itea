@@ -27,10 +27,10 @@ function checkDelete(nick){
 	<div class="admin-div">
 		<!-- 회원을 닉네임이나 아이디로 검색 가능 -->
 		<div class="board-search">
-			<form action="<%= request.getContextPath()%>/userList.do" name="user-search" 
+			<form action="<%= request.getContextPath()%>/admin/memberSearch.co" name="user-search" 
 				method ="post" class="user-search" onsubmit="return checkForm();">
 				<div class="insertFavorite pull-right">
-			    <select name="search" class="selectCss ">	
+			    <select name="search" class="selectCss">	
 			        <option value="mnick">닉네임</option>
 			        <option value="mmail">이메일</option> 
 			    </select>
@@ -100,7 +100,7 @@ function checkDelete(nick){
 	  				<!-- 이전페이지 -->
 	  				<c:if test="${PINFO.nowPage ne 1}">
 	  				    <li class="page-item">
-					      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberList.co?nowPage=${PINFO.nowPage-1}">&laquo;</a>
+					      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberSearch.co?nowPage=${PINFO.nowPage-1}">&laquo;</a>
 					    </li>
 						</c:if>
 						<c:if test="${PINFO.nowPage eq 1}">
@@ -117,14 +117,14 @@ function checkDelete(nick){
 							<c:if test="${PINFO.nowPage!=pg}">
 								<li id="q-nowPage" class="page-item">
 							</c:if>
-					      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberList.co?nowPage=${pg}">${pg}</a>
+					      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberSearch.co?nowPage=${pg}">${pg}</a>
 					    </li>
 						</c:forEach>
 						
 						<!-- 다음페이지 -->
 						<c:if test="${PINFO.nowPage ne PINFO.totalPage}">
 						<li class="page-item">
-					      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberList.co?nowPage=${PINFO.nowPage+1}">&raquo;</a>
+					      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberSearch.co?nowPage=${PINFO.nowPage+1}">&raquo;</a>
 					    </li>
 						</c:if>
 						<c:if test="${PINFO.nowPage eq PINFO.totalPage}">
@@ -139,7 +139,7 @@ function checkDelete(nick){
 							<%-- [이전prev]출력 --%>
 							<c:if test="${PINFO.nowPage ne 1}">
 	  				    <li class="page-item">
-					      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberList.co?nowPage=${PINFO.nowPage-1}&search=${search}&inform=${content}">&laquo;</a>
+					      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberSearch.co?nowPage=${PINFO.nowPage-1}&search=${search}&inform=${content}">&laquo;</a>
 					    </li>
 						</c:if>
 						<c:if test="${PINFO.nowPage eq 1}">
@@ -149,7 +149,7 @@ function checkDelete(nick){
 						</c:if>
 						<c:if test="${PINFO.nowPage ne 1}">
   				    <li class="page-item">
-				      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberList.co?nowPage=${PINFO.nowPage-1}&search=${search}&inform=${content}">&laquo;</a>
+				      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberSearch.co?nowPage=${PINFO.nowPage-1}&search=${search}&inform=${content}">&laquo;</a>
 				    </li>
 						</c:if>
 						
@@ -161,10 +161,10 @@ function checkDelete(nick){
 							<c:if test="${PINFO.nowPage!=pg}">
 								<li id="q-nowPage" class="page-item">
 							</c:if>
-					      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberList.co?nowPage=${pg}&search=${search}&inform=${content}">${pg}</a>
+					      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberSearch.co?nowPage=${pg}&search=${search}&inform=${content}">${pg}</a>
 					    </li>
 						</c:forEach>
-		http://localhost:9000/spring/admin/memberList.co?nowpage=2					
+						
 							<!-- 다음페이지 -->
 						<c:if test="${PINFO.nowPage ne PINFO.totalPage}">
 						<li class="page-item">

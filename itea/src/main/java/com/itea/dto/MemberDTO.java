@@ -24,6 +24,8 @@ public class MemberDTO {
    private int start;
    private int end;
    private int size=5;
+   private String column;
+   private String value;
    
    public int getMno() {
       return mno;
@@ -108,6 +110,14 @@ public class MemberDTO {
 	}
 	public void setEnd(int end) {
 		this.end = end;
+	}
+	
+	public int getSize() {
+			return size;
+	}
+	
+	public void setSize(int size) {
+		this.size = size;
 	}
 public void setMnickdate(Date mnickdate) {
 	   Calendar cal=new GregorianCalendar();
