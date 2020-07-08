@@ -20,8 +20,10 @@ public class MemberDTO {
    private Date mdate;
    private Date mnickdate;
    private long modifydate;
+   
    private int start;
    private int end;
+   private int size=5;
    
    public int getMno() {
       return mno;

@@ -17,7 +17,7 @@ public class PageUtil {
 	private	int	endPage;		//	페이지 이동 기능을 몇페이지까지 만들지를 지정한다.
 	
 	public PageUtil(int nowPage, int totalCount) {
-		this(nowPage, totalCount, 3, 5);
+		this(nowPage, totalCount, 5, 5);
 	}
 	
 	public PageUtil(int nowPage, int totalCount, int lineCount, int pageGroup) {

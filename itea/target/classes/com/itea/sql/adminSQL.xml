@@ -12,7 +12,7 @@
 		select mnick,mmail,mclass,mname,mphone,mdate
 		from member
 		order by mno desc
-		limit #{start},#{end}
+		limit #{start},#{size}
 	</select>
 	
 	<!-- 전체게시물 수 조회 -->

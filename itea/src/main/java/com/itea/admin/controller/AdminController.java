@@ -24,11 +24,10 @@ public class AdminController {
 	//회원목록
 	@RequestMapping("/memberList")
 	public ModelAndView memberList(@RequestParam(value="nowPage",required=false,
-	defaultValue="1")  int  nowPage,
-	 ModelAndView mv) throws Exception{
+	defaultValue="1")  int  nowPage, ModelAndView mv) throws Exception{
 		
 		//1.파라미터받기 nowPage=
-		//2.비즈니스로직	<->Service<->DAO<->SQL.xml->DB
+		//2.비즈니스로직	
 		//	2-1) 페이징관련 정보준비
 		PageUtil pInfo = adminSV.getPageInfo(nowPage);
 		

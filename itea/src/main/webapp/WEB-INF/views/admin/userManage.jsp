@@ -100,8 +100,7 @@ function checkDelete(nick){
 	  				<!-- 이전페이지 -->
 	  				<c:if test="${PINFO.nowPage ne 1}">
 	  				    <li class="page-item">
-					      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberList.co?nowpage=
-					      ${PINFO.nowPage-1}">&laquo;</a>
+					      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberList.co?nowPage=${PINFO.nowPage-1}">&laquo;</a>
 					    </li>
 						</c:if>
 						<c:if test="${PINFO.nowPage eq 1}">
@@ -113,21 +112,19 @@ function checkDelete(nick){
 						<!-- 페이지 -->
 						<c:forEach var="pg"	 begin="${PINFO.startPage}" end="${PINFO.endPage}">
 							<c:if test="${PINFO.nowPage==pg}">
-								<li id="q-nowpage" class="page-item active">
+								<li id="q-nowPage" class="page-item active">
 							</c:if>
 							<c:if test="${PINFO.nowPage!=pg}">
-								<li id="q-nowpage" class="page-item">
+								<li id="q-nowPage" class="page-item">
 							</c:if>
-					      <a class="page-link" href="<%= request.getContextPath()%>
-					      /admin/memberList.co?nowpage=${pg}">${pg}</a>
+					      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberList.co?nowPage=${pg}">${pg}</a>
 					    </li>
-						</c:forEach> 
+						</c:forEach>
 						
 						<!-- 다음페이지 -->
 						<c:if test="${PINFO.nowPage ne PINFO.totalPage}">
 						<li class="page-item">
-					      <a class="page-link" href="<%= request.getContextPath()%>
-					      /admin/memberList.co?nowpage=${PINFO.nowPage+1}">&raquo;</a>
+					      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberList.co?nowPage=${PINFO.nowPage+1}">&raquo;</a>
 					    </li>
 						</c:if>
 						<c:if test="${PINFO.nowPage eq PINFO.totalPage}">
@@ -136,31 +133,49 @@ function checkDelete(nick){
 					    </li>
 						</c:if>
 					</c:if>
+					
 					<!-- 검색조건이 있을 때는 페이지넘버와 검색조건도 파라미터로 보내기 -->
 						<c:if test="${null ne content}">
 							<%-- [이전prev]출력 --%>
-							<c:if test="${PINFO.currentPage>5}">
-								<a href="admin/memberList?nowpage=${PINFO.startPage-5}&search=${search}&inform=${content}">
-									[이전]</a>
-							</c:if>
 							<c:if test="${PINFO.nowPage ne 1}">
 	  				    <li class="page-item">
-					      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberList.co?nowpage=
-					      ${PINFO.nowPage-1}&search=${search}&inform=${content}">&laquo;</a>
+					      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberList.co?nowPage=${PINFO.nowPage-1}&search=${search}&inform=${content}">&laquo;</a>
 					    </li>
 						</c:if>
-							
-							<%-- 페이지출력 [이전] [1] [2] [3] [4] [5] --%>
-							<c:forEach var="pg" begin="${PINFO.startPage}" end="${PINFO.endPage}">
-								<a href="../admin/memberList.co?nowPage=${pg}&search=${search}&inform=${content}">
-									[${pNo}]</a>
-							</c:forEach>
-							
-							<%-- [다음next]출력 --%>
-							<c:if test="${PINFO.endPage<PINFO.totalPages}">
-								<a href="../admin/memberList.co?nowPage=${PINFO.startPage+5}&search=${search}&inform=${content}">
-									[다음]</a>
+						<c:if test="${PINFO.nowPage eq 1}">
+	  				    <li class="page-item disabled">
+	  				    	<a class="page-link" href="#">&laquo;</a>
+					    </li>
+						</c:if>
+						<c:if test="${PINFO.nowPage ne 1}">
+  				    <li class="page-item">
+				      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberList.co?nowPage=${PINFO.nowPage-1}&search=${search}&inform=${content}">&laquo;</a>
+				    </li>
+						</c:if>
+						
+						<!-- 페이지 -->
+						<c:forEach var="pg"	 begin="${PINFO.startPage}" end="${PINFO.endPage}">
+							<c:if test="${PINFO.nowPage==pg}">
+								<li id="q-nowPage" class="page-item active">
 							</c:if>
+							<c:if test="${PINFO.nowPage!=pg}">
+								<li id="q-nowPage" class="page-item">
+							</c:if>
+					      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberList.co?nowPage=${pg}&search=${search}&inform=${content}">${pg}</a>
+					    </li>
+						</c:forEach>
+		http://localhost:9000/spring/admin/memberList.co?nowpage=2					
+							<!-- 다음페이지 -->
+						<c:if test="${PINFO.nowPage ne PINFO.totalPage}">
+						<li class="page-item">
+					      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberList.co?nowPage=${PINFO.nowPage+1}&search=${search}&inform=${content}">&raquo;</a>
+					    </li>
+						</c:if>
+						<c:if test="${PINFO.nowPage eq PINFO.totalPage}">
+						<li class="page-item disabled">
+							<a class="page-link" href="#}">&raquo;</a>
+					    </li>
+						</c:if>
 						</c:if>
 				  </ul>
 				</div>
