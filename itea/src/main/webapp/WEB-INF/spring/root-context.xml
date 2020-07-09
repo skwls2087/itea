@@ -13,7 +13,7 @@
   <!--	컨넥션 풀 설정을 위한 작업 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
-        <property name="url" value="jdbc:mysql://192.168.56.93:3306/itea?characterEncoding=utf8&amp;serverTimezone=UTC&amp;autoReconnection=true"></property>
+        <property name="url" value="jdbc:mysql://192.168.56.93:3306/itea3?characterEncoding=utf8&amp;serverTimezone=UTC&amp;autoReconnection=true"></property>
         <property name="username" value="root"></property>   
         <property name="password" value="1234"></property>
     </bean>
@@ -43,6 +43,9 @@
 	<bean id="qaDAO" class="com.itea.dao.QaDAO">
 		<property name="sqlSessionTemplate" ref ="sqlSession"/>
 	</bean>
+	<bean id="askDAO" class="com.itea.dao.AskDAO">
+		<property name="sqlSessionTemplate" ref ="sqlSession"></property>
+	</bean>
 	
 
 	
@@ -53,8 +56,12 @@
 	<bean id="joinSV" class="com.itea.member.service.JoinService"/>
 	<bean id="modifySV" class="com.itea.member.service.ModifyService"/>
 	
+	
 	<!-- Q&A 관련 서비스 -->
 	<bean id="qaSV" class="com.itea.qa.service.QaService"/>
+	
+	<!-- 질문 게시판 관련 서비스 -->
+	<bean id="askSV" class="com.itea.ask.service.AskService"></bean>
 	
 </beans>
 
