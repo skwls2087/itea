@@ -63,8 +63,8 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="4">기출문제 최다 빈출 단어<br />
-				<input type="text" id="lfreeq" name="lfreeq">
+				<td colspan="4">시험 유형<br />
+				<input type="hidden" id="lfreeq" name="lfreeq">			
 				</td>
 			</tr>
 			<tr>
