@@ -1,9 +1,5 @@
 package com.itea.admin.controller;
 
-
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,11 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itea.admin.service.AdminService;
-import com.itea.dto.MemberDTO;
 import com.itea.util.PageUtil;
-
-import admin.service.CheckAdminPwService;
-import controller.command.CommandHandler;
 
 @Controller
 @RequestMapping("/admin")
@@ -30,18 +22,15 @@ public class AdminController {
 	public String memberList(HttpServletRequest request, 
 						  HttpServletResponse response) throws Exception {
 		
-		ArrayList<MemberDTO> list=null;
-
 		String column=request.getParameter("search");
 		String value=request.getParameter("user-inform");
-		String page=request.getParameter("page");
+		String page=request.getParameter("nowPage");
 		
 		PageUtil pinfo;
 		int pageNo;
 		
 		if(column==null) {//검색 안했을 때
 			System.out.println("전체회원출력-검색어 없음");
-			
 			if(page==null) {//처음화면
 				pageNo=1;
 			}else {//페이지 눌렀을 때
@@ -52,7 +41,6 @@ public class AdminController {
 			
 		}else {//검색 했을 때
 			System.out.print("검색된 회원출력:");
-			
 			if(page==null) {//처음화면
 				pageNo=1;
 			}else { //페이지 눌렀을 때
@@ -119,60 +107,32 @@ public class AdminController {
 	
 	//관리자 비번 확인
 	@RequestMapping("/checkAdminPw.co")
-	public String checkAdminPw() (HttpServletRequest request, 
+	public String checkAdminPw(HttpServletRequest request, 
 			  HttpServletResponse response) throws Exception {
-		
 		HttpSession session = request.getSession();
 		
-		//세션의 id에 해당하는 비번과 사용자가 입력한 비번이 같은지 확인
-		String id=(String) session.getAttribute("ID");
-		String pw=request.getParameter("adminPw");
+		String mnick=(String) session.getAttribute("MNICK");
+		String mpw=request.getParameter("adminPw");
 		
-		if(pw==null) {//처음 비밀번호 입력 화면에 들어왔을 때 form만 출력
-			return FORM_VIEW;
+		if(mpw==null) {//처음 비밀번호 입력 화면에 들어왔을 때 form만 출력
+			return "admin/checkAdminPw";
 		}
+		System.out.print(mnick+"님이 입력한 비밀번호는 "+mpw+"입니다-");
 		
-		System.out.print(id+"님이 입력한 비밀번호는 "+pw+"입니다-");
-		
-		Boolean pwCheck=checkAdminPwService.check(id,pw);
+		String pwCheck=adminSV.checkAdminPw(mpw);
 		System.out.println("비밀번호가 일치하는가?"+pwCheck);
 		
-		if(pwCheck) {//비밀번호가 맞으면 이 페이지를 부른 각 페이지로 리턴
+		if(pwCheck.equals(mpw)) {//비밀번호가 맞으면 이 페이지를 부른 각 페이지로 리턴
 			String service=request.getParameter("service");
-			
-			if(service.equals("deleteMember")){
-				String userNick=request.getParameter("userNick");
-				request.setAttribute("userNick",userNick);
-				return "memberDelete.do"; //회원을 삭제하는 로직 수행
-				
-			}else if(service.equals("pointCharge")) {
-				String point=request.getParameter("point");
-				request.setAttribute("point", point);	
-				String userNick=request.getParameter("userNick");
-				request.setAttribute("userNick",userNick);
-				return "/admin/pointCharge.jsp"; //포인트 충전하기 위한 form 화면으로
-				
-			}else if(service.equals("modify")) {
-				String no=request.getParameter("no");
-				request.setAttribute("no", no);
-				return "noticeModify.do"; //게시글 수정을 위한 로직 수행
-				
-			}else if(service.equals("delete")) {
-				String no=request.getParameter("no");
-				request.setAttribute("no", no);
-				return "noticeDelete.do"; //게시글 삭제를 위한 로직 수행
-				
-			}else if(service.equals("write")) {
-				return "/admin/noticeWrite.jsp";//게시글 작성을 위한 form 화면으로
-			}
+			String memberNick=request.getParameter("mnick");
+			request.setAttribute("mnick",mnick);
+			return "admin/deleteMember"; //회원을 삭제하는 로직 수행
 		}else {//비밀번호가 다르면 에러메시지를 가지고 비밀번호 입력 폼으로 이동
 			String error="비밀번호를 다시 입력하세요";
 			request.setAttribute("error", error);
 		}
+		return "/admin/userManage";
 	}
-		return "admin/checkAdminPw";
-	}
-	
 	
 	//회원탈퇴
 	@RequestMapping("/deleteMember")
@@ -187,7 +147,7 @@ public class AdminController {
 		//3.Model
 		session.invalidate();
 		//4.View
-		return "admin/userManage";
+		return "/admin/deleteMember";
 	}
 	
 	

@@ -91,6 +91,7 @@ function checkDelete(nick){
 	        </c:forEach>
 	        
 			 <!-- 회원목록 페이징 -->		
+			 <c:if test="${PINFO.totalCount>0}">
 				<tr>
 				<td colspan="7" class="text-center">
 				<div>
@@ -181,6 +182,7 @@ function checkDelete(nick){
 				</div>
 				</td>
 				</tr>
+				</c:if>
      </table>
     </div>
 </div>

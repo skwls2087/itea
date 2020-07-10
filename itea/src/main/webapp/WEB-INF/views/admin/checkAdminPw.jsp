@@ -22,8 +22,6 @@
 			<!-- 로직을 실행하는 데 필요한 파라미터들을 셋팅 -->
 			<input type="hidden" name="mnick" value="${param.mnick}">
 			<input type="hidden" name="service" value="${param.service}">
-			<input type="hidden" name="point" value="${param.point}">
-			<input type="hidden" name="no" value="${param.no}">
 			
 			<input type="submit" value="확인" class="pwSubmit"/>
 			<input type="button" value="취소" onclick="history.back()" class="pwCancel"/>

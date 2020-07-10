@@ -119,6 +119,25 @@ public class MemberDTO {
 	public void setSize(int size) {
 		this.size = size;
 	}
+	
+	
+	
+	
+public String getColumn() {
+		return column;
+	}
+	public void setColumn(String column) {
+		this.column = column;
+	}
+	public String getValue() {
+		return value;
+	}
+	public void setValue(String value) {
+		this.value = value;
+	}
+	public void setModifydate(long modifydate) {
+		this.modifydate = modifydate;
+	}
 public void setMnickdate(Date mnickdate) {
 	   Calendar cal=new GregorianCalendar();
 	   Date now=new Date(cal.getTimeInMillis());	      

@@ -41,7 +41,6 @@ public class PageUtil {
 			if (totalCount % size > 0) {
 				totalPage++;  //나머지 게시물을 출력하기위한 페이지를 추가
 			}
-			
 			//아래의 5값은  한번에 출력하고 싶은 페이지개수를 뜻한다
 			int modVal = nowPage % 5;   //보고싶은페이지10%5  1 2 3 4
 			startPage = nowPage / 5 * 5 + 1; //시작페이지=10/5*5+1
@@ -50,7 +49,6 @@ public class PageUtil {
 			
 			endPage = startPage + 4;
 		  //끝 페이지번호= 시작 페이지번호  + 4      
-
 			//끝페이지번호가   실제총페이지수보다 크게 되면
 			//끝페이지번호를  실제총페이수로 조정하여
 			//비어있는 페이지가 발생되지 않도록 한다

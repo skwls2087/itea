@@ -1,7 +1,5 @@
 package com.itea.admin.service;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +13,7 @@ public class AdminService {
 	@Autowired
 	adminDAO adminDAO;
 	
-	PageUtil pInfo;
 	MemberDTO mdto = new MemberDTO();
-	ArrayList<MemberDTO> list=null;
 	
 	/*//회원목록
 	public ArrayList<MemberDTO> memberList(PageUtil pInfo) throws Exception {
@@ -35,12 +31,26 @@ public class AdminService {
 	public PageUtil memberList(int page) throws Exception {
 		int size=mdto.getSize();
 		int totalCount=adminDAO.getTotalCnt();
+		ArrayList<MemberDTO> list=null;
 		list=adminDAO.memberList(mdto);
-		
-		PageUtil pageInfo = new PageUtil(totalCount,page,size,list);
-		return pageInfo;
+		PageUtil pInfo = new PageUtil(totalCount,page,size,list);
+		System.out.println("servicelist"+pInfo);
+		return pInfo;
 	}
 		
+	//회원 검색
+	public PageUtil memberSearch(int page,String column,String value) throws Exception {
+		int start=mdto.getStart();
+		int size=mdto.getSize();
+		int totalCount=adminDAO.mCnt(column,value);
+		System.out.println(start+"**"+size+"**"+totalCount);
+		ArrayList<MemberDTO> list=null;
+		PageUtil pInfo = new PageUtil(totalCount,page,size,list);
+		System.out.println("servicesearch"+pInfo);
+		list=adminDAO.memberSearch(mdto);
+		return pInfo;		
+	}
+	
 	//페이징관련 정보
 	public PageUtil getPageInfo(int nowPage) {
 		int totalCount= adminDAO.getTotalCnt();
@@ -49,21 +59,9 @@ public class AdminService {
 		return pInfo;
 	}
 	
-	//회원 검색
-	public PageUtil memberSearch(int page,String column,String value) throws Exception {
-		int size=mdto.getSize();
-		int totalCount=adminDAO.memberCnt();
-		PageUtil pInfo = new PageUtil(totalCount,page,size,list);
-		
-		list=adminDAO.memberSearch(mdto);
-		return pInfo;		
-	}
-	
-	
-	
 	//관리자 비번 확인
-	public Boolean checkAdminPw(String mpw) throws Exception {
-		Boolean pwCheck=adminDAO.checkAdminPw(mpw);
+	public String checkAdminPw(String mpw) throws Exception {
+		String pwCheck=adminDAO.checkAdminPw(mpw);
 		return pwCheck;
 		
 	}
