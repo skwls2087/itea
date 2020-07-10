@@ -95,6 +95,7 @@ public class LicenseListController {
 		int lno = Integer.parseInt(request.getParameter("lno"));
 		//2.비즈니스 로직 수행
 		lService.modify(lDto);
+		System.out.println("lDto.lqclass"+lDto.getLqclass());
 		//3.모델//4.뷰
 		RedirectView rv = new RedirectView("../license/licenseList.co");
 		mv.setView(rv);	
@@ -110,7 +111,6 @@ public class LicenseListController {
 		//2.비즈니스 로직 수행
 		lService.delete(lno);
 		//3.
-		session.invalidate();
 		//3.모델//4.뷰
 		RedirectView rv = new RedirectView("../license/licenseList.co");
 		mv.setView(rv);	

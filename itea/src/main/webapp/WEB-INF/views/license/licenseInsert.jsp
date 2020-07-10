@@ -7,8 +7,53 @@
 	<script>
 	$(function(){
 		$("#license-insert-button").click(function(){
+			if($("#lname").val().length==0){
+				alert("자격증 명칭을 입력하지 않았습니다.")
+				$("#lname").focus();
+				return false;
+			}
+			if($("#lorg").val().length==0){
+				alert("자격증 발급기관명칭을 입력하지 않았습니다.")
+				$("#lorg").focus();
+				return false;
+			}
+			if($("#lfee").val().length==0){
+				alert("자격증 응시료를 입력하지 않았습니다.")
+				$("#lfee").focus();
+				return false;
+			}
+			if($("#lclass").val().length==0){
+				alert("자격증 분류를 입력하지 않았습니다.")
+				$("#lclass").focus();
+				return false;
+			}
+			if($("#la").val().length==0){
+				alert("자격증 시험일정을 입력하지 않았습니다.")
+				$("#la").focus();
+				return false;
+			}
+			if($("#lreq").val().length==0){
+				alert("자격증 자격요건을 입력하지 않았습니다.")
+				$("#lreq").focus();
+				return false;
+			}
+			if($("#ldetail").val().length==0){
+				alert("자격증시험 과목을 입력하지 않았습니다.")
+				$("#ldetail").focus();
+				return false;
+			}
+			if($("#lcut").val().length==0){
+				alert("검정기준 및 합격기준을 입력하지 않았습니다.")
+				$("#lcut").focus();
+				return false;
+			}
+			if($("#linfo").val().length==0){
+				alert("자격증 소개글을 입력하지 않았습니다.")
+				$("#linfo").focus();
+				return false;
+			}
 			alert("입력하신 내용을 등록합니다.");
-			$("license-insert-button").submit();
+			$("#ifrm").submit();
 		});
 		
 	});
@@ -66,6 +111,25 @@
 			<tr>
 				<td colspan="2"><div class="wrap"><textarea id="linfo" name="linfo"
 			placeholder="자격증에 대한 전반적 소개를 입력하세요" cols="50" rows="10"></textarea> </div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="license-head">자격증 시험유형</td>
+			</tr>
+			<tr>
+				<td colspan="2"><div class="wrap">
+						<select name="lqclass" id="lqclass" size="6">
+							<optgroup label="필기,실기">
+							<option value="1">필기,실기</option>
+							</optgroup>
+							<optgroup label="1차,2차">
+							<option value="2">1차,2차</option>
+							</optgroup >
+							<optgroup label="단독">
+							<option value="3">단독시험</option>
+							</optgroup>
+						</select>
+					</div>
 				</td>
 			</tr>
 			<tr id="license-insert-button">

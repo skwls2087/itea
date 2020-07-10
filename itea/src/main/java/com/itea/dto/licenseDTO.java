@@ -11,9 +11,8 @@ public class licenseDTO {
 	private String ldetail; //시험과목
 	private String lcut; 	//검정기준합격기준
 	private String linfo; 	//자격증정보
-	private String lfreeq;	//기출문제최다빈출단어
 	private String la;		//관련페이지(시험일정)
-	
+	private String lqclass; //시험 유형
 	
 	public int getLno() {
 		return lno;
@@ -69,24 +68,26 @@ public class licenseDTO {
 	public void setLinfo(String linfo) {
 		this.linfo = linfo;
 	}
-	public String getLfreeq() {
-		return lfreeq;
-	}
-	public void setLfreeq(String lfreeq) {
-		this.lfreeq = lfreeq;
-	}
+	
 	public String getLa() {
 		return la;
 	}
 	public void setLa(String la) {
 		this.la = la;
 	}
+	public String getLqclass() {
+		return lqclass;
+	}
+	public void setLqclass(String lqclass) {
+		this.lqclass = lqclass;
+	}
 	@Override
 	public String toString() {
 		return "licenseDTO [lno=" + lno + ", lname=" + lname + ", lorg=" + lorg + ", lfee=" + lfee + ", lclass="
 				+ lclass + ", lreq=" + lreq + ", ldetail=" + ldetail + ", lcut=" + lcut + ", linfo=" + linfo
-				+ ", lfreeq=" + lfreeq + ", la=" + la + "]";
+				+ ", la=" + la + ", lqclass=" + lqclass + "]";
 	}
+	
 	
 	
 	
