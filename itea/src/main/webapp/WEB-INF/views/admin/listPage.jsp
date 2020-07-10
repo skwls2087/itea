@@ -1,23 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <script>
-function checkForm() {
-    if(document.getElementById("member-content").value==""){
-    	alert("회원정보를 입력해주세요")
-    	return false;
-    }
-}
-	
-function checkDelete(nick){
-	result=confirm(nick+"님을 강제탈퇴하시겠습니까?")
-	if(result){
-		return true;
-	}else{
-		return false;
-	}
-}
-
 $(function(){
+
+	function checkDelete(nick){
+		result=confirm(nick+"님을 강제탈퇴하시겠습니까?")
+		if(result){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	function(){
 	//perPageNum select 박스 설정
 	setPerPageNumSelect();
 	
@@ -37,46 +32,48 @@ $(function(){
 	var thisPage = '${pageMaker.cri.page}';
 	//매번 refresh 되므로 다른 페이지 removeClass 할 필요는 없음->Ajax 이용시엔 해야함
 	$('#page'+thisPage).addClass('active');
-})
+	}
 
-function setPerPageNumSelect(){
-	var perPageNum = "${pageMaker.cri.perPageNum}";
-	var $perPageSel = $('#perPageSel');
-	var thisPage = '${pageMaker.cri.page}';
-	$perPageSel.val(perPageNum).prop("selected",true);
-	//PerPageNum가 바뀌면 링크 이동
-	$perPageSel.on('change',function(){
-		//pageMarker.makeQuery 사용 못하는 이유: makeQuery는 page만을 매개변수로 받기에 변경된 perPageNum을 반영못함
-		window.location.href = "listPage.co?page="+thisPage+"&perPageNum="+$perPageSel.val();
-	})
-}
-function setSearchTypeSelect(){
-	var $searchTypeSel = $('#searchTypeSel');
-	var $keyword = $('#keyword');
-	
-	$searchTypeSel.val('${pageMaker.cri.searchType}').prop("selected",true);
-	//검색 버튼이 눌리면
-	$('#searchBtn').on('click',function(){
-		var searchTypeVal = $searchTypeSel.val();
-		var keywordVal = $keyword.val();
-		//검색 조건 입력 안했으면 경고창 
-		if(!searchTypeVal){
-			alert("검색 조건을 선택하세요!");
-			$searchTypeSel.focus();
-			return;
-		//검색어 입력 안했으면 검색창
-		}else if(!keywordVal){
-			alert("검색어를 입력하세요!");
-			$('#keyword').focus();
-			return;
-		}
-		var url = "listPage?page=1"
-			+ "&perPageNum=" + "${pageMaker.cri.perPageNum}"
-			+ "&searchType=" + searchTypeVal
-			+ "&keyword=" + encodeURIComponent(keywordVal);
-		window.location.href = url;
-	})
-}
+	function setPerPageNumSelect(){
+		var perPageNum = "${pageMaker.cri.perPageNum}";
+		var $perPageSel = $('#perPageSel');
+		var thisPage = '${pageMaker.cri.page}';
+		$perPageSel.val(perPageNum).prop("selected",true);
+		//PerPageNum가 바뀌면 링크 이동
+		$perPageSel.on('change',function(){
+			//pageMarker.makeQuery 사용 못하는 이유: makeQuery는 page만을 매개변수로 받기에 변경된 perPageNum을 반영못함
+			window.location.href = "listPage.co?page="+thisPage+"&perPageNum="+$perPageSel.val();
+		})
+	}
+	function setSearchTypeSelect(){
+		var $searchTypeSel = $('#searchTypeSel');
+		var $keyword = $('#keyword');
+		
+		$searchTypeSel.val('${pageMaker.cri.searchType}').prop("selected",true);
+		//검색 버튼이 눌리면
+		$('#searchBtn').on('click',function(){
+			var searchTypeVal = $searchTypeSel.val();
+			var keywordVal = $keyword.val();
+			//검색 조건 입력 안했으면 경고창 
+			if(!searchTypeVal){
+				alert("검색 조건을 선택하세요!");
+				$searchTypeSel.focus();
+				return;
+			//검색어 입력 안했으면 검색창
+			}else if(!keywordVal){
+				alert("검색어를 입력하세요!");
+				$('#keyword').focus();
+				return;
+			}
+			var url = "listPage?page=1"
+				+ "&perPageNum=" + "${pageMaker.cri.perPageNum}"
+				+ "&searchType=" + searchTypeVal
+				+ "&keyword=" + encodeURIComponent(keywordVal);
+			window.location.href = url;
+		})
+	}
+
+});
 </script>
 
 <div class="title">
@@ -88,8 +85,8 @@ function setSearchTypeSelect(){
 	<div class="admin-div">
 		<!-- 회원을 닉네임이나 아이디로 검색 가능 -->
 		<div class="board-search">
-			<form action="<%= request.getContextPath()%>/admin/memberList.co" name="user-search" 
-				method ="post" class="user-search" onsubmit="return checkForm();">
+			<form action="<%= request.getContextPath()%>/admin/listPage.co" name="user-search" 
+				method ="get" class="user-search" onsubmit="return checkForm();">
 				<div class="insertFavorite pull-right">
 			    <select name="searchType" class="selectCss">	
 			        <option value="mnick">닉네임</option>
@@ -186,7 +183,6 @@ function setSearchTypeSelect(){
 				</div>
 				</td>
 				</tr>
-				</c:if>
      </table>
     </div>
 </div>

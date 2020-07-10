@@ -12,17 +12,17 @@
 		select mnick,mmail,mclass,mname,mphone,mdate
 		from member
 		where mno>0
-		<include refid="searchCondition"></include>
+		<include refid="searchCondition"/>
 		order by mno desc
 		limit #{pageStart},#{perPageNum}
 	</select>
 	
 	<!-- 전체게시물 수 조회-->
-	<select id="totalCnt" resultType="int">
+	<select id="totalCount" resultType="int">
 		select  count(*) 
 		from 		member
-		where bno>0
-		<include refid="searchCondition"></include>
+		where mno>0
+		<include refid="searchCondition"/>
 	</select> 
 	
 	<sql id="searchCondition">

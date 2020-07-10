@@ -22,10 +22,12 @@ public class adminDAO {
 	
     //listPage 구현
 	public List<MemberDTO> listPage(Criteria cri) throws Exception {
+		System.out.println("listPage DAO "+cri);
 		return session.selectList("admin.listPage",cri);
 	}
 	
 	public int totalCount(Criteria cri) throws Exception {
+		System.out.println("totalCount DAO "+cri);
 		return session.selectOne("admin.totalCount",cri);
 	}
 
