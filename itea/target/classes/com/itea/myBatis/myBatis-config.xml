@@ -32,6 +32,7 @@
 		<mapper resource="/com/itea/sql/memberSQL.xml"/>
 		<mapper resource="/com/itea/sql/qaSQL.xml"/>
 		<mapper resource="/com/itea/sql/adminSQL.xml"/>
+		<mapper resource="/com/itea/sql/adminSQL2.xml"/>
 	</mappers>
 	
 </configuration>

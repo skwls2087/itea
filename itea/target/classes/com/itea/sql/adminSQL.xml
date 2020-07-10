@@ -8,45 +8,36 @@
 <mapper namespace="admin">
 
 	<!-- 회원리스트 조예인-->
-	<select id="memberList" parameterType="memberDTO" resultType="memberDTO">
+	<select id="listPage" resultType="memberDTO">
 		select mnick,mmail,mclass,mname,mphone,mdate
 		from member
+		where mno>0
+		<include refid="searchCondition"></include>
 		order by mno desc
-		limit #{start},#{size}
+		limit #{pageStart},#{perPageNum}
 	</select>
 	
-	<!-- 전체게시물 수 조회 -->
+	<!-- 전체게시물 수 조회-->
 	<select id="totalCnt" resultType="int">
 		select  count(*) 
 		from 		member
-	</select>
+		where bno>0
+		<include refid="searchCondition"></include>
+	</select> 
 	
-	<!-- 회원 검색 조예인 -->
-	<select id="memberSearch" parameterType="memberDTO" resultType="memberDTO">
-		select mnick,mmail,mclass,mname,mphone,mdate
-		from member
-		where #{column} like  '%' || #{value} || '%'
-		limit #{start},#{size}
-	</select>
+	<sql id="searchCondition">
+	<!-- 검색 조건이 null이 아니라면 검색조건에 따른 데이터 조회-->
+		<if test="searchType != null">
+			<if test="searchType == 'mnick'.toString()">
+				and mnick like CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'mmail'.toString()">
+				and mmail like CONCAT('%', #{keyword}, '%')
+			</if>
+		</if>
+	</sql>
 	
-	<!-- 회원수 검색 수 -->
-	<select id="mCnt" resultType="int" parameterType="Hashmap">
-		select  count(*)
-		from 		member
-		where #{column} like  '%' || #{value} || '%'
-	</select>
-	
-	<!-- 관리자 비번 확인 조예인 -->
-	<select id="checkAdminPw" resultType="string">
-		select mpw from member where mnick='관리자'
-	</select>
-	
-	<!-- 회원탈퇴하기 -->	
-	<delete id="deleteMember" parameterType="string">
-	DELETE 
-	FROM member
-	WHERE mnick=#{mnick}
-	</delete>
+
 </mapper>
 
 
