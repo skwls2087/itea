@@ -1,3 +1,8 @@
+/*textarea설정*/
+textarea{
+	resize:none;
+}
+
 /*자격증 소개 리스트*/
 .license-heading{
 	margin-top:10px;
@@ -39,15 +44,11 @@
 	width:100%;
 	margin:10px 0;
 }
-#license-table input{
-	width:80%;
-	height:30px;
-	margin:10px 0;
-}
+
 .license-head{
 	background:#F2F2F2;
-}
-#license-insert-buttons{
+} 
+#license-insert-button,#license-back-button {
 	text-align:center;
 	width:80px;
 }
