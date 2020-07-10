@@ -15,7 +15,7 @@ import com.itea.problem.service.ProblemService;
 
 @Controller
 @RequestMapping("/problem")
-public class ProblemController {
+public class CreateProblemController {
 	
 	@Autowired
 	ProblemService problemSV;

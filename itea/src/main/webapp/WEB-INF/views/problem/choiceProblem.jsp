@@ -52,5 +52,8 @@
 		</tr>
 		</div>
     </table>
+    <input type="hidden" name="lqno" value="${lqno}"/>
+    <input type="hidden" name="pyear" value="${pyear}"/>
+    <input type="hidden" name="ptype" value="${ptype}"/>
     <input type="submit" class="btn btn-primary" value="출제하기">
 </div>

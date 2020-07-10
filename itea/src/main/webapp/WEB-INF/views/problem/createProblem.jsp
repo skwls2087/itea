@@ -7,45 +7,57 @@
 <div id="problem-create-container">
 	<div id="problem-create">
 	<form action="selectTest.co" method="post">
-		출제하실 자격증 시험의 종류와 유형을 선택해주세요.<br/>
-		
+		<p>출제하실 자격증 시험의 종류와 유형을 선택해주세요.</p><br/>
 	    <div class="form-group">
 	    	<!-- 자격증테이블에 있는 모든 자격증을 불러올까? 아님 자격증을 따로 지정해줘야될까? -->
-		    <select name="Ckind" class="custom-select">
-		      <option selected="">자격증 종류</option>
-		      <option value="1">One</option>
-		      <option value="2">Two</option>
-		      <option value="3">Three</option>
+		    <select id="Ckind" name="Ckind" class="custom-select">
+		      <option value="" selected="">자격증 종류</option>
+		      <c:forEach var="ckind" items="${ckind}">
+			      <option value="${ckind.lno}">${ckind.lname}</option>
+		      </c:forEach>
+		    </select>
+		  </div>
+		  <div class="form-group" id="ctype-select">
+		    <select id="Ctype" name="Ctype" class="custom-select">
+		      <option id="type0" value="" selected="">자격증 유형</option>
+		      <option id="type1" value=""></option>
+		      <option id="type2" value=""></option>
 		    </select>
 		  </div>
 		  <div class="form-group">
-		  	<!-- 각 자격증에 맞는 유형을 자격증 테이블에서 지정해야 된다. -->
-		    <select name="Ctype" class="custom-select">
-		      <option selected="">자격증 유형</option>
-		      <option value="1">One</option>
-		      <option value="2">Two</option>
-		      <option value="3">Three</option>
-		    </select>
-		  </div>
-		  <div class="form-group">
-		  	<!-- 자격증 유형에 출제유형을 따로 지정해줘야 될까? -->
-		    <select name="Qtype" class="custom-select">
-		      <option selected="">출제유형</option>
+		    <select id="Qtype" name="Qtype" class="custom-select">
+		      <option value="" selected="">출제유형</option>
 		      <option value="1">객관식</option>
 		      <option value="2">단답형</option>
 		      <option value="3">서술형</option>
 		    </select>
 		  </div>
-		  <div class="form-group">
-		  	<!-- 출제년도는 언제부터 언제까지로 할까? -->
-		    <select name="Qyear" class="custom-select">
-		      <option selected="">출제년도</option>
-		      <option value="1">One</option>
-		      <option value="2">Two</option>
-		      <option value="3">Three</option>
-		    </select>
-		  </div>
-		  <input type="submit" class="btn btn-primary" value="문제내기">
+		  <!-- 관리자일때만 출제년도 나오기 -->
+		  <c:if test="${MNICK=='관리자'}">
+			  <div class="form-group">
+			    <select id="Qyear" name="Qyear" class="custom-select">
+			      <option value="" selected="">출제년도</option>
+			      <option value="2007">2007년도</option>
+			      <option value="2008">2008년도</option>
+			      <option value="2009">2009년도</option>
+			      <option value="2010">2010년도</option>
+			      <option value="2011">2011년도</option>
+			      <option value="2012">2012년도</option>
+			      <option value="2013">2013년도</option>
+			      <option value="2014">2014년도</option>
+			      <option value="2015">2015년도</option>
+			      <option value="2016">2016년도</option>
+			      <option value="2017">2017년도</option>
+			      <option value="2018">2018년도</option>
+			      <option value="2019">2019년도</option>
+			      <option value="2020">2020년도</option>
+			    </select>
+			  </div>
+		  </c:if>
+		  <c:if test="${MNICK!='관리자'}">
+			  <input type="hidden" id="Qyear" value="2020" name="Qyear"/>
+		  </c:if>
+		  <input type="submit" class="btn btn-primary" value="문제내기" id="select-test-button">
 	  </form>
 	</div>
 </div>

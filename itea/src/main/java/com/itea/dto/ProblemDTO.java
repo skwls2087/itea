@@ -6,13 +6,19 @@ public class ProblemDTO {
 	private int lno; //자격증코드
 	private int ppilsil; //필기1,실기2
 	private int pyear; //출제년도
-	private String pclass; //출제구문(연도내 회차)
 	private int ptype; //객관1,주관2,서술3
 	private String pman; //출제자
 	private String pdetail; //해설
 	private String pimg; //출제이미지
 	private int plike; //좋아요 수
 	private int phate; //싫어요 수
+	
+	private String choice1;
+	private String choice2;
+	private String choice3;
+	private String choice4;
+	
+	private String correct;
 	
 	public int getPno() {
 		return pno;
@@ -37,12 +43,6 @@ public class ProblemDTO {
 	}
 	public void setPyear(int pyear) {
 		this.pyear = pyear;
-	}
-	public String getPclass() {
-		return pclass;
-	}
-	public void setPclass(String pclass) {
-		this.pclass = pclass;
 	}
 	public int getPtype() {
 		return ptype;
@@ -80,12 +80,43 @@ public class ProblemDTO {
 	public void setPhate(int phate) {
 		this.phate = phate;
 	}
+	public String getChoice1() {
+		return choice1;
+	}
+	public void setChoice1(String choice1) {
+		this.choice1 = choice1;
+	}
+	public String getChoice2() {
+		return choice2;
+	}
+	public void setChoice2(String choice2) {
+		this.choice2 = choice2;
+	}
+	public String getChoice3() {
+		return choice3;
+	}
+	public void setChoice3(String choice3) {
+		this.choice3 = choice3;
+	}
+	public String getChoice4() {
+		return choice4;
+	}
+	public void setChoice4(String choice4) {
+		this.choice4 = choice4;
+	}
+	public String getCorrect() {
+		return correct;
+	}
+	public void setCorrect(String correct) {
+		this.correct = correct;
+	}
 	
 	@Override
 	public String toString() {
-		return "ProblemDTO [pno=" + pno + ", lno=" + lno + ", ppilsil=" + ppilsil + ", pyear=" + pyear + ", pclass="
-				+ pclass + ", ptype=" + ptype + ", pman=" + pman + ", pdetail=" + pdetail + ", pimg=" + pimg
-				+ ", plike=" + plike + ", phate=" + phate + "]";
+		return "ProblemDTO [pno=" + pno + ", lno=" + lno + ", ppilsil=" + ppilsil + ", pyear=" + pyear + ", ptype="
+				+ ptype + ", pman=" + pman + ", pdetail=" + pdetail + ", pimg=" + pimg + ", plike=" + plike + ", phate="
+				+ phate + ", choice1=" + choice1 + ", choice2=" + choice2 + ", choice3=" + choice3 + ", choice4="
+				+ choice4 + ", correct=" + correct + "]";
 	}
 	
 }
