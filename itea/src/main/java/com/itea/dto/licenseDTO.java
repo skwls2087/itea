@@ -14,6 +14,7 @@ public class licenseDTO {
 	private String lfreeq;	//기출문제최다빈출단어
 	private String la;		//관련페이지(시험일정)
 	
+	
 	public int getLno() {
 		return lno;
 	}
@@ -86,6 +87,8 @@ public class licenseDTO {
 				+ lclass + ", lreq=" + lreq + ", ldetail=" + ldetail + ", lcut=" + lcut + ", linfo=" + linfo
 				+ ", lfreeq=" + lfreeq + ", la=" + la + "]";
 	}
+	
+	
 	
 	
 }
