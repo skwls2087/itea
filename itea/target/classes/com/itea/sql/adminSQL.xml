@@ -8,36 +8,33 @@
 <mapper namespace="admin">
 
 	<!-- 회원리스트 조예인-->
-	<select id="listPage" resultType="memberDTO">
+	<select id="getMemberList" resultType="memberDTO">
 		select mnick,mmail,mclass,mname,mphone,mdate
 		from member
 		where mno>0
 		<include refid="searchCondition"/>
 		order by mno desc
-		limit #{pageStart},#{perPageNum}
+		limit #{startList},#{listSize}
 	</select>
 	
 	<!-- 전체게시물 수 조회-->
-	<select id="totalCount" resultType="int">
-		select  count(*) 
+	<select id="getMemberListCnt" resultType="int">
+		select  count(*) as listCnt
 		from 		member
 		where mno>0
 		<include refid="searchCondition"/>
 	</select> 
 	
 	<sql id="searchCondition">
-	<!-- 검색 조건이 null이 아니라면 검색조건에 따른 데이터 조회-->
-		<if test="searchType != null">
-			<if test="searchType == 'mnick'.toString()">
-				and mnick like CONCAT('%', #{keyword}, '%')
-			</if>
-			<if test="searchType == 'mmail'.toString()">
-				and mmail like CONCAT('%', #{keyword}, '%')
-			</if>
-		</if>
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+				<if test="searchType == 'mnick' and keyword != null">
+					and mnick like '%#{keyword}%'
+				</if>
+				<if test="searchType == 'mmail' and keyword != null">
+					and mmail like '%#{keyword}%'
+				</if>
+		</trim>
 	</sql>
-	
-
 </mapper>
 
 

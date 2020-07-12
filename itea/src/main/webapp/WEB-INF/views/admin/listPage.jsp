@@ -10,72 +10,19 @@ $(function(){
 		}else{
 			return false;
 		}
-	}
-
-	function(){
-	//perPageNum select 박스 설정
-	setPerPageNumSelect();
-	
-	//prev 버튼 활성화, 비활성화 처리
-	var canPrev = '${pageMaker.prev}';
-	if(canPrev !== 'true'){
-		$('#page-prev').addClass('disabled');
-	}
-	
-	//next 버튼 활성화, 비활성화 처리
-	var canNext = '${pageMaker.next}';
-	if(canNext !== 'true'){
-		$('#page-next').addClass('disabled');
-	}
-	
-	//현재 페이지 파란색으로 활성화
-	var thisPage = '${pageMaker.cri.page}';
-	//매번 refresh 되므로 다른 페이지 removeClass 할 필요는 없음->Ajax 이용시엔 해야함
-	$('#page'+thisPage).addClass('active');
-	}
-
-	function setPerPageNumSelect(){
-		var perPageNum = "${pageMaker.cri.perPageNum}";
-		var $perPageSel = $('#perPageSel');
-		var thisPage = '${pageMaker.cri.page}';
-		$perPageSel.val(perPageNum).prop("selected",true);
-		//PerPageNum가 바뀌면 링크 이동
-		$perPageSel.on('change',function(){
-			//pageMarker.makeQuery 사용 못하는 이유: makeQuery는 page만을 매개변수로 받기에 변경된 perPageNum을 반영못함
-			window.location.href = "listPage.co?page="+thisPage+"&perPageNum="+$perPageSel.val();
-		})
-	}
-	function setSearchTypeSelect(){
-		var $searchTypeSel = $('#searchTypeSel');
-		var $keyword = $('#keyword');
 		
-		$searchTypeSel.val('${pageMaker.cri.searchType}').prop("selected",true);
-		//검색 버튼이 눌리면
-		$('#searchBtn').on('click',function(){
-			var searchTypeVal = $searchTypeSel.val();
-			var keywordVal = $keyword.val();
-			//검색 조건 입력 안했으면 경고창 
-			if(!searchTypeVal){
-				alert("검색 조건을 선택하세요!");
-				$searchTypeSel.focus();
-				return;
-			//검색어 입력 안했으면 검색창
-			}else if(!keywordVal){
-				alert("검색어를 입력하세요!");
-				$('#keyword').focus();
-				return;
-			}
-			var url = "listPage?page=1"
-				+ "&perPageNum=" + "${pageMaker.cri.perPageNum}"
-				+ "&searchType=" + searchTypeVal
-				+ "&keyword=" + encodeURIComponent(keywordVal);
-			window.location.href = url;
-		})
-	}
+		$(document).on('click', '#btnSearch', function(e){
+			e.preventDefault();
+			var url = "${getMemberList}";
+			url = url + "?searchType=" + $('#searchType').val();
+			url = url + "&keyword=" + $('#keyword').val();
+			location.href = url;
+			console.log(url);
+		});	
+}
 
-});
 </script>
-
+<c:url var="getMemberListURL" value="/admin/getMemberList"></c:url>
 <div class="title">
 	<a href="<%= request.getContextPath()%>/admin.co" >관리자 페이지</a>
 </div>
@@ -85,7 +32,7 @@ $(function(){
 	<div class="admin-div">
 		<!-- 회원을 닉네임이나 아이디로 검색 가능 -->
 		<div class="board-search">
-			<form action="<%= request.getContextPath()%>/admin/listPage.co" name="user-search" 
+			<form action="<%= request.getContextPath()%>/admin/getMemberList.co" name="user-search" 
 				method ="get" class="user-search" onsubmit="return checkForm();">
 				<div class="insertFavorite pull-right">
 			    <select name="searchType" class="selectCss">	
@@ -111,7 +58,7 @@ $(function(){
 		        	<th>강제탈퇴</th>
 	        	<tr>
 	        </thead>
-	        <c:forEach var="member" items="${LIST}">
+	        <c:forEach var="member" items="${memberList}">
 	         <c:if test='${member.mnick ne "관리자"}'>
 		        <tr class="member-list">
 		        	<td>${member.mnick}</td>
@@ -149,38 +96,24 @@ $(function(){
 	   		 </c:if>
 	       </c:forEach>
 	        
-					<!-- 페이지 번호 -->	
-				<div class="text-center">
-					<nav aria-label="pagination">
-						<ul class="pagination">
-						
-							<!-- prev 버튼 -->
-							<li id="page-prev">
-								<a href="listPage${pageMaker.makeQuery(pageMaker.startPage-1)}" aria-label="Prev">
-									<span aria-hidden="true">«</span>
-								</a>
-							</li>
-							
-							<!-- 페이지 번호 (시작 페이지 번호부터 끝 페이지 번호까지) -->
-							<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-							    <li id="page${idx}">
-								    <a href="listPage${pageMaker.makeQuery(idx)}">
-								    	<!-- 시각 장애인을 위한 추가 -->
-								      	<span>${idx}<span class="sr-only">(current)</span></span>
-								    </a>
-							    </li>
-							</c:forEach>
-							
-							<!-- next 버튼 -->
-							<li id="page-next">
-							    <a href="listPage${pageMaker.makeQuery(pageMaker.endPage + 1)}" aria-label="Next">
-							    	<span aria-hidden="true">»</span>
-							    </a>
-							</li>
-							
-						</ul>
-					</nav>
+			<!-- pagination{s} -->
+				<div id="paginationBox">
+					<ul class="pagination">
+						<c:if test="${pagination.prev}">
+							<li class="page-item"><a class="page-link" href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a></li>
+						</c:if>
+			
+						<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
+							<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> "><a class="page-link" href="#" onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')"> ${idx} </a></li>
+						</c:forEach>
+						<c:if test="${pagination.next}">
+							<li class="page-item"><a class="page-link" href="#" onClick="fn_next('${pagination.range}', 
+			'${pagination.range}', '${pagination.rangeSize}')" >Next</a></li>
+						</c:if>
+					</ul>
 				</div>
+
+	<!-- pagination{e} -->
 				</td>
 				</tr>
      </table>

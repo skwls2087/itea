@@ -6,23 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.itea.dao.adminDAO;
 import com.itea.dto.MemberDTO;
-import com.itea.util.Criteria;
+import com.itea.dto.Search;
 
 public class AdminService {
 	
 	@Autowired
 	adminDAO adminDAO;
 	
-	public List<MemberDTO> listPage(Criteria cri) throws Exception {
-		return adminDAO.listPage(cri);
+	
+	public List<MemberDTO> getMemberList(Search search) throws Exception {
+		return adminDAO.getMemberList(search);
 	}
 	
-	public int totalCount(Criteria cri) throws Exception {
-		return adminDAO.totalCount(cri);
+	public int getMemberListCnt(Search search) throws Exception {
+		return adminDAO.getMemberListCnt(search);
 	}
-	
-	
-	
 	
 }
 

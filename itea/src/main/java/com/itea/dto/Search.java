@@ -1,8 +1,8 @@
 package com.itea.dto;
 
-import com.itea.util.Criteria;
+import com.itea.util.Pagination;
 
-public class SearchCriteria extends Criteria{
+public class Search extends Pagination{
 	private String searchType;
 	private String keyword;
 	
