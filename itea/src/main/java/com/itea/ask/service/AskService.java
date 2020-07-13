@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.itea.dao.AskDAO;
 import com.itea.dto.AskDTO;
+import com.itea.dto.ReplyDTO;
 import com.itea.util.PageUtil;
 
 
@@ -29,7 +30,7 @@ public class AskService {
 	//게시판 리스트
 	public ArrayList<AskDTO> askList(PageUtil pInfo) {
 		int start = 
-				(pInfo.getNowPage()-1)*pInfo.getLineCount()+1;
+				(pInfo.getNowPage()-1)*pInfo.getLineCount();
 		int end   = start+pInfo.getLineCount()-1;
 		AskDTO askDTO = new AskDTO();
 		askDTO.setStart(start);
@@ -82,6 +83,38 @@ public class AskService {
 			askDAO.askCnt(ano);
 		}
 		
+	}
+	
+	//검색
+	public ArrayList<AskDTO> askSearch(String search,PageUtil pInfo) {
+		int start = 
+				(pInfo.getNowPage()-1)*pInfo.getLineCount();
+		int end   = start+pInfo.getLineCount()-1;
+		AskDTO askDTO = new AskDTO();
+		askDTO.setStart(start);
+		askDTO.setEnd(end);
+		askDTO.setSearch(search);
+		
+		ArrayList<AskDTO> list = 
+				askDAO.askSearch(askDTO);
+		return list;
+		
+	}
+	
+	//댓글 리스트
+	public ArrayList<ReplyDTO> replyList(int ano) {
+		ArrayList<ReplyDTO> list =  askDAO.replyList(ano);
+		return list;
+	}
+
+	//댓글 삽입
+	public void askReplyInsert(ReplyDTO replyDTO) {
+		askDAO.askReplyInsert(replyDTO);
+	}
+
+	//댓글 삭제
+	public void askReplyDelete(int acno) {
+		askDAO.askReplyDelete(acno);
 	}
 
 }

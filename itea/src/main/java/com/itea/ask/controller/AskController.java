@@ -7,11 +7,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itea.ask.service.AskService;
 import com.itea.dto.AskDTO;
+import com.itea.dto.ReplyDTO;
 import com.itea.util.PageUtil;
 
 @Controller
@@ -28,11 +30,11 @@ public class AskController {
 		if(request.getParameter("nowPage")!=null) {
 			nowPage=Integer.parseInt(request.getParameter("nowPage"));
 		}
-		String anick=(String) session.getAttribute("MNICK");
+		String mnick=(String) session.getAttribute("MNICK");
 		PageUtil pInfo = askSV.getPageInfo(nowPage);
 		
 		ArrayList<AskDTO> list= askSV.askList(pInfo);
-		request.setAttribute("anick", anick);
+		request.setAttribute("mnick", mnick);
 		request.setAttribute("pInfo", pInfo);
 		request.setAttribute("list", list);
 	}
@@ -50,15 +52,15 @@ public class AskController {
 		String atitle=request.getParameter("atitle");
 		String acontent=request.getParameter("acontent");
 		int pno=Integer.parseInt(request.getParameter("pno"));
-		String anick=(String) session.getAttribute("MNICK");
-		AskDTO askDTO= new AskDTO(atitle,acontent,pno,anick);
+		int mno=(Integer)session.getAttribute("MNO");
+		AskDTO askDTO= new AskDTO(mno,pno,atitle,acontent);
 		askSV.aWriteProc(askDTO);
 		mv.setViewName("redirect:/ask/askList.co");
 		return mv;
 	}
 	
 	
-	//글 상세보기
+	//글 상세보기  && 댓글 리스트
 	@RequestMapping("ask/askDetail")
 	public void askDetail(HttpServletRequest request,HttpSession session) {
 		int ano=Integer.parseInt(request.getParameter("ano"));
@@ -66,10 +68,28 @@ public class AskController {
 		System.out.println("nowPage="+nowPage);
 		String userNick=(String) session.getAttribute("MNICK");
 		AskDTO askDTO = askSV.askDetail(ano);
+		ArrayList<ReplyDTO> list = askSV.replyList(ano);
 		askDTO.setNowPage(nowPage);
 		
 		request.setAttribute("userNick", userNick);
 		request.setAttribute("askDTO", askDTO);
+		request.setAttribute("list", list);
+	}
+	
+	
+	//댓글 입력
+	@RequestMapping("ask/askReplyInsert")
+	public void askReplyInsert(ReplyDTO replyDTO,HttpSession session) {
+		String mnick = (String)session.getAttribute("MNICK");
+		replyDTO.setMnick(mnick);
+		askSV.askReplyInsert(replyDTO);
+	}
+	
+	//댓글 삭제
+	@RequestMapping("ask/askReplyDelete")
+	public void askReplyDelete(HttpServletRequest request) {
+		int acno = (Integer) request.getAttribute("acno");
+		askSV.askReplyDelete(acno);
 	}
 	
 	
@@ -122,6 +142,29 @@ public class AskController {
 		mv.setViewName("redirect:/ask/askDetail.co?ano="+ano+"&nowPage="+nowPage);
 		return mv;
 	}
+	
+	//검색
+	@RequestMapping("ask/askSearch")
+	public String askSearch(HttpServletRequest request,HttpSession session) {
+		String search = request.getParameter("asearch");
+		int nowPage=1;
+		if(request.getParameter("nowPage")!=null) {
+			nowPage=Integer.parseInt(request.getParameter("nowPage"));
+		}
+		String mnick=(String) session.getAttribute("MNICK");
+		PageUtil pInfo = askSV.getPageInfo(nowPage);
+		
+		ArrayList<AskDTO> list = askSV.askSearch(search,pInfo);
+		request.setAttribute("mnick", mnick);
+		request.setAttribute("pInfo", pInfo);
+		request.setAttribute("list", list);
+		return "ask/askList";
+	}
+	
+	
+	
+
+	
 	
 	
 	

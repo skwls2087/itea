@@ -7,11 +7,13 @@ public class AskDTO {
 	 private int 	ano;
 	 private String atitle;
 	 private String acontent;
-	 private String anick;
+	 private int 	mno;
+	 private String mnick;
 	 private String lname;		//자격증이름
 	 private int 	pno;		//문제번호
 	 private Date	adate; 
 	 private int	ahit;
+	 private String search;
 	 private int    start;	 	 //시작 글번호
 	 private int    end;		 //끝 글번호
 	 private int    nowPage; 	 //보고싶은 페이지
@@ -23,11 +25,11 @@ public class AskDTO {
 		
 	} 
 	 
-	public AskDTO(String atitle, String acontent, int pno, String anick) {
+	public AskDTO(int mno,int pno,String atitle, String acontent ) {
+		this.mno=mno;
+		this.pno=pno;
 		this.atitle=atitle;
 		this.acontent=acontent;
-		this.pno=pno;
-		this.anick=anick;
 	}
 
 	public AskDTO(String atitle, String acontent, int pno, int ano) {
@@ -98,20 +100,46 @@ public class AskDTO {
 		this.pno = pno;
 	}
 
-	public String getAnick() {
-		return anick;
-	}
-
-	public void setAnick(String anick) {
-		this.anick = anick;
-	}
-
 	public int getSize() {
 		return size;
 	}
 
 	public void setSize(int size) {
 		this.size = size;
+	}
+
+	public int getMno() {
+		return mno;
+	}
+
+	public void setMno(int mno) {
+		this.mno = mno;
+	}
+	
+	
+	
+
+	public String getMnick() {
+		return mnick;
+	}
+
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
+	public void setMnick(String mnick) {
+		this.mnick = mnick;
+	}
+
+	@Override
+	public String toString() {
+		return "AskDTO [ano=" + ano + ", atitle=" + atitle + ", acontent=" + acontent + ", mno=" + mno + ", mnick="
+				+ mnick + ", lname=" + lname + ", pno=" + pno + ", adate=" + adate + ", ahit=" + ahit + ", search="
+				+ search + ", start=" + start + ", end=" + end + ", nowPage=" + nowPage + ", size=" + size + "]";
 	}
 
 

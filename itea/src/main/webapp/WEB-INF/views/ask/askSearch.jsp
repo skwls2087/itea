@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script>
 	$(function(){
 		$("#wBtn").click(function(){
@@ -18,12 +17,11 @@
 		});
 	});
 </script>
-<div class="container" style="margin-top:100px">
-	<form action="../ask/askSearch.co" style="text-align:right">
-		<input type="text" id="asearch" name="asearch"/>
-		<input type="submit" id="sBtn" value="검색"/>
+<div class="container">
+	<form action="../ask/asksearch.co">
+		<input type="text" id="asearch" name="asearch" placeholder="검색어를 입력하세요"/>
+		<input type="button" id="sBtn" value="검색"/>
 	</form>
-	<br>
 	<table class="table" style="text-align:center">
 		<tr>
 			<th>번호</th>
@@ -41,21 +39,14 @@
 			<td>${ask.pno}</td>
 			<td>${ask.lname}</td>
 			<td>${ask.mnick}</td>
-			<td><fmt:formatDate value="${ask.adate}" pattern="yyyy-MM-dd"/></td>
+			<td>${ask.adate}</td>
 			<td>${ask.ahit}</td>
 		</tr>
 		</c:forEach>
 	</table>
-	<table class="table" style="text-align:right">
+	<table class="row text-center">
 		<tr>
-			<td>
-				<input type="button" id="wBtn" value="글쓰기"/>
-			</td>
-		</tr>
-	</table>
-	<table style="text-align:center" width="100%">
-		<tr>
-			<td>
+			<td colspan="7">
 				<c:if test="${pInfo.nowPage eq 1}">
 					이전
 				</c:if>
@@ -71,6 +62,13 @@
 				<c:if test="${pInfo.nowPage ne pInfo.totalPage}">
 					<a href="../ask/askList.co?nowPage=${pInfo.nowPage+1}">다음</a>
 				</c:if>	
+			</td>
+		</tr>
+	</table>
+	<table class="row text-left">
+		<tr>
+			<td colspan="7">
+				<input type="button" id="wBtn" value="글쓰기"/>
 			</td>
 		</tr>
 	</table>

@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.itea.dto.AskDTO;
+import com.itea.dto.ReplyDTO;
 
 public class AskDAO {
 
@@ -54,6 +55,26 @@ public class AskDAO {
 	//조회수 증가
 	public void askCnt(int ano) {
 		session.update("ask.askCnt",ano);
+	}
+	
+	//검색
+	public ArrayList askSearch(AskDTO askDTO) {
+		return (ArrayList) session.selectList("ask.search",askDTO);
+	}
+
+	//댓글 리스트
+	public ArrayList replyList(int ano) {
+		return (ArrayList) session.selectList("ask.replyList",ano);
+	}
+
+	//댓글 삽입
+	public void askReplyInsert(ReplyDTO replyDTO) {
+		session.insert("ask.askReplyInsert",replyDTO);
+	}
+
+	//댓글 삭제
+	public void askReplyDelete(int acno) {
+		session.delete("ask.askReplyDelete",acno);
 	}
 }
 

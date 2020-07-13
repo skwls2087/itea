@@ -9,29 +9,54 @@
 		select count(*) from askboard
 	</select>
 	
+	<!-- 검색 -->
+	<select id="search" resultType="askDTO">
+		SELECT k.ano,atitle,k.pno,p.mnick,k.lname,adate,ahit FROM
+		(SELECT ano,atitle,aplc.pno,l.lname,adate,ahit from
+		(SELECT ano,atitle,lc.lno,ap.pno,lc.lqno,adate,ahit FROM
+		(SELECT askboard.pno,ano, problem.lqno, atitle, adate, ahit FROM 
+				askboard JOIN problem ON askboard.pno=problem.pno) ap
+		JOIN licenseClass lc ON ap.lqno=lc.lqno) aplc
+		JOIN license l ON aplc.lno=l.lno)k
+		join
+		(SELECT ano, a.mno, m.mnick from
+		askboard a JOIN member m ON a.mno=m.mno) p
+		ON p.ano=k.ano
+		where atitle like '%${search}%'
+		ORDER BY k.ano desc	
+		LIMIT #{start}, #{size}
+	</select>
+	
+	
+	
 	<!-- 게시판 목록 -->
 	<select id="list" resultType="askDTO">
-		SELECT ano,atitle,j.pno,l.lname,adate,ahit FROM
-		(SELECT askboard.pno,ano, lno,atitle, adate, ahit FROM 
-		askboard JOIN problem ON askboard.pno=problem.pno
-		order by ano) j
-		JOIN license l ON j.lno=l.lno
-		ORDER BY ano desc
-		LIMIT #{start}, #{size}
-		
+		SELECT k.ano,atitle,k.pno,p.mnick,k.lname,adate,ahit FROM
+		(SELECT ano,atitle,aplc.pno,l.lname,adate,ahit from
+		(SELECT ano,atitle,lc.lno,ap.pno,lc.lqno,adate,ahit FROM
+		(SELECT askboard.pno,ano, problem.lqno, atitle, adate, ahit FROM 
+				askboard JOIN problem ON askboard.pno=problem.pno) ap
+		JOIN licenseClass lc ON ap.lqno=lc.lqno) aplc
+		JOIN license l ON aplc.lno=l.lno)k
+		join
+		(SELECT ano, a.mno, m.mnick from
+		askboard a JOIN member m ON a.mno=m.mno) p
+		ON p.ano=k.ano
+		ORDER BY k.ano desc	
+		LIMIT #{start}, #{size}	
 	</select>
 	
 	<!-- 게시글 입력 -->
 	<insert id="aWriteProc">
-		insert into askboard(pno,anick,atitle,acontent)
-		values(#{pno},#{anick},#{atitle},#{acontent})
+		insert into askboard(mno,pno,atitle,acontent)
+		values(#{mno},#{pno},#{atitle},#{acontent})
 	</insert>
 	
 	<!-- 상세보기 -->
 	<select id="askDetail" resultType="askDTO">
-		select ano,atitle,a.pno,l.lname,anick,acontent
-		from askboard a ,problem p ,license l
-		where a.pno=p.pno and l.lno=p.lno and a.ano=#{ano}
+		select ano,atitle,a.pno,l.lname,mnick,acontent
+		from askboard a ,problem p ,license l, member m, licenseclass lc
+		where a.pno=p.pno and lc.lqno=p.lqno and lc.lno=l.lno and a.mno=m.mno and a.ano=#{ano} 
 	</select>
 	
 	<!-- 게시글 수정 -->
@@ -56,6 +81,23 @@
 		where ano=#{ano}
 	</update>
 	
+	<!-- 댓글 리스트(나중 수정해야됌) -->
+	<select id="replyList" resultType="replyDTO">
+		select * from askcoment
+		where ano=#{ano}
+	</select>
+	
+	<!-- 댓글 삽입 -->
+	<insert id="askReplyInsert">
+		insert into askcoment(ano,mnick,accontent)
+		values(#{ano},#{mnick},#{accontent})
+	</insert>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="askReplyDelete">
+		delete from askcoment
+		where acno=#{acno}
+	</delete>
 	
 </mapper>
 	
