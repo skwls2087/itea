@@ -12,6 +12,7 @@
 	
 	<!-- 컨트롤러를 거치지 않는 파일들 넣기(ex)이미지,CSS,JS 등 -->
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources location="/WEB-INF/views/json/" mapping="/json/**" />
 
 	<!-- 뷰를 검색할 기본경로와 형식 지정하기 -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

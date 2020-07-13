@@ -1,7 +1,11 @@
 package com.itea.admin.controller;
 
+import java.util.HashMap;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,10 +22,23 @@ public class AdminController {
 	@Autowired
 	AdminService adminSV;
 	
-	
 	@RequestMapping("/memberList")
 	public String memberList(HttpServletRequest request, 
-						  HttpServletResponse response,MemberDTO mdto) throws Exception {
+						  HttpServletResponse response,MemberDTO mdto,HttpSession session,String week) throws Exception {
+		
+	        String cooContractNo = (String) session.getAttribute("setNo");
+	        Gson gson = new Gson();
+	        HashMap<String,String> map = new HashMap<String,String>();
+	        
+	        map.put("cooContractNo",cooContractNo);
+	        map.put("month", month);
+	 
+	        List<PartnerStatsDto> list= partnerDao.selectDailyVisitor(map);
+	        
+	        return gson.toJson(list);
+	 
+
+		adminSV.memberService
 		
 		String column=request.getParameter("column");
 		String value=request.getParameter("value");

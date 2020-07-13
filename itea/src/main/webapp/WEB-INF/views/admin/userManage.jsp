@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<!-- 방문자수 그래프를 위한 구글차트 사용 -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
 function checkForm() {
     if(document.getElementById("member-content").value==""){
@@ -16,13 +17,114 @@ function checkDelete(mnick){
 		return false;
 	}
 }
+
+$(document).ready(function() {
+	 
+    
+    var chartLabels = []; // 받아올 데이터를 저장할 배열 선언
+    var chartData = []; 
+    var month="";
+
+    var cooContractNo = '<c:out value="${no}"/>';
+    
+    function createChart() {
+        
+        var ctx = document.getElementById("canvas").getContext("2d");
+        LineChartDemo = Chart.Line(ctx, {
+            data : lineChartData,
+            options : {
+                scales : {
+                    yAxes : [ {
+                        ticks : {
+                            beginAtZero : true
+                        }
+                    } ]
+                }
+            }
+        });
+    }
+
+
+    
+    //selectList로 월을 선택해서 ajax로 받는다.
+    $('#selectMonth').change(function() {
+        var changeMonth = $('#selectMonth option:selected').val();
+        month = changeMonth;
+        console.log('month:'+month);
+        
+        
+         
+    });
+    
+    //버튼을 클릭하면 차트가 그려진다. createChart()함수를 안에다 선언해야지 차트값을 받더라...
+    $('#btn').click(function(){
+        
+        chartLabels = [];
+        chartData=[];
+        
+        //getJson으로 데이터 
+        $.getJSON("./getDailyVisitor", {
+            cooContractNo : cooContractNo,
+            month : month
+        }, function(data) {
+            $.each(data, function(key, value) {
+                
+                chartLabels.push(value.statsDate);
+                chartData.push(value.statsAmount);
+            });
+            
+            lineChartData = {
+                    labels : chartLabels,
+                    datasets : [ {
+                        label : "일별 방문자 수",
+                        backgroundColor:"#bfdaf9",
+                        borderColor: "#80b6f4",
+                        pointBorderColor: "#80b6f4",
+                        pointBackgroundColor: "#80b6f4",
+                        pointHoverBackgroundColor: "#80b6f4",
+                        pointHoverBorderColor: "#80b6f4",
+                        fill: false,
+                        borderWidth: 4,
+                        data : chartData
+                    } ]
+
+                }
+            createChart();
+            
+        });
+    })
+
+    
+})
 </script>
 
-<div class="admin-user">
+<div class="admin" id="admin">
+	<!-- 기간별 회원 추이 그래프 -->
+	<div class="member-graph">
+		가입자 통계 그래프
+		<form name="memberForm" action="<%=request.getContextPath()%>/admin/memberList.co" method="post"
+			onChange="javascript:visitForm.submit();">
+	  </form>
+	  <!-- 기간별 방문자 차트  -->
+	  <div id="chart_div"></div>
+  </div>
 	
+	<!-- 기간별 방문자 추이 그래프 -->
+	<div class="visitor-graph">
+		방문자 통계 그래프
+		<form name="visitForm" action="<%=request.getContextPath()%>/admin/memberList.co" method="post"
+			onChange="javascript:visitForm.submit();">
+	  </form>
+	  <!-- 기간별 방문자 차트  -->
+	  <div id="chart_div"></div>
+  </div>
+  
+</div>
+
+<div class="admin-user">
 	<div class="admin-div">
 		<!-- 회원을 닉네임이나 아이디로 검색 가능 -->
-		<div class="board-search">
+		<div class="board-search text-right">
 			<form action="<%= request.getContextPath()%>/admin/memberList.co" name="user-search" 
 				method ="get" class="user-search" onsubmit="return checkForm();">
 				<div class="insertFavorite pull-right">
