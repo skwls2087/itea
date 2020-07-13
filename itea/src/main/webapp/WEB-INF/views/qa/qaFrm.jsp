@@ -122,7 +122,7 @@
   				
   				<!-- 이전페이지 -->
   				<c:if test="${PINFO.nowPage ne 1}">
-  				    <li class="page-item">
+  				  <li class="page-item">
 				      <a class="page-link" href="<%= request.getContextPath()%>/qa/qaFrm.co?nowPage=${PINFO.nowPage-1}&field=${field}">&laquo;</a>
 				    </li>
 					</c:if>
@@ -161,7 +161,6 @@
 			</tr>
         </table>
         
-
         </div>
     </div>
 </div>

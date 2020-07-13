@@ -18,13 +18,14 @@ import com.itea.qa.service.QaService;
 import com.itea.util.PageUtil;
 
 @Controller
+@RequestMapping("/qa")
 public class QaController {
 	
 	@Autowired
 	QaService qaSV;
 	
 	//qa게시판 폼 & 리스트 보여주기
-	@RequestMapping("qa/qaFrm")
+	@RequestMapping("/qaFrm")
 	public ModelAndView listView(@RequestParam(value="nowPage",
 			 							required=false,
 			 							defaultValue="1")  int  nowPage,
@@ -67,7 +68,7 @@ public class QaController {
 	}
 	
 	//질문등록
-	@RequestMapping("qa/qInsert")
+	@RequestMapping("/qInsert")
 	public ModelAndView qInsert(QaDTO qaDTO,HttpSession session,ModelAndView mv) {
 		
 		System.out.println("Q&A 질문 등록하기");
@@ -85,7 +86,7 @@ public class QaController {
 	}
 	
 	//질문삭제
-	@RequestMapping("qa/qDelete")
+	@RequestMapping("/qDelete")
 	public ModelAndView qDelete(@RequestParam("qno") int qno,@RequestParam("nowPage") int page,ModelAndView mv) {
 		
 		System.out.println("Q&A 질문 삭제하기");
@@ -100,7 +101,7 @@ public class QaController {
 	}
 	
 	//질문에 답변하기
-	@RequestMapping("qa/aInsert")
+	@RequestMapping("/aInsert")
 	public ModelAndView aInsert(HttpServletRequest request,QaDTO qaDTO,@RequestParam("nowPage") int page, ModelAndView mv) {
 		
 		System.out.println("Q&A 질문 답변하기");
@@ -113,6 +114,54 @@ public class QaController {
 		mv.setView(rv);
 		return mv;
 		
+	}
+	
+	//조회수 증가
+	@RequestMapping("/cntUpdate")
+	public ModelAndView cntUpdate(
+			HttpServletRequest request,
+			HttpSession session,
+			ModelAndView mv) {
+		System.out.println("조회수증가요청함수 cntUpdate()진입");
+		
+		//1.파라미터받기
+		int bno  =  Integer.parseInt(request.getParameter("bno"));//글번호
+		int nowPage = Integer.parseInt(request.getParameter("nowPage"));//보고싶은페이지(릴레이용)
+		
+		System.out.println(bno);
+		System.out.println(nowPage);
+		
+		//3.Model
+		mv.addObject("nowPage",nowPage);//보고싶은페이지(릴레이용)
+		mv.addObject("bno",bno); //글번호
+		
+		//4.View  리다이렉트용뷰	: 상세보기
+		RedirectView rv = new RedirectView("../qa/detailView.co");
+		mv.setView(rv);
+		return mv;
+	}
+	
+	//상세보기
+  	//http://localhost:9000/myapp/fileBoard/detailView.co
+	@RequestMapping("/detailView")
+	public ModelAndView detailView(
+			HttpServletRequest request,
+			ModelAndView mv) {
+		System.out.println("상세보기요청함수 detailView()진입");
+		//1.파라미터받기
+		//파라미터	: bno=글번호   nowPage=보고싶은페이지(릴레이용)
+		int nowPage = Integer.parseInt(request.getParameter("nowPage"));//보고싶은페이지(릴레이용)
+
+		System.out.println(nowPage);
+		
+		//3.Model
+		mv.addObject("nowPage", nowPage);//보고싶은페이지(릴레이용)
+		
+		System.out.println("나는"+nowPage);
+
+		//4.View
+		mv.setViewName("/fileBoard/detailView");
+		return mv;
 	}
 
 }

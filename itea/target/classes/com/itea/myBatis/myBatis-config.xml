@@ -12,7 +12,6 @@
 		<setting name="useGeneratedKeys" value="true" />
 		<!-- 기본 질의 실행 방식 -->
 		<setting name="defaultExecutorType" value="REUSE" />	
-		<setting name="jdbcTypeForNull" value="NULL"/>
 		
 		<setting name="aggressiveLazyLoading" value="true" />
 		<setting name="multipleResultSetsEnabled" value="true" />
@@ -22,6 +21,7 @@
 	
 	<typeAliases>  
     <typeAlias type="com.itea.dto.MemberDTO"  alias="memberDTO"/>
+    <typeAlias type="com.itea.dto.licenseDTO"  alias="licenseDTO"/>
     <typeAlias type="com.itea.dto.QaDTO"  alias="qaDTO"/>
 		<typeAlias type="java.lang.Integer" alias="int"/> 
 		<typeAlias type="java.lang.String" alias="string"/>  
@@ -32,7 +32,7 @@
 		<!-- mappers의 자식요소로서 mapper등록 -->
 		<mapper resource="/com/itea/sql/memberSQL.xml"/>
 		<mapper resource="/com/itea/sql/qaSQL.xml"/>
-		<mapper resource="/com/itea/sql/adminSQL.xml"/>
+		<mapper resource="/com/itea/sql/licenseSQL.xml"/>
 	</mappers>
 	
 </configuration>
