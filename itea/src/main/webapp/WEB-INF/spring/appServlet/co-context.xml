@@ -22,15 +22,5 @@
 	<!-- 컨트롤러를 검색할 기본경로 지정하기 -->
 	<context:component-scan base-package="com.itea" />
 	
-	<!-- 인터셉터 관련 설정 부분 -->
-	<interceptors>
-		<interceptor>
-			<!-- 인터셉터가 언제 처리될지 지정-->
-			<mapping path="/admin/checkAdminPw.co"/>
-			
-			<!-- 사용할 인터셉터 클래스를 등록 -->
-			<beans:bean class="com.itea.util.AdminCheck" />
-		</interceptor>
-	</interceptors>
 	
 </beans:beans>

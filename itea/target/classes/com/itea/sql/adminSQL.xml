@@ -8,33 +8,59 @@
 <mapper namespace="admin">
 
 	<!-- 회원리스트 조예인-->
-	<select id="getMemberList" resultType="memberDTO">
+	<select id="memberList" resultType="memberDTO">
 		select mnick,mmail,mclass,mname,mphone,mdate
 		from member
-		where mno>0
-		<include refid="searchCondition"/>
+		where mnick!='관리자'
 		order by mno desc
-		limit #{startList},#{listSize}
+		limit #{start},#{size}
 	</select>
 	
 	<!-- 전체게시물 수 조회-->
-	<select id="getMemberListCnt" resultType="int">
-		select  count(*) as listCnt
+	<select id="totalCnt" resultType="int">
+		select  count(*)
 		from 		member
-		where mno>0
-		<include refid="searchCondition"/>
+		where mnick!='관리자'
 	</select> 
 	
-	<sql id="searchCondition">
-		<trim prefix="WHERE" prefixOverrides="AND|OR">
-				<if test="searchType == mnick and keyword != null">
-					and mnick like '%#{keyword}%'
-				</if>
-				<if test="searchType == mmail and keyword != null">
-					and mmail like '%#{keyword}%'
-				</if>
-		</trim>
-	</sql>
+	<select id="memberSearchMnick" resultType="memberDTO" parameterType="memberDTO">
+	select mnick,mmail,mclass,mname,mphone,mdate
+	from member
+	where mnick like CONCAT('%',#{value},'%') 
+	and mnick!='관리자'
+	order by mno desc
+	limit #{start},#{size}
+	</select>
+	
+	<select id="memberSearchMmail" resultType="memberDTO" parameterType="memberDTO">
+	select mnick,mmail,mclass,mname,mphone,mdate
+	from member
+	where mmail like CONCAT('%',#{value},'%')
+	and mnick!='관리자'
+	order by mno desc
+	limit #{start},#{size}
+	</select>
+	
+	<select id="mCntMnick" resultType="int" parameterType="string">
+	select count(*)
+	from member
+	where mnick like CONCAT('%',#{value},'%')
+	and mnick!='관리자'
+	</select> 
+	
+	<select id="mCntMmail" resultType="int" parameterType="string">
+	select count(*)
+	from member
+	where mmail like CONCAT('%',#{value},'%')
+	and mnick!='관리자'
+	</select> 
+	
+	
+	<!-- 회원탈퇴 -->
+	<delete id="deleteMember">
+	delete from member
+	where mnick=#{mnick}
+	</delete>
 </mapper>
 
 

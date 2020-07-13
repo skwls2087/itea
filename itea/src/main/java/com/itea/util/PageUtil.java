@@ -22,9 +22,9 @@ public class PageUtil {
 	private	int	startPage;		//	페이지 이동 기능이 몇페이지 부터 만들지를 지정한다.
 	private	int	endPage;		//	페이지 이동 기능을 몇페이지까지 만들지를 지정한다.
 	
-	public PageUtil(int nowPage, int totalCount) {
+	/*public PageUtil(int nowPage, int totalCount) {
 		this(nowPage, totalCount, 5, 5);
-	}
+	}*/
 	
 	//(전체회원수, 보고싶은페이지,한페이지당 게시글수, content)
 	public PageUtil(int totalCount, int nowPage, int size, ArrayList<MemberDTO> content) {
@@ -46,7 +46,6 @@ public class PageUtil {
 			startPage = nowPage / 5 * 5 + 1; //시작페이지=10/5*5+1
 		   //시작 페이지번호=   보고싶은페이지 / 5 * 5 + 1;
 			if (modVal == 0) startPage -= 5; //startPage=startPage-5
-			
 			endPage = startPage + 4;
 		  //끝 페이지번호= 시작 페이지번호  + 4      
 			//끝페이지번호가   실제총페이지수보다 크게 되면

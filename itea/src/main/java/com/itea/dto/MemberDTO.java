@@ -4,9 +4,7 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import com.itea.util.Pagination;
-
-public class MemberDTO extends Pagination{
+public class MemberDTO {
    
    //sql문과 파라미터를
    private int mno;
@@ -28,22 +26,6 @@ public class MemberDTO extends Pagination{
    private int size=5;
    private String column;
    private String value;
-   
-   private String searchType;
-   private String keyword;
-   
-   public String getSearchType() {
-		return searchType;
-	}
-	public void setSearchType(String searchType) {
-		this.searchType = searchType;
-	}
-	public String getKeyword() {
-		return keyword;
-	}
-	public void setKeyword(String keyword) {
-		this.keyword = keyword;
-	}
    
    public int getMno() {
       return mno;
@@ -138,6 +120,7 @@ public class MemberDTO extends Pagination{
 		this.size = size;
 	}
 	
+	
 	public String getColumn() {
 		return column;
 	}
@@ -153,7 +136,7 @@ public class MemberDTO extends Pagination{
 	public void setModifydate(long modifydate) {
 		this.modifydate = modifydate;
 	}
-public void setMnickdate(Date mnickdate) {
+	public void setMnickdate(Date mnickdate) {
 	   Calendar cal=new GregorianCalendar();
 	   Date now=new Date(cal.getTimeInMillis());	      
       System.out.println(now);
@@ -169,14 +152,13 @@ public void setMnickdate(Date mnickdate) {
    public long getModifydate() {
       return modifydate;
    }
-	@Override
-	public String toString() {
-		return "MemberDTO [mno=" + mno + ", mclass=" + mclass + ", mmail=" + mmail + ", mpw=" + mpw + ", mname=" + mname
-				+ ", mphone=" + mphone + ", mnick=" + mnick + ", msex=" + msex + ", mbirth=" + mbirth + ", mgradu=" + mgradu
-				+ ", mdate=" + mdate + ", mnickdate=" + mnickdate + ", modifydate=" + modifydate + ", start=" + start
-				+ ", end=" + end + ", size=" + size + ", column=" + column + ", value=" + value + ", searchType="
-				+ searchType + ", keyword=" + keyword + "]";
-	}
+@Override
+public String toString() {
+	return "MemberDTO [mno=" + mno + ", mclass=" + mclass + ", mmail=" + mmail + ", mpw=" + mpw + ", mname=" + mname
+			+ ", mphone=" + mphone + ", mnick=" + mnick + ", msex=" + msex + ", mbirth=" + mbirth + ", mgradu=" + mgradu
+			+ ", mdate=" + mdate + ", mnickdate=" + mnickdate + ", modifydate=" + modifydate + ", start=" + start
+			+ ", end=" + end + ", size=" + size + ", column=" + column + ", value=" + value + "]";
+}
    
    
 

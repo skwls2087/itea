@@ -12,6 +12,7 @@
 		<setting name="useGeneratedKeys" value="true" />
 		<!-- 기본 질의 실행 방식 -->
 		<setting name="defaultExecutorType" value="REUSE" />	
+		<setting name="jdbcTypeForNull" value="NULL"/>
 		
 		<setting name="aggressiveLazyLoading" value="true" />
 		<setting name="multipleResultSetsEnabled" value="true" />
