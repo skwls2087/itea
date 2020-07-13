@@ -70,10 +70,6 @@
 				${LDTO.linfo} 
 				</td>
 			</tr>
-			<tr>
-				<td colspan="4">기출문제 최다 빈출 단어<br />${LDTO.lfreeq}
-				</td>
-			</tr>
 		</table>
 		<button type="button" id="rBtn" class="btn btn-secondary">메인화면으로</button>
 	</form>

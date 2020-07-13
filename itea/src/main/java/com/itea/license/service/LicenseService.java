@@ -37,9 +37,9 @@ public class LicenseService {
 		return lDto;
 	}
 
-	public licenseDTO modify(licenseDTO lDto) {
-		lDto=lDao.modify(lDto);
-		return lDto;
+	public void modify(licenseDTO lDto) {
+		lDao.modify(lDto);
+		
 	}
 
 	public void delete(int lno) {

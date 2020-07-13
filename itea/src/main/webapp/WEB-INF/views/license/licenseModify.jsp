@@ -70,9 +70,15 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="4">기출문제 최다 빈출 단어<br />
-				<input type="text" id="lfreeq" name="lfreeq" value="${lDto.lfreeq}">
+				<td colspan="2"><div class="wrap">
+						<select name="lqclass" id="lqclass" size="6">
+							<option value="1" <c:if test="${lDto.lqclass=='필기'}"> selected='selected' </c:if>>필기,실기</option>
+							<option value="2" <c:if test="${lDto.lqclass=='1차'}"> selected='selected' </c:if>>1차,2차</option>
+							<option value="3" <c:if test="${lDto.lqclass=='단독'}"> selected='selected' </c:if>>단독시험</option>
+						</select>
+					</div>
 				</td>
+			</tr>
 			</tr>
 		</table>
 		<input type="button" class="" id="sBtn" name="" value="수정">

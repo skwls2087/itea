@@ -13,21 +13,42 @@
 	select * from license;
 	</select>
   <select id="detailView" parameterType="int" resultType="licenseDTO">
-	SELECT lno,lname, lorg, lfee, lclass, lreq, ldetail, lcut, linfo,lfreeq,la FROM license
+	SELECT lno,lname, lorg, lfee, lclass, lreq, ldetail, lcut, linfo,la FROM license
 	WHERE lno=#{lno}	
 	</select> 
 	<insert id="insertProc" parameterType="licenseDTO" >
-		insert into license  ( lname, lorg, lfee, lclass, lreq, ldetail, lcut, linfo,lfreeq,la) 
-		values (#{lname},#{lorg},#{lfee},#{lclass},#{lreq},#{ldetail},#{lcut},#{linfo},#{lfreeq},#{la})
+		insert into license  ( lname, lorg, lfee, lclass, lreq, ldetail, lcut, linfo,la) 
+		values (#{lname},#{lorg},#{lfee},#{lclass},#{lreq},#{ldetail},#{lcut},#{linfo},#{la}) 
 	</insert>
+	<insert id="insertProc1" parameterType="licenseDTO" >
+		insert into licenseclass (lno,lqclass) values ((select lno from license where lname=#{lname}),'필기')		 
+	</insert>
+	<insert id="insertProc2" parameterType="licenseDTO" >
+		insert into licenseclass (lno,lqclass) values ((select lno from license where lname=#{lname}),'실기')		 
+	</insert>
+	<insert id="insertProc3" parameterType="licenseDTO" >	
+		insert into licenseclass (lno,lqclass) values ((select lno from license where lname=#{lname}),'1차') 
+	</insert>
+	<insert id="insertProc4" parameterType="licenseDTO" >	
+		insert into licenseclass (lno,lqclass) values ((select lno from license where lname=#{lname}),'2차') 
+	</insert>
+	<insert id="insertProc5" parameterType="licenseDTO" >
+		insert into licenseclass (lno,lqclass) values ((select lno from license where lname=#{lname}),'단독') 	
+	</insert>
+
 	<select id="modifyInfo" resultType="licenseDTO">
-	select * from license
-	where lno=#{lno}
+	SELECT l.lno, lname, lorg, lfee, lclass, lreq, ldetail, lcut, linfo,la,c.lqclass,c.lqno FROM license l,licenseclass c WHERE l.lno=c.lno AND l.lno=#{lno} LIMIT 1
 	</select>
-	<update id="modify" parameterType="licenseDTO">
-	UPDATE license SET lname=#{lname}, lorg=#{lorg}, lfee=#{lfee}, lclass=#{lclass}, lreq=#{lreq}, ldetail=#{ldetail}, lcut=#{lcut}, linfo=#{linfo},lfreeq=#{lfreeq},la=#{la}	
+	
+ <update id="modify" parameterType="licenseDTO">
+	UPDATE license SET lname=#{lname}, lorg=#{lorg}, lfee=#{lfee}, lclass=#{lclass}, lreq=#{lreq}, ldetail=#{ldetail}, lcut=#{lcut}, linfo=#{linfo},la=#{la}	
 	WHERE lno=#{lno}
-	</update>
+	</update> 
+	<delete id="deleteClass" parameterType="licenseDTO">
+	DELETE 
+	FROM licenseclass
+	WHERE lno=#{lno}
+	</delete>
 	<delete id="delete" parameterType="licenseDTO">
 	DELETE 
 	FROM license

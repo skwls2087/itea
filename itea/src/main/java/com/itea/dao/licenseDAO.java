@@ -27,6 +27,15 @@ public class licenseDAO {
 
 	public void  insertProc(licenseDTO lDto) {
 		session.insert("license.insertProc",lDto);
+		if(Integer.parseInt(lDto.getLqclass())==1) {
+		session.insert("license.insertProc1",lDto);
+		session.insert("license.insertProc2",lDto);
+		}else if(Integer.parseInt(lDto.getLqclass())==2) {
+		session.insert("license.insertProc3",lDto);
+		session.insert("license.insertProc4",lDto);
+		}else {
+		session.insert("license.insertProc5",lDto);	
+		}
 	}
 
 	public licenseDTO detailView(int lno) {
@@ -39,14 +48,27 @@ public class licenseDAO {
 	}
 
 
-	public licenseDTO modify(licenseDTO lDto) {
+	public void modify(licenseDTO lDto) {
 		session.update("license.modify",lDto);	
-		return null;
+		session.delete("license.deleteClass",lDto.getLno());
+		if(Integer.parseInt(lDto.getLqclass())==1) {
+		session.insert("license.insertProc1",lDto);
+		session.insert("license.insertProc2",lDto);
+		}else if(Integer.parseInt(lDto.getLqclass())==2) {
+		session.insert("license.insertProc3",lDto);
+		session.insert("license.insertProc4",lDto);
+		}else {
+		session.insert("license.insertProc5",lDto);	
+		}
 	}
 
 
 	public void delete(int lno) {
+		System.out.println("deleteClass ");
+		session.delete("license.deleteClass",lno);
+		System.out.println("delete");
 		session.delete("license.delete",lno);
+		
 	}
 
 
