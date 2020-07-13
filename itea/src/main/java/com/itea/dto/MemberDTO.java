@@ -4,7 +4,9 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class MemberDTO {
+import com.itea.util.Pagination;
+
+public class MemberDTO extends Pagination{
    
    //sql문과 파라미터를
    private int mno;
@@ -26,6 +28,22 @@ public class MemberDTO {
    private int size=5;
    private String column;
    private String value;
+   
+   private String searchType;
+   private String keyword;
+   
+   public String getSearchType() {
+		return searchType;
+	}
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
    
    public int getMno() {
       return mno;
@@ -120,10 +138,7 @@ public class MemberDTO {
 		this.size = size;
 	}
 	
-	
-	
-	
-public String getColumn() {
+	public String getColumn() {
 		return column;
 	}
 	public void setColumn(String column) {
@@ -154,13 +169,17 @@ public void setMnickdate(Date mnickdate) {
    public long getModifydate() {
       return modifydate;
    }
+	@Override
+	public String toString() {
+		return "MemberDTO [mno=" + mno + ", mclass=" + mclass + ", mmail=" + mmail + ", mpw=" + mpw + ", mname=" + mname
+				+ ", mphone=" + mphone + ", mnick=" + mnick + ", msex=" + msex + ", mbirth=" + mbirth + ", mgradu=" + mgradu
+				+ ", mdate=" + mdate + ", mnickdate=" + mnickdate + ", modifydate=" + modifydate + ", start=" + start
+				+ ", end=" + end + ", size=" + size + ", column=" + column + ", value=" + value + ", searchType="
+				+ searchType + ", keyword=" + keyword + "]";
+	}
+   
+   
 
-   @Override
-   public String toString() {
-      return "MemberDTO [mno=" + mno + ", mclass=" + mclass + ", mmail=" + mmail + ", mpw=" + mpw + ", mname=" + mname
-            + ", mphone=" + mphone + ", mnick=" + mnick + ", msex=" + msex + ", mbirth=" + mbirth + ", mgradu="
-            + mgradu + ", mdate=" + mdate + ", mnickdate=" + mnickdate + "]";
-   }
    
    
 }

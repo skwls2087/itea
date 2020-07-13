@@ -27,10 +27,10 @@
 	
 	<sql id="searchCondition">
 		<trim prefix="WHERE" prefixOverrides="AND|OR">
-				<if test="searchType == 'mnick' and keyword != null">
+				<if test="searchType == mnick and keyword != null">
 					and mnick like '%#{keyword}%'
 				</if>
-				<if test="searchType == 'mmail' and keyword != null">
+				<if test="searchType == mmail and keyword != null">
 					and mmail like '%#{keyword}%'
 				</if>
 		</trim>

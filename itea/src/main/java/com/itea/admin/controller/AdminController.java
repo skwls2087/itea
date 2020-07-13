@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itea.admin.service.AdminService;
-import com.itea.dto.Search;
+import com.itea.dto.MemberDTO;
 
 @Controller
 @RequestMapping("/admin")
@@ -24,7 +24,7 @@ public class AdminController {
 			, @RequestParam(required = false, defaultValue = "mnick") String searchType
 			, @RequestParam(required = false) String keyword
 			) throws Exception {
-		Search search = new Search();
+		MemberDTO search = new MemberDTO();
 		search.setSearchType(searchType);
 		search.setKeyword(keyword);
 

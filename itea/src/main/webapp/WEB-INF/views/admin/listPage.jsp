@@ -22,7 +22,7 @@ $(function(){
 }
 
 </script>
-<c:url var="getMemberListURL" value="/admin/getMemberList"></c:url>
+<c:url var="getMemberListURL" value="/admin/getMemberList.co"></c:url>
 <div class="title">
 	<a href="<%= request.getContextPath()%>/admin.co" >관리자 페이지</a>
 </div>
@@ -39,7 +39,7 @@ $(function(){
 			        <option value="mnick">닉네임</option>
 			        <option value="mmail">이메일</option> 
 			    </select>
-			    <input type="text" name="keyword" id="keyword" value="${pageMaker.cri.keyword }"
+			    <input type="text" name="keyword" id="keyword"
 			    placeholder="검색어를 입력하세요"/>
 			    <input type="submit" value="검색" class="btn pull-right"/>
 		    </div>
