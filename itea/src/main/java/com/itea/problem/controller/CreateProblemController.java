@@ -1,17 +1,18 @@
 package com.itea.problem.controller;
 
-
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.itea.dto.ProblemDTO;
 import com.itea.problem.service.ProblemService;
-
+import com.itea.util.FileUtil;
 
 @Controller
 @RequestMapping("/problem")
@@ -22,15 +23,40 @@ public class CreateProblemController {
 	
 	//객관식 문제 출제하기
 	@RequestMapping("/choiceProblem")
-	public void problemMain(ProblemDTO pDTO,HttpServletRequest request) throws FileNotFoundException {
+	public String problemMain(ProblemDTO pDTO,HttpServletRequest request,HttpSession session) throws FileNotFoundException {
 		
-		String path=request.getContextPath();
-		System.out.println(path);
-		
-		String oriName = pDTO.getFile().getOriginalFilename();
-		FileOutputStream fos = new FileOutputStream("d:/iteaFile/" + oriName);
+		if(pDTO.getFile().getSize()!=0) {
+			//1.첨부파일이 있다면 저장하기
+			String path=request.getSession().getServletContext().getRealPath("/")+"resources/files/";
+			System.out.println(path);
+			
+			Date date=new Date();
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyyMMdd");
+			String today = transFormat.format(date);
 
+			int oriName = pDTO.getFile().getOriginalFilename().lastIndexOf( "." );
+			String ext = pDTO.getFile().getOriginalFilename().substring( oriName + 1 );
+			
+			String name=today+"."+ext;
+			String saveName=FileUtil.renameTo(path, name);
+			File file=new File(path,saveName);
+			System.out.println(saveName+"으로 저장할게~");
+			
+			try {
+				pDTO.getFile().transferTo(file);
+			} catch (Exception e) {
+				System.out.println("파일복사에러"+e);
+			}
+			pDTO.setPimg(saveName);//저장된 이름으로 pimg컬럼에 셋팅
+		}
+		
+		String pman=(String) session.getAttribute("MNICK");
+		pDTO.setPman(pman);
 		System.out.println(pDTO);
-
+		problemSV.insertChoice(pDTO);
+		
+		System.out.println(pDTO);
+		return "problem/createProblem";
+		
 	}
 }

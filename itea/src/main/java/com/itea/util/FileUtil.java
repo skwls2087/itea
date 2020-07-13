@@ -3,20 +3,10 @@ package com.itea.util;
 import java.io.File;
 // * 	이 클래스는 파일 업로드를 할때 생기는 문제점을 해결하기 위한 각종 함수를 만들어 놓는 클래스이다.
 public class FileUtil {
-	//	업로드할 폴더가 혹시 없으면?
-	public static void makeFolder(String path) {
-		//	방법
-		//	그 경로를 이용해서 File 클래스를 만든다.		File	file = new File(path);
-		File	file = new File(path);
-		file.mkdirs();
-	}
 	
 	//	2.	혹시 같은 이름의 파일이 존재하면 현재 파일의 이름을 바꿔줌으로 덮어쓰기가 되지 않도록 방지하는 함수
 	public static String renameTo(String path, String name) {
 		//	어떤 폴더(path)에 무슨이름(name)으로 저장할 예정인데... 이름이 같으면 바꿔 달라.
-		
-		//	이름을 바꾸기 전에 혹시 현재 저장할 폴더가 없으면 만들고 시작하자.
-		makeFolder(path);
 		
 		//	만약 같은 이름의 파일이 존재하면 현재 파일이름 다음에 _번호	를 붙여서 이름을 바꾸도록 한다.
 		String	tempName = name;	//	현재 이름을 기억

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.itea.dao.ProblemDAO;
+import com.itea.dto.ProblemDTO;
 import com.itea.dto.licenseDTO;
 
 public class ProblemService {
@@ -26,6 +27,10 @@ public class ProblemService {
 	//선택한 자격증시험의 lqno 구하기
 	public int selectLqno(HashMap map) {
 		return problemDAO.selectLqno(map);
+	}
+
+	public void insertChoice(ProblemDTO pDTO) {
+		problemDAO.insertChoice(pDTO);
 	}
 
 }

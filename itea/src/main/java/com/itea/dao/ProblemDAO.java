@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.itea.dto.ProblemDTO;
 import com.itea.dto.licenseDTO;
 
 public class ProblemDAO {
@@ -29,6 +31,15 @@ public class ProblemDAO {
 
 	public int selectLqno(HashMap map) {
 		return session.selectOne("problem.selectLqno",map);
+	}
+
+	public void insertChoice(ProblemDTO pDTO) {
+		session.insert("problem.insertChoiceProblem",pDTO);
+		int pno= session.selectOne("problem.selectPno");
+		pDTO.setPno(pno);
+		session.insert("problem.insertChoicePchoice",pDTO);
+		session.insert("problem.insertChoiceCorrect",pDTO);
+		
 	}
 	
 }

@@ -9,7 +9,7 @@
 	<form action="selectTest.co" method="post">
 		<p>출제하실 자격증 시험의 종류와 유형을 선택해주세요.</p><br/>
 	    <div class="form-group">
-	    	<!-- 자격증테이블에 있는 모든 자격증을 불러올까? 아님 자격증을 따로 지정해줘야될까? -->
+	    
 		    <select id="Ckind" name="Ckind" class="custom-select">
 		      <option value="" selected="">자격증 종류</option>
 		      <c:forEach var="ckind" items="${ckind}">
@@ -17,6 +17,7 @@
 		      </c:forEach>
 		    </select>
 		  </div>
+		  
 		  <div class="form-group" id="ctype-select">
 		    <select id="Ctype" name="Ctype" class="custom-select">
 		      <option id="type0" value="" selected="">자격증 유형</option>
@@ -24,6 +25,7 @@
 		      <option id="type2" value=""></option>
 		    </select>
 		  </div>
+		  
 		  <div class="form-group">
 		    <select id="Qtype" name="Qtype" class="custom-select">
 		      <option value="" selected="">출제유형</option>
@@ -32,6 +34,7 @@
 		      <option value="3">서술형</option>
 		    </select>
 		  </div>
+		  
 		  <!-- 관리자일때만 출제년도 나오기 -->
 		  <c:if test="${MNICK=='관리자'}">
 			  <div class="form-group">
@@ -57,6 +60,7 @@
 		  <c:if test="${MNICK!='관리자'}">
 			  <input type="hidden" id="Qyear" value="2020" name="Qyear"/>
 		  </c:if>
+		  
 		  <input type="submit" class="btn btn-primary" value="문제내기" id="select-test-button">
 	  </form>
 	</div>

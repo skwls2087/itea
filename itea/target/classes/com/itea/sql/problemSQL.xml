@@ -25,4 +25,29 @@
 		WHERE lno=#{lno} and lqclass=#{lqclass}
 	</select>
 	
+	<!-- 데이터 입력 시 no가져오기 -->
+	<select id="selectPno" resultType="int">
+		SELECT pno FROM problem
+		ORDER BY pno desc
+		LIMIT 1
+	</select>
+	
+	<!-- 객관식 문제 입력 -->
+	<insert id="insertChoiceProblem" parameterType="problemDTO">
+		INSERT INTO problem (lqno,pyear,ptype,pman,pdetail,pimg) VALUES (#{lqno},#{pyear},#{ptype},#{pman},#{pdetail},#{pimg})
+	</insert>
+	
+	<insert id="insertChoicePchoice" parameterType="problemDTO">
+		INSERT INTO pchoice (pno,pcnumber,pccontent) 
+		VALUES 
+		<foreach collection="choice" index="index" item="item" separator=",">
+			(#{pno},#{index}+1,#{item})
+		</foreach>
+	</insert>
+	
+
+	<insert id="insertChoiceCorrect" parameterType="problemDTO">
+		INSERT INTO correct (pno,lcor) VALUES (#{pno},#{correct})
+	</insert>
+	
 </mapper>
