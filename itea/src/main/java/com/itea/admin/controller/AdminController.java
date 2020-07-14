@@ -1,11 +1,10 @@
 package com.itea.admin.controller;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.itea.admin.service.AdminService;
 import com.itea.dto.MemberDTO;
 import com.itea.util.PageUtil;
+import com.itea.util.Statistics;
 
 @Controller
 @RequestMapping("/admin")
@@ -24,26 +24,11 @@ public class AdminController {
 	
 	@RequestMapping("/memberList")
 	public String memberList(HttpServletRequest request, 
-						  HttpServletResponse response,MemberDTO mdto,HttpSession session,String week) throws Exception {
-		
-	        String cooContractNo = (String) session.getAttribute("setNo");
-	        Gson gson = new Gson();
-	        HashMap<String,String> map = new HashMap<String,String>();
-	        
-	        map.put("cooContractNo",cooContractNo);
-	        map.put("month", month);
-	 
-	        List<PartnerStatsDto> list= partnerDao.selectDailyVisitor(map);
-	        
-	        return gson.toJson(list);
-	 
-
-		adminSV.memberService
+						  HttpServletResponse response,MemberDTO mdto) throws Exception {
 		
 		String column=request.getParameter("column");
 		String value=request.getParameter("value");
 		String nowPage=request.getParameter("nowPage");
-		System.out.println("controller1 "+column+"/"+value+"/"+nowPage);
 		
 		mdto.setColumn(column);
 		mdto.setValue(value);
@@ -52,22 +37,18 @@ public class AdminController {
 		int pageNo;
 		
 		if(column==null) {//검색 안했을 때
-			System.out.println("전체회원출력-검색어 없음");
 			if(nowPage==null) {//처음화면
 				pageNo=1;
 			}else {//페이지 눌렀을 때
 				pageNo=Integer.parseInt(nowPage);
-				System.out.println("관리자페이지-회원목록 "+pageNo+"페이지");
 			}
 			pinfo=adminSV.memberList(pageNo);
 			
 		}else {//검색 했을 때
-			System.out.print("검색된 회원출력:");
 			if(nowPage==null) {//처음화면
 				pageNo=1;
 			}else { //페이지 눌렀을 때
 				pageNo=Integer.parseInt(nowPage);
-				System.out.println("관리자페이지-회원목록 "+pageNo+"페이지");
 			}
 			
 			if(column.equals("mnick")) {
@@ -81,7 +62,6 @@ public class AdminController {
 		request.setAttribute("column",column);
 		request.setAttribute("value",value);
 		request.setAttribute("PINFO",pinfo);
-		System.out.println("controller2 "+pinfo);
 		return "/admin/userManage";
 	}
 	

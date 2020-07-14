@@ -18,84 +18,67 @@ function checkDelete(mnick){
 	}
 }
 
-$(document).ready(function() {
-	 
-    
-    var chartLabels = []; // 받아올 데이터를 저장할 배열 선언
-    var chartData = []; 
-    var month="";
+$( document ).ready(function() {
 
-    var cooContractNo = '<c:out value="${no}"/>';
-    
-    function createChart() {
-        
-        var ctx = document.getElementById("canvas").getContext("2d");
-        LineChartDemo = Chart.Line(ctx, {
-            data : lineChartData,
-            options : {
-                scales : {
-                    yAxes : [ {
-                        ticks : {
-                            beginAtZero : true
-                        }
-                    } ]
-                }
-            }
-        });
-    }
+	google.charts.load('current', {packages: ['corechart', 'line']});
+	google.charts.setOnLoadCallback(drawCurveTypes);
 
-
+	function drawCurveTypes() {
+    var data = new google.visualization.DataTable();
     
-    //selectList로 월을 선택해서 ajax로 받는다.
-    $('#selectMonth').change(function() {
-        var changeMonth = $('#selectMonth option:selected').val();
-        month = changeMonth;
-        console.log('month:'+month);
-        
-        
-         
-    });
-    
-    //버튼을 클릭하면 차트가 그려진다. createChart()함수를 안에다 선언해야지 차트값을 받더라...
-    $('#btn').click(function(){
-        
-        chartLabels = [];
-        chartData=[];
-        
-        //getJson으로 데이터 
-        $.getJSON("./getDailyVisitor", {
-            cooContractNo : cooContractNo,
-            month : month
-        }, function(data) {
-            $.each(data, function(key, value) {
-                
-                chartLabels.push(value.statsDate);
-                chartData.push(value.statsAmount);
-            });
-            
-            lineChartData = {
-                    labels : chartLabels,
-                    datasets : [ {
-                        label : "일별 방문자 수",
-                        backgroundColor:"#bfdaf9",
-                        borderColor: "#80b6f4",
-                        pointBorderColor: "#80b6f4",
-                        pointBackgroundColor: "#80b6f4",
-                        pointHoverBackgroundColor: "#80b6f4",
-                        pointHoverBorderColor: "#80b6f4",
-                        fill: false,
-                        borderWidth: 4,
-                        data : chartData
-                    } ]
+    data.addColumn('string', '날짜');
+    data.addColumn('number', '가입자 수');
 
-                }
-            createChart();
-            
-        });
-    })
+    <c:forEach items="${member}" var="member">
+ 			data.addRow(['${member.term}','${member.sum}'])
+ 		</c:forEach>
+   
+    var options = {
+      hAxis: {
+        title: '일주일'
+      },
+      vAxis: {
+        title: '가입자 수'
+      },
+      series: {
+        1: {curveType: 'function'}
+      }
+    };
+    var chart = new google.visualization.LineChart(document.getElementById('chart_div1'));
+    chart.draw(data, options);
+  	}
+	});
+	
+$( document ).ready(function() {
 
+	google.charts.load('current', {packages: ['corechart', 'line']});
+	google.charts.setOnLoadCallback(drawCurveTypes);
+
+	function drawCurveTypes() {
+    var data = new google.visualization.DataTable();
     
-})
+    data.addColumn('string', '날짜');
+    data.addColumn('number', '방문자 수');
+
+    <c:forEach items="${visitor}" var="visitor">
+ 			data.addRow(['${visitor.term}','${visitor.sum}'])
+ 		</c:forEach>
+   
+    var options = {
+      hAxis: {
+        title: '일주일'
+      },
+      vAxis: {
+        title: '방문자 수'
+      },
+      series: {
+        1: {curveType: 'function'}
+      }
+    };
+    var chart = new google.visualization.LineChart(document.getElementById('chart_div2'));
+    chart.draw(data, options);
+  	}
+	});
 </script>
 
 <div class="admin" id="admin">
@@ -106,7 +89,7 @@ $(document).ready(function() {
 			onChange="javascript:visitForm.submit();">
 	  </form>
 	  <!-- 기간별 방문자 차트  -->
-	  <div id="chart_div"></div>
+	  <div id="chart_div1"></div>
   </div>
 	
 	<!-- 기간별 방문자 추이 그래프 -->
@@ -116,7 +99,7 @@ $(document).ready(function() {
 			onChange="javascript:visitForm.submit();">
 	  </form>
 	  <!-- 기간별 방문자 차트  -->
-	  <div id="chart_div"></div>
+	  <div id="chart_div2"></div>
   </div>
   
 </div>

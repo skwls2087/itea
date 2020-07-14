@@ -1,20 +1,12 @@
 package com.itea.dao;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
-import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.itea.dto.MemberDTO;
-import com.itea.util.Visitor;
-
 
 public class adminDAO {
 	
@@ -39,6 +31,7 @@ public class adminDAO {
 		System.out.println("weekmember dao "+member);
 		return member;
 	}
+	
 	
 	//회원목록
 	public ArrayList<MemberDTO> memberList(MemberDTO mdto) throws Exception{
