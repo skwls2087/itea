@@ -1,11 +1,9 @@
 package com.itea.admin.service;
 
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,7 +11,7 @@ import com.itea.dao.adminDAO;
 import com.itea.dto.MemberDTO;
 import com.itea.util.PageUtil;
 import com.itea.util.Statistics;
-import com.itea.util.Visitor;
+
 
 
 public class AdminService {
@@ -21,11 +19,36 @@ public class AdminService {
 	@Autowired
 	adminDAO adminDAO;
 	
+	//today,total 통계데이터 구하는 메서드
+	public Statistics staticService(MemberDTO mdto) throws Exception {
+		
+		Statistics memberStatistics= new Statistics();
+		ArrayList<MemberDTO> member=new ArrayList<MemberDTO>();
+
+		int totalMember=adminDAO.totalCount();
+		int todayMember=adminDAO.TodayMember(mdto);
+		
+		Calendar cal = Calendar.getInstance();
+		 
+		//현재 년도, 월, 일
+		int year = cal.get ( Calendar.YEAR );
+		int month = cal.get ( Calendar.MONTH );
+		int date = cal.get ( Calendar.DATE );
+		String today=year+"-"+(month+1)+"-"+(date+1);
+		Date now=Date.valueOf(today);
+		mdto.setMdate(now);
+		
+		memberStatistics.setTotalMember(totalMember);
+		memberStatistics.setTodayMember(todayMember);
+		
+		return memberStatistics;
+	}
+	
 	
 	//member 통계데이터 구하는 메서드	
-	public ArrayList<MemberDTO> memberService(MemberDTO mdto) {
+	public ArrayList<MemberDTO> WeekMember(MemberDTO mdto) throws Exception {
 		Calendar today = Calendar.getInstance();
-		ArrayList<MemberDTO> member = null;
+		ArrayList<MemberDTO> member= adminDAO.WeekMember(mdto);
 			for(int i=1;i<8;i++) {
 				int weekNum=today.get(Calendar.DAY_OF_WEEK)-i; //오늘부터 7일전까지의 요일 구하기
 				String week="";
@@ -44,16 +67,14 @@ public class AdminService {
 				}else if(weekNum==6 || weekNum==-1) {
 					week="토";
 				}
-				//member.add(new MemberDTO(week,weekCnt);
+				member.add(new MemberDTO(week, weekNum));
 			}
-			//member=adminDAO.WeekMember(mdto);
+			System.out.println("service"+member);
+			Collections.reverse(member); //리스트 순서를 반대로
 		return member;
 	}
 	
-	
-	
-	
-	//visitor 통계데이터 구하는 메서드	
+	/*//visitor 통계데이터 구하는 메서드	
 	public List<Visitor> visitService(String term) {
 		if(term.equals("week")) {
 			visitor=adminDao.selectWeekVisitor(conn);
@@ -64,7 +85,7 @@ public class AdminService {
 		}
 		return visitor;
 	}
-	
+	*/
 	
 	
 	

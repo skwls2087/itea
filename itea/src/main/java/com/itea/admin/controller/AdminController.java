@@ -15,6 +15,7 @@ import com.itea.dto.MemberDTO;
 import com.itea.util.PageUtil;
 import com.itea.util.Statistics;
 
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -25,7 +26,18 @@ public class AdminController {
 	@RequestMapping("/memberList")
 	public String memberList(HttpServletRequest request, 
 						  HttpServletResponse response,MemberDTO mdto) throws Exception {
+		String term=request.getParameter("term");	
+		Statistics statistics= new Statistics(); //통계데이터 담을 객체 생성(today,total 통계)
+		ArrayList<MemberDTO> member=new ArrayList<MemberDTO>();//단위기간별 방문자 데이터를 담을 객체 생성(기간별 방문자 통계)
+		statistics=adminSV.staticService(mdto);//통계값 리턴받아 통계객체에 저장
+		term="week"; //기본 단위기간=일주일
+		member=adminSV.WeekMember(mdto);
+		System.out.println("가입자수 단위기간="+term);
+		request.setAttribute("stat",statistics);//페이지에서 출력할 통계 객체 request속성으로 전달
+		request.setAttribute("member", member);
+		request.setAttribute("term", term);
 		
+		//------------------------------------------------------
 		String column=request.getParameter("column");
 		String value=request.getParameter("value");
 		String nowPage=request.getParameter("nowPage");
@@ -64,7 +76,6 @@ public class AdminController {
 		request.setAttribute("PINFO",pinfo);
 		return "/admin/userManage";
 	}
-	
 	
 	
 	//회원탈퇴

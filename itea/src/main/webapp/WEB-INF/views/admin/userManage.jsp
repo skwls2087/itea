@@ -29,7 +29,7 @@ $( document ).ready(function() {
     data.addColumn('string', '날짜');
     data.addColumn('number', '가입자 수');
 
-    <c:forEach items="${member}" var="member">
+    <c:forEach items="${MemberDTO}" var="member">
  			data.addRow(['${member.term}','${member.sum}'])
  		</c:forEach>
    
@@ -80,30 +80,37 @@ $( document ).ready(function() {
   	}
 	});
 </script>
-
-<div class="admin" id="admin">
+<div id="admin" class="admin">
 	<!-- 기간별 회원 추이 그래프 -->
 	<div class="member-graph">
 		가입자 통계 그래프
-		<form name="memberForm" action="<%=request.getContextPath()%>/admin/memberList.co" method="post"
-			onChange="javascript:visitForm.submit();">
+		<form name="memberForm" action="<%= request.getContextPath()%>/admin/memberList.co" method="post"
+			onChange="javascript:memberForm.submit();">
+		  <select id="term" name="term">
+		  	<option value="week"<c:if test="${term == 'week'}">selected='selected'</c:if>>일주일</option>
+		  	<option value="month"<c:if test="${term == 'month'}">selected='selected'</c:if>>한달</option>
+		  	<option value="year"<c:if test="${term == 'year'}">selected='selected'</c:if>>일년</option>
+		  </select>
 	  </form>
 	  <!-- 기간별 방문자 차트  -->
-	  <div id="chart_div1"></div>
+	  <div id="chart_div1" class="col-md-6"/>
   </div>
 	
 	<!-- 기간별 방문자 추이 그래프 -->
 	<div class="visitor-graph">
 		방문자 통계 그래프
-		<form name="visitForm" action="<%=request.getContextPath()%>/admin/memberList.co" method="post"
+		<form name="visitForm" action="<%= request.getContextPath()%>/admin/memberList.co" method="post"
 			onChange="javascript:visitForm.submit();">
+		  <select id="term" name="term">
+		  	<option value="week"<c:if test="${term == 'week'}">selected='selected'</c:if>>일주일</option>
+		  	<option value="month"<c:if test="${term == 'month'}">selected='selected'</c:if>>한달</option>
+		  	<option value="year"<c:if test="${term == 'year'}">selected='selected'</c:if>>일년</option>
+		  </select>
 	  </form>
 	  <!-- 기간별 방문자 차트  -->
-	  <div id="chart_div2"></div>
+	  <div id="chart_div2" class="col-md-6"/>
   </div>
-  
-</div>
-
+ </div>
 <div class="admin-user">
 	<div class="admin-div">
 		<!-- 회원을 닉네임이나 아이디로 검색 가능 -->

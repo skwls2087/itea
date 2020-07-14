@@ -22,6 +22,13 @@
 		group by mdate
 		desc limit 7
 	</select>
+	
+	<!-- 하루 가입자 수 검색-->
+	<select id="TodayMember" resultType="int">
+		select count(*) 
+		from member 
+		where mdate=#{mdate}
+	</select>
 
 	<!-- 회원리스트 조예인-->
 	<select id="memberList" resultType="memberDTO">

@@ -25,13 +25,19 @@ public class adminDAO {
 	
 	//한 주간 가입자 수 검색
 	public ArrayList<MemberDTO> WeekMember(MemberDTO mdto) throws Exception {
-		ArrayList<MemberDTO> member=null;
-		member = (ArrayList)session.selectList("admin.WeekMember", mdto);
-		Collections.reverse(member); //리스트 순서를 반대로
+		ArrayList<MemberDTO> member = null;
+		member=(ArrayList)session.selectList("admin.WeekMember", mdto);
 		System.out.println("weekmember dao "+member);
 		return member;
 	}
 	
+	//하루 가입자 수 검색
+	public int TodayMember(MemberDTO mdto) throws Exception {
+		int member = (int)session.selectOne("admin.TodayMember", mdto);
+		System.out.println("TodayMember dao "+member);
+		return member;
+	}
+
 	
 	//회원목록
 	public ArrayList<MemberDTO> memberList(MemberDTO mdto) throws Exception{
