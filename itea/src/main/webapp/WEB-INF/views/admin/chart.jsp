@@ -14,7 +14,7 @@ google.load('visualization','1',{
     google.setOnLoadCallback(drawChart); //라이브러리를 불러오는 작업이 완료되었으면 drawChart작업을 실행하라는 뜻.
     function drawChart() {
         var jsonData = $.ajax({ //비동기적 방식으로 호출한다는 의미이다.
-            url : "${path}/chart/weeCnt.co",
+            url : "${path}/chart/weekCnt.co",
 
             //json에 sampleData.json파일을 불러온다.
             //확장자가 json이면 url 맵핑을 꼭 해주어야 한다. 안해주면 자바파일인줄 알고 404에러가 발생한다.
