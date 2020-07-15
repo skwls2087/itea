@@ -29,8 +29,18 @@ public class ProblemService {
 		return problemDAO.selectLqno(map);
 	}
 
+	//객관식 시험
 	public void insertChoice(ProblemDTO pDTO) {
 		problemDAO.insertChoice(pDTO);
+	}
+	//주관식 시험
+	public void insertShort(ProblemDTO pDTO) {
+		problemDAO.insertShort(pDTO);
+		
+	}
+	//서술형 시험
+	public void insertEssay(ProblemDTO pDTO) {
+		problemDAO.insertEssay(pDTO);
 	}
 
 }

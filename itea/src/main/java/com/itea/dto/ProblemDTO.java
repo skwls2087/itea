@@ -23,8 +23,11 @@ public class ProblemDTO {
 	//객관식 선지
 	private String[] choice;
 	
-	//정답
+	//객관식정답
 	private String correct;
+	
+	//주관식,서술형 정답
+	private String[] correctList;
 
 	public int getPno() {
 		return pno;
@@ -114,16 +117,6 @@ public class ProblemDTO {
 		this.pimg = pimg;
 	}
 
-	public String getCorrect() {
-		return correct;
-	}
-
-	public void setCorrect(String correct) {
-		this.correct = correct;
-	}
-	
-
-
 	public String[] getChoice() {
 		return choice;
 	}
@@ -132,15 +125,28 @@ public class ProblemDTO {
 		this.choice = choice;
 	}
 
+	public String getCorrect() {
+		return correct;
+	}
+
+	public void setCorrect(String correct) {
+		this.correct = correct;
+	}
+
+	public String[] getCorrectList() {
+		return correctList;
+	}
+
+	public void setCorrectList(String[] correctList) {
+		this.correctList = correctList;
+	}
+
 	@Override
 	public String toString() {
 		return "ProblemDTO [pno=" + pno + ", lqno=" + lqno + ", pyear=" + pyear + ", ptype=" + ptype + ", pman=" + pman
 				+ ", pdetail=" + pdetail + ", pcomment=" + pcomment + ", plike=" + plike + ", phate=" + phate
 				+ ", file=" + file + ", pimg=" + pimg + ", choice=" + Arrays.toString(choice) + ", correct=" + correct
-				+ "]";
+				+ ", correctList=" + Arrays.toString(correctList) + "]";
 	}
-
-	
-
 	
 }

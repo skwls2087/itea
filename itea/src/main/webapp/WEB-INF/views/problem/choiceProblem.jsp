@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/problem.css">
 
 <div class="choice-Problem">
-	<form method="post" action="choiceProblem.co" encType="multipart/form-data">
+	<form method="post" action="createProblemProc.co" encType="multipart/form-data">
 	<table width="100%">
 		
 		<!-- 문제 -->

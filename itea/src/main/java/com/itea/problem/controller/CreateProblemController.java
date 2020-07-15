@@ -21,8 +21,8 @@ public class CreateProblemController {
 	@Autowired
 	ProblemService problemSV;
 	
-	//객관식 문제 출제하기
-	@RequestMapping("/choiceProblem")
+	//문제 출제하기
+	@RequestMapping("/createProblemProc")
 	public String problemMain(ProblemDTO pDTO,HttpServletRequest request,HttpSession session) throws FileNotFoundException {
 		
 		if(pDTO.getFile().getSize()!=0) {
@@ -53,10 +53,16 @@ public class CreateProblemController {
 		String pman=(String) session.getAttribute("MNICK");
 		pDTO.setPman(pman);
 		System.out.println(pDTO);
-		problemSV.insertChoice(pDTO);
+		
+		if(pDTO.getPtype()==1) {
+			problemSV.insertChoice(pDTO);
+		}else if(pDTO.getPtype()==2) {
+			problemSV.insertShort(pDTO);
+		}else if(pDTO.getPtype()==3) {
+			problemSV.insertEssay(pDTO);
+		}
 		
 		System.out.println(pDTO);
-		return "problem/createProblem";
-		
+		return "problem/problemMain";
 	}
 }

@@ -7,13 +7,27 @@
 <div class="essay-Problem">
 	서술형문제 <br/>
 	서술형문제는 입력해주신 키워드가 전부 포함되어있어야 정답이 됩니다.
-	<textarea class="form-control" placeholder="내용을 입력해주세요" rows="5"></textarea>
-	  <div class="form-group">
-      <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
-      </div>
-   
-	<input class="form-control form-control-lg" type="text" id="inputLarge">
-	<input class="form-control form-control-lg" type="text" id="inputLarge">
-	<input class="form-control form-control-lg" type="text" id="inputLarge">
-  <img src="${pageContext.request.contextPath}/resources/img/add.png"	width="30"/>
+	<form method="post" action="createProblemProc.co" encType="multipart/form-data">
+	
+	<!-- 문제 -->
+		<textarea class="form-control" name="pdetail" placeholder="내용을 입력해주세요" rows="5"></textarea>
+		  <div class="form-group">
+	      <input type="file" name="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+	      </div>
+	      
+    <!-- 해설 -->
+    <textarea class="form-control" name="pcomment" placeholder="해설을 입력해주세요" rows="5"></textarea><br/>
+    
+    <!-- 정답 키워드 -->
+    <div id="correct-box">
+			<input class="form-control form-control-lg" type="text" id="inputLarge" name="correctList">
+			<img src="${pageContext.request.contextPath}/resources/img/close.png"	width="10" id="close-img"/><br/>
+		</div>
+	  <img src="${pageContext.request.contextPath}/resources/img/add.png"	width="30"/><br/>
+	  
+	  <input type="hidden" name="lqno" value="${lqno}"/>
+    <input type="hidden" name="pyear" value="${pyear}"/>
+    <input type="hidden" name="ptype" value="${ptype}"/>
+    <input type="submit" class="btn btn-primary" value="출제하기">
+  </form>
 </div>

@@ -7,19 +7,21 @@
 <div class="short-Problem">
 	주관식문제 <br/>
 	주관식문제는 입력해주신 정답 중 하나라도 맞으면 정답이 됩니다.
-	<form method="post" action="choiceProblem.co" encType="multipart/form-data">
+	<form method="post" action="createProblemProc.co" encType="multipart/form-data">
 	
 	<!-- 문제 -->
 		<textarea class="form-control" name="pdetail" placeholder="내용을 입력해주세요" rows="5"></textarea>
 		  <div class="form-group">
-	      <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+	      <input type="file" name="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
 	      </div>
 	      
     <!-- 해설 -->
     <textarea class="form-control" name="pcomment" placeholder="해설을 입력해주세요" rows="5"></textarea><br/>
     
     <!-- 정답 키워드 -->
-		<input class="form-control form-control-lg" type="text" id="inputLarge">
+		<input class="form-control form-control-lg" type="text" id="inputLarge" name="correctList">
+		<input class="form-control form-control-lg" type="text" id="inputLarge" name="correctList">
+		<input class="form-control form-control-lg" type="text" id="inputLarge" name="correctList">
 	  <img src="${pageContext.request.contextPath}/resources/img/add.png"	width="30"/><br/>
 	  <input type="hidden" name="lqno" value="${lqno}"/>
     <input type="hidden" name="pyear" value="${pyear}"/>

@@ -34,11 +34,26 @@ public class ProblemDAO {
 	}
 
 	public void insertChoice(ProblemDTO pDTO) {
-		session.insert("problem.insertChoiceProblem",pDTO);
+		session.insert("problem.insertProblem",pDTO);
 		int pno= session.selectOne("problem.selectPno");
 		pDTO.setPno(pno);
 		session.insert("problem.insertChoicePchoice",pDTO);
 		session.insert("problem.insertChoiceCorrect",pDTO);
+		
+	}
+
+	public void insertShort(ProblemDTO pDTO) {
+		session.insert("problem.insertProblem",pDTO);
+		int pno= session.selectOne("problem.selectPno");
+		pDTO.setPno(pno);
+		session.insert("problem.insertCorrectList",pDTO);
+	}
+
+	public void insertEssay(ProblemDTO pDTO) {
+		session.insert("problem.insertProblem",pDTO);
+		int pno= session.selectOne("problem.selectPno");
+		pDTO.setPno(pno);
+		session.insert("problem.insertCorrectList",pDTO);
 		
 	}
 	

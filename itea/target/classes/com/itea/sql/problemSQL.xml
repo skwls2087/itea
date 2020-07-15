@@ -32,11 +32,12 @@
 		LIMIT 1
 	</select>
 	
-	<!-- 객관식 문제 입력 -->
-	<insert id="insertChoiceProblem" parameterType="problemDTO">
-		INSERT INTO problem (lqno,pyear,ptype,pman,pdetail,pimg) VALUES (#{lqno},#{pyear},#{ptype},#{pman},#{pdetail},#{pimg})
+	<!-- 문제 입력 -->
+	<insert id="insertProblem" parameterType="problemDTO">
+		INSERT INTO problem (lqno,pyear,ptype,pman,pdetail,pcomment,pimg) VALUES (#{lqno},#{pyear},#{ptype},#{pman},#{pdetail},#{pcomment},#{pimg})
 	</insert>
 	
+	<!-- 객관식 선지 입력 -->
 	<insert id="insertChoicePchoice" parameterType="problemDTO">
 		INSERT INTO pchoice (pno,pcnumber,pccontent) 
 		VALUES 
@@ -45,9 +46,19 @@
 		</foreach>
 	</insert>
 	
-
+	<!-- 객관식 답안 입력 -->
 	<insert id="insertChoiceCorrect" parameterType="problemDTO">
 		INSERT INTO correct (pno,lcor) VALUES (#{pno},#{correct})
+	</insert>
+	
+	<!-- 주관식 서술형 답안 입력 -->
+
+	<insert id="insertCorrectList" parameterType="problemDTO">
+		INSERT INTO correct (pno,lcor) 
+		VALUES 
+		<foreach collection="correctList" item="item" separator=",">
+			(#{pno},#{item})
+		</foreach>
 	</insert>
 	
 </mapper>
