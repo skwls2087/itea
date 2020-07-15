@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,7 +15,7 @@ import com.itea.util.Statistics;
 
 
 
-public class AdminService {
+public class AdminService<Hashmap> {
 	
 	@Autowired
 	adminDAO adminDAO;
@@ -28,7 +29,7 @@ public class AdminService {
 
 		int totalMember=adminDAO.totalCount();
 		int todayMember=adminDAO.TodayMember(mdto);
-		System.out.println("sercive todaymember "+todayMember);
+		//System.out.println("service totalmember "+totalMember);
 		
 		Calendar cal = Calendar.getInstance();
 		 
@@ -39,40 +40,101 @@ public class AdminService {
 		String today=year+"-"+(month+1)+"-"+(date);
 		Date now=Date.valueOf(today);
 		mdto.setMdate(now);
-		
+		//System.out.println("service today "+today);
+		//System.out.println("service now "+now);
+		System.out.println("service todaymember "+todayMember);
 		memberStatistics.setTotalMember(totalMember);
 		return memberStatistics;
 	}
 	
 	
 	//member 통계데이터 구하는 메서드	
-	public ArrayList<MemberDTO> WeekMember(MemberDTO mdto) throws Exception {
+	public ArrayList WeekMember(MemberDTO mdto) throws Exception {
 		Calendar today = Calendar.getInstance();
-		ArrayList<MemberDTO> member= adminDAO.WeekMember(mdto);
-			for(int i=1;i<8;i++) {
+		ArrayList member= adminDAO.WeekMember(mdto);
+		ArrayList list = new ArrayList();
+		ArrayList cntList = new ArrayList();
+		int sum = adminDAO.totalCount();
+		
+		for(int i=0;i<member.size();i++) {
+			if(i!=0) {
+				int cntstr = (int) member.get(i);
+				//System.out.println("service cntstr "+cntstr);
+				//System.out.println("service member "+(int) member.get(i-1));
+				sum = sum-cntstr;
+			}
+			list.add(sum);
+			//System.out.println("service add "+list);
+		}
+			for(int i=0;i<7;i++) {
+				HashMap map = new HashMap();
 				int weekNum=today.get(Calendar.DAY_OF_WEEK)-i; //오늘부터 7일전까지의 요일 구하기
 				String week="";
-				if(weekNum==0 || weekNum==-7 ) {
+				if(weekNum==1 || weekNum==-6 ) {
 					week="일";
-				}else if(weekNum==1 || weekNum==-6) {
-					week="월";
 				}else if(weekNum==2 || weekNum==-5) {
-					week="화";
+					week="월";
 				}else if(weekNum==3 || weekNum==-4) {
-					week="수";
+					week="화";
 				}else if(weekNum==4 || weekNum==-3) {
-					week="목";
+					week="수";
 				}else if(weekNum==5 || weekNum==-2) {
-					week="금";
+					week="목";
 				}else if(weekNum==6 || weekNum==-1) {
+					week="금";
+				}else if(weekNum==7 || weekNum==0) {
 					week="토";
 				}
-				member.add(new MemberDTO(week, weekNum));
+				//System.out.println("service week "+week);
+				//System.out.println("service map "+map);
+				map.put(week,(int)list.get(i));
+				//map.put("term",week);
+				//map.put("sum",(int)list.get(i));
+				cntList.add(map);
 			}
-			System.out.println("service"+member);
-			Collections.reverse(member); //리스트 순서를 반대로
-		return member;
+			Collections.reverse(cntList); //리스트 순서를 반대로
+			System.out.println("service"+cntList);
+		return cntList;
 	}
+	
+	
+	//member 통계데이터  메서드	
+		public Hashmap WeekMemberMap(MemberDTO mdto) throws Exception {
+			Calendar today = Calendar.getInstance();
+			ArrayList member= adminDAO.WeekMember(mdto);
+			ArrayList list = new ArrayList();
+			int sum = adminDAO.totalCount();
+			HashMap map = new HashMap();
+			
+			for(int i=0;i<member.size();i++) {
+				if(i!=0) {
+					int cntstr = (int) member.get(i);
+					sum = sum-cntstr;
+				}
+				list.add(sum);
+			}
+			for(int i=0;i<7;i++) {
+				int weekNum=today.get(Calendar.DAY_OF_WEEK)-i; //오늘부터 7일전까지의 요일 구하기
+				String week="";
+				if(weekNum==1 || weekNum==-6 ) {
+					week="일";
+				}else if(weekNum==2 || weekNum==-5) {
+					week="월";
+				}else if(weekNum==3 || weekNum==-4) {
+					week="화";
+				}else if(weekNum==4 || weekNum==-3) {
+					week="수";
+				}else if(weekNum==5 || weekNum==-2) {
+					week="목";
+				}else if(weekNum==6 || weekNum==-1) {
+					week="금";
+				}else if(weekNum==7 || weekNum==0) {
+					week="토";
+				}
+				map.put(week,(int)list.get(i));
+			}
+			return (Hashmap) map;
+		}
 	
 	/*//visitor 통계데이터 구하는 메서드	
 	public List<Visitor> visitService(String term) {

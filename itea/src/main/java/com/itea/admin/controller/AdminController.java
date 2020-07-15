@@ -1,7 +1,9 @@
 package com.itea.admin.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,9 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itea.admin.service.AdminService;
+import com.itea.dao.adminDAO;
 import com.itea.dto.MemberDTO;
 import com.itea.util.PageUtil;
-import com.itea.util.Statistics;
 
 
 @Controller
@@ -26,15 +28,14 @@ public class AdminController {
 	@RequestMapping("/memberList")
 	public String memberList(HttpServletRequest request, 
 						  HttpServletResponse response,MemberDTO mdto) throws Exception {
-		String term=request.getParameter("term");	
-		Statistics statistics= new Statistics(); //통계데이터 담을 객체 생성(today,total 통계)
-		ArrayList<MemberDTO> member=new ArrayList<MemberDTO>();//단위기간별 방문자 데이터를 담을 객체 생성(기간별 방문자 통계)
-		statistics=adminSV.staticService(mdto);//통계값 리턴받아 통계객체에 저장
-		term="week"; //기본 단위기간=일주일
+		ArrayList member=new ArrayList();//단위기간별 방문자 데이터를 담을 객체 생성(기간별 방문자 통계)
 		member=adminSV.WeekMember(mdto);
-		request.setAttribute("stat",statistics);//페이지에서 출력할 통계 객체 request속성으로 전달
+		HashMap map= new HashMap();
+		map=(HashMap)adminSV.WeekMemberMap(mdto);
+		
+		System.out.println("con "+map);
+		request.setAttribute("map",map);
 		request.setAttribute("member", member);
-		request.setAttribute("term", term);
 		//------------------------------------------------------
 		String column=request.getParameter("column");
 		String value=request.getParameter("value");

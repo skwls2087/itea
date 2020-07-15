@@ -27,14 +27,12 @@ public class adminDAO {
 	public ArrayList<MemberDTO> WeekMember(MemberDTO mdto) throws Exception {
 		ArrayList<MemberDTO> member = null;
 		member=(ArrayList)session.selectList("admin.WeekMember", mdto);
-		System.out.println("weekmember dao "+member);
 		return member;
 	}
 	
 	//하루 가입자 수 검색
 	public int TodayMember(MemberDTO mdto) throws Exception {
 		int member = (int)session.selectOne("admin.TodayMember", mdto);
-		System.out.println("TodayMember dao "+member);
 		return member;
 	}
 
@@ -47,7 +45,7 @@ public class adminDAO {
 	}
 	
 	//전체게시물 수 조회
-	public  int  totalCount() {
+	public int  totalCount() {
 		return (Integer)session.selectOne("admin.totalCnt");
 	}
 

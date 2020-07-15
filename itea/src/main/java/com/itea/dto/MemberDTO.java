@@ -27,34 +27,9 @@ public class MemberDTO {
    private String column;
    private String value;
    
-   private String term;
-   private int sum;
-   
    public MemberDTO() {
 		
 	}
-   
-   public MemberDTO(String term,int sum) {
-		this.term = term;
-		this.sum = sum;
-	}
-   
-   public String getTerm() {
-	return term;
-	}
-	
-	public void setTerm(String term) {
-		this.term = term;
-	}
-	
-	public int getSum() {
-		return sum;
-	}
-	
-	public void setSum(int sum) {
-		this.sum = sum;
-	}
-
 
 	public int getMno() {
       return mno;

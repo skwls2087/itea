@@ -29,10 +29,10 @@ $( document ).ready(function() {
     data.addColumn('string', '날짜');
     data.addColumn('number', '가입자 수');
 
-    <c:forEach items="${MemberDTO}" var="member">
- 			data.addRow(['${member.term}','${member.sum}'])
- 		</c:forEach>
-   
+		<c:forEach var="map" items="${map }">
+				data.addRow(['${map.key }','${map.value}'])
+		</c:forEach>		
+				
     var options = {
       hAxis: {
         title: '일주일'
@@ -48,7 +48,7 @@ $( document ).ready(function() {
     chart.draw(data, options);
   	}
 	});
-	
+//--------------------------------------------------------------------------------------------	
 $( document ).ready(function() {
 
 	google.charts.load('current', {packages: ['corechart', 'line']});
@@ -84,14 +84,6 @@ $( document ).ready(function() {
 	<!-- 기간별 회원 추이 그래프 -->
 	<div class="member-graph">
 		가입자 통계 그래프
-		<form name="memberForm" action="<%= request.getContextPath()%>/admin/memberList.co" method="post"
-			onChange="javascript:memberForm.submit();">
-		  <select id="term" name="term">
-		  	<option value="week"<c:if test="${term == 'week'}">selected='selected'</c:if>>일주일</option>
-		  	<option value="month"<c:if test="${term == 'month'}">selected='selected'</c:if>>한달</option>
-		  	<option value="year"<c:if test="${term == 'year'}">selected='selected'</c:if>>일년</option>
-		  </select>
-	  </form>
 	  <!-- 기간별 방문자 차트  -->
 	  <div id="chart_div1" class="col-md-6"/>
   </div>
@@ -99,14 +91,6 @@ $( document ).ready(function() {
 	<!-- 기간별 방문자 추이 그래프 -->
 	<div class="visitor-graph">
 		방문자 통계 그래프
-		<form name="visitForm" action="<%= request.getContextPath()%>/admin/memberList.co" method="post"
-			onChange="javascript:visitForm.submit();">
-		  <select id="term" name="term">
-		  	<option value="week"<c:if test="${term == 'week'}">selected='selected'</c:if>>일주일</option>
-		  	<option value="month"<c:if test="${term == 'month'}">selected='selected'</c:if>>한달</option>
-		  	<option value="year"<c:if test="${term == 'year'}">selected='selected'</c:if>>일년</option>
-		  </select>
-	  </form>
 	  <!-- 기간별 방문자 차트  -->
 	  <div id="chart_div2" class="col-md-6"/>
   </div>
