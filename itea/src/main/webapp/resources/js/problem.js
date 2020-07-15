@@ -51,7 +51,7 @@ $(function(){
 		}
 	});
 	
-	//문제 출제 유효성검사
+	//객관식:문제 출제 유효성검사
 	$("#create-problem-submit").click(function(){
 		if($("#pdetail").val()==""){
 			alert("문제를 입력해주세요")
@@ -73,30 +73,46 @@ $(function(){
 			alert("지문을 입력해주세요")
 			return false;
 		}
-		
 		if($(':radio[name="correct"]:checked').length < 1){
 		    alert('정답 번호를 선택해주세요'); 
 		    return false;
 		}
 	})
+	//주관식,서술형문제 출제 유효성검사
+	$("#create-text-problem-submit").submit(function(){
+		if($("#pdetail").val()==""){
+			alert("문제를 입력해주세요")
+			return false;
+		}
+		if($('#pcomment').val()==""){
+		    alert('해설을 입력해주세요'); 
+		    return false;
+		}
+		
+		var noword=0;
+		
+		$('input[type="text"]').each(function(){
+			if($(this).val()==""){
+				alert("키워드를 전부 입력해주세요")
+				noword++
+			}
+		})
+		if(noword!=0){
+			return false;
+		}
+	})
 	
-	//주관식&서술형-키워드 추가 삭제
-//	$(".close-img").click(function(){
-//		alert("박스삭제")
-//		/*$(this).parent('div').remove()*/
-//		return false;
-//	})
-	
+	//키워드 삭제하기
 	$(document).on('click','.close-img',function(){
 		$(this).parent('div').remove()
 	})
 	
+	//키워드 입력시 텍스트박스 크기 늘어나기
 	$(document).on('keydown','input[type="text"]',function(){
 		$(this).attr('size', $(this).val().length+5);
-		return false;
 	});
 	
-	
+	//키워드 추가를 누르면 박스 생성
 	$("#plus-keyword").click(function(){
 		
 		div=$('<div>')

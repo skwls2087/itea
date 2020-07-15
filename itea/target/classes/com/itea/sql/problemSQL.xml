@@ -34,7 +34,7 @@
 	
 	<!-- 문제 입력 -->
 	<insert id="insertProblem" parameterType="problemDTO">
-		INSERT INTO problem (lqno,pyear,ptype,pman,pdetail,pcomment,pimg) VALUES (#{lqno},#{pyear},#{ptype},#{pman},#{pdetail},#{pcomment},#{pimg})
+		INSERT INTO problem (lqno,pyear,ptype,mno,pdetail,pcomment,pimg) VALUES (#{lqno},#{pyear},#{ptype},#{mno},#{pdetail},#{pcomment},#{pimg})
 	</insert>
 	
 	<!-- 객관식 선지 입력 -->

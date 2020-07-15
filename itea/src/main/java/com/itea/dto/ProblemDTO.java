@@ -10,7 +10,7 @@ public class ProblemDTO {
 	private int lqno; //자격증코드
 	private int pyear; //출제년도
 	private int ptype; //객관1,주관2,서술3
-	private String pman; //출제자
+	private int mno; //출제자
 	private String pdetail; //문제
 	private String pcomment; //해설
 	private int plike; //좋아요 수
@@ -61,12 +61,12 @@ public class ProblemDTO {
 		this.ptype = ptype;
 	}
 
-	public String getPman() {
-		return pman;
+	public int getMno() {
+		return mno;
 	}
 
-	public void setPman(String pman) {
-		this.pman = pman;
+	public void setMno(int mno) {
+		this.mno = mno;
 	}
 
 	public String getPdetail() {
@@ -143,10 +143,12 @@ public class ProblemDTO {
 
 	@Override
 	public String toString() {
-		return "ProblemDTO [pno=" + pno + ", lqno=" + lqno + ", pyear=" + pyear + ", ptype=" + ptype + ", pman=" + pman
+		return "ProblemDTO [pno=" + pno + ", lqno=" + lqno + ", pyear=" + pyear + ", ptype=" + ptype + ", mno=" + mno
 				+ ", pdetail=" + pdetail + ", pcomment=" + pcomment + ", plike=" + plike + ", phate=" + phate
 				+ ", file=" + file + ", pimg=" + pimg + ", choice=" + Arrays.toString(choice) + ", correct=" + correct
 				+ ", correctList=" + Arrays.toString(correctList) + "]";
 	}
+
+	
 	
 }

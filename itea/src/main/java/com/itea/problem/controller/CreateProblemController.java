@@ -50,8 +50,8 @@ public class CreateProblemController {
 			pDTO.setPimg(saveName);//저장된 이름으로 pimg컬럼에 셋팅
 		}
 		
-		String pman=(String) session.getAttribute("MNICK");
-		pDTO.setPman(pman);
+		int mno=(Integer) session.getAttribute("MNO");
+		pDTO.setMno(mno);
 		System.out.println(pDTO);
 		
 		if(pDTO.getPtype()==1) {
