@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<!-- js/css 참조 -->
+<script src="${pageContext.request.contextPath}/resources/js/problem.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/problem.css">
+	
 1.자격증별 문제
 2.내가 만든 문제
 3.즐겨찾기 문제
 
 <div id="problem-solve-container">
 	<div id="problem-solve">
-	<form action="#####" method="post">
+	<form action="selectForTest.co" method="post">
 		<p>자격증 시험의 종류와 유형을 선택해주세요.</p><br/>
 	    <div class="form-group">
 		    <select id="Ckind" name="Ckind" class="custom-select">
@@ -34,7 +38,7 @@
 		  </div>
 		  
 		  <div class="form-group">
-		    <select id="Qyear" name="Qyear" class="custom-select">
+		    <select id="Qyear" name="pyearList" class="custom-select" multiple>
 		      <option value="" selected="">출제년도</option>
 		      <option value="2007">2007년도</option>
 		      <option value="2008">2008년도</option>

@@ -99,9 +99,13 @@ public class ProblemController {
 	}
 	
 	@RequestMapping("/solveProblem")
-	public void solveProblem() {
+	public void solveProblem(HttpServletRequest request) {
 		
 		System.out.println("문제 풀기페이지 진입");
-
+		
+		//자격증 종류 보내기
+		List<licenseDTO> ckind=problemSV.selectCkind();
+		request.setAttribute("ckind", ckind);
+		
 	}
 }

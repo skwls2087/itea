@@ -61,4 +61,16 @@
 		</foreach>
 	</insert>
 	
+	<!-- 문제풀기-문제번호리스트 -->
+	<select id="selectProblem" parameterType="Hashmap" resultType="problemDTO">
+		SELECT p.*
+		FROM problem AS p
+		join licenseclass AS l ON p.lqno=l.lqno
+		join member AS m ON m.mno=p.mno
+		WHERE l.lno=#{ckind} AND l.lqclass=#{ctype} AND m.mnick!='관리자'
+		<!-- <foreach collection="qyear" item="item">
+			or pyear=#{item}
+		</foreach> -->
+	</select>
+	
 </mapper>

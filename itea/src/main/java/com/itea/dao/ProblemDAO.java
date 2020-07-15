@@ -56,5 +56,10 @@ public class ProblemDAO {
 		session.insert("problem.insertCorrectList",pDTO);
 		
 	}
+
+	public List<ProblemDTO> selectProblem(HashMap tinfo) {
+		System.out.println("dao"+tinfo);
+		return session.selectList("problem.selectProblem",tinfo);
+	}
 	
 }

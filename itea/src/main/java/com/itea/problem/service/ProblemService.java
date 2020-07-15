@@ -43,4 +43,8 @@ public class ProblemService {
 		problemDAO.insertEssay(pDTO);
 	}
 
+	public List<ProblemDTO> selectProblem(HashMap tinfo) {
+		return problemDAO.selectProblem(tinfo);
+	}
+
 }

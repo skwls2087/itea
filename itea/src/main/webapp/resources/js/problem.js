@@ -95,6 +95,7 @@ $(function(){
 			if($(this).val()==""){
 				alert("키워드를 전부 입력해주세요")
 				noword++
+				return;
 			}
 		})
 		if(noword!=0){

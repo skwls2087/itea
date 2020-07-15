@@ -7,10 +7,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class ProblemDTO {
 
 	private int pno; //문제번호
+	private int mno; //출제자
 	private int lqno; //자격증코드
 	private int pyear; //출제년도
 	private int ptype; //객관1,주관2,서술3
-	private int mno; //출제자
 	private String pdetail; //문제
 	private String pcomment; //해설
 	private int plike; //좋아요 수
@@ -28,6 +28,9 @@ public class ProblemDTO {
 	
 	//주관식,서술형 정답
 	private String[] correctList;
+	
+	//출제년도 list
+	private int[] pyearList; //출제년도
 
 	public int getPno() {
 		return pno;
@@ -35,6 +38,14 @@ public class ProblemDTO {
 
 	public void setPno(int pno) {
 		this.pno = pno;
+	}
+
+	public int getMno() {
+		return mno;
+	}
+
+	public void setMno(int mno) {
+		this.mno = mno;
 	}
 
 	public int getLqno() {
@@ -59,14 +70,6 @@ public class ProblemDTO {
 
 	public void setPtype(int ptype) {
 		this.ptype = ptype;
-	}
-
-	public int getMno() {
-		return mno;
-	}
-
-	public void setMno(int mno) {
-		this.mno = mno;
 	}
 
 	public String getPdetail() {
@@ -141,14 +144,22 @@ public class ProblemDTO {
 		this.correctList = correctList;
 	}
 
-	@Override
-	public String toString() {
-		return "ProblemDTO [pno=" + pno + ", lqno=" + lqno + ", pyear=" + pyear + ", ptype=" + ptype + ", mno=" + mno
-				+ ", pdetail=" + pdetail + ", pcomment=" + pcomment + ", plike=" + plike + ", phate=" + phate
-				+ ", file=" + file + ", pimg=" + pimg + ", choice=" + Arrays.toString(choice) + ", correct=" + correct
-				+ ", correctList=" + Arrays.toString(correctList) + "]";
+	public int[] getPyearList() {
+		return pyearList;
 	}
 
+	public void setPyearList(int[] pyearList) {
+		this.pyearList = pyearList;
+	}
+
+	@Override
+	public String toString() {
+		return "ProblemDTO [pno=" + pno + ", mno=" + mno + ", lqno=" + lqno + ", pyear=" + pyear + ", ptype=" + ptype
+				+ ", pdetail=" + pdetail + ", pcomment=" + pcomment + ", plike=" + plike + ", phate=" + phate
+				+ ", file=" + file + ", pimg=" + pimg + ", choice=" + Arrays.toString(choice) + ", correct=" + correct
+				+ ", correctList=" + Arrays.toString(correctList) + ", pyearList=" + Arrays.toString(pyearList) + "]";
+	}
+	
 	
 	
 }
