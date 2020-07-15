@@ -29,8 +29,8 @@ $( document ).ready(function() {
     data.addColumn('string', '날짜');
     data.addColumn('number', '가입자 수');
 
-		<c:forEach var="map" items="${map }">
-				data.addRow(['${map.key }','${map.value}'])
+		<c:forEach items="${member}" var="member">
+		    data.addRow(['${member }','${member}'])
 		</c:forEach>		
 				
     var options = {
@@ -80,6 +80,14 @@ $( document ).ready(function() {
   	}
 	});
 </script>
+
+
+<c:forEach items="${member}" var="member">
+   ${member.key},oo
+   ${member.value}
+</c:forEach>	
+
+	
 <div id="admin" class="admin">
 	<!-- 기간별 회원 추이 그래프 -->
 	<div class="member-graph">

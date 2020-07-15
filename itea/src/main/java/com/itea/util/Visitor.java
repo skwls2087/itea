@@ -1,9 +1,13 @@
 package com.itea.util;
 
+import java.util.Date;
+
 public class Visitor {
 
 	private String term;
 	private int sum;
+	private int vscount;
+	private Date vsDate;
 	
 	public Visitor() {
 		
@@ -14,6 +18,23 @@ public class Visitor {
 		this.sum = sum;
 	}
 	
+	
+	public int getVscount() {
+		return vscount;
+	}
+
+	public void setVscount(int vscount) {
+		this.vscount = vscount;
+	}
+
+	public Date getVsDate() {
+		return vsDate;
+	}
+
+	public void setVsDate(Date vsDate) {
+		this.vsDate = vsDate;
+	}
+
 	public String getTerm() {
 		return term;
 	}
@@ -26,9 +47,11 @@ public class Visitor {
 	public void setSum(int sum) {
 		this.sum = sum;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Visitor [term=" + term + ", sum=" + sum + "]";
+		return "Visitor [term=" + term + ", sum=" + sum + ", vscount=" + vscount + ", vsDate=" + vsDate + "]";
 	}
+	
+	
 }

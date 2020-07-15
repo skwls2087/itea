@@ -7,6 +7,26 @@
 <!-- myBatis-config.xml의     mapper로 반드시 등록되어야 한다 --> 
 <mapper namespace="admin">
 
+	<!-- 방문자수 추가 -->
+	<update id="setVisitTotalCount">
+		UPDATE visitor 
+		SET vscount = vscount+1 
+		where vsdate=#{vsdate}
+	</update> 
+	
+	<!-- 방문자수 조회 -->
+	<select id="setVisitTotalCount" resultType="int">
+		select vscount 
+		from visitor 
+		where vsdate=#{vsdate}
+	</select> 
+	
+	<!-- 방문자수 조회 -->
+	<select id="getVisitTotalCount" resultType="int">
+		select sum(vscount) 
+		from visitor
+	</select> 
+	
 	<!-- 전체회원 수 조회-->
 	<select id="totalCnt" resultType="int">
 		select  count(*) as totalCnt

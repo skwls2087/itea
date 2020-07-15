@@ -30,11 +30,12 @@ public class AdminController {
 						  HttpServletResponse response,MemberDTO mdto) throws Exception {
 		ArrayList member=new ArrayList();//단위기간별 방문자 데이터를 담을 객체 생성(기간별 방문자 통계)
 		member=adminSV.WeekMember(mdto);
-		HashMap map= new HashMap();
+		/*HashMap map= new HashMap();
 		map=(HashMap)adminSV.WeekMemberMap(mdto);
 		
-		System.out.println("con "+map);
-		request.setAttribute("map",map);
+		System.out.println("con map "+map);
+		request.setAttribute("map",map);*/
+		System.out.println("con member "+member);
 		request.setAttribute("member", member);
 		//------------------------------------------------------
 		String column=request.getParameter("column");

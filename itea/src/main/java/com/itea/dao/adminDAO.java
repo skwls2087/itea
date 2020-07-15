@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.itea.dto.MemberDTO;
+import com.itea.util.Visitor;
 
 public class adminDAO {
 	
@@ -22,6 +23,25 @@ public class adminDAO {
 	
 	
 	/*관리자페이지 홈화면-단위기간별 가입자 수 추이 구하기*/
+	
+	//방문자수 추가
+	public int setVisitTotalCount(Visitor visitor) throws Exception {
+		int vscount = (int)session.update("admin.setVisitTotalCount", visitor);
+		return vscount;
+	}
+	
+	//방문자수 조회
+	public int getVisitTodayCount(Visitor visitor) throws Exception {
+		int vscount = (int)session.selectOne("admin.getVisitTodayCount", visitor);
+		return vscount;
+	}
+	
+	//방문자수 조회
+	public int getVisitTotalCount(Visitor visitor) throws Exception {
+		int vscount = (int)session.selectOne("admin.getVisitTotalCount", visitor);
+		return vscount;
+	}
+	
 	
 	//한 주간 가입자 수 검색
 	public ArrayList<MemberDTO> WeekMember(MemberDTO mdto) throws Exception {
