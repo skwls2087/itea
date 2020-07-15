@@ -30,7 +30,7 @@ $( document ).ready(function() {
     data.addColumn('number', '가입자 수');
 
 		<c:forEach items="${member}" var="member">
-		    data.addRow(['${member.week }','${member.weekCnt}'])
+		    data.addRow(['${member.week}','${member.weekCnt}'])
 		</c:forEach>		
 				
     var options = {
@@ -83,7 +83,7 @@ $( document ).ready(function() {
 
 
 <c:forEach items="${member}" var="member">
-   ${member.week },${member.weekCnt}
+   ${member.week},${member.weekCnt}
 </c:forEach>	
 
 	

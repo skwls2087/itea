@@ -86,6 +86,7 @@ public class AdminService<Hashmap> {
 		ArrayList member= adminDAO.WeekMember(mdto);
 		ArrayList list = new ArrayList();
 		ArrayList cntList = new ArrayList();
+		
 		int sum = adminDAO.totalCount();
 		
 		for(int i=0;i<member.size();i++) {
@@ -117,24 +118,19 @@ public class AdminService<Hashmap> {
 				}else if(weekNum==7 || weekNum==0) {
 					week="토";
 				}
-				//System.out.println("service week "+week);
-				//System.out.println("service map "+map);
 				//map.put(week,(int)list.get(i));
+				//map.put("term",week);
+				//map.put("sum",(int)list.get(i));
+				
 				int weekCnt=(int)list.get(i);
 				mdto.setWeek(week);
 				mdto.setWeekCnt(weekCnt);
-				//map.put("term",week);
-				//map.put("sum",(int)list.get(i));
-				//cntList.add(map);
-				cntList.add(mdto);
+				cntList.add(new MemberDTO(week,weekCnt));
 			}
 			Collections.reverse(cntList); //리스트 순서를 반대로
 			System.out.println("service"+cntList);
 		return cntList;
 	}
-	
-	
-	
 	
 	
 	//회원 목록
