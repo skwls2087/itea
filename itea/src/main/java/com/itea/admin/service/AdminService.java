@@ -19,6 +19,7 @@ public class AdminService {
 	@Autowired
 	adminDAO adminDAO;
 	
+
 	//today,total 통계데이터 구하는 메서드
 	public Statistics staticService(MemberDTO mdto) throws Exception {
 		
@@ -27,6 +28,7 @@ public class AdminService {
 
 		int totalMember=adminDAO.totalCount();
 		int todayMember=adminDAO.TodayMember(mdto);
+		System.out.println("sercive todaymember "+todayMember);
 		
 		Calendar cal = Calendar.getInstance();
 		 
@@ -34,13 +36,11 @@ public class AdminService {
 		int year = cal.get ( Calendar.YEAR );
 		int month = cal.get ( Calendar.MONTH );
 		int date = cal.get ( Calendar.DATE );
-		String today=year+"-"+(month+1)+"-"+(date+1);
+		String today=year+"-"+(month+1)+"-"+(date);
 		Date now=Date.valueOf(today);
 		mdto.setMdate(now);
 		
 		memberStatistics.setTotalMember(totalMember);
-		memberStatistics.setTodayMember(todayMember);
-		
 		return memberStatistics;
 	}
 	
@@ -89,45 +89,6 @@ public class AdminService {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	//회원 목록
 	public PageUtil memberList(int page) throws Exception {
 		MemberDTO mdto = new MemberDTO();
@@ -170,6 +131,10 @@ public class AdminService {
 	public void deleteMember(String mnick) throws Exception {
 		adminDAO.deleteMember(mnick);
 	}
+
+
+	
+
 		
 	
 }

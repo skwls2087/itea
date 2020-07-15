@@ -1,7 +1,7 @@
 package com.itea.admin.controller;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,11 +32,9 @@ public class AdminController {
 		statistics=adminSV.staticService(mdto);//통계값 리턴받아 통계객체에 저장
 		term="week"; //기본 단위기간=일주일
 		member=adminSV.WeekMember(mdto);
-		System.out.println("가입자수 단위기간="+term);
 		request.setAttribute("stat",statistics);//페이지에서 출력할 통계 객체 request속성으로 전달
 		request.setAttribute("member", member);
 		request.setAttribute("term", term);
-		
 		//------------------------------------------------------
 		String column=request.getParameter("column");
 		String value=request.getParameter("value");
