@@ -87,8 +87,7 @@ public class AdminService<Hashmap> {
 		ArrayList list = new ArrayList();
 		ArrayList cntList = new ArrayList();
 		int sum = adminDAO.totalCount();
-		String week=mdto.getWeek();
-		int weekCnt= mdto.getWeekCnt();
+		
 		for(int i=0;i<member.size();i++) {
 			if(i!=0) {
 				int cntstr = (int) member.get(i);
@@ -102,7 +101,7 @@ public class AdminService<Hashmap> {
 			for(int i=0;i<7;i++) {
 				//HashMap<String,Integer> map = new HashMap<String,Integer>();
 				int weekNum=today.get(Calendar.DAY_OF_WEEK)-i; //오늘부터 7일전까지의 요일 구하기
-				week="";
+				String week="";
 				if(weekNum==1 || weekNum==-6 ) {
 					week="일";
 				}else if(weekNum==2 || weekNum==-5) {
@@ -121,13 +120,13 @@ public class AdminService<Hashmap> {
 				//System.out.println("service week "+week);
 				//System.out.println("service map "+map);
 				//map.put(week,(int)list.get(i));
-				weekCnt=(int)list.get(i);
+				int weekCnt=(int)list.get(i);
 				mdto.setWeek(week);
 				mdto.setWeekCnt(weekCnt);
 				//map.put("term",week);
 				//map.put("sum",(int)list.get(i));
 				//cntList.add(map);
-				cntList.add(week,weekCnt);
+				cntList.add(mdto);
 			}
 			Collections.reverse(cntList); //리스트 순서를 반대로
 			System.out.println("service"+cntList);

@@ -39,7 +39,6 @@ public class MemberDTO {
 		this.week=week;
 		this.weekCnt=weekCnt;
    }
-   
 
 	public String getWeek() {
 	return week;
@@ -182,12 +181,14 @@ public void setWeekCnt(int weekCnt) {
    public long getModifydate() {
       return modifydate;
    }
+
 @Override
 public String toString() {
 	return "MemberDTO [mno=" + mno + ", mclass=" + mclass + ", mmail=" + mmail + ", mpw=" + mpw + ", mname=" + mname
 			+ ", mphone=" + mphone + ", mnick=" + mnick + ", msex=" + msex + ", mbirth=" + mbirth + ", mgradu=" + mgradu
 			+ ", mdate=" + mdate + ", mnickdate=" + mnickdate + ", modifydate=" + modifydate + ", start=" + start
-			+ ", end=" + end + ", size=" + size + ", column=" + column + ", value=" + value + "]";
+			+ ", end=" + end + ", size=" + size + ", column=" + column + ", value=" + value + ", week=" + week
+			+ ", weekCnt=" + weekCnt + "]";
 }
    
    
