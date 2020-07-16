@@ -1,17 +1,11 @@
 package com.itea.admin.listener;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.List;
-
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
-
+import com.itea.admin.service.AdminService;
 import com.itea.dao.adminDAO;
 import com.itea.util.Visitor;
 
@@ -21,27 +15,28 @@ public class SessionListener implements HttpSessionListener {
     @Override
     public void sessionCreated(HttpSessionEvent se) {
     	System.out.print("세션시작-");
-    	HttpSession session = se.getSession();
     	
     	int todayCount = 0;
     	int totalCount = 0;
         adminDAO adminDAO = new adminDAO();
+        AdminService adminSV = new AdminService();
         Visitor vo = new Visitor();
         
         try {
-			todayCount = adminDAO.getVisitTodayCount(vo);
-			totalCount = adminDAO.getVisitTotalCount(vo);
-			if(todayCount!=0) {
-				adminDAO.setVisitTotalCount2(vo);
-			}else {
-				adminDAO.setVisitTotalCount1(vo);
-			}
+        	//전체 방문자수 +1
+        	adminSV.setVisitTotalCount(vo);
+        	// 오늘 방문자 수
+			todayCount = adminSV.getVisitTodayCount(vo);
+			// 전체 방문자 수
+			totalCount = adminSV.getVisitTotalCount(vo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
         System.out.print("세션시작-"+vo);
         System.out.print("세션시작-"+todayCount);
         System.out.print("세션시작-"+totalCount);
+        
+        HttpSession session = se.getSession();
         
         // 세션 속성에 담아준다.
         session.setAttribute("totalCount", totalCount); // 전체 방문자 수

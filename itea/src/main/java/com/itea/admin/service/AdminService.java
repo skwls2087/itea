@@ -57,8 +57,8 @@ public class AdminService<Hashmap> {
 		
 		String today=year+"-"+(month+1)+"-"+(date);
 		Date now=Date.valueOf(today);
-		
 		vo.setVsdate(now);
+		
 		int todayCount = adminDAO.getVisitTodayCount(vo);
 		
 		if(todayCount!=0) { //오늘 날짜의 방문자 데이터가 있으면

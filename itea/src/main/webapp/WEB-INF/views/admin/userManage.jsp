@@ -82,7 +82,9 @@ $( document ).ready(function() {
 	});
 </script>
 
-오늘 방문자 : ${visitor.todayCount} , 전체 방문자 : ${visitor.totalCount}
+전체 방문자 수: ${sessionScope.totalCount}
+
+오늘의 방문자 수: ${sessionScope.todayCount}
 <c:forEach items="${visitor}" var="visitor">
  			${visitor.week},${visitor.vscount}
 </c:forEach>
