@@ -8,21 +8,21 @@
 <mapper namespace="admin">
 
 	<!--  방문자수 추가-->
-	<insert id="setVisitTotalCount1" parameterType="visitor">
+	<insert id="setVisitTotalCount1">
 		insert INTO 
 		visitor (vsdate,vscount) 
 		values (#{vsdate},1)
 	</insert> 
 
 	<!--  방문자수 추가-->
-	<update id="setVisitTotalCount2" parameterType="visitor">
+	<update id="setVisitTotalCount2">
 		UPDATE visitor 
 		SET vscount = vscount+1 
 		where vsdate=#{vsdate}
 	</update> 
 	
 	<!--방문자수 조회 -->
-	<select id="getVisitTodayCount" parameterType="visitor" resultType="int">
+	<select id="getVisitTodayCount" resultType="int">
 		select vscount 
 		from visitor 
 		where vsdate = #{vsdate}

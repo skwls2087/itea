@@ -24,19 +24,17 @@ public class adminDAO {
 	/*관리자페이지 홈화면-단위기간별 가입자 수 추이 구하기*/
 	
 	//방문자수 추가
-	public int setVisitTotalCount1(Visitor vo) throws Exception {
+	public void setVisitTotalCount1(Visitor vo) throws Exception {
 		System.out.println("dao들어옴");
 		System.out.println("vo 1"+vo);
-		int vscount = (int)session.insert("admin.setVisitTotalCount1", vo);
+		session.insert("admin.setVisitTotalCount1", vo);
 		System.out.println("vo 2"+vo);
-		return vscount;
 	}
 	
 	//방문자수 추가
-	public int setVisitTotalCount2(Visitor vo) throws Exception {
+	public void setVisitTotalCount2(Visitor vo) throws Exception {
 		System.out.println("dao들어옴");
-		int vscount = (int)session.update("admin.setVisitTotalCount2", vo);
-		return vscount;
+		session.update("admin.setVisitTotalCount2", vo);
 	}
 	
 	//방문자수 조회 오늘

@@ -47,14 +47,12 @@ public class AdminService<Hashmap> {
 	}
 	
 	//방문자수 추가
-	public int setVisitTotalCount(Visitor vo) throws Exception {
+	public void setVisitTotalCount(Visitor vo) throws Exception {
 		Calendar cal = Calendar.getInstance();
-		 
 		//현재 년도, 월, 일
 		int year = cal.get ( Calendar.YEAR );
 		int month = cal.get ( Calendar.MONTH );
 		int date = cal.get ( Calendar.DATE );
-		
 		String today=year+"-"+(month+1)+"-"+(date);
 		Date now=Date.valueOf(today);
 		vo.setVsdate(now);
@@ -62,14 +60,13 @@ public class AdminService<Hashmap> {
 		int todayCount = adminDAO.getVisitTodayCount(vo);
 		
 		if(todayCount!=0) { //오늘 날짜의 방문자 데이터가 있으면
-			System.out.println("방문자수 1명 증가 ");
-			return adminDAO.setVisitTotalCount2(vo);
-		}else {
-			vo.setVsdate(now);
-			System.out.println(now+"일자 첫 방문자");
-			return adminDAO.setVisitTotalCount1(vo);
-		}
-	}	
+    		System.out.println("방문자수 1명 증가 ");
+    		adminDAO.setVisitTotalCount2(vo);
+    	}else {
+    		System.out.println("일자 첫 방문자");
+    		adminDAO.setVisitTotalCount1(vo);
+    	}
+	}
 	
 	//오늘 방문자 수 구하는 메서드
 	public int getVisitTodayCount(Visitor vo) throws Exception {
@@ -84,7 +81,6 @@ public class AdminService<Hashmap> {
 		vo.setVsdate(now);
 		
 		int todayCount = adminDAO.getVisitTodayCount(vo);
-		System.out.println("service "+now);
 		System.out.println("service "+todayCount);
 		return todayCount;
 	}
