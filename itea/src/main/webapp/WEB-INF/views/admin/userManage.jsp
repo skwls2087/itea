@@ -29,9 +29,10 @@ $( document ).ready(function() {
     data.addColumn('string', '날짜');
     data.addColumn('number', '가입자 수');
 
+   
 		<c:forEach items="${member}" var="member">
-		    data.addRow(['${member.week}','${member.weekCnt}'])
-		</c:forEach>		
+		 data.addRow(['${member.week}',${member.weekCnt}])
+		</c:forEach>	
 				
     var options = {
       hAxis: {
@@ -80,28 +81,22 @@ $( document ).ready(function() {
   	}
 	});
 </script>
-
-
-<c:forEach items="${member}" var="member">
-   ${member.week},${member.weekCnt}
-</c:forEach>	
-
 	
 <div id="admin" class="admin">
 	<!-- 기간별 회원 추이 그래프 -->
 	<div class="member-graph">
-		가입자 통계 그래프
+	일주일간 가입자 수(누적)
 	  <!-- 기간별 방문자 차트  -->
 	  <div id="chart_div1" class="col-md-6"/>
   </div>
 	
 	<!-- 기간별 방문자 추이 그래프 -->
 	<div class="visitor-graph">
-		방문자 통계 그래프
+	일주일간 방문자 수(누적)
 	  <!-- 기간별 방문자 차트  -->
 	  <div id="chart_div2" class="col-md-6"/>
   </div>
- </div>
+</div>
 <div class="admin-user">
 	<div class="admin-div">
 		<!-- 회원을 닉네임이나 아이디로 검색 가능 -->
