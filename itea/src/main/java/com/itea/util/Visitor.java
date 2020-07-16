@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Visitor {
 
-	private String term;
+	private String week;
 	private int sum;
 	private int vscount;
 	private Date vsDate;
@@ -13,9 +13,9 @@ public class Visitor {
 		
 	}
 	
-	public Visitor(String term,int sum) {
-		this.term = term;
-		this.sum = sum;
+	public Visitor(String week,int vscount) {
+		this.week = week;
+		this.vscount = vscount;
 	}
 	
 	
@@ -34,13 +34,15 @@ public class Visitor {
 	public void setVsDate(Date vsDate) {
 		this.vsDate = vsDate;
 	}
+	
+	public String getWeek() {
+		return week;
+	}
 
-	public String getTerm() {
-		return term;
+	public void setWeek(String week) {
+		this.week = week;
 	}
-	public void setTerm(String term) {
-		this.term = term;
-	}
+
 	public int getSum() {
 		return sum;
 	}
@@ -50,8 +52,10 @@ public class Visitor {
 
 	@Override
 	public String toString() {
-		return "Visitor [term=" + term + ", sum=" + sum + ", vscount=" + vscount + ", vsDate=" + vsDate + "]";
+		return "Visitor [week=" + week + ", sum=" + sum + ", vscount=" + vscount + ", vsDate=" + vsDate + "]";
 	}
 	
+	
+
 	
 }

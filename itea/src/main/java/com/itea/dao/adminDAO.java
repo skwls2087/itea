@@ -21,18 +21,23 @@ public class adminDAO {
 		this.sqlSession = session;  
 	}
 	
-	
 	/*관리자페이지 홈화면-단위기간별 가입자 수 추이 구하기*/
 	
 	//방문자수 추가
-	public int setVisitTotalCount(Visitor visitor) throws Exception {
-		int vscount = (int)session.update("admin.setVisitTotalCount", visitor);
+	public int setVisitTotalCount1(Visitor vo) throws Exception {
+		int vscount = (int)session.update("admin.setVisitTotalCount1", vo);
+		return vscount;
+	}
+	
+	//방문자수 추가
+	public int setVisitTotalCount2(Visitor vo) throws Exception {
+		int vscount = (int)session.update("admin.setVisitTotalCount2", vo);
 		return vscount;
 	}
 	
 	//방문자수 조회
-	public int getVisitTodayCount(Visitor visitor) throws Exception {
-		int vscount = (int)session.selectOne("admin.getVisitTodayCount", visitor);
+	public int getVisitTodayCount(Visitor vo) throws Exception {
+		int vscount = (int)session.selectOne("admin.getVisitTodayCount", vo);
 		return vscount;
 	}
 	
@@ -42,7 +47,7 @@ public class adminDAO {
 		return vscount;
 	}
 	
-	
+	//-------------------------------------------------------------------------------
 	//한 주간 가입자 수 검색
 	public ArrayList<MemberDTO> WeekMember(MemberDTO mdto) throws Exception {
 		ArrayList<MemberDTO> member = null;

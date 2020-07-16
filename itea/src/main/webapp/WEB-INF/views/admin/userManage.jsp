@@ -81,6 +81,8 @@ $( document ).ready(function() {
   	}
 	});
 </script>
+
+오늘 방문자 : ${visitor.todayCount} , 전체 방문자 : ${visitor.totalCount}
 	
 <div id="admin" class="admin">
 	<!-- 기간별 회원 추이 그래프 -->

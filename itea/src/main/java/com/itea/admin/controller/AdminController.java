@@ -1,10 +1,6 @@
 package com.itea.admin.controller;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.HashMap;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itea.admin.service.AdminService;
-import com.itea.dao.adminDAO;
 import com.itea.dto.MemberDTO;
 import com.itea.util.PageUtil;
 
@@ -30,8 +25,11 @@ public class AdminController {
 						  HttpServletResponse response,MemberDTO mdto) throws Exception {
 		ArrayList member=new ArrayList();//단위기간별 방문자 데이터를 담을 객체 생성(기간별 방문자 통계)
 		member=adminSV.WeekMember(mdto);
-		System.out.println("con member "+member);
 		request.setAttribute("member", member);
+		
+		
+		
+		
 		//------------------------------------------------------
 		String column=request.getParameter("column");
 		String value=request.getParameter("value");
