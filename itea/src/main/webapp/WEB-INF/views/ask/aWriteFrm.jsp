@@ -7,16 +7,31 @@ th {
 }
 </style>
 <script>
-function validateForm()
-{
+	$(function(){
+		$("#sBtn").click(function(){
+			if($("#atitle").val().length==0){
+				alert("제목을 입력하세요")
+				return false;
+			}
+			
+			var z = document.forms["aWriteFrm"]["pno"].value;
+		    if(!z.match(/^\d+/))
+		        {
+		        alert("문제번호는 숫자만 입력이 가능합니다")
+		        return false;
+		        }
+			
+			if($("#acontent").val().length==0){
+				alert("내용을 입력하세요")
+				return false;
+			}
+			
 
-    var z = document.forms["aWriteFrm"]["pno"].value;
-    if(!z.match(/^\d+/))
-        {
-        alert("문제번호는 숫자만 입력이 가능합니다")
-        return false;
-        }
-}
+		});
+		
+		
+	});
+
 </script>
 
 <div class="container">

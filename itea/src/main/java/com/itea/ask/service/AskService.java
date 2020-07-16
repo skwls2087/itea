@@ -113,8 +113,20 @@ public class AskService {
 	}
 
 	//댓글 삭제
-	public void askReplyDelete(int acno) {
-		askDAO.askReplyDelete(acno);
+	public void askReplyDelete(int acno, int acdepth) {
+		if(acdepth==0) {
+			askDAO.askReplyDelete(acno);
+		}else if(acdepth==1) {
+			askDAO.askcoReplyDelete(acno);
+		}
+		
 	}
+	
+	//대댓글 삽입
+	public void askcoReplyInsert(ReplyDTO replyDTO) {
+		askDAO.askcoReplyInsert(replyDTO);
+	}
+
+	
 
 }

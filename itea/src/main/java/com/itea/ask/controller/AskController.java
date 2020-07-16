@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -62,34 +61,77 @@ public class AskController {
 	
 	//글 상세보기  && 댓글 리스트
 	@RequestMapping("ask/askDetail")
-	public void askDetail(HttpServletRequest request,HttpSession session) {
+	public void askDetail(HttpServletRequest request,HttpSession session) throws Exception{
 		int ano=Integer.parseInt(request.getParameter("ano"));
 		int nowPage=Integer.parseInt(request.getParameter("nowPage"));
-		System.out.println("nowPage="+nowPage);
 		String userNick=(String) session.getAttribute("MNICK");
 		AskDTO askDTO = askSV.askDetail(ano);
 		ArrayList<ReplyDTO> list = askSV.replyList(ano);
 		askDTO.setNowPage(nowPage);
-		
+		request.setAttribute("list", list);
 		request.setAttribute("userNick", userNick);
 		request.setAttribute("askDTO", askDTO);
-		request.setAttribute("list", list);
+
 	}
 	
 	
 	//댓글 입력
 	@RequestMapping("ask/askReplyInsert")
-	public void askReplyInsert(ReplyDTO replyDTO,HttpSession session) {
-		String mnick = (String)session.getAttribute("MNICK");
-		replyDTO.setMnick(mnick);
+	public ModelAndView askReplyInsert(ReplyDTO replyDTO,HttpSession session,
+			HttpServletRequest request,ModelAndView mv) {
+		int ano = Integer.parseInt(request.getParameter("ano"));
+		int mno = (Integer) session.getAttribute("MNO");
+		int nowPage = Integer.parseInt(request.getParameter("nowPage"));
+		
+		replyDTO.setAcdepth(0);
+		replyDTO.setMno(mno);
+		replyDTO.setAno(ano);
+		System.out.println("replyDTO="+replyDTO);
 		askSV.askReplyInsert(replyDTO);
+		
+		mv.addObject("ano",ano);
+		mv.addObject("nowPage",nowPage);
+		mv.setViewName("redirect:askDetail.co");
+		
+		return mv;
+	}
+	
+	//대댓글 입력
+	@RequestMapping("ask/askcoReplyInsert")
+	public ModelAndView askcoReplyInsert(ReplyDTO replyDTO,HttpSession session,
+			HttpServletRequest request,ModelAndView mv) {
+		int ano = Integer.parseInt(request.getParameter("ano"));
+		int mno = (Integer) session.getAttribute("MNO");
+		int nowPage = Integer.parseInt(request.getParameter("nowPage"));
+		int acno = Integer.parseInt(request.getParameter("acno"));
+		
+		replyDTO.setMno(mno);
+		replyDTO.setAno(ano);
+		replyDTO.setAcdepth(1);
+		replyDTO.setAcparent(acno);
+		askSV.askcoReplyInsert(replyDTO);
+		
+		mv.addObject("ano",ano);
+		mv.addObject("nowPage",nowPage);
+		mv.setViewName("redirect:askDetail.co");
+		
+		return mv;
 	}
 	
 	//댓글 삭제
 	@RequestMapping("ask/askReplyDelete")
-	public void askReplyDelete(HttpServletRequest request) {
-		int acno = (Integer) request.getAttribute("acno");
-		askSV.askReplyDelete(acno);
+	public ModelAndView askReplyDelete(HttpServletRequest request,
+										ModelAndView mv) {
+		int acno = Integer.parseInt(request.getParameter("acno"));
+		int ano = Integer.parseInt(request.getParameter("ano"));
+		int nowPage = Integer.parseInt(request.getParameter("nowPage")); 
+		int acdepth = Integer.parseInt(request.getParameter("acdepth"));
+		askSV.askReplyDelete(acno,acdepth);
+		mv.addObject("ano",ano);
+		mv.addObject("nowPage",nowPage);
+		mv.setViewName("redirect:askDetail.co");
+		
+		return mv;
 	}
 	
 	
@@ -97,8 +139,9 @@ public class AskController {
 	@RequestMapping("ask/askModifyFrm")
 	public void askModifyFrm(HttpServletRequest request){
 		int ano = Integer.parseInt(request.getParameter("ano"));
+		int nowPage = Integer.parseInt(request.getParameter("nowPage")); 
 		AskDTO askDTO= askSV.askDetail(ano);
-		
+		askDTO.setNowPage(nowPage);
 		request.setAttribute("askDTO", askDTO);
 	}
 	
@@ -110,11 +153,15 @@ public class AskController {
 		String acontent=request.getParameter("acontent");
 		int pno=Integer.parseInt(request.getParameter("pno"));
 		int ano=Integer.parseInt(request.getParameter("ano"));
+		int nowPage = Integer.parseInt(request.getParameter("nowPage")); 
 		
 		AskDTO askDTO= new AskDTO(atitle,acontent,pno,ano);
+		askDTO.setNowPage(nowPage);
 		
 		askSV.askModifyProc(askDTO);
-		mv.setViewName("redirect:/ask/askDetail.co?ano="+ano);
+		mv.addObject("ano",ano);
+		mv.addObject("nowPage",nowPage);
+		mv.setViewName("redirect:/ask/askDetail.co");
 		return mv;
 			
 	}
@@ -137,7 +184,6 @@ public class AskController {
 		int ano=Integer.parseInt(request.getParameter("ano"));
 		int nowPage=Integer.parseInt(request.getParameter("nowPage"));
 
-		System.out.println("nowPage="+nowPage);
 		askSV.askCnt(ano,session);
 		mv.setViewName("redirect:/ask/askDetail.co?ano="+ano+"&nowPage="+nowPage);
 		return mv;
@@ -160,12 +206,6 @@ public class AskController {
 		request.setAttribute("list", list);
 		return "ask/askList";
 	}
-	
-	
-	
-
-	
-	
 	
 	
 }

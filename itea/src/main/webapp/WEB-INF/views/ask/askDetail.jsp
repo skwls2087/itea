@@ -4,6 +4,9 @@
 <style>
 	th{text-align:center}
 	.table{margin-top:100px}
+	.hide{display:none;}
+	#sBtn{height:85px;width:120px;}
+	#sBtn1{height:85px;width:120px;}
 </style>
 <script>
 	$(function(){
@@ -16,7 +19,7 @@
 				alert("작성자만이 게시글을 수정할 수 있습니다.");
 				return false;
 			};  
-			location.href="../ask/askModifyFrm.co?ano=${askDTO.ano}";
+			location.href="../ask/askModifyFrm.co?ano=${askDTO.ano}&nowPage=${askDTO.nowPage}";
 		});
 		
 		$("#dBtn").click(function(){
@@ -33,39 +36,37 @@
 			};
 		});	
 			
-		//댓글 삽입
-	/* 	$("#sBtn").click(function(){
+		$("#sBtn").click(function(){
 			if(${userNick==null}){
-				alert("작성자만이 게시글을 수정할 수 있습니다.");
-			}else if(${userNick != null}{
-				var accontent = $("#accontent").val();
-				var ano="${askDTO.ano}"
-				var param="accontent="+accontent+"&ano="+ano;
-				$.ajax({
-					type="post"
-					url:"${path}/ask/askReplyInsert.co"
-					data:param,
-					success: function(){
-						alert("댓글이 등록되었습니다.");
-						askReply2();
-					}
-				});
-			});	
-		});	 */
-	});
-	
-	
-	//댓글 목록 1
-	/* function askReply(){
-		$.ajax({
-			type:"get"
-			url:"${path}/ask/"
-		})
-	} */
-	
+				alert("회원만이 댓글을 등록할 수 있습니다.");
+				return false;
+			}
+			if($("#accontent").val().length==0){
+				alert("내용을 입력해주세요.")
+				return false;
+			}
+		});
+
+		$("#sBtn1").click(function(){
+			if(${userNick==null}){
+				alert("회원만이 댓글을 등록할 수 있습니다.");
+				return false;
+			}
+			if($("#accontent1").val().length==0){
+				alert("내용을 입력해주세요.")
+				return false;
+			}
+		});
+		
+		$(".tog").click(function(){
+			$(".hide").toggle();
+		});	
+
+			
+		
+	});	
 	
 </script>
-
 <div class="container">
 	<table class="table">
 		<tr>
@@ -95,30 +96,65 @@
 			</td>
 		</tr>
 	</table>
-	<form action="ask/askReplyInsert.co">
+	<form action="askReplyInsert.co">
 	<input type="hidden" name="ano" value="${askDTO.ano}"/>
+	<input type="hidden" name="nowPage" value="${askDTO.nowPage}"/>
 	<table class="table">
 		<tr>
-			<th>댓글</th>
-			<td colspan="2"><textarea name="accontent" cols="30" rows="3" class="form-control" placeholder="내용을 입력하세요"></textarea></td>
+			<td colspan="2"><textarea name="accontent" id="accontent" cols="70" rows="3" class="form-control" placeholder="댓글 내용을 입력하세요"></textarea></td>
 			<td><input type="submit" id="sBtn" value="등록" class="form-control"></td>
 		</tr>
 	</table>
 	</form>
-	<table>
-		<c:forEach var="reply" items="${list}">
+	<c:forEach var="reply" items="${list}">
+	<c:if test="${reply.acdepth==0}">
+	<form id="coReplyInsert" action="askcoReplyInsert.co">
+	<table class="table" style="margin-top:0px;">
 		<tr>
 			<td>
-				${reply.mnick}(<fmt:formatDate value="${reply.acdate}" pattern="yyyy-MM-dd a HH:mm:ss"/>)
+				${reply.mnick}(<fmt:formatDate value="${reply.acdate}" pattern="yyyy-MM-dd HH:mm:ss"/>)
 				<br>
 				${reply.accontent}
 				<br>
-				<a>답글쓰기</a> 
-				<c:if test="${userNick eq reply.mnick }">
-					<a href="ask/askReplyDelete.co?acno=${list.acno}">삭제</a>
+				<div class="tog">답글쓰기
+				<c:if test="${userNick eq reply.mnick}">
+					<a href="askReplyDelete.co?acdepth=${reply.acdepth}&acno=${reply.acno}&nowPage=${askDTO.nowPage}&ano=${askDTO.ano}">삭제</a>
+				</c:if>
+				</div>
+			</td>
+		</tr>
+		<tr class="hide">
+			<td>
+				<input type="hidden" name="ano" value="${askDTO.ano}"/>
+				<input type="hidden" name="nowPage" value="${askDTO.nowPage}"/>
+				<input type="hidden" name="acno" value="${reply.acno}"/>
+				<textarea name="accontent" id="accontent1" cols="70" rows="3" class="form-control" placeholder="답글 내용을 입력하세요"></textarea>
+			</td>
+			<td>
+				<input type="submit" id="sBtn1" value="등록" class="form-control">
+			</td>
+		</tr>
+	</table>	
+	</form>
+	</c:if>
+	<c:if test="${reply.acdepth==1}">
+	<table style="margin:0px 0px 30px 50px;">
+		<tr>
+			<td>
+				${reply.mnick}(<fmt:formatDate value="${reply.acdate}" pattern="yyyy-MM-dd HH:mm:ss"/>)
+				<br>
+				${reply.accontent}
+				<br>
+				<c:if test="${userNick eq reply.mnick}">
+					<a href="askReplyDelete.co?acdepth=${reply.acdepth}&acno=${reply.acno}&nowPage=${askDTO.nowPage}&ano=${askDTO.ano}">삭제</a>
 				</c:if>
 			</td>
 		</tr>
-		</c:forEach>
-	</table>
+	</table>	
+	</c:if>
+	</c:forEach>
 </div>
+
+
+
+

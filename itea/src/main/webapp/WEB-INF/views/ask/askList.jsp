@@ -26,13 +26,13 @@
 	<br>
 	<table class="table" style="text-align:center">
 		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>문제번호</th>
-			<th>자격증</th>
-			<th>작성자</th>
-			<th>등록일</th>
-			<th>조회수</th>
+			<th width="60">번호</th>
+			<th width="280">제목</th>
+			<th width="100">문제번호</th>
+			<th width="150">자격증</th>
+			<th width="90">작성자</th>
+			<th width="100">등록일</th>
+			<th width="70">조회수</th>
 		</tr>
 		<c:forEach var="ask" items="${list}">
 		<tr>

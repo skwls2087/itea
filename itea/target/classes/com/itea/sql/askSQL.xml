@@ -81,22 +81,40 @@
 		where ano=#{ano}
 	</update>
 	
-	<!-- 댓글 리스트(나중 수정해야됌) -->
+	<!-- 댓글 리스트 -->
 	<select id="replyList" resultType="replyDTO">
-		select * from askcoment
+		select acno,mnick,accontent, acdate,acdepth from askcoment a
+		join member m
+		on a.mno=m.mno
 		where ano=#{ano}
+		order by if(isnull(acparent),acno,acparent),acorder
 	</select>
+
 	
 	<!-- 댓글 삽입 -->
 	<insert id="askReplyInsert">
-		insert into askcoment(ano,mnick,accontent)
-		values(#{ano},#{mnick},#{accontent})
+		insert into askcoment(ano,mno,accontent,acdepth,acorder)
+		values(#{ano},#{mno},#{accontent},#{acdepth},1)
 	</insert>
+	
+	<!-- 대댓글 삽입 -->
+	<insert id="askcoReplyInsert">
+		insert into askcoment(ano,mno,accontent,acparent,acdepth,acorder)
+		values(#{ano},#{mno},#{accontent},#{acparent},#{acdepth},(select acorder from askcoment a where acno=#{acparent} order by acno desc limit 1)+1)
+	
+	</insert>
+	
 	
 	<!-- 댓글 삭제 -->
 	<delete id="askReplyDelete">
 		delete from askcoment
-		where acno=#{acno}
+		where acno=#{acno} or acparent=#{acno}
+	</delete>
+	
+	<!-- 대댓글 삭제 -->
+	<delete id="askcoReplyDelete">
+		delete from askcoment
+		wehre acno=#{acno}
 	</delete>
 	
 </mapper>

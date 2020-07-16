@@ -76,5 +76,17 @@ public class AskDAO {
 	public void askReplyDelete(int acno) {
 		session.delete("ask.askReplyDelete",acno);
 	}
+
+	//대댓글 삽입
+	public void askcoReplyInsert(ReplyDTO replyDTO) {
+		session.insert("ask.askcoReplyInsert",replyDTO);
+	}
+
+	//대댓글 삭제
+	public void askcoReplyDelete(int acno) {
+		session.delete("ask.askcoReplyDelete",acno);
+	}
+
+
 }
 
