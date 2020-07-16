@@ -1,7 +1,5 @@
 package com.itea.problem.controller;
 
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -37,8 +35,10 @@ public class SolveProblemController {
 		tinfo.put("qtype", qtype);
 		tinfo.put("qyear", qyear);
 		
-		List<ProblemDTO> problem=problemSV.selectProblem(tinfo);
-		System.out.println(problem);
+		List<ProblemDTO> probleminfo=problemSV.selectProblem(tinfo);
+		System.out.println(probleminfo);
+		
+		List<ProblemDTO> problem=problemSV.selectProblem2(probleminfo);
 		
 		return "";
 	}

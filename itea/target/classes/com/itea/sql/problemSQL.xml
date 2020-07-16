@@ -67,10 +67,15 @@
 		FROM problem AS p
 		join licenseclass AS l ON p.lqno=l.lqno
 		join member AS m ON m.mno=p.mno
-		WHERE l.lno=#{ckind} AND l.lqclass=#{ctype} AND m.mnick!='관리자'
-		<!-- <foreach collection="qyear" item="item">
+		WHERE l.lno=#{ckind} AND l.lqclass=#{ctype} AND m.mnick!='관리자' and (p.pyear=0
+		<foreach collection="qyear" item="item">
 			or pyear=#{item}
-		</foreach> -->
+		</foreach>
+		)
+	</select>
+	
+	<select id="selectProblem2" parameterType="Hashmap" resultType="problemDTO">
+		select * from problem
 	</select>
 	
 </mapper>

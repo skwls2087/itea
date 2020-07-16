@@ -61,5 +61,9 @@ public class ProblemDAO {
 		System.out.println("dao"+tinfo);
 		return session.selectList("problem.selectProblem",tinfo);
 	}
+
+	public List<ProblemDTO> selectProblem2(List<ProblemDTO> probleminfo) {
+		return session.selectList("problem.selectProblem2",probleminfo);
+	}
 	
 }

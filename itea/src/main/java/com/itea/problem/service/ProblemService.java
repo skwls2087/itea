@@ -47,4 +47,8 @@ public class ProblemService {
 		return problemDAO.selectProblem(tinfo);
 	}
 
+	public List<ProblemDTO> selectProblem2(List<ProblemDTO> probleminfo) {
+		return problemDAO.selectProblem2(probleminfo);
+	}
+
 }
