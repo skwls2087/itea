@@ -1,6 +1,7 @@
 package com.itea.admin.controller;
 
 import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.itea.admin.service.AdminService;
 import com.itea.dto.MemberDTO;
 import com.itea.util.PageUtil;
+import com.itea.util.Visitor;
 
 
 @Controller
@@ -22,13 +24,14 @@ public class AdminController {
 	
 	@RequestMapping("/memberList")
 	public String memberList(HttpServletRequest request, 
-						  HttpServletResponse response,MemberDTO mdto) throws Exception {
+						  HttpServletResponse response,MemberDTO mdto,Visitor vo) throws Exception {
 		ArrayList member=new ArrayList();//단위기간별 방문자 데이터를 담을 객체 생성(기간별 방문자 통계)
 		member=adminSV.WeekMember(mdto);
 		request.setAttribute("member", member);
 		
-		
-		
+		ArrayList visitor=new ArrayList();//단위기간별 방문자 데이터를 담을 객체 생성(기간별 방문자 통계)
+		visitor=adminSV.WeekVisitor(vo);
+		request.setAttribute("visitor", visitor);
 		
 		//------------------------------------------------------
 		String column=request.getParameter("column");

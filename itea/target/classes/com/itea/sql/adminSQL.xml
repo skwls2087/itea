@@ -11,29 +11,37 @@
 	<insert id="setVisitTotalCount1">
 		insert INTO 
 		visitor (vsdate,vscount) 
-		values (now(),1)
+		values (#{vsdate},1)
 	</insert> 
 
 	<!--  방문자수 추가-->
 	<update id="setVisitTotalCount2">
 		UPDATE visitor 
 		SET vscount = vscount+1 
-		where vsdate=now()
+		where vsdate=#{vsdate}
 	</update> 
 	
 	<!--방문자수 조회 -->
-	<select id="setVisitTodayCount">
+	<select id="getVisitTodayCount" resultType="int">
 		select vscount 
 		from visitor 
-		WHERE FORMAT(vsdate, 'YYYY-MM-DD') = FORMAT(now(), 'YYYY-MM-DD')
+		WHERE vsdate=#{vsdate} 
 	</select> 
 	
 	<!-- 방문자수 조회 -->
-	<select id="getVisitTotalCount">
-		select sum(vscount) as sum
+	<select id="getVisitTotalCount" resultType="int">
+		select sum(vscount)
 		from visitor
 	</select>
-	
+
+	<!-- 한 주간 방문자 수 검색-->
+	<select id="WeekVisitor" resultType="int">
+		select vscount
+		from visitor 
+		group by vsdate
+		desc limit 7
+	</select>
+
 	<!-- 전체회원 수 조회-->
 	<select id="totalCnt" resultType="int">
 		select  count(*) as totalCnt
@@ -67,6 +75,7 @@
 		limit #{start},#{size}
 	</select>
 	
+	<!-- 회원 닉네임 검색-->
 	<select id="memberSearchMnick" resultType="memberDTO" parameterType="memberDTO">
 	select mnick,mmail,mclass,mname,mphone,mdate
 	from member
@@ -76,6 +85,7 @@
 	limit #{start},#{size}
 	</select>
 	
+	<!-- 회원 이메일 검색-->
 	<select id="memberSearchMmail" resultType="memberDTO" parameterType="memberDTO">
 	select mnick,mmail,mclass,mname,mphone,mdate
 	from member
@@ -85,6 +95,7 @@
 	limit #{start},#{size}
 	</select>
 	
+	<!-- 회원 닉네임 검색-->
 	<select id="mCntMnick" resultType="int" parameterType="string">
 	select count(*)
 	from member
@@ -92,13 +103,13 @@
 	and mnick!='관리자'
 	</select> 
 	
+	<!-- 회원 이메일 검색-->
 	<select id="mCntMmail" resultType="int" parameterType="string">
 	select count(*)
 	from member
 	where mmail like CONCAT('%',#{value},'%')
 	and mnick!='관리자'
 	</select> 
-	
 	
 	<!-- 회원탈퇴 -->
 	<delete id="deleteMember">

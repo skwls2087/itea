@@ -36,13 +36,14 @@ public class SessionListener implements HttpSessionListener {
         try {
 			todayCount = adminDAO.getVisitTodayCount(vo);
 			totalCount = adminDAO.getVisitTotalCount(vo);
-			adminDAO.setVisitTotalCount1(vo);
-			adminDAO.setVisitTotalCount2(vo);
-			
+			if(todayCount!=0) {
+				adminDAO.setVisitTotalCount2(vo);
+			}else {
+				adminDAO.setVisitTotalCount1(vo);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-        
         // 세션 속성에 담아준다.
         session.setAttribute("totalCount", totalCount); // 전체 방문자 수
         session.setAttribute("todayCount", todayCount); // 오늘 방문자 수

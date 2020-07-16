@@ -35,17 +35,26 @@ public class adminDAO {
 		return vscount;
 	}
 	
-	//방문자수 조회
+	//방문자수 조회 오늘
 	public int getVisitTodayCount(Visitor vo) throws Exception {
 		int vscount = (int)session.selectOne("admin.getVisitTodayCount", vo);
 		return vscount;
 	}
 	
-	//방문자수 조회
-	public int getVisitTotalCount(Visitor visitor) throws Exception {
-		int vscount = (int)session.selectOne("admin.getVisitTotalCount", visitor);
+	//방문자수 조회 총
+	public int getVisitTotalCount(Visitor vo) throws Exception {
+		int vscount = (int)session.selectOne("admin.getVisitTotalCount", vo);
+		System.out.println("dao "+vscount);
 		return vscount;
 	}
+	
+	//한 주간 방문자 수 검색
+	public ArrayList<MemberDTO> WeekVisitor(Visitor vo) throws Exception {
+		ArrayList<MemberDTO> visitor = null;
+		visitor=(ArrayList)session.selectList("admin.WeekVisitor", vo);
+		return visitor;
+	}
+		
 	
 	//-------------------------------------------------------------------------------
 	//한 주간 가입자 수 검색

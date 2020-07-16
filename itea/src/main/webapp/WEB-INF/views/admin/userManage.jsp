@@ -62,7 +62,7 @@ $( document ).ready(function() {
     data.addColumn('number', '방문자 수');
 
     <c:forEach items="${visitor}" var="visitor">
- 			data.addRow(['${visitor.term}','${visitor.sum}'])
+ 			data.addRow(['${visitor.week}','${visitor.vscount}'])
  		</c:forEach>
    
     var options = {

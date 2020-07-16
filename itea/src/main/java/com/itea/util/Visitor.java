@@ -7,7 +7,7 @@ public class Visitor {
 	private String week;
 	private int sum;
 	private int vscount;
-	private Date vsDate;
+	private Date vsdate;
 	
 	public Visitor() {
 		
@@ -17,24 +17,7 @@ public class Visitor {
 		this.week = week;
 		this.vscount = vscount;
 	}
-	
-	
-	public int getVscount() {
-		return vscount;
-	}
 
-	public void setVscount(int vscount) {
-		this.vscount = vscount;
-	}
-
-	public Date getVsDate() {
-		return vsDate;
-	}
-
-	public void setVsDate(Date vsDate) {
-		this.vsDate = vsDate;
-	}
-	
 	public String getWeek() {
 		return week;
 	}
@@ -46,15 +29,32 @@ public class Visitor {
 	public int getSum() {
 		return sum;
 	}
+
 	public void setSum(int sum) {
 		this.sum = sum;
 	}
 
-	@Override
-	public String toString() {
-		return "Visitor [week=" + week + ", sum=" + sum + ", vscount=" + vscount + ", vsDate=" + vsDate + "]";
+	public int getVscount() {
+		return vscount;
+	}
+
+	public void setVscount(int vscount) {
+		this.vscount = vscount;
 	}
 	
+	
+	public Date getVsdate() {
+		return vsdate;
+	}
+
+	public void setVsdate(Date vsdate) {
+		this.vsdate = vsdate;
+	}
+
+	@Override
+	public String toString() {
+		return "Visitor [week=" + week + ", sum=" + sum + ", vscount=" + vscount + ", vsdate=" + vsdate + "]";
+	}
 	
 
 	

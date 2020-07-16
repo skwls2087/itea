@@ -54,25 +54,25 @@ public class AdminService<Hashmap> {
 		int year = cal.get ( Calendar.YEAR );
 		int month = cal.get ( Calendar.MONTH );
 		int date = cal.get ( Calendar.DATE );
+		
 		String today=year+"-"+(month+1)+"-"+(date);
 		Date now=Date.valueOf(today);
-		vo.setVsDate(now);
+		
+		vo.setVsdate(now);
 		int todayCount = adminDAO.getVisitTodayCount(vo);
 		
 		if(todayCount!=0) { //오늘 날짜의 방문자 데이터가 있으면
 			System.out.println("방문자수 1명 증가 ");
 			return adminDAO.setVisitTotalCount2(vo);
 		}else {
-			vo.setVsDate(now);
+			vo.setVsdate(now);
 			System.out.println(now+"일자 첫 방문자");
 			return adminDAO.setVisitTotalCount1(vo);
 		}
 	}	
 	
 	//오늘 방문자 수 구하는 메서드
-	public int getVisitTodayCount(Connection conn) throws SQLException {
-		String sql = "select vscount from visitor where vsdate=?";
-		
+	public int getVisitTodayCount(Visitor vo) throws Exception {
 		Calendar cal = Calendar.getInstance();
 		
 		//현재 년도, 월, 일
@@ -80,41 +80,32 @@ public class AdminService<Hashmap> {
 		int month = cal.get ( Calendar.MONTH );
 		int date = cal.get ( Calendar.DATE );
 		String today=year+"-"+(month+1)+"-"+(date+1);
-		
 		Date now=Date.valueOf(today);
+		vo.setVsDate(now);
 		
-		pstmt.setDate(1, now);
-		rs=pstmt.executeQuery();
-		rs.next();
-		return rs.getInt(1);
+		return adminDAO.getVisitTodayCount(vo);
 	}
 	
 	//전체 방문자 수 구하는 메서드
-		public int getVisitTotalCount(Connection conn) throws SQLException {
-			String sql = "select sum(vscount) from visitor";
-			
-			pstmt = conn.prepareStatement(sql);
-			rs=pstmt.executeQuery();
-			
-			rs.next();
-			return rs.getInt(1);
+	public int getVisitTotalCount(Visitor vo) throws Exception {
+		return adminDAO.getVisitTotalCount(vo);
 	}
 	
 		
 	//visitor 통계데이터 구하는 메서드	
 	public ArrayList WeekVisitor(Visitor vo) throws Exception {
 		Calendar today = Calendar.getInstance();
-		ArrayList member= adminDAO.WeekMember(mdto);
+		ArrayList visitor= adminDAO.WeekVisitor(vo);
 		ArrayList list = new ArrayList();
 		ArrayList cntList = new ArrayList();
 		
-		int sum = adminDAO.totalCount();
+		int sum = adminDAO.getVisitTotalCount(vo);
 		
-		for(int i=0;i<member.size();i++) {
+		for(int i=0;i<visitor.size();i++) {
 			if(i!=0) {
-				int cntstr = (int) member.get(i);
-				//System.out.println("service cntstr "+cntstr);
-				//System.out.println("service member "+(int) member.get(i-1));
+				int cntstr = (int) visitor.get(i);
+				System.out.println("service cntstr "+cntstr);
+				System.out.println("service member "+(int) visitor.get(i));
 				sum = sum-cntstr;
 			}
 			list.add(sum);
@@ -142,13 +133,13 @@ public class AdminService<Hashmap> {
 				//map.put("term",week);
 				//map.put("sum",(int)list.get(i));
 				
-				int weekCnt=(int)list.get(i);
-				mdto.setWeek(week);
-				mdto.setWeekCnt(weekCnt);
-				cntList.add(new MemberDTO(week,weekCnt));
+				int vscount=(int)list.get(i);
+				vo.setWeek(week);
+				vo.setVscount(vscount);
+				cntList.add(new Visitor(week,vscount));
 			}
 			Collections.reverse(cntList); //리스트 순서를 반대로
-			//System.out.println("service"+cntList);
+			System.out.println("service"+cntList);
 		return cntList;
 	}	
 	
