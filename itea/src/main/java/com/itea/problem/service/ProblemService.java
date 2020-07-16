@@ -42,13 +42,21 @@ public class ProblemService {
 	public void insertEssay(ProblemDTO pDTO) {
 		problemDAO.insertEssay(pDTO);
 	}
-
+	//선택한 조건에 맞는 문제리스트 
 	public List<ProblemDTO> selectProblem(HashMap tinfo) {
 		return problemDAO.selectProblem(tinfo);
 	}
-
-	public List<ProblemDTO> selectProblem2(List<ProblemDTO> probleminfo) {
-		return problemDAO.selectProblem2(probleminfo);
+	//객관식 선지리스트 구하기
+	public List<HashMap> selectChoice(int pno) {
+		return problemDAO.selectChoice(pno);
+	}
+	//객관식 답 구하기
+	public String selectChoiceCorrect(int pno) {
+		return problemDAO.selectChoiceCorrect(pno);
+	}
+	//주관서술 답리스트 구하기
+	public List<HashMap> selectCorrectList(int pno) {
+		return problemDAO.selectCorrectList(pno);
 	}
 
 }

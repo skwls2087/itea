@@ -62,8 +62,16 @@ public class ProblemDAO {
 		return session.selectList("problem.selectProblem",tinfo);
 	}
 
-	public List<ProblemDTO> selectProblem2(List<ProblemDTO> probleminfo) {
-		return session.selectList("problem.selectProblem2",probleminfo);
+	public List<HashMap> selectChoice(int pno) {
+		return session.selectList("problem.selectChoice",pno);
+	}
+
+	public String selectChoiceCorrect(int pno) {
+		return session.selectOne("problem.selectChoiceCorrect",pno);
+	}
+
+	public List<HashMap> selectCorrectList(int pno) {
+		return session.selectList("problem.selectCorrectList",pno);
 	}
 	
 }

@@ -33,4 +33,15 @@
 		<beans:property name="defaultEncoding" value="UTF-8" />
 	</beans:bean>
 	
+	<!-- 로그인 체크 인터셉터 추가 -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/problem/createProblem.co"/>
+			<mapping path="/problem/solveProblem.co"/>
+			
+			<beans:bean class="com.itea.util.LoginCheck" />
+		</interceptor>
+	</interceptors>
+	
+	
 </beans:beans>

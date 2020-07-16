@@ -74,8 +74,19 @@
 		)
 	</select>
 	
-	<select id="selectProblem2" parameterType="Hashmap" resultType="problemDTO">
-		select * from problem
+	<!-- 객관식 선지리스트 -->
+	<select id="selectChoice" parameterType="int" resultType="Hashmap">
+		SELECT pccontent FROM pchoice WHERE pno=#{pno} order by pcnumber
+	</select>
+	
+	<!-- 객관식 정답 받기 -->
+	<select id="selectChoiceCorrect" parameterType="int" resultType="string">
+		SELECT lcor FROM correct WHERE pno=#{pno}
+	</select>
+	
+	<!-- 주관식서술형 정답 리스트 -->
+	<select id="selectCorrectList" parameterType="int" resultType="Hashmap">
+		SELECT lcor FROM correct WHERE pno=#{pno}
 	</select>
 	
 </mapper>

@@ -17,6 +17,16 @@
 	    </div></td>
     </tr>
     
+    <tr>
+    <td colspan="2">
+    <div>
+    	<div class="img_wrap">
+    		<img id="img">
+    	</div>
+    </div>
+    </td>
+    </tr>
+    
     <!-- 지문 -->
    	<div class="form-group">
    	<!-- 1번 -->

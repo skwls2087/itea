@@ -51,6 +51,32 @@ $(function(){
 		}
 	});
 	
+	//파일첨부 미리보기
+	var sel_file;
+	$(document).ready(function(){
+		$("#problemFile").on("change",handleImgFileSelect);
+	})
+	function handleImgFileSelect(e){
+		alert("c")
+		var files=e.target.files;
+		var filesArr=Array.prototype.slice.call(files);
+		
+		filesArr.forEach(function(f){
+			if(!f.type.match("image.*")){
+				alert("이미지만 첨부 가능합니다.")
+				return;
+			}
+			
+			sel_file=f;
+			
+			var reader=new FileReader();
+			reader.onload=function(e){
+				$("#img").attr("src",e.target.result);
+			}
+			reader.readAsDataURL(f);
+		})
+	}
+	
 	//객관식:문제 출제 유효성검사
 	$("#create-problem-submit").click(function(){
 		if($("#pdetail").val()==""){

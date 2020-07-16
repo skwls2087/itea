@@ -1,5 +1,6 @@
 package com.itea.problem.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -36,10 +37,54 @@ public class SolveProblemController {
 		tinfo.put("qyear", qyear);
 		
 		List<ProblemDTO> probleminfo=problemSV.selectProblem(tinfo);
-		System.out.println(probleminfo);
+		List<ProblemDTO> problemList = new ArrayList<ProblemDTO>();
+
+		for(ProblemDTO problem:probleminfo) {
+			int pno=problem.getPno();
+			//객관식일 때
+			if(problem.getPtype()==1) {
+				
+				//문제 선지 구하기
+				List<HashMap> choice=problemSV.selectChoice(pno);
+	
+				List<String> list=new ArrayList<String>();
+				for(HashMap map:choice) {
+					list.add((String) map.get("pccontent"));
+				}
+				
+				String[] simpleArray = new String[4];
+				String[] choicelist=list.toArray(simpleArray);
+				
+				problem.setChoice(choicelist);
+				
+				//문제 답 구하기
+				String choiceCorrect=problemSV.selectChoiceCorrect(pno);
+				
+				problem.setCorrect(choiceCorrect);
+			}else{//주관식,객관식일 때
+				
+				//문제 답 구하기
+				List<HashMap> Corrects=problemSV.selectCorrectList(pno);
+				List<String> list=new ArrayList<String>();
+				
+				for(HashMap map:Corrects) {
+					list.add((String) map.get("lcor"));
+				}
+				
+				String[] simpleArray = new String[Corrects.size()];
+				String[] CorrectList=list.toArray(simpleArray);
+				
+				problem.setCorrectList(CorrectList);
+				
+			}
+			
+			
+			problemList.add(problem);
+			System.out.println(problemList);
+		}
+
+		request.setAttribute("problemList", problemList);
 		
-		List<ProblemDTO> problem=problemSV.selectProblem2(probleminfo);
-		
-		return "";
+		return "problem/problemProc";
 	}
 }
