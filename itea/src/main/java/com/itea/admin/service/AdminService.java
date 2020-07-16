@@ -57,9 +57,7 @@ public class AdminService<Hashmap> {
 		Date now=Date.valueOf(today);
 		vo.setVsdate(now);
 		
-		int todayCount = adminDAO.getVisitTodayCount(vo);
-		
-		if(todayCount!=0) { //오늘 날짜의 방문자 데이터가 있으면
+		if(adminDAO.getVisitTodayCount(vo)!=0) { //오늘 날짜의 방문자 데이터가 있으면
     		System.out.println("방문자수 1명 증가 ");
     		adminDAO.setVisitTotalCount2(vo);
     	}else {
@@ -71,7 +69,6 @@ public class AdminService<Hashmap> {
 	//오늘 방문자 수 구하는 메서드
 	public int getVisitTodayCount(Visitor vo) throws Exception {
 		Calendar cal = Calendar.getInstance();
-		
 		//현재 년도, 월, 일
 		int year = cal.get ( Calendar.YEAR );
 		int month = cal.get ( Calendar.MONTH );

@@ -20,12 +20,15 @@ public class SessionListener implements HttpSessionListener {
         
         	int todayCount;
         	int totalCount;
-        	AdminService adminSV = new AdminService();
         	Visitor vo = new Visitor();
+        	
+        	HttpSession session = se.getSession();
+        	ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(session.getServletContext()); 
+        	AdminService adminSV = (AdminService) context.getBean("adminSV");
         	
         	try {
         	//전체 방문자수 +1
-        		adminSV.setVisitTotalCount(vo);
+        	adminSV.setVisitTotalCount(vo);
         	// 오늘 방문자 수
 			todayCount = adminSV.getVisitTodayCount(vo);
 			// 전체 방문자 수
@@ -34,10 +37,6 @@ public class SessionListener implements HttpSessionListener {
 			System.out.print("세션시작-"+vo);
 			System.out.print("세션시작-"+todayCount);
 			System.out.print("세션시작-"+totalCount);
-			
-			HttpSession session = se.getSession();
-			ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(session.getServletContext()); 
-			adminSV = (AdminService) context.getBean("adminSV");
 			
 			// 세션 속성에 담아준다.
 			session.setAttribute("totalCount", totalCount); // 전체 방문자 수

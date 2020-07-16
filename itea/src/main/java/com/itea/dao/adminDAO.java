@@ -1,14 +1,14 @@
 package com.itea.dao;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.itea.dto.MemberDTO;
 import com.itea.util.Visitor;
-
+@Repository
 public class adminDAO {
 	
 	@Autowired

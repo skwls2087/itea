@@ -22,7 +22,7 @@
 	</update> 
 	
 	<!--방문자수 조회 -->
-	<select id="getVisitTodayCount" resultType="int">
+	<select id="getVisitTodayCount" parameterType="visitor" resultType="int">
 		select vscount 
 		from visitor 
 		where vsdate = #{vsdate}
