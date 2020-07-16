@@ -37,15 +37,17 @@ public class adminDAO {
 	
 	//방문자수 조회 오늘
 	public int getVisitTodayCount(Visitor vo) throws Exception {
-		int vscount = (int)session.selectOne("admin.getVisitTodayCount", vo);
-		return vscount;
+		int todayCount = (int)session.selectOne("admin.getVisitTodayCount", vo);
+		System.out.println("dao today "+vo);
+		System.out.println("dao today "+todayCount);
+		return todayCount;
 	}
 	
 	//방문자수 조회 총
 	public int getVisitTotalCount(Visitor vo) throws Exception {
-		int vscount = (int)session.selectOne("admin.getVisitTotalCount", vo);
-		System.out.println("dao "+vscount);
-		return vscount;
+		int totalCount = (int)session.selectOne("admin.getVisitTotalCount", vo);
+		System.out.println("dao total "+totalCount);
+		return totalCount;
 	}
 	
 	//한 주간 방문자 수 검색

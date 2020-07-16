@@ -62,7 +62,7 @@ $( document ).ready(function() {
     data.addColumn('number', '방문자 수');
 
     <c:forEach items="${visitor}" var="visitor">
- 			data.addRow(['${visitor.week}','${visitor.vscount}'])
+ 			data.addRow(['${visitor.week}',${visitor.vscount}])
  		</c:forEach>
    
     var options = {
@@ -83,7 +83,10 @@ $( document ).ready(function() {
 </script>
 
 오늘 방문자 : ${visitor.todayCount} , 전체 방문자 : ${visitor.totalCount}
-	
+<c:forEach items="${visitor}" var="visitor">
+ 			${visitor.week},${visitor.vscount}
+</c:forEach>
+ 			
 <div id="admin" class="admin">
 	<!-- 기간별 회원 추이 그래프 -->
 	<div class="member-graph">

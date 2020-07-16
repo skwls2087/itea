@@ -79,18 +79,22 @@ public class AdminService<Hashmap> {
 		int year = cal.get ( Calendar.YEAR );
 		int month = cal.get ( Calendar.MONTH );
 		int date = cal.get ( Calendar.DATE );
-		String today=year+"-"+(month+1)+"-"+(date+1);
+		String today=year+"-"+(month+1)+"-"+(date);
 		Date now=Date.valueOf(today);
-		vo.setVsDate(now);
+		vo.setVsdate(now);
 		
-		return adminDAO.getVisitTodayCount(vo);
+		int todayCount = adminDAO.getVisitTodayCount(vo);
+		System.out.println("service "+now);
+		System.out.println("service "+todayCount);
+		return todayCount;
 	}
 	
 	//전체 방문자 수 구하는 메서드
 	public int getVisitTotalCount(Visitor vo) throws Exception {
-		return adminDAO.getVisitTotalCount(vo);
+		int totalCount =  adminDAO.getVisitTotalCount(vo);
+		System.out.println("service "+totalCount);
+		return totalCount;
 	}
-	
 		
 	//visitor 통계데이터 구하는 메서드	
 	public ArrayList WeekVisitor(Visitor vo) throws Exception {
@@ -105,7 +109,7 @@ public class AdminService<Hashmap> {
 			if(i!=0) {
 				int cntstr = (int) visitor.get(i);
 				System.out.println("service cntstr "+cntstr);
-				System.out.println("service member "+(int) visitor.get(i));
+				System.out.println("service visitor "+(int) visitor.get(i));
 				sum = sum-cntstr;
 			}
 			list.add(sum);
@@ -129,10 +133,6 @@ public class AdminService<Hashmap> {
 				}else if(weekNum==7 || weekNum==0) {
 					week="토";
 				}
-				//map.put(week,(int)list.get(i));
-				//map.put("term",week);
-				//map.put("sum",(int)list.get(i));
-				
 				int vscount=(int)list.get(i);
 				vo.setWeek(week);
 				vo.setVscount(vscount);

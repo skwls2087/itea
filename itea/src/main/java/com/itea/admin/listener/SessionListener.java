@@ -20,17 +20,12 @@ public class SessionListener implements HttpSessionListener {
 
     @Override
     public void sessionCreated(HttpSessionEvent se) {
-    //Spring 컨테이너에 등록된 특정 객체를 호출하고자 할 때는 
-   	//ApplicationContext를 이용해 원하는 객체를 주입받는다.	
     	System.out.print("세션시작-");
     	HttpSession session = se.getSession();
-    	ApplicationContext context = 
-    			WebApplicationContextUtils.getWebApplicationContext(session.getServletContext()); 
     	
     	int todayCount = 0;
     	int totalCount = 0;
-        
-        adminDAO adminDAO = (adminDAO)context.getBean("adminDAO");
+        adminDAO adminDAO = new adminDAO();
         Visitor vo = new Visitor();
         
         try {
@@ -44,6 +39,10 @@ public class SessionListener implements HttpSessionListener {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+        System.out.print("세션시작-"+vo);
+        System.out.print("세션시작-"+todayCount);
+        System.out.print("세션시작-"+totalCount);
+        
         // 세션 속성에 담아준다.
         session.setAttribute("totalCount", totalCount); // 전체 방문자 수
         session.setAttribute("todayCount", todayCount); // 오늘 방문자 수
