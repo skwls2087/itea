@@ -4,9 +4,10 @@
 <style>
 	th{text-align:center}
 	.table{margin-top:100px}
-	.hide{display:none;}
 	#sBtn{height:85px;width:120px;}
 	#sBtn1{height:85px;width:120px;}
+	.show {display:block}
+	.hide {display:none}
 </style>
 <script>
 	$(function(){
@@ -58,13 +59,39 @@
 			}
 		});
 		
-		$(".tog").click(function(){
-			$(".hide").toggle();
-		});	
-
-			
-		
+ 	 	$(".tog").click(function(){
+			$(this).parents('tr').next().toggle();
+		});	 	 
 	});	
+
+	function hide_function(){
+		$(".hide").toggle();
+	}
+	
+	
+	
+	/* $(document).ready(function(){
+
+	      div = $('.tog'); //버튼 아이디 변수 선언
+
+	      layer = $('.hide'); //레이어 아이디 변수 선언
+	      
+
+	      for (var i; i<)
+	      div.click(function(){
+
+	         layer.toggle(
+
+	           function(){layer.addClass('show')}, //클릭하면 show클래스 적용되서 보이기
+
+	           function(){layer.addClass('hide')} //한 번 더 클릭하면 hide클래스가 숨기기
+
+	         );
+
+	       });
+
+	     }); */
+	
 	
 </script>
 <div class="container">
@@ -116,7 +143,7 @@
 				<br>
 				${reply.accontent}
 				<br>
-				<div class="tog">답글쓰기
+				<div class="tog" onclick="hide_function">답글쓰기
 				<c:if test="${userNick eq reply.mnick}">
 					<a href="askReplyDelete.co?acdepth=${reply.acdepth}&acno=${reply.acno}&nowPage=${askDTO.nowPage}&ano=${askDTO.ano}">삭제</a>
 				</c:if>
