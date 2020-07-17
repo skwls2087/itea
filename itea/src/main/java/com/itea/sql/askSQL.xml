@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- xml선언부-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ask">
+	
+	<!-- 페이징 처리 -->
+	<select id="getTotalCnt" resultType="int">
+		select count(*) from askboard
+	</select>
+	
+	<!-- 검색 -->
+	<select id="search" resultType="askDTO">
+		SELECT k.ano,atitle,k.pno,p.mnick,k.lname,adate,ahit FROM
+		(SELECT ano,atitle,aplc.pno,l.lname,adate,ahit from
+		(SELECT ano,atitle,lc.lno,ap.pno,lc.lqno,adate,ahit FROM
+		(SELECT askboard.pno,ano, problem.lqno, atitle, adate, ahit FROM 
+				askboard JOIN problem ON askboard.pno=problem.pno) ap
+		JOIN licenseClass lc ON ap.lqno=lc.lqno) aplc
+		JOIN license l ON aplc.lno=l.lno)k
+		join
+		(SELECT ano, a.mno, m.mnick from
+		askboard a JOIN member m ON a.mno=m.mno) p
+		ON p.ano=k.ano
+		where atitle like '%${search}%'
+		ORDER BY k.ano desc	
+		LIMIT #{start}, #{size}
+	</select>
+	
+	
+	
+	<!-- 게시판 목록 -->
+	<select id="list" resultType="askDTO">
+		SELECT k.ano,atitle,k.pno,p.mnick,k.lname,adate,ahit FROM
+		(SELECT ano,atitle,aplc.pno,l.lname,adate,ahit from
+		(SELECT ano,atitle,lc.lno,ap.pno,lc.lqno,adate,ahit FROM
+		(SELECT askboard.pno,ano, problem.lqno, atitle, adate, ahit FROM 
+				askboard JOIN problem ON askboard.pno=problem.pno) ap
+		JOIN licenseClass lc ON ap.lqno=lc.lqno) aplc
+		JOIN license l ON aplc.lno=l.lno)k
+		join
+		(SELECT ano, a.mno, m.mnick from
+		askboard a JOIN member m ON a.mno=m.mno) p
+		ON p.ano=k.ano
+		ORDER BY k.ano desc	
+		LIMIT #{start}, #{size}	
+	</select>
+	
+	<!-- 게시글 입력 -->
+	<insert id="aWriteProc">
+		insert into askboard(mno,pno,atitle,acontent)
+		values(#{mno},#{pno},#{atitle},#{acontent})
+	</insert>
+	
+	<!-- 상세보기 -->
+	<select id="askDetail" resultType="askDTO">
+		select ano,atitle,a.pno,l.lname,mnick,acontent
+		from askboard a ,problem p ,license l, member m, licenseclass lc
+		where a.pno=p.pno and lc.lqno=p.lqno and lc.lno=l.lno and a.mno=m.mno and a.ano=#{ano} 
+	</select>
+	
+	<!-- 게시글 수정 -->
+	<update id="askModifyProc">
+		update askboard
+		set atitle=#{atitle},
+			acontent=#{acontent},
+			pno=#{pno}
+		where ano=#{ano}
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="askDelete">
+		delete from askboard
+		where ano=#{ano}
+	</delete>
+	
+	<!-- 조회수 증가 -->
+	<update id="askCnt">
+		update askboard
+		set ahit=ahit+1
+		where ano=#{ano}
+	</update>
+	
+	<!-- 댓글 리스트 -->
+	<select id="replyList" resultType="replyDTO">
+		select acno,mnick,accontent, acdate,acdepth from askcoment a
+		join member m
+		on a.mno=m.mno
+		where ano=#{ano}
+		order by if(isnull(acparent),acno,acparent),acorder
+	</select>
+
+	
+	<!-- 댓글 삽입 -->
+	<insert id="askReplyInsert">
+		insert into askcoment(ano,mno,accontent,acdepth,acorder)
+		values(#{ano},#{mno},#{accontent},#{acdepth},1)
+	</insert>
+	
+	<!-- 대댓글 삽입 -->
+	<insert id="askcoReplyInsert">
+		insert into askcoment(ano,mno,accontent,acparent,acdepth,acorder)
+		values(#{ano},#{mno},#{accontent},#{acparent},#{acdepth},(select acorder from askcoment a where acno=#{acparent} order by acno desc limit 1)+1)
+	
+	</insert>
+	
+	
+	<!-- 댓글 삭제 -->
+	<delete id="askReplyDelete">
+		delete from askcoment
+		where acno=#{acno} or acparent=#{acno}
+	</delete>
+	
+	<!-- 대댓글 삭제 -->
+	<delete id="askcoReplyDelete">
+		delete from askcoment
+		wehre acno=#{acno}
+	</delete>
+	
+</mapper>
+	
