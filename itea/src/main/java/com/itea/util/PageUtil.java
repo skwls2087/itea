@@ -65,7 +65,7 @@ public class PageUtil {
 		calcEndPage();
 	}
 	
-
+	
 	//	1.총 페이지수 계산
 	private	void calcTotalPage() {
 		//	총 페이지 수는 전체 게시물 개수를 한페이지당 보여줄 개수로 나눈 결과이다.
