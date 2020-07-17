@@ -69,30 +69,6 @@
 	}
 	
 	
-	
-	/* $(document).ready(function(){
-
-	      div = $('.tog'); //버튼 아이디 변수 선언
-
-	      layer = $('.hide'); //레이어 아이디 변수 선언
-	      
-
-	      for (var i; i<)
-	      div.click(function(){
-
-	         layer.toggle(
-
-	           function(){layer.addClass('show')}, //클릭하면 show클래스 적용되서 보이기
-
-	           function(){layer.addClass('hide')} //한 번 더 클릭하면 hide클래스가 숨기기
-
-	         );
-
-	       });
-
-	     }); */
-	
-	
 </script>
 <div class="container">
 	<table class="table">
@@ -118,8 +94,10 @@
 		<tr>
 			<td colspan="4" class="text-right">
 				<input type="button" id="lBtn" value="목록"/>
+				<c:if test="${userNick!=null}">
 				<input type="button" id="mBtn" value="수정"/>
 				<input type="button" id="dBtn" value="삭제"/>
+				</c:if>
 			</td>
 		</tr>
 	</table>
@@ -143,7 +121,7 @@
 				<br>
 				${reply.accontent}
 				<br>
-				<div class="tog" onclick="hide_function">답글쓰기
+				<div class="tog">답글쓰기
 				<c:if test="${userNick eq reply.mnick}">
 					<a href="askReplyDelete.co?acdepth=${reply.acdepth}&acno=${reply.acno}&nowPage=${askDTO.nowPage}&ano=${askDTO.ano}">삭제</a>
 				</c:if>
