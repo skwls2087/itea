@@ -21,6 +21,12 @@ public class MemberDTO {
    private Date mnickdate;
    private long modifydate;
    
+   private int start;
+   private int end;
+   private int size=5;
+   private String column;
+   private String value;
+   
    public int getMno() {
       return mno;
    }
@@ -92,7 +98,45 @@ public class MemberDTO {
       return mnickdate;
    }
    
-   public void setMnickdate(Date mnickdate) {
+   
+   public int getStart() {
+	return start;
+	}
+	public void setStart(int start) {
+		this.start = start;
+	}
+	public int getEnd() {
+		return end;
+	}
+	public void setEnd(int end) {
+		this.end = end;
+	}
+	
+	public int getSize() {
+			return size;
+	}
+	
+	public void setSize(int size) {
+		this.size = size;
+	}
+	
+	
+	public String getColumn() {
+		return column;
+	}
+	public void setColumn(String column) {
+		this.column = column;
+	}
+	public String getValue() {
+		return value;
+	}
+	public void setValue(String value) {
+		this.value = value;
+	}
+	public void setModifydate(long modifydate) {
+		this.modifydate = modifydate;
+	}
+	public void setMnickdate(Date mnickdate) {
 	   Calendar cal=new GregorianCalendar();
 	   Date now=new Date(cal.getTimeInMillis());	      
       System.out.println(now);
@@ -108,13 +152,16 @@ public class MemberDTO {
    public long getModifydate() {
       return modifydate;
    }
+@Override
+public String toString() {
+	return "MemberDTO [mno=" + mno + ", mclass=" + mclass + ", mmail=" + mmail + ", mpw=" + mpw + ", mname=" + mname
+			+ ", mphone=" + mphone + ", mnick=" + mnick + ", msex=" + msex + ", mbirth=" + mbirth + ", mgradu=" + mgradu
+			+ ", mdate=" + mdate + ", mnickdate=" + mnickdate + ", modifydate=" + modifydate + ", start=" + start
+			+ ", end=" + end + ", size=" + size + ", column=" + column + ", value=" + value + "]";
+}
+   
+   
 
-   @Override
-   public String toString() {
-      return "MemberDTO [mno=" + mno + ", mclass=" + mclass + ", mmail=" + mmail + ", mpw=" + mpw + ", mname=" + mname
-            + ", mphone=" + mphone + ", mnick=" + mnick + ", msex=" + msex + ", mbirth=" + mbirth + ", mgradu="
-            + mgradu + ", mdate=" + mdate + ", mnickdate=" + mnickdate + "]";
-   }
    
    
 }

@@ -1,10 +1,16 @@
 package com.itea.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.itea.dto.MemberDTO;
+
 public class PageUtil {
 	
 	//	꼭 필요한 정보
 	private	int	nowPage;		//	보고싶은 페이지
 	private	int	totalCount;		//	총 데이터 개수
+	private List<MemberDTO> content;	//화면에 출력할 회원 목록
 	
 	//	보조적으로 필요한 정보
 	private	int	lineCount;		//	한페이지당 보여주고 싶은 게시물의 개수
@@ -16,6 +22,39 @@ public class PageUtil {
 	private	int	startPage;		//	페이지 이동 기능이 몇페이지 부터 만들지를 지정한다.
 	private	int	endPage;		//	페이지 이동 기능을 몇페이지까지 만들지를 지정한다.
 	
+	/*public PageUtil(int nowPage, int totalCount) {
+		this(nowPage, totalCount, 5, 5);
+	}*/
+	
+	//(전체회원수, 보고싶은페이지,한페이지당 게시글수, content)
+	public PageUtil(int totalCount, int nowPage, int size, ArrayList<MemberDTO> content) {
+		this.totalCount = totalCount;
+		this.nowPage = nowPage;
+		this.content = content;
+		if (totalCount == 0) { //등록된 게시글이 0건일경우
+			totalPage = 0;
+			startPage = 0;
+			endPage = 0;
+		} else { //등록된 게시글이 1건이상 존재한다면 
+			totalPage = totalCount / size; // 10=109/10  9  
+		    //전체 페이지수  = 전체게시물수 /한페이지당 게시글수;
+			if (totalCount % size > 0) {
+				totalPage++;  //나머지 게시물을 출력하기위한 페이지를 추가
+			}
+			//아래의 5값은  한번에 출력하고 싶은 페이지개수를 뜻한다
+			int modVal = nowPage % 5;   //보고싶은페이지10%5  1 2 3 4
+			startPage = nowPage / 5 * 5 + 1; //시작페이지=10/5*5+1
+		   //시작 페이지번호=   보고싶은페이지 / 5 * 5 + 1;
+			if (modVal == 0) startPage -= 5; //startPage=startPage-5
+			endPage = startPage + 4;
+		  //끝 페이지번호= 시작 페이지번호  + 4      
+			//끝페이지번호가   실제총페이지수보다 크게 되면
+			//끝페이지번호를  실제총페이수로 조정하여
+			//비어있는 페이지가 발생되지 않도록 한다
+			if (endPage > totalPage) endPage = totalPage;
+		}
+	}
+	
 	public PageUtil(int nowPage, int totalCount, int lineCount, int pageGroup) {
 		this.nowPage 	= nowPage;
 		this.totalCount = totalCount;
@@ -26,7 +65,7 @@ public class PageUtil {
 		calcEndPage();
 	}
 	
-	
+
 	//	1.총 페이지수 계산
 	private	void calcTotalPage() {
 		//	총 페이지 수는 전체 게시물 개수를 한페이지당 보여줄 개수로 나눈 결과이다.
@@ -103,6 +142,14 @@ public class PageUtil {
 		this.endPage = endPage;
 	}
 	
+	public List<MemberDTO> getContent() {
+		return content;
+	}
+
+	public void setContent(List<MemberDTO> content) {
+		this.content = content;
+	}
+
 	@Override
 	public String toString() {
 		return "PageUtil [nowPage=" + nowPage + ", totalCount=" + totalCount + ", lineCount=" + lineCount

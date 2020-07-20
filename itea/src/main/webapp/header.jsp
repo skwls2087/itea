@@ -53,7 +53,7 @@
         <a class="nav-link" href="<%= request.getContextPath()%>/problem/problemMain.co">문제풀이</a>
       </li>
       <li class="nav-item  m-2">
-        <a class="nav-link" href="#">질문/토론</a>
+        <a class="nav-link" href="<%= request.getContextPath()%>/ask/askList.co">질문/토론</a>
       </li>
       <li class="nav-item  m-2">
         <a class="nav-link" href="#">채팅방</a>
@@ -85,6 +85,9 @@
 		        <div class="dropdown"> 
 			        <a id="mNick" class="dropdown-toggle" href="#" data-toggle="dropdown"> ${MNICK}님 </a> 
 			        <div class="dropdown-menu"> 
+			        <c:if test="${MNICK eq '관리자' }">
+			       	  <a class="dropdown-item" href="<%= request.getContextPath()%>/admin/memberList.co">회원관리</a> 
+			       	</c:if>  
 				        <a class="dropdown-item" href="<%= request.getContextPath()%>/member/modifyFrm.co">정보수정</a> 
 				        <a class="dropdown-item" href="<%= request.getContextPath()%>/member/logoutProc.co">로그아웃</a> 
 			        </div> 
