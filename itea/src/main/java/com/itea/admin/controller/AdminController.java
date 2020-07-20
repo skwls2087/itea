@@ -1,5 +1,7 @@
 package com.itea.admin.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.itea.admin.service.AdminService;
 import com.itea.dto.MemberDTO;
 import com.itea.util.PageUtil;
+import com.itea.util.Visitor;
+
 
 @Controller
 @RequestMapping("/admin")
@@ -18,15 +22,21 @@ public class AdminController {
 	@Autowired
 	AdminService adminSV;
 	
-	
 	@RequestMapping("/memberList")
 	public String memberList(HttpServletRequest request, 
-						  HttpServletResponse response,MemberDTO mdto) throws Exception {
+						  HttpServletResponse response,MemberDTO mdto,Visitor vo) throws Exception {
+		ArrayList member=new ArrayList();//단위기간별 방문자 데이터를 담을 객체 생성(기간별 방문자 통계)
+		member=adminSV.WeekMember(mdto);
+		request.setAttribute("member", member);
 		
+		ArrayList visitors=new ArrayList();//단위기간별 방문자 데이터를 담을 객체 생성(기간별 방문자 통계)
+		visitors=adminSV.WeekVisitor(vo);
+		request.setAttribute("visitors", visitors);
+		
+		//------------------------------------------------------
 		String column=request.getParameter("column");
 		String value=request.getParameter("value");
 		String nowPage=request.getParameter("nowPage");
-		System.out.println("controller1 "+column+"/"+value+"/"+nowPage);
 		
 		mdto.setColumn(column);
 		mdto.setValue(value);
@@ -35,22 +45,18 @@ public class AdminController {
 		int pageNo;
 		
 		if(column==null) {//검색 안했을 때
-			System.out.println("전체회원출력-검색어 없음");
 			if(nowPage==null) {//처음화면
 				pageNo=1;
 			}else {//페이지 눌렀을 때
 				pageNo=Integer.parseInt(nowPage);
-				System.out.println("관리자페이지-회원목록 "+pageNo+"페이지");
 			}
 			pinfo=adminSV.memberList(pageNo);
 			
 		}else {//검색 했을 때
-			System.out.print("검색된 회원출력:");
 			if(nowPage==null) {//처음화면
 				pageNo=1;
 			}else { //페이지 눌렀을 때
 				pageNo=Integer.parseInt(nowPage);
-				System.out.println("관리자페이지-회원목록 "+pageNo+"페이지");
 			}
 			
 			if(column.equals("mnick")) {
@@ -64,10 +70,8 @@ public class AdminController {
 		request.setAttribute("column",column);
 		request.setAttribute("value",value);
 		request.setAttribute("PINFO",pinfo);
-		System.out.println("controller2 "+pinfo);
 		return "/admin/userManage";
 	}
-	
 	
 	
 	//회원탈퇴

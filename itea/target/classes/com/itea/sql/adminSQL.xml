@@ -7,6 +7,56 @@
 <!-- myBatis-config.xml의     mapper로 반드시 등록되어야 한다 --> 
 <mapper namespace="admin">
 
+	<!--  방문자수 추가-->
+	<insert id="setVisitTotalCount">
+		INSERT INTO visitor(vsdate,vscount) VALUES (date_format(now(), '%Y-%m-%d'),1)
+		ON DUPLICATE KEY UPDATE vscount = vscount + 1
+	</insert> 
+	
+	<!--방문자수 조회 -->
+	<select id="getVisitTodayCount" resultType="int">
+		SELECT vscount
+		from visitor 
+		where vsdate = date_format(now(), '%Y-%m-%d')
+	</select> 
+	
+	<!-- 방문자수 조회 -->
+	<select id="getVisitTotalCount" resultType="int">
+		select sum(vscount)
+		from visitor
+	</select>
+
+	<!-- 한 주간 방문자 수 검색-->
+	<select id="WeekVisitor" resultType="int">
+		select vscount
+		from visitor 
+		group by vsdate
+		desc limit 7
+	</select>
+
+	<!-- 전체회원 수 조회-->
+	<select id="totalCnt" resultType="int">
+		select  count(*) as totalCnt
+		from 		member
+		where mnick!='관리자'
+	</select> 
+
+	<!-- 한 주간 가입자 수 검색-->
+	<select id="WeekMember" resultType="int">
+		select count(*) as weekCnt
+		from member 
+		where mnick!='관리자'
+		group by mdate
+		desc limit 7
+	</select>
+	
+	<!-- 하루 가입자 수 검색-->
+	<select id="TodayMember" resultType="int">
+		select count(*) 
+		from member 
+		where mdate=#{mdate}
+	</select>
+
 	<!-- 회원리스트 조예인-->
 	<select id="memberList" resultType="memberDTO">
 		select mnick,mmail,mclass,mname,mphone,mdate
@@ -16,13 +66,7 @@
 		limit #{start},#{size}
 	</select>
 	
-	<!-- 전체게시물 수 조회-->
-	<select id="totalCnt" resultType="int">
-		select  count(*)
-		from 		member
-		where mnick!='관리자'
-	</select> 
-	
+	<!-- 회원 닉네임 검색-->
 	<select id="memberSearchMnick" resultType="memberDTO" parameterType="memberDTO">
 	select mnick,mmail,mclass,mname,mphone,mdate
 	from member
@@ -32,6 +76,7 @@
 	limit #{start},#{size}
 	</select>
 	
+	<!-- 회원 이메일 검색-->
 	<select id="memberSearchMmail" resultType="memberDTO" parameterType="memberDTO">
 	select mnick,mmail,mclass,mname,mphone,mdate
 	from member
@@ -41,6 +86,7 @@
 	limit #{start},#{size}
 	</select>
 	
+	<!-- 회원 닉네임 검색-->
 	<select id="mCntMnick" resultType="int" parameterType="string">
 	select count(*)
 	from member
@@ -48,13 +94,13 @@
 	and mnick!='관리자'
 	</select> 
 	
+	<!-- 회원 이메일 검색-->
 	<select id="mCntMmail" resultType="int" parameterType="string">
 	select count(*)
 	from member
 	where mmail like CONCAT('%',#{value},'%')
 	and mnick!='관리자'
 	</select> 
-	
 	
 	<!-- 회원탈퇴 -->
 	<delete id="deleteMember">

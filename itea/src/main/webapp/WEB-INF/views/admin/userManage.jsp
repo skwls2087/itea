@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<!-- 방문자수 그래프를 위한 구글차트 사용 -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
 function checkForm() {
     if(document.getElementById("member-content").value==""){
@@ -16,13 +17,83 @@ function checkDelete(mnick){
 		return false;
 	}
 }
+
+$( document ).ready(function() {
+
+	google.charts.load('current', {packages: ['corechart', 'line']});
+	google.charts.setOnLoadCallback(drawCurveTypes);
+
+	function drawCurveTypes() {
+    var data = new google.visualization.DataTable();
+    
+    data.addColumn('string', '날짜');
+    data.addColumn('number', '가입자 수');
+
+   
+		<c:forEach items="${member}" var="member">
+		 data.addRow(['${member.week}',${member.weekCnt}])
+		</c:forEach>	
+				
+    var options = {
+      lineWidth: 2,
+      series: {
+    	  legend: { position: 'bottom' },
+      	0: { color: '#166ADC' },
+    	  1: {curveType: 'function'}
+      }
+    };
+    var chart = new google.visualization.LineChart(document.getElementById('chart_div1'));
+    chart.draw(data, options);
+  	}
+	});
+//--------------------------------------------------------------------------------------------	
+$( document ).ready(function() {
+
+	google.charts.load('current', {packages: ['corechart', 'line']});
+	google.charts.setOnLoadCallback(drawCurveTypes);
+
+	function drawCurveTypes() {
+    var data = new google.visualization.DataTable();
+    
+    data.addColumn('string', '날짜');
+    data.addColumn('number', '방문자 수');
+
+    <c:forEach items="${visitors}" var="visitor">
+ 			data.addRow(['${visitor.week}',${visitor.vscount}])
+ 		</c:forEach>
+   
+    var options = {
+   		lineWidth: 2,
+   	      series: {
+   	    	  legend: { position: 'bottom' },
+   	      	0: { color: '#CF2F11' },
+   	    	  1: {curveType: 'function'}
+   	      }
+   	    };
+    var chart = new google.visualization.LineChart(document.getElementById('chart_div2'));
+    chart.draw(data, options);
+  	}
+});
 </script>
 
+<div id="admin" class="admin">
+	<!-- 기간별 회원 추이 그래프 -->
+	<div class="member-graph">
+	<b>일주일간 가입자 수(누적)</b>
+	  <!-- 기간별 방문자 차트  -->
+	  <div id="chart_div1"/>
+	 </div>
+	 	<!-- 기간별 방문자 추이 그래프 -->
+	<div class="visitor-graph">
+	<b>일주일간 방문자 수(누적)</b>
+	  <!-- 기간별 방문자 차트  -->
+	  <div id="chart_div2"/>
+  </div>
+</div>
 <div class="admin-user">
-	
 	<div class="admin-div">
 		<!-- 회원을 닉네임이나 아이디로 검색 가능 -->
-		<div class="board-search">
+		<div class="board-search text-right">
 			<form action="<%= request.getContextPath()%>/admin/memberList.co" name="user-search" 
 				method ="get" class="user-search" onsubmit="return checkForm();">
 				<div class="insertFavorite pull-right">
