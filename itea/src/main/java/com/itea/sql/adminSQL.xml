@@ -8,24 +8,16 @@
 <mapper namespace="admin">
 
 	<!--  방문자수 추가-->
-	<insert id="setVisitTotalCount1">
-		insert INTO 
-		visitor (vsdate,vscount) 
-		values (#{vsdate},1)
+	<insert id="setVisitTotalCount">
+		INSERT INTO visitor(vsdate,vscount) VALUES (date_format(now(), '%Y-%m-%d'),1)
+		ON DUPLICATE KEY UPDATE vscount = vscount + 1
 	</insert> 
-
-	<!--  방문자수 추가-->
-	<update id="setVisitTotalCount2">
-		UPDATE visitor 
-		SET vscount = vscount+1 
-		where vsdate=#{vsdate}
-	</update> 
 	
 	<!--방문자수 조회 -->
-	<select id="getVisitTodayCount" parameterType="visitor" resultType="int">
-		select vscount 
+	<select id="getVisitTodayCount" resultType="int">
+		SELECT vscount
 		from visitor 
-		where vsdate = #{vsdate}
+		where vsdate = DATE_FORMAT(#{vsdate}, '%Y-%m-%d')
 	</select> 
 	
 	<!-- 방문자수 조회 -->

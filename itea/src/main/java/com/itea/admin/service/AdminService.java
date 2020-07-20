@@ -1,12 +1,12 @@
 package com.itea.admin.service;
 
-import java.sql.Connection;
 import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -57,26 +57,18 @@ public class AdminService<Hashmap> {
 		Date now=Date.valueOf(today);
 		vo.setVsdate(now);
 		
-		if(adminDAO.getVisitTodayCount(vo)!=0) { //오늘 날짜의 방문자 데이터가 있으면
-    		System.out.println("방문자수 1명 증가 ");
-    		adminDAO.setVisitTotalCount2(vo);
-    	}else {
-    		System.out.println("일자 첫 방문자");
-    		adminDAO.setVisitTotalCount1(vo);
-    	}
+    	adminDAO.setVisitTotalCount();
 	}
 	
 	//오늘 방문자 수 구하는 메서드
 	public int getVisitTodayCount(Visitor vo) throws Exception {
 		Calendar cal = Calendar.getInstance();
-		//현재 년도, 월, 일
 		int year = cal.get ( Calendar.YEAR );
 		int month = cal.get ( Calendar.MONTH );
 		int date = cal.get ( Calendar.DATE );
 		String today=year+"-"+(month+1)+"-"+(date);
 		Date now=Date.valueOf(today);
 		vo.setVsdate(now);
-		
 		int todayCount = adminDAO.getVisitTodayCount(vo);
 		System.out.println("service "+todayCount);
 		return todayCount;

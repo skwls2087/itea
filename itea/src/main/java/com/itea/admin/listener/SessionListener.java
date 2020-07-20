@@ -18,29 +18,29 @@ public class SessionListener implements HttpSessionListener {
     public void sessionCreated(HttpSessionEvent se) {
     	System.out.print("세션시작-");
         
-        	int todayCount;
-        	int totalCount;
-        	Visitor vo = new Visitor();
-        	
-        	HttpSession session = se.getSession();
-        	ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(session.getServletContext()); 
-        	AdminService adminSV = (AdminService) context.getBean("adminSV");
-        	
-        	try {
-        	//전체 방문자수 +1
-        	adminSV.setVisitTotalCount(vo);
-        	// 오늘 방문자 수
-			todayCount = adminSV.getVisitTodayCount(vo);
-			// 전체 방문자 수
-			totalCount = adminSV.getVisitTotalCount(vo);
-			
-			System.out.print("세션시작-"+vo);
-			System.out.print("세션시작-"+todayCount);
-			System.out.print("세션시작-"+totalCount);
-			
-			// 세션 속성에 담아준다.
-			session.setAttribute("totalCount", totalCount); // 전체 방문자 수
-			session.setAttribute("todayCount", todayCount); // 오늘 방문자 수
+    	int todayCount;
+    	int totalCount;
+    	Visitor vo = new Visitor();
+    	
+    	HttpSession session = se.getSession();
+    	ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(session.getServletContext()); 
+    	AdminService adminSV = (AdminService) context.getBean(AdminService.class,"adminSV");
+    	
+    	try {
+    	//전체 방문자수 +1
+    	adminSV.setVisitTotalCount(vo);
+    	// 오늘 방문자 수
+		todayCount = adminSV.getVisitTodayCount(vo);
+		// 전체 방문자 수
+		totalCount = adminSV.getVisitTotalCount(vo);
+		
+		System.out.print("세션시작-"+vo);
+		System.out.print("세션시작-"+todayCount);
+		System.out.print("세션시작-"+totalCount);
+		
+		// 세션 속성에 담아준다.
+		session.setAttribute("totalCount", totalCount); // 전체 방문자 수
+		session.setAttribute("todayCount", todayCount); // 오늘 방문자 수
 		} catch (Exception e) {
 			e.printStackTrace();
 			
