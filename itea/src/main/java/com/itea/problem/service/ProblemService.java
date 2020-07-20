@@ -43,11 +43,15 @@ public class ProblemService {
 		problemDAO.insertEssay(pDTO);
 	}
 	//선택한 조건에 맞는 문제리스트 
-	public List<ProblemDTO> selectProblem(HashMap tinfo) {
-		return problemDAO.selectProblem(tinfo);
+	public List<String> selectPnoList(HashMap tinfo) {
+		return problemDAO.selectPnoList(tinfo);
+	}
+	//해당 문제의 기본정보
+	public ProblemDTO problemInfo(int pno) {
+		return problemDAO.problemInfo(pno);
 	}
 	//객관식 선지리스트 구하기
-	public List<HashMap> selectChoice(int pno) {
+	public List<Object> selectChoice(int pno) {
 		return problemDAO.selectChoice(pno);
 	}
 	//객관식 답 구하기
@@ -55,8 +59,10 @@ public class ProblemService {
 		return problemDAO.selectChoiceCorrect(pno);
 	}
 	//주관서술 답리스트 구하기
-	public List<HashMap> selectCorrectList(int pno) {
+	public List<Object> selectCorrectList(int pno) {
 		return problemDAO.selectCorrectList(pno);
 	}
+
+	
 
 }

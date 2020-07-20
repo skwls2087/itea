@@ -1,6 +1,7 @@
 package com.itea.dto;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -8,6 +9,7 @@ public class ProblemDTO {
 
 	private int pno; //문제번호
 	private int mno; //출제자
+	private String mnick; //출제자 닉네임
 	private int lqno; //자격증코드
 	private int pyear; //출제년도
 	private int ptype; //객관1,주관2,서술3
@@ -46,6 +48,14 @@ public class ProblemDTO {
 
 	public void setMno(int mno) {
 		this.mno = mno;
+	}
+
+	public String getMnick() {
+		return mnick;
+	}
+
+	public void setMnick(String mnick) {
+		this.mnick = mnick;
 	}
 
 	public int getLqno() {
@@ -154,12 +164,12 @@ public class ProblemDTO {
 
 	@Override
 	public String toString() {
-		return "ProblemDTO [pno=" + pno + ", mno=" + mno + ", lqno=" + lqno + ", pyear=" + pyear + ", ptype=" + ptype
-				+ ", pdetail=" + pdetail + ", pcomment=" + pcomment + ", plike=" + plike + ", phate=" + phate
-				+ ", file=" + file + ", pimg=" + pimg + ", choice=" + Arrays.toString(choice) + ", correct=" + correct
-				+ ", correctList=" + Arrays.toString(correctList) + ", pyearList=" + Arrays.toString(pyearList) + "]";
+		return "ProblemDTO [pno=" + pno + ", mno=" + mno + ", mnick=" + mnick + ", lqno=" + lqno + ", pyear=" + pyear
+				+ ", ptype=" + ptype + ", pdetail=" + pdetail + ", pcomment=" + pcomment + ", plike=" + plike
+				+ ", phate=" + phate + ", file=" + file + ", pimg=" + pimg + ", choice=" + Arrays.toString(choice)
+				+ ", correct=" + correct + ", correctList=" + Arrays.toString(correctList) + ", pyearList="
+				+ Arrays.toString(pyearList) + "]";
 	}
-	
-	
-	
+
+
 }

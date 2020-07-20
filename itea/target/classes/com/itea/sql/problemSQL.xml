@@ -52,7 +52,6 @@
 	</insert>
 	
 	<!-- 주관식 서술형 답안 입력 -->
-
 	<insert id="insertCorrectList" parameterType="problemDTO">
 		INSERT INTO correct (pno,lcor) 
 		VALUES 
@@ -62,20 +61,34 @@
 	</insert>
 	
 	<!-- 문제풀기-문제번호리스트 -->
-	<select id="selectProblem" parameterType="Hashmap" resultType="problemDTO">
-		SELECT p.*
+	<select id="selectPnoList" parameterType="Hashmap" resultType="string">
+		SELECT p.pno
 		FROM problem AS p
 		join licenseclass AS l ON p.lqno=l.lqno
 		join member AS m ON m.mno=p.mno
-		WHERE l.lno=#{ckind} AND l.lqclass=#{ctype} AND m.mnick!='관리자' and (p.pyear=0
+		WHERE l.lno=#{ckind} AND l.lqclass=#{ctype} and (p.pyear=0
 		<foreach collection="qyear" item="item">
 			or pyear=#{item}
 		</foreach>
 		)
+		<if test='qtype.equals("1")'>
+			and m.mnick='관리자'
+		</if>
+		<if test='qtype.equals("2")'>
+			and m.mnick!='관리자'
+		</if>
+	</select>
+	
+	<!-- 해당 글번호의 기본정보 -->
+	<select id="problemInfo" parameterType="int" resultType="problemDTO">
+		SELECT p.*,m.mnick
+		FROM problem AS p
+		join member AS m ON m.mno=p.mno
+		where p.pno=#{pno}
 	</select>
 	
 	<!-- 객관식 선지리스트 -->
-	<select id="selectChoice" parameterType="int" resultType="Hashmap">
+	<select id="selectChoice" parameterType="int" resultType="string">
 		SELECT pccontent FROM pchoice WHERE pno=#{pno} order by pcnumber
 	</select>
 	
@@ -85,7 +98,7 @@
 	</select>
 	
 	<!-- 주관식서술형 정답 리스트 -->
-	<select id="selectCorrectList" parameterType="int" resultType="Hashmap">
+	<select id="selectCorrectList" parameterType="int" resultType="string">
 		SELECT lcor FROM correct WHERE pno=#{pno}
 	</select>
 	

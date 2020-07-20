@@ -1,9 +1,9 @@
 package com.itea.problem.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,68 +23,89 @@ public class SolveProblemController {
 	@RequestMapping("/selectForTest")
 	public String problemMain(ProblemDTO pDTO,HttpServletRequest request,HttpSession session) {
 		
-		System.out.println("문제풀기페이지 진입");
-
+		System.out.println("문제풀기페이지 첫화면 진입");
+		
+		//자격증,출제 유형및 종류 파라미터로 받기
 		String ckind=request.getParameter("Ckind");
 		String ctype=request.getParameter("Ctype");
 		String qtype=request.getParameter("Qtype");
+		//선택한 연도 목록 불러오기
 		int[] qyear=pDTO.getPyearList();
 		
 		HashMap tinfo=new HashMap();
-		tinfo.put("ckind", ckind);
-		tinfo.put("ctype", ctype);
-		tinfo.put("qtype", qtype);
-		tinfo.put("qyear", qyear);
+		tinfo.put("ckind", ckind); //자격증 종류
+		tinfo.put("ctype", ctype); //자격증 유형
+		tinfo.put("qtype", qtype); //출제유형
+		tinfo.put("qyear", qyear); //출제년도
 		
-		List<ProblemDTO> probleminfo=problemSV.selectProblem(tinfo);
-		List<ProblemDTO> problemList = new ArrayList<ProblemDTO>();
-
-		for(ProblemDTO problem:probleminfo) {
-			int pno=problem.getPno();
-			//객관식일 때
-			if(problem.getPtype()==1) {
-				
-				//문제 선지 구하기
-				List<HashMap> choice=problemSV.selectChoice(pno);
-	
-				List<String> list=new ArrayList<String>();
-				for(HashMap map:choice) {
-					list.add((String) map.get("pccontent"));
-				}
-				
-				String[] simpleArray = new String[4];
-				String[] choicelist=list.toArray(simpleArray);
-				
-				problem.setChoice(choicelist);
-				
-				//문제 답 구하기
-				String choiceCorrect=problemSV.selectChoiceCorrect(pno);
-				
-				problem.setCorrect(choiceCorrect);
-			}else{//주관식,객관식일 때
-				
-				//문제 답 구하기
-				List<HashMap> Corrects=problemSV.selectCorrectList(pno);
-				List<String> list=new ArrayList<String>();
-				
-				for(HashMap map:Corrects) {
-					list.add((String) map.get("lcor"));
-				}
-				
-				String[] simpleArray = new String[Corrects.size()];
-				String[] CorrectList=list.toArray(simpleArray);
-				
-				problem.setCorrectList(CorrectList);
-				
-			}
-			
-			
-			problemList.add(problem);
-			System.out.println(problemList);
-		}
-
-		request.setAttribute("problemList", problemList);
+		//조건에 맞는 문제번호 리스트 작성 후 순서 섞기
+		List<String> pnoList=problemSV.selectPnoList(tinfo);
+		Collections.shuffle(pnoList);
+		
+		//첫번째 문제의 상세정보 가져오기
+		int pno=Integer.parseInt(pnoList.get(0));
+		
+		problemLogic(pno,pnoList,request);
 		
 		return "problem/problemProc";
+
 	}
+	
+	//다음 문제 클릭
+	@RequestMapping("/nextProblem")
+	public String nextProblem(HttpServletRequest request) {
+		
+		String[] pnoList=request.getParameterValues("pnoList");
+		
+		ArrayList<String> pnoArray = new ArrayList<>();
+
+		for(String temp : pnoList){
+
+			pnoArray.add(temp);
+
+		}
+
+		int pno=Integer.parseInt(pnoList[0]);
+		
+		problemLogic(pno,pnoArray,request);
+		
+	return "problem/problemProc";
+	}
+	
+	//pno에따른 리스트 검색하는 로직
+	public void problemLogic(int pno,List<String> pnoList,HttpServletRequest request) {
+		ProblemDTO problemInfo=problemSV.problemInfo(pno);
+		
+		//객관식일 때
+		if(problemInfo.getPtype()==1) {
+			
+			//문제 선지 구하기
+			List<Object> choice=problemSV.selectChoice(pno);
+			
+			String[] simpleArray = new String[4];
+			String[] choicelist=choice.toArray(simpleArray);
+			
+			problemInfo.setChoice(choicelist);
+			
+			//문제 답 구하기
+			String choiceCorrect=problemSV.selectChoiceCorrect(pno);
+			problemInfo.setCorrect(choiceCorrect);
+			
+		}else{//주관식,객관식일 때
+			
+			//문제 답 구하기
+			List<Object> Corrects=problemSV.selectCorrectList(pno);
+			
+			String[] simpleArray = new String[Corrects.size()];
+			String[] CorrectList=Corrects.toArray(simpleArray);
+			
+			problemInfo.setCorrectList(CorrectList);
+			
+		}
+		pnoList.remove(0);
+		request.setAttribute("pnoList", pnoList); //문제번호리스트 보내기
+		request.setAttribute("problem", problemInfo); //1번 문제 보내기
+	}
+
+
 }

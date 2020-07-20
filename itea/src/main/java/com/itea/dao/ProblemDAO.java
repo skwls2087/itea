@@ -57,12 +57,14 @@ public class ProblemDAO {
 		
 	}
 
-	public List<ProblemDTO> selectProblem(HashMap tinfo) {
-		System.out.println("dao"+tinfo);
-		return session.selectList("problem.selectProblem",tinfo);
+	public List<String> selectPnoList(HashMap tinfo) {
+		return session.selectList("problem.selectPnoList",tinfo);
+	}
+	public ProblemDTO problemInfo(int pno) {
+		return session.selectOne("problem.problemInfo",pno);
 	}
 
-	public List<HashMap> selectChoice(int pno) {
+	public List<Object> selectChoice(int pno) {
 		return session.selectList("problem.selectChoice",pno);
 	}
 
@@ -70,8 +72,9 @@ public class ProblemDAO {
 		return session.selectOne("problem.selectChoiceCorrect",pno);
 	}
 
-	public List<HashMap> selectCorrectList(int pno) {
+	public List<Object> selectCorrectList(int pno) {
 		return session.selectList("problem.selectCorrectList",pno);
 	}
+
 	
 }
