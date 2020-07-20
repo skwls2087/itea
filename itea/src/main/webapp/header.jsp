@@ -87,7 +87,6 @@
 			        <div class="dropdown-menu"> 
 			        <c:if test="${MNICK eq '관리자' }">
 			       	  <a class="dropdown-item" href="<%= request.getContextPath()%>/admin/memberList.co">회원관리</a> 
-			       	  <a class="dropdown-item" href="<%= request.getContextPath()%>/admin/chart.co">차트</a> 
 			       	</c:if>  
 				        <a class="dropdown-item" href="<%= request.getContextPath()%>/member/modifyFrm.co">정보수정</a> 
 				        <a class="dropdown-item" href="<%= request.getContextPath()%>/member/logoutProc.co">로그아웃</a> 

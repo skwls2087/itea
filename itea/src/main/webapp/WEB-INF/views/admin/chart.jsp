@@ -13,40 +13,27 @@ $( document ).ready(function() {
     data.addColumn('string', '날짜');
     data.addColumn('number', '방문자 수');
 
-    <c:forEach items="${visitor}" var="visitor">
+    <c:forEach items="${visitors}" var="visitor">
  			data.addRow(['${visitor.week}',${visitor.vscount}])
  		</c:forEach>
    
     var options = {
-      hAxis: {
-        title: '일주일'
-      },
-      vAxis: {
-        title: '방문자 수'
-      },
-      series: {
-        1: {curveType: 'function'}
-      }
-    };
+   		lineWidth: 2,
+   	      series: {
+   	    	  legend: { position: 'bottom' },
+   	      	0: { color: '#CF2F11' },
+   	    	  1: {curveType: 'function'}
+   	      }
+   	    };
     var chart = new google.visualization.LineChart(document.getElementById('chart_div2'));
     chart.draw(data, options);
   	}
-	});
+});
 </script>
-
-
-
-전체 방문자 수: ${sessionScope.totalCount}
-
-오늘의 방문자 수: ${sessionScope.todayCount}
-<c:forEach items="${visitor}" var="visitor">
- 			${visitor.week},${visitor.vscount}
-</c:forEach>
-
 
 	<!-- 기간별 방문자 추이 그래프 -->
 	<div class="visitor-graph">
 	일주일간 방문자 수(누적)
-	  <!-- 기간별 방문자 차트  
-	  <div id="chart_div2" class="col-md-6"/>-->
+	  <!-- 기간별 방문자 차트  -->
+	  <div id="chart_div2" class="col-md-6"/>
   </div>

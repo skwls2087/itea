@@ -22,16 +22,6 @@ public class AdminController {
 	@Autowired
 	AdminService adminSV;
 	
-	@RequestMapping("/chart")
-	public String visitList(HttpServletRequest request, 
-			  HttpServletResponse response,Visitor vo) throws Exception {
-	
-		ArrayList visitor=new ArrayList();//단위기간별 방문자 데이터를 담을 객체 생성(기간별 방문자 통계)
-		visitor=adminSV.WeekVisitor(vo);
-		request.setAttribute("visitor", visitor);
-		return "/admin/chart";
-	}
-	
 	@RequestMapping("/memberList")
 	public String memberList(HttpServletRequest request, 
 						  HttpServletResponse response,MemberDTO mdto,Visitor vo) throws Exception {
@@ -39,9 +29,9 @@ public class AdminController {
 		member=adminSV.WeekMember(mdto);
 		request.setAttribute("member", member);
 		
-		/*ArrayList visitor=new ArrayList();//단위기간별 방문자 데이터를 담을 객체 생성(기간별 방문자 통계)
-		visitor=adminSV.WeekVisitor(vo);
-		request.setAttribute("visitor", visitor);*/
+		ArrayList visitors=new ArrayList();//단위기간별 방문자 데이터를 담을 객체 생성(기간별 방문자 통계)
+		visitors=adminSV.WeekVisitor(vo);
+		request.setAttribute("visitors", visitors);
 		
 		//------------------------------------------------------
 		String column=request.getParameter("column");

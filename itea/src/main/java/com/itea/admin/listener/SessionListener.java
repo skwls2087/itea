@@ -32,11 +32,11 @@ public class SessionListener implements HttpSessionListener {
     	// 오늘 방문자 수
 		todayCount = adminSV.getVisitTodayCount(vo);
 		// 전체 방문자 수
-		totalCount = adminSV.getVisitTotalCount(vo);
+		totalCount = adminSV.getVisitTotalCount();
 		
-		System.out.print("세션시작-"+vo);
-		System.out.print("세션시작-"+todayCount);
-		System.out.print("세션시작-"+totalCount);
+		//System.out.print("세션시작-"+vo);
+		//System.out.print("세션시작-"+todayCount);
+		//System.out.print("세션시작-"+totalCount);
 		
 		// 세션 속성에 담아준다.
 		session.setAttribute("totalCount", totalCount); // 전체 방문자 수

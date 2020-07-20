@@ -49,14 +49,12 @@ public class AdminService<Hashmap> {
 	//방문자수 추가
 	public void setVisitTotalCount(Visitor vo) throws Exception {
 		Calendar cal = Calendar.getInstance();
-		//현재 년도, 월, 일
 		int year = cal.get ( Calendar.YEAR );
 		int month = cal.get ( Calendar.MONTH );
 		int date = cal.get ( Calendar.DATE );
 		String today=year+"-"+(month+1)+"-"+(date);
 		Date now=Date.valueOf(today);
 		vo.setVsdate(now);
-		
     	adminDAO.setVisitTotalCount();
 	}
 	
@@ -75,8 +73,8 @@ public class AdminService<Hashmap> {
 	}
 	
 	//전체 방문자 수 구하는 메서드
-	public int getVisitTotalCount(Visitor vo) throws Exception {
-		int totalCount =  adminDAO.getVisitTotalCount(vo);
+	public int getVisitTotalCount() throws Exception {
+		int totalCount =  adminDAO.getVisitTotalCount();
 		System.out.println("service "+totalCount);
 		return totalCount;
 	}
@@ -88,19 +86,18 @@ public class AdminService<Hashmap> {
 		ArrayList list = new ArrayList();
 		ArrayList cntList = new ArrayList();
 		
-		int sum = adminDAO.getVisitTotalCount(vo);
+		int sum = adminDAO.getVisitTotalCount();
 		
 		for(int i=0;i<visitor.size();i++) {
 			if(i!=0) {
 				int cntstr = (int) visitor.get(i);
-				System.out.println("service cntstr "+cntstr);
-				System.out.println("service visitor "+(int) visitor.get(i));
+				//System.out.println("service cntstr "+cntstr);
+				//System.out.println("service visitor "+(int) visitor.get(i));
 				sum = sum-cntstr;
 			}
 			list.add(sum);
 		}
 			for(int i=0;i<7;i++) {
-				//HashMap<String,Integer> map = new HashMap<String,Integer>();
 				int weekNum=today.get(Calendar.DAY_OF_WEEK)-i; //오늘부터 7일전까지의 요일 구하기
 				String week="";
 				if(weekNum==1 || weekNum==-6 ) {

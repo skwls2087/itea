@@ -25,21 +25,21 @@ public class adminDAO {
 	
 	//방문자수 추가
 	public void setVisitTotalCount() throws Exception {
-		System.out.println("dao들어옴");
 		session.insert("admin.setVisitTotalCount");
 	}
 	
 	//방문자수 조회 오늘
 	public int getVisitTodayCount(Visitor vo) throws Exception {
 		int todayCount = (int)session.selectOne("admin.getVisitTodayCount", vo);
-		System.out.println("dao today1 "+todayCount);
+		//System.out.println("dao today1 "+vo);
+		//System.out.println("dao today1 "+todayCount);
 		return todayCount;
 	}
 	
 	//방문자수 조회 총
-	public int getVisitTotalCount(Visitor vo) throws Exception {
-		int totalCount = (int)session.selectOne("admin.getVisitTotalCount", vo);
-		System.out.println("dao total "+totalCount);
+	public int getVisitTotalCount() throws Exception {
+		int totalCount = (int)session.selectOne("admin.getVisitTotalCount");
+		//System.out.println("dao total "+totalCount);
 		return totalCount;
 	}
 	

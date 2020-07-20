@@ -35,16 +35,10 @@ $( document ).ready(function() {
 		</c:forEach>	
 				
     var options = {
-      hAxis: {
-        title: '일주일'
-      },
-      vAxis: {
-        title: '가입자 수'
-      },
-      lineWidth: 4,
+      lineWidth: 2,
       series: {
     	  legend: { position: 'bottom' },
-      	0: { color: '#3A01DF' },
+      	0: { color: '#166ADC' },
     	  1: {curveType: 'function'}
       }
     };
@@ -53,6 +47,33 @@ $( document ).ready(function() {
   	}
 	});
 //--------------------------------------------------------------------------------------------	
+$( document ).ready(function() {
+
+	google.charts.load('current', {packages: ['corechart', 'line']});
+	google.charts.setOnLoadCallback(drawCurveTypes);
+
+	function drawCurveTypes() {
+    var data = new google.visualization.DataTable();
+    
+    data.addColumn('string', '날짜');
+    data.addColumn('number', '방문자 수');
+
+    <c:forEach items="${visitors}" var="visitor">
+ 			data.addRow(['${visitor.week}',${visitor.vscount}])
+ 		</c:forEach>
+   
+    var options = {
+   		lineWidth: 2,
+   	      series: {
+   	    	  legend: { position: 'bottom' },
+   	      	0: { color: '#CF2F11' },
+   	    	  1: {curveType: 'function'}
+   	      }
+   	    };
+    var chart = new google.visualization.LineChart(document.getElementById('chart_div2'));
+    chart.draw(data, options);
+  	}
+});
 </script>
 
 <div id="admin" class="admin">
@@ -60,8 +81,14 @@ $( document ).ready(function() {
 	<div class="member-graph">
 	<b>일주일간 가입자 수(누적)</b>
 	  <!-- 기간별 방문자 차트  -->
-	  <div id="chart_div1" class="col-md-6"/>
+	  <div id="chart_div1"/>
 	 </div>
+	 	<!-- 기간별 방문자 추이 그래프 -->
+	<div class="visitor-graph">
+	<b>일주일간 방문자 수(누적)</b>
+	  <!-- 기간별 방문자 차트  -->
+	  <div id="chart_div2"/>
+  </div>
 </div>
 <div class="admin-user">
 	<div class="admin-div">
