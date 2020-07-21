@@ -155,23 +155,36 @@ $(function(){
 		return false;
 	})
 	
-	//다음문제보기 눌렀을 때
-	$("#next-problem-submit").click(function(){
+	$("#problem-scoring").click(function(){
 		
-		div=$('<div>')
-		div.attr({'class':'correct-box'})
-		
-		input=$('<input>')
-		input.attr({'class':'form-control form-control-lg','type':'text','name':'correctList','size':'5'})
-		
-		img=$('<img>')
-		img.attr({'src':'../resources/img/close.png','width':'10','class':'close-img'})
-		
-		div.append(input).append(img)
-		
-		$('#correct-boxes').append(div)
-		
-		return false;
-	})
+		$.ajax({
+			url : 'problemScore.co?lno='+ lno,
+			type : 'post',
+			contentType:"application/json; charset=utf-8;",
+			dataType:"json",
+			success : function(data) {					
+				if(typeof data.first!="undefined"){
+					$('#ctype-select').css('display','');
+					
+					$('#type1').val(data.first);
+					$('#type1').text(data.first);
+					$('#type2').val(data.second);
+					$('#type2').text(data.second);
+					
+				}
+				if(typeof data.first=="undefined"){
+					$('#ctype-select').css('display','none');
+					$('#type0').val("단일");
+				}
+			}
+		})
+	});
 	
+	$("#nextProblem").submit(function(){
+		if($("#psolve").html()==$("#ptotal").html()){
+			alert("마지막 문제입니다.")
+			return false;
+		}
+		
+	});
 });

@@ -45,7 +45,10 @@ public class SolveProblemController {
 		//첫번째 문제의 상세정보 가져오기
 		int pno=Integer.parseInt(pnoList.get(0));
 		
-		problemLogic(pno,pnoList,request);
+		int size=problemLogic(pno,pnoList,request);
+		
+		request.setAttribute("total", size);
+		request.setAttribute("solve", 0);
 		
 		return "problem/problemProc";
 
@@ -55,8 +58,12 @@ public class SolveProblemController {
 	@RequestMapping("/nextProblem")
 	public String nextProblem(HttpServletRequest request) {
 		
-		String[] pnoList=request.getParameterValues("pnoList");
+		System.out.println("다음문제");
 		
+		String[] pnoList=request.getParameterValues("pnoList");
+		int total=Integer.parseInt(request.getParameter("total"));
+		
+		System.out.println(pnoList);
 		ArrayList<String> pnoArray = new ArrayList<>();
 
 		for(String temp : pnoList){
@@ -67,13 +74,18 @@ public class SolveProblemController {
 
 		int pno=Integer.parseInt(pnoList[0]);
 		
-		problemLogic(pno,pnoArray,request);
+		int size=problemLogic(pno,pnoArray,request);
+		
+		int solve=total-size;
+		
+		request.setAttribute("total", total);
+		request.setAttribute("solve", solve);
 		
 	return "problem/problemProc";
 	}
 	
 	//pno에따른 리스트 검색하는 로직
-	public void problemLogic(int pno,List<String> pnoList,HttpServletRequest request) {
+	public int problemLogic(int pno,List<String> pnoList,HttpServletRequest request) {
 		ProblemDTO problemInfo=problemSV.problemInfo(pno);
 		
 		//객관식일 때
@@ -102,9 +114,13 @@ public class SolveProblemController {
 			problemInfo.setCorrectList(CorrectList);
 			
 		}
+		System.out.println(pnoList);
+		
 		pnoList.remove(0);
 		request.setAttribute("pnoList", pnoList); //문제번호리스트 보내기
 		request.setAttribute("problem", problemInfo); //1번 문제 보내기
+		
+		return pnoList.size();
 	}
 
 
