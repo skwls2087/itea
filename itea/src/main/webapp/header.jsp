@@ -20,9 +20,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 <!-- font-family: 'Noto Sans KR', sans-serif; -->
 
+<!-- 굵은 글씨 -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
+<!-- font-family: 'Noto Sans KR', sans-serif; -->
+
 <!-- 통통 특이한 글씨 -->
 <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
 <!-- font-family: 'Black Han Sans', sans-serif; -->
+
+<!-- 귀욤 손글씨 -->
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+<!-- font-family: 'Nanum Pen Script', cursive; -->
 
 <!-- JSTL 선언 -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

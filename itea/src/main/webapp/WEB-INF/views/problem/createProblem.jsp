@@ -7,7 +7,8 @@
 <div id="problem-create-container">
 	<div id="problem-create">
 	<form action="selectTest.co" method="post">
-		<p>출제하실 자격증 시험의 종류와 유형을 선택해주세요.</p><br/>
+		<span id="cert-select">자격증 선택</span><br/><br/>
+		<hr><br/>
 	    <div class="form-group">
 	    
 		    <select id="Ckind" name="Ckind" class="custom-select">
@@ -61,7 +62,7 @@
 			  <input type="hidden" id="Qyear" value="2020" name="Qyear"/>
 		  </c:if>
 		  
-		  <input type="submit" class="btn btn-primary" value="문제내기" id="select-test-button">
+		  <input type="submit" class="btn btn-primary btn-lg" value="문제내기" id="select-test-button">
 	  </form>
 	</div>
 </div>
