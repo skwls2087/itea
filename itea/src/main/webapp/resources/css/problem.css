@@ -2,7 +2,7 @@
 #problem-main-container{
 	text-align:center;
 }
-#problem-header{
+#problem-main-header{
 	font-family: 'Do Hyeon', sans-serif;
 }
 #problem-highlight{
@@ -49,18 +49,45 @@
 
 /* 문제 출제하기 : problem-create */
 #problem-create{
-/* 	border:1px solid #ced4da;
-	border-radius:10px; */
-	padding:50px 80px;
-	width:400px;
-	margin:50px auto;
-	text-align:center;
+	padding:30px;
+	width:90%;
+	max-width:700px;
+	margin:20px auto;
 	font-family: 'Noto Sans KR', sans-serif;
 }
-#cert-select{
+#problem-header{
 	background:linear-gradient(to top, #f7ca3e 30%, transparent 30% );
 	font-weight:900;
 	font-size:2rem;
+	font-family: 'Do Hyeon', sans-serif;
+}
+textarea{
+	resize:none;
+}
+.filebox label { 
+	display: inline-block; 
+	padding: .5em .75em; 
+	color: white; 
+	font-size: inherit; 
+	line-height: normal; 
+	vertical-align: middle; 
+	background-color: #408080; 
+	cursor: pointer; 
+	border: 1px solid #ebebeb; 
+	border-bottom-color: #e2e2e2; 
+	border-radius: .25em; 
+} 
+.filebox input[type="file"] { 
+	/* 파일 필드 숨기기 */ 
+	position: absolute; 
+	width: 1px; 
+	height: 1px; 
+	padding: 0; 
+	margin: -1px; 
+	overflow: hidden; 
+	clip:rect(0,0,0,0); 
+	border: 0;
+	float:right; 
 }
 .form-group{
 	margin-bottom:40px;
@@ -95,7 +122,12 @@
 	width:100px;
 	display:inline-block;
 }
-
+#img_wrap{
+	margin:0 auto;
+}
+.filebox{
+	text-align: right;
+}
 /* problem-create:essay-problem */
 .essay-Problem{
 	border:1px solid #ced4da;

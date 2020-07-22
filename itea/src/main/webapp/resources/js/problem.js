@@ -54,7 +54,7 @@ $(function(){
 		$("#problemFile").on("change",handleImgFileSelect);
 	})
 	function handleImgFileSelect(e){
-		alert("c")
+		
 		var files=e.target.files;
 		var filesArr=Array.prototype.slice.call(files);
 		
@@ -69,6 +69,7 @@ $(function(){
 			var reader=new FileReader();
 			reader.onload=function(e){
 				$("#img").attr("src",e.target.result);
+				$('#img_wrap').css('display','');
 			}
 			reader.readAsDataURL(f);
 		})
@@ -154,6 +155,12 @@ $(function(){
 		
 		return false;
 	})
+	
+	//텍스트박스 크기 자동조절
+	$("#choice-problem-create").find("textarea").on('keydown keyup', function () {
+		$(this).height(1).height( $(this).prop('scrollHeight')+12 );	
+	});
+	
 	
 	$("#problem-scoring").click(function(){
 		
