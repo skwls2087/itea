@@ -68,7 +68,6 @@ public class licenseDTO {
 	public void setLinfo(String linfo) {
 		this.linfo = linfo;
 	}
-	
 	public String getLa() {
 		return la;
 	}
@@ -81,15 +80,12 @@ public class licenseDTO {
 	public void setLqclass(String lqclass) {
 		this.lqclass = lqclass;
 	}
+	
 	@Override
 	public String toString() {
 		return "licenseDTO [lno=" + lno + ", lname=" + lname + ", lorg=" + lorg + ", lfee=" + lfee + ", lclass="
-				+ lclass + ", lreq=" + lreq + ", ldetail=" + ldetail + ", lcut=" + lcut + ", linfo=" + linfo
-				+ ", la=" + la + ", lqclass=" + lqclass + "]";
+				+ lclass + ", lreq=" + lreq + ", ldetail=" + ldetail + ", lcut=" + lcut + ", linfo=" + linfo + ", la="
+				+ la + ", lqclass=" + lqclass + "]";
 	}
-	
-	
-	
-	
-	
+
 }

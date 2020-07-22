@@ -23,6 +23,7 @@
     <typeAlias type="com.itea.dto.MemberDTO"  alias="memberDTO"/>
     <typeAlias type="com.itea.dto.licenseDTO"  alias="licenseDTO"/>
     <typeAlias type="com.itea.util.Visitor"  alias="visitor"/>
+    <typeAlias type="com.itea.dto.ProblemDTO"  alias="problemDTO"/>
     <typeAlias type="com.itea.dto.AskDTO" alias="askDTO"/>
     <typeAlias type="com.itea.dto.ReplyDTO" alias="replyDTO"/>
     <typeAlias type="com.itea.dto.QaDTO"  alias="qaDTO"/>
@@ -36,6 +37,7 @@
 		<mapper resource="/com/itea/sql/memberSQL.xml"/>
 		<mapper resource="/com/itea/sql/qaSQL.xml"/>
 		<mapper resource="/com/itea/sql/licenseSQL.xml"/>
+		<mapper resource="/com/itea/sql/problemSQL.xml"/>
 		<mapper resource="/com/itea/sql/adminSQL.xml"/>
 		<mapper resource="/com/itea/sql/askSQL.xml"/>
 
