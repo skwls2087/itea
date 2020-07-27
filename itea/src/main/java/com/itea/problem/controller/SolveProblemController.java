@@ -9,6 +9,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.itea.dto.ProblemDTO;
 import com.itea.problem.service.ProblemService;
 
@@ -122,6 +124,11 @@ public class SolveProblemController {
 		
 		return pnoList.size();
 	}
-
-
+	
+	//문제를 풀면 정답률에 반영하기
+	@RequestMapping("/problemScore")
+	@ResponseBody
+	public void problemScore(int pno, int correct) {
+		problemSV.problemCountUp(pno,correct);
+	}
 }

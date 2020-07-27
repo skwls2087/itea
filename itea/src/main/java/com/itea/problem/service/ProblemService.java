@@ -63,6 +63,10 @@ public class ProblemService {
 		return problemDAO.selectCorrectList(pno);
 	}
 
+	public void problemCountUp(int pno, int correct) {
+		problemDAO.problemCountUp(pno,correct);
+	}
+
 	
 
 }

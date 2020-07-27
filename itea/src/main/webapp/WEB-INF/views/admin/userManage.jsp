@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- 방문자수 그래프를 위한 구글차트 사용 -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/admin.css">
 <script>
 function checkForm() {
     if(document.getElementById("member-content").value==""){
@@ -79,16 +80,16 @@ $( document ).ready(function() {
 <div id="admin" class="admin">
 	<!-- 기간별 회원 추이 그래프 -->
 	<div class="member-graph">
-	<b>일주일간 가입자 수(누적)</b>
-	  <!-- 기간별 방문자 차트  -->
-	  <div id="chart_div1"/>
-	 </div>
+		<b>일주일간 가입자 수(누적)</b>
+		  <!-- 기간별 방문자 차트  -->
+		  <div id="chart_div1"></div>
+ </div>
 	 	<!-- 기간별 방문자 추이 그래프 -->
 	<div class="visitor-graph">
-	<b>일주일간 방문자 수(누적)</b>
-	  <!-- 기간별 방문자 차트  -->
-	  <div id="chart_div2"/>
-  </div>
+		<b>일주일간 방문자 수(누적)</b>
+		  <!-- 기간별 방문자 차트  -->
+		  <div id="chart_div2"></div>
+ </div>
 </div>
 <div class="admin-user">
 	<div class="admin-div">

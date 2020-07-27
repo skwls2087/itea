@@ -14,6 +14,7 @@
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources location="/WEB-INF/views/json/" mapping="/json/**" />
 
+
 	<!-- 뷰를 검색할 기본경로와 형식 지정하기 -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
