@@ -1,13 +1,14 @@
+/*파랑:#08324d*/
+/*노랑:#ffb535*/
+
 .itLab{
-	display:flex;
-	justify-content:center;
-  flex-wrap:wrap;
+	width:80%;
+	margin:0 auto;
 }
 #itLab-heading{
 	font-family: 'Noto Sans KR', sans-serif;
 	font-size:30px;
-	text-align:center;
-	margin-top:20px;
+	margin:20px 0;
 }
 .itLab-highlight{
 	background:linear-gradient(to top, #f7ca3e 50%, transparent 50% )
@@ -15,34 +16,58 @@
 
 /*it연구소-직업만족도 테스트*/
 #itTest{
-	width:400px;
-	text-align:center;
-	font-family: 'Nanum Pen Script', cursive;
+	width:100%;
+	min-height:300px;
+	font-family: 'Noto Sans KR', sans-serif;
 	font-size:30px;
-	padding-top:100px;
-}
-#itTest img{
-	width:200px;
+	background:#08324d;
+	margin:0 auto;
+	color:#ffb535;
+	display:flex;
 }
 #it-test-button{
 	font-family: 'Noto Sans KR', sans-serif;
 	font-weight:700;
 	font-size:30px;
 }
+.itTest-left{
+	padding:40px;
+	width:70%;
+}
+.itTest-right{
+	padding-top:50px;
+	width:30%
+}
+#itTest-left-sub{
+	color:white;
+	font-size:20px;
+}
 
 /*it연구소-워드클라우드*/
 #itKeyword{
-	width:400px;
+	width:100%;
+	padding:40px;
 	font-family: 'Noto Sans KR', sans-serif;
-	text-align:center;
+	font-size:30px;
+	background:#08324d;
+	margin:20px auto;
+	color:#ffb535;
 }
 .wordcloud{
 	width:300px;
 }
-#itInfo{
-	background:green;
-	clear:both;
-}
 .wordcloudArrow{
 	width:30px;
+}
+
+/*it연구소-인포그래픽*/
+#itInfo{
+	clear:both;
+	width:100%;
+	text-align:center;
+}
+#itInfo img{
+	margin:0 auto;
+	width:80%;
+	max-width:1000px;
 }

@@ -80,9 +80,11 @@ $( document ).ready(function() {
   	}
 });
 </script>
+<div class="admin-heading">관리자 페이지</div>
 
 <div id="admin" class="admin">
 	<!-- 기간별 회원 추이 그래프 -->
+	
 	<div class="member-graph">
 		<b>누적 회원 수</b>
 		  <!-- 기간별 방문자 차트  -->
@@ -102,11 +104,12 @@ $( document ).ready(function() {
 			<form action="<%= request.getContextPath()%>/admin/memberList.co" name="user-search" 
 				method ="get" class="user-search" onsubmit="return checkForm();">
 				<div class="insertFavorite pull-right">
-			    <select name="column" class="selectCss">	
+			    <select name="column" class="custom-select" id="admin-user-select">	
 			        <option value="mnick">닉네임</option>
 			        <option value="mmail">이메일</option> 
 			    </select>
-			    <input type="text" name="value" id="member-content" placeholder="검색어를 입력하세요."/>
+			    <input type="text" name="value" class="form-control"  id="member-content" placeholder="검색어를 입력하세요."/>
+			    <img src="${pageContext.request.contextPath}/resources/img/search.png" width="20">
 			    <input type="submit" value="검색" class="btn btn-secondary"/>
 		    </div>
 			</form>
@@ -163,7 +166,7 @@ $( document ).ready(function() {
 			 <!-- 회원목록 페이징 -->		
 			 <c:if test="${PINFO.totalCount>0}">
 				<tr>
-				<td colspan="7" class="text-center">
+				<td colspan="7">
 				<div>
   			<ul class="pagination" id="a-paging">
 				<!-- 검색조건이 없을 때는 페이지넘버만 파라미터로 보내기 -->
@@ -181,29 +184,29 @@ $( document ).ready(function() {
 						</c:if>
 						
 						<!-- 페이지 -->
-						<c:forEach var="pg"	 begin="${PINFO.startPage}" end="${PINFO.endPage}">
-							<c:if test="${PINFO.nowPage==pg}">
-								<li id="q-nowPage" class="page-item active">
+							<c:forEach var="pg"	 begin="${PINFO.startPage}" end="${PINFO.endPage}">
+								<c:if test="${PINFO.nowPage==pg}">
+									<li id="q-nowPage" class="page-item active">
+								</c:if>
+								<c:if test="${PINFO.nowPage!=pg}">
+									<li id="q-nowPage" class="page-item">
+								</c:if>
+						      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberList.co?nowPage=${pg}">${pg}</a>
+						    </li>
+							</c:forEach>
+							
+							<!-- 다음페이지 -->
+							<c:if test="${PINFO.nowPage ne PINFO.totalPage}">
+							<li class="page-item">
+						      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberList.co?nowPage=${PINFO.nowPage+1}">&raquo;</a>
+						    </li>
 							</c:if>
-							<c:if test="${PINFO.nowPage!=pg}">
-								<li id="q-nowPage" class="page-item">
+							<c:if test="${PINFO.nowPage eq PINFO.totalPage}">
+							<li class="page-item disabled">
+								<a class="page-link" href="#}">&raquo;</a>
+						    </li>
 							</c:if>
-					      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberList.co?nowPage=${pg}">${pg}</a>
-					    </li>
-						</c:forEach>
-						
-						<!-- 다음페이지 -->
-						<c:if test="${PINFO.nowPage ne PINFO.totalPage}">
-						<li class="page-item">
-					      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberList.co?nowPage=${PINFO.nowPage+1}">&raquo;</a>
-					    </li>
 						</c:if>
-						<c:if test="${PINFO.nowPage eq PINFO.totalPage}">
-						<li class="page-item disabled">
-							<a class="page-link" href="#}">&raquo;</a>
-					    </li>
-						</c:if>
-					</c:if>
 					
 					<!-- 검색조건이 있을 때는 페이지넘버와 검색조건도 파라미터로 보내기 -->
 					<c:if test="${null ne value}">

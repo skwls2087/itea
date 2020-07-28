@@ -16,12 +16,30 @@
   justify-content:center;
   flex-wrap:wrap;
 }
+.admin-heading{
+	margin-top:20px;
+	margin-bottom:30px;
+	font-size:30px;
+	font-family: 'Do Hyeon', sans-serif;
+	margin-left:10%;
+}
 #admin-table{
-	width:80%;
+	width:100%;
 	font-size:15px;
 	margin:10px auto;
 }
-#admin-user{
-	background:yellow;
-	margin:0 auto;
+#admin-user-select{
+	width:100px;
 }
+#member-content{
+	width:200px;
+}
+.admin-user{
+	margin:0 auto;
+	width:80%;
+	text-align:center;
+}
+#a-paging{
+	justify-content: center;
+}
+
