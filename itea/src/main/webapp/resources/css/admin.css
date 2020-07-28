@@ -1,8 +1,27 @@
 .member-graph{
-	width:50%;
+	width:500px;
 	float:left;
 }
 .visitor-graph{
-	width:50%;
+	width:500px;
 	float:left;
+}
+#admin{
+	text-align:center;
+	font-family: 'Noto Sans KR', sans-serif;
+	margin:50px auto;
+	width:100%;
+	text-align:center;
+  display: flex;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+#admin-table{
+	width:80%;
+	font-size:15px;
+	margin:10px auto;
+}
+#admin-user{
+	background:yellow;
+	margin:0 auto;
 }

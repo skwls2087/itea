@@ -52,14 +52,23 @@
 				$("#linfo").focus();
 				return false;
 			}
-			alert("입력하신 내용을 등록합니다.");
 			$("#ifrm").submit();
+		});
+		
+		$("#license-back-button").click(function(){
+			yn=confirm("입력하신 내용을 무시하고 목록으로 돌아가시겠습니까?")
+			if(yn){
+				$(location).attr("href","licenseList.co");
+			}
+			else{
+				return false;
+			}
 		});
 		
 	});
 
 	</script>
-	
+    
 <div class="container" id="license-container">
 	<h2 class="license-heading">자격증 등록</h2>
 	<form id="ifrm" action="../license/insertProc.co" >
@@ -81,7 +90,7 @@
 				<td><input type="text" id="lclass" name="lclass" style="width:85%" placeholder="공인,민간자격증을 분류하세요."></td>
 			</tr>
 			<tr class="license-head">
-				<td colspan="2">검정시험 일정</td>
+				<td colspan="2">시험일정 보러가기</td>
 			</tr>
 			<tr>
 				<td colspan="2"><input type="text" name="la" id="la"  size="50" placeholder="시험일정을 볼 수 있는 url을 입력하세요." style="width:100%"></td>
@@ -118,23 +127,19 @@
 			</tr>
 			<tr>
 				<td colspan="2"><div class="wrap">
-						<select name="lqclass" id="lqclass" size="6">
-							<optgroup label="필기,실기">
+						<select name="lqclass" id="lqclass" size="3">
 							<option value="1">필기,실기</option>
-							</optgroup>
-							<optgroup label="1차,2차">
 							<option value="2">1차,2차</option>
-							</optgroup >
-							<optgroup label="단독">
 							<option value="3">단독시험</option>
-							</optgroup>
 						</select>
 					</div>
 				</td>
 			</tr>
-			<tr id="license-insert-button">
-			<td colspan="2"><input type="button" class="btn btn-info" id="license-insert-button" value="등록">
-			<input type="button" class="btn btn-secondary" id="license-back-button" value="취소"></td>
+			<tr id="license-button">
+			<td colspan="2">
+				<input type="button" class="btn btn-info" id="license-insert-button" value="등록">
+				<input type="button" class="btn btn-secondary" id="license-back-button" value="취소">
+			</td>
 			</tr>
 		</table>
 	</form>

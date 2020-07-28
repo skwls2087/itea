@@ -1,0 +1,48 @@
+.itLab{
+	display:flex;
+	justify-content:center;
+  flex-wrap:wrap;
+}
+#itLab-heading{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size:30px;
+	text-align:center;
+	margin-top:20px;
+}
+.itLab-highlight{
+	background:linear-gradient(to top, #f7ca3e 50%, transparent 50% )
+}
+
+/*it연구소-직업만족도 테스트*/
+#itTest{
+	width:400px;
+	text-align:center;
+	font-family: 'Nanum Pen Script', cursive;
+	font-size:30px;
+	padding-top:100px;
+}
+#itTest img{
+	width:200px;
+}
+#it-test-button{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight:700;
+	font-size:30px;
+}
+
+/*it연구소-워드클라우드*/
+#itKeyword{
+	width:400px;
+	font-family: 'Noto Sans KR', sans-serif;
+	text-align:center;
+}
+.wordcloud{
+	width:300px;
+}
+#itInfo{
+	background:green;
+	clear:both;
+}
+.wordcloudArrow{
+	width:30px;
+}

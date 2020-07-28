@@ -80,7 +80,7 @@
         <a class="nav-link" href="<%= request.getContextPath()%>/qa/qaFrm.co">Q&A</a>
       </li>
       <li class="nav-item  m-2">
-        <a class="nav-link" id="it-test" href="#">IT연구소</a>
+        <a class="nav-link" id="it-test" href="<%= request.getContextPath()%>/itLab/itLab.co">IT연구소</a>
       </li>
     </ul>
     
