@@ -33,6 +33,7 @@
 }
 #member-content{
 	width:200px;
+	display:inline-block;
 }
 .admin-user{
 	margin:0 auto;

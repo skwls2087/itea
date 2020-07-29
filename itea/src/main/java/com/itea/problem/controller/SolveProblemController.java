@@ -59,6 +59,7 @@ public class SolveProblemController {
 			 out.println("<script>");
 	         out.println("alert('선택한 조건에 해당되는 문제가 없습니다');");
 	         //out.println("$(location).attr(\"href\",\"problemMain.co\");");
+	         out.println("history.go(-2);");
 	         out.println("</script>");
 	         out.close();
 	         System.out.println("아이디 x");

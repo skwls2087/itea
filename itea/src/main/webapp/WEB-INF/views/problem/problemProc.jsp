@@ -7,14 +7,14 @@
 
 <div id="problem-proc">
 
-	<div id="problemPNO">${problem.pno}</div>
+	<div id="problemPNO">#${problem.pno}</div>
 
 	<div class="processing">
-		<span id="psolve">${solve}</span>/<span id="ptotal">${total}</span>
+		<span id="psolve">${solve+1}</span>/<span id="ptotal">${total+1}</span>
 	</div>
 	<div class="progress" id="processing-bar">
-	  <div class="progress-bar" role="progressbar" style="width:${solve/total*100}%;background:#2E9AFE;" 
-	  	aria-valuenow="10" aria-valuemin="0" aria-valuemax="${total}"></div>
+	  <div class="progress-bar" role="progressbar" style="width:${(solve/total*100)+1}%;background:#2E9AFE;" 
+	  	aria-valuenow="10" aria-valuemin="0" aria-valuemax="${total+1}"></div>
 	</div>
 	<div id="problem-info">
 		<br/>

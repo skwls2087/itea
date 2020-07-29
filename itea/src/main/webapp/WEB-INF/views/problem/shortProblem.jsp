@@ -6,15 +6,20 @@
 
 <div id="problem-create">
 	<div class="short-Problem">
-	<span id="problem-header">문제출제</span><br/>
+	<span id="problem-header">문제출제</span><br/><br/>
 		<form method="post" action="createProblemProc.co" id="create-text-problem-submit" encType="multipart/form-data">
 		
 		<!-- 문제 -->
-			<textarea class="form-control" id="pdetail" name="pdetail" placeholder="내용을 입력해주세요" rows="5"></textarea>
-			  <div class="form-group">
-		      <input type="file" name="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
-		      </div>
-		      
+    <textarea class="form-control" name="pdetail" id="pdetail" placeholder="문제를 입력해주세요" rows="2"></textarea>
+		  <div class="filebox">
+		  	<label for="problemFile">이미지 첨부</label> 
+		  	<input type="file" name="file" id="problemFile">
+	    </div>
+    <div>
+    	<div class="img_wrap" id="img_wrap" style="display:none;">
+    		<img id="img">
+    	</div>
+    </div>
 	    <!-- 해설 -->
 	    <textarea class="form-control" name="pcomment" id="pcomment" placeholder="해설을 입력해주세요" rows="5"></textarea><br/>
 	    

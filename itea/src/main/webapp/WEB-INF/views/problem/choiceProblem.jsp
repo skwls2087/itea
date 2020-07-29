@@ -4,9 +4,19 @@
 <script src="${pageContext.request.contextPath}/resources/js/problem.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/problem.css">
 
+<script>
+if(!window.HashChangeEvent)(function(){
+	var lastURL=document.URL;
+	window.addEventListener("hashchange",function(event){
+		Object.defineProperty(event,"oldURL",{enumerable:true,configurable:true,value:lastURL});
+		Object.defineProperty(event,"newURL",{enumerable:true,configurable:true,value:document.URL});
+		lastURL=document.URL;
+	});
+}());
+</script>
 
 <div id="problem-create">
-	<span id="problem-header">문제출제</span><br/>
+	<span id="problem-header">문제출제</span><br/><br/>
 	<form id="choice-problem-create" method="post" action="createProblemProc.co" encType="multipart/form-data">
 		<table width="100%">
 		<!-- 문제 -->
