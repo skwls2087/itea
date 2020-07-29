@@ -17,7 +17,7 @@
 /*it연구소-직업만족도 테스트*/
 #itTest{
 	width:100%;
-	min-height:300px;
+	min-height:250px;
 	font-family: 'Noto Sans KR', sans-serif;
 	font-size:30px;
 	background:#08324d;
@@ -35,29 +35,83 @@
 	width:70%;
 }
 .itTest-right{
-	padding-top:50px;
-	width:30%
+	padding-top:40px;
+	width:30%;
+	text-align:center;
+}
+.itTest-right img{
+	width:110px;
+	margin-bottom:20px;
 }
 #itTest-left-sub{
 	color:white;
-	font-size:20px;
+	font-size:14px;
+	padding-top:10px;
+}
+#itTest-left-sub a{
+	color:#ffb535;
+}
+
+@media (max-width: 750px) {
+  .itTest-right img{
+		display:none;
+		height:0px;
+	}
+	#itTest{
+		display:block;
+	}
+	.itTest-left{
+		width:100%;
+		padding-bottom:0px;
+	}
+	.itTest-right{
+		width:100%;
+		padding-top:0px;
+		padding-bottom:20px;
+	}
 }
 
 /*it연구소-워드클라우드*/
 #itKeyword{
 	width:100%;
-	padding:40px;
 	font-family: 'Noto Sans KR', sans-serif;
 	font-size:30px;
 	background:#08324d;
 	margin:20px auto;
 	color:#ffb535;
+	display:flex;
+}
+#itKeyword-left{
+	width:50%;
+	padding:40px;
+  line-height: 1.0;
+}
+#itKeyword-left a{
+	color:white;
+	font-size:14px;
+}
+#itKeyword-right{
+	width:50%;
 }
 .wordcloud{
-	width:300px;
+	width:80%;
 }
 .wordcloudArrow{
-	width:30px;
+	width:8%;
+}
+@media (max-width: 750px) {
+	#itKeyword{
+		display:block;
+	}
+  #itKeyword-left a{
+		font-size:0px;
+	}
+	#itKeyword-left{
+		width:100%;
+	}
+	#itKeyword-right{
+		width:100%;
+	}
 }
 
 /*it연구소-인포그래픽*/

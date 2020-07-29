@@ -1,4 +1,5 @@
 $(function(){
+	
 	$('#ctype-select').css('display','none');
 	var c
 	

@@ -167,6 +167,14 @@ textarea{
 }
 
 /*문제풀기*/
+#problem-solve{
+	padding:30px;
+	width:90%;
+	max-width:700px;
+	margin:20px auto;
+	font-family: 'Noto Sans KR', sans-serif;
+	text-align:center;
+}	
 #problem-proc{
 	padding:30px;
 	width:90%;

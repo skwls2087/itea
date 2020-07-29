@@ -4,13 +4,14 @@
 <script src="${pageContext.request.contextPath}/resources/js/problem.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/problem.css">
 
+
 <div id="problem-create">
 	<span id="problem-header">문제출제</span><br/>
 	<form id="choice-problem-create" method="post" action="createProblemProc.co" encType="multipart/form-data">
 		<table width="100%">
 		<!-- 문제 -->
 		<tr>
-		<td width="10px">
+		<td valign=top width="10px">
 		Q.</td>
 		<td>
 		<textarea class="form-control" name="pdetail" id="pdetail" placeholder="문제를 입력해주세요" rows="2"></textarea>
@@ -28,7 +29,7 @@
    	<div class="form-group">
    	<!-- 1번 -->
    	<tr>
-		<td width="10%">1.</td>
+		<td valign=top width="10%">1.</td>
 		<td width="80%">
 		<textarea class="form-control" placeholder="내용을 입력해주세요" rows="1" name="choice" id="choice1"></textarea> </td>
 		<td width="10%">
@@ -41,7 +42,7 @@
 		
 		<!-- 2번 -->
     <tr>
-		<td>2.</td>
+		<td valign=top>2.</td>
 		<td><textarea class="form-control" placeholder="내용을 입력해주세요" rows="1" name="choice" id="choice2"></textarea> </td>
 		<td>
 		<div class="custom-control custom-radio">
@@ -53,7 +54,7 @@
 		
 		<!-- 3번 -->
 		<tr>
-		<td>3.</td>
+		<td valign=top>3.</td>
 		<td><textarea class="form-control" placeholder="내용을 입력해주세요" rows="1" name="choice" id="choice3"></textarea> </td>
 		<td>
 		<div class="custom-control custom-radio">
@@ -65,7 +66,7 @@
 		
 		<!-- 4번 -->
 		<tr>
-			<td>4.</td>
+			<td valign=top>4.</td>
 			<td><textarea class="form-control" placeholder="내용을 입력해주세요" rows="1" name="choice" id="choice4"></textarea> </td>
 			<td>
 			<div class="custom-control custom-radio">
@@ -78,7 +79,7 @@
 		
 		<!-- 해설 -->
 		<tr>
-			<td>해설.</td>
+			<td valign=top>해설.</td>
 			<td><textarea class="form-control" name="pcomment" placeholder="내용을 입력해주세요" id="pcomment" rows="3">
 			</textarea></td>
     </tr>
