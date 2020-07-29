@@ -1,6 +1,7 @@
 .survey{
 	margin-top:50px;
 	text-align:center;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 .survey-answer{
@@ -8,23 +9,28 @@
 	width:80%;
 	height:300px;
 	margin:0 auto;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 .survey1{
-	width:45%;
-	margin:5%;
-	float:left;
-	padding:20px;
-	background:#819FF7;
-	border:2px solid black;
-	border-radius:10px;
+	width: 500px;
+  margin: 5%;
+  float: left;
+  padding: 20px;
+  background: #3282b8;
+  border-radius: 10px;
+  color: white;
+  font-weight:bold;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 .survey2{
-	width:45%;
-	margin:5%;
-	float:left;
-	padding:20px;
-	background:#819FF7;
-	border:2px solid black;
-	border-radius:10px;
+	width: 500px;
+  margin: 5%;
+  float: left;
+  padding: 20px;
+  background: #3282b8;
+  border-radius: 10px;
+  color: white;
+  font-weight:bold;
+  font-family: 'Noto Sans KR', sans-serif;
 }
