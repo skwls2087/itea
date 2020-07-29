@@ -1,10 +1,10 @@
-package com.itea.dto;
+package com.itea.calendar.dto;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class CalendarDTO {
+public class GoogleCalendarDTO {
 
 	private String summary;
 	private String startDate;
@@ -19,12 +19,17 @@ public class CalendarDTO {
 		description = "";
 	}
 	
-	public CalendarDTO() {}
+	public GoogleCalendarDTO() {}
 	
 	public Date getStartDateTime() throws ParseException {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-ddHH:mm");
-		return format.parse(endDate + endTime);
+		return format.parse(startDate + startTime);
 	}
+	
+	public Date getEndDateTime() throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-ddHH:mm");
+        return format.parse(endDate+endTime);
+    }
 
 	public String getSummary() {
 		return summary;

@@ -78,6 +78,9 @@
 	<!-- 질문 게시판 관련 서비스 -->
 	<bean id="askSV" class="com.itea.ask.service.AskService"></bean>
 	
+	<!-- GoogleCalendar 관련 서비스 -->
+	<bean id="GoogleCalendarService" class="com.itea.calendar.service.GoogleCalendarService"></bean>
+	
 </beans>
 
 
