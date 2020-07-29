@@ -166,11 +166,9 @@ textarea{
 	margin:20px auto;
 	font-family: 'Noto Sans KR', sans-serif;
 }
-#problemScore{
-	padding:30px;
+.problemScore{
 	width:90%;
 	max-width:700px;
-	border:1px solid gray;
 	border-radius:10px;
 	margin:20px auto;
 	font-family: 'Noto Sans KR', sans-serif;
@@ -206,8 +204,17 @@ textarea{
 	clear:both;
 }
 #problemScore-left{
-	background:red;
+	float:left;
+	width:20%;
+	text-align:center;
 }
 #problemScore-right{
-	background:green;
+	float:left;
+	width:70%;
+}
+#next-problem-submit{
+	float:right;
+}
+#nextProblem{
+	height:30px;
 }

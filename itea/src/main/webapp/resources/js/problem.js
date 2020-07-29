@@ -1,8 +1,13 @@
+
+
+
 $(function(){
 	
 	$('#ctype-select').css('display','none');
 	var c
-	
+
+	$("#Ckind option:eq(0)").attr("selected", "selected");
+
 	//회원이 질문 등록할 때
 	$("#Ckind").change(function(){
 		var lno=$(this).val()
@@ -224,44 +229,60 @@ $(function(){
 	
 	//선지를 눌렀을때 체크한거 표시하고 정답체크 class부여하기
 	$("#solveChoice1").click(function(){
+		$("#solveChoice1").removeClass();
+		$("#solveChoice2").removeClass();
+		$("#solveChoice3").removeClass();
+		$("#solveChoice4").removeClass();
 		$(this).css('color','red');
 		$("#solveChoice2").css('color','black')
 		$("#solveChoice3").css('color','black')
 		$("#solveChoice4").css('color','black')
-		$(this).addClass('select1');
-		$("#solveChoice2").removeClass();
-		$("#solveChoice3").removeClass();
-		$("#solveChoice4").removeClass();
+		$(this).addClass('correct');
+		$("#solveChoice2").addClass('wrong');
+		$("#solveChoice3").addClass('wrong');
+		$("#solveChoice4").addClass('wrong');
 	});
 	$("#solveChoice2").click(function(){
+		$("#solveChoice1").removeClass();
+		$("#solveChoice2").removeClass();
+		$("#solveChoice3").removeClass();
+		$("#solveChoice4").removeClass();
 		$(this).css('color','red');
 		$("#solveChoice1").css('color','black')
 		$("#solveChoice3").css('color','black')
 		$("#solveChoice4").css('color','black')
 		$(this).addClass('correct');
-		$("#solveChoice1").removeClass();
-		$("#solveChoice3").removeClass();
-		$("#solveChoice4").removeClass();
+		$("#solveChoice1").addClass('wrong');
+		$("#solveChoice3").addClass('wrong');
+		$("#solveChoice4").addClass('wrong');
 	});
 	$("#solveChoice3").click(function(){
+		$("#solveChoice1").removeClass();
+		$("#solveChoice2").removeClass();
+		$("#solveChoice3").removeClass();
+		$("#solveChoice4").removeClass();
 		$(this).css('color','red');
 		$("#solveChoice1").css('color','black')
 		$("#solveChoice2").css('color','black')
 		$("#solveChoice4").css('color','black')
 		$(this).addClass('correct');
-		$("#solveChoice1").removeClass();
-		$("#solveChoice2").removeClass();
-		$("#solveChoice4").removeClass();
+		$("#solveChoice1").addClass('wrong');
+		$("#solveChoice2").addClass('wrong');
+		$("#solveChoice4").addClass('wrong');
 	});
 	$("#solveChoice4").click(function(){
+		$("#solveChoice1").removeClass();
+		$("#solveChoice2").removeClass();
+		$("#solveChoice3").removeClass();
+		$("#solveChoice4").removeClass();
 		$(this).css('color','red');
 		$("#solveChoice1").css('color','black')
 		$("#solveChoice2").css('color','black')
 		$("#solveChoice3").css('color','black')
 		$(this).addClass('correct');
-		$("#solveChoice1").removeClass();
-		$("#solveChoice2").removeClass();
-		$("#solveChoice3").removeClass();
+		$("#solveChoice1").addClass('wrong');
+		$("#solveChoice2").addClass('wrong');
+		$("#solveChoice3").addClass('wrong');
 	});
 	
 	//채점하기 눌렀을 때
@@ -271,29 +292,33 @@ $(function(){
 		correct=$("#problem-choice-correct").html();
 		select=$("#solveChoice"+correct).attr('class');
 		
-		if($("#solveChoice").attr("class")!="")
-				
-		
 		pno=$("#problemPNO").html();
 		
 		//선택과 정답이 일치하는지 확인
 		if(select=='correct'){
+			$("#problem-correct").css('display','')
+			$("#").css('display','')
+			$("#problemScoring").css('display','none')
 			correct=1;
-			$("#problemScore").css('display','')
-			$("#problemScore").css('border','1px solid green')
-		}else{
+		}else if(select=='wrong'){
+			$("#problem-wrong").css('display','')
+			$("#problemScoring").css('display','none')
 			correct=0;
-			$("#problemScore").css('display','')
-			$("#problemScore").css('border','1px solid red')
+		}else{
+			alert("정답을 골라주세요")
+			return false;
 		}
 		
-		//해당 문제의 정답률에 반영	
+		//해당 문제의 정답률에 반영
 		$.ajax({
-			url : 'problemScore.co?pno='+pno+'&correct='+correct,
-			type : 'get',
+			url : 'problemScore.co?pno='+ pno+'&correct='+correct ,
+			type : 'post',
+			contentType:"application/json; charset=utf-8;",
+			dataType:"json",
 			success : function(data) {					
 
 			}
 		})
+		
 	});
 });
