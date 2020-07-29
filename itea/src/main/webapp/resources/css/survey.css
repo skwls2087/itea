@@ -1,0 +1,30 @@
+.survey{
+	margin-top:50px;
+	text-align:center;
+}
+
+.survey-answer{
+	display:flex;
+	width:80%;
+	height:300px;
+	margin:0 auto;
+}
+
+.survey1{
+	width:45%;
+	margin:5%;
+	float:left;
+	padding:20px;
+	background:#819FF7;
+	border:2px solid black;
+	border-radius:10px;
+}
+.survey2{
+	width:45%;
+	margin:5%;
+	float:left;
+	padding:20px;
+	background:#819FF7;
+	border:2px solid black;
+	border-radius:10px;
+}
