@@ -13,7 +13,7 @@ public class licenseDTO {
 	private String linfo; 	//자격증정보
 	private String la;		//관련페이지(시험일정)
 	private String lqclass; //시험 유형
-	
+	private int lqno;
 	public int getLno() {
 		return lno;
 	}
