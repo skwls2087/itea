@@ -9,11 +9,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.itea.dto.MemberDTO;
 import com.itea.member.service.LoginService;
 
@@ -63,7 +65,7 @@ public class LoginController {
 	//네아로-회원가입 여부 체크하기
 	@RequestMapping(value = "/joincheck")
 	@ResponseBody
-	public int joinCheck(@RequestParam String email,HttpServletRequest request,HttpServletResponse response,HttpSession session) throws IOException {
+	public int joinCheck(@RequestParam String email, HttpServletRequest request,HttpServletResponse response,HttpSession session) throws IOException {
 		
 		MemberDTO mdto=new MemberDTO();
 		
@@ -89,12 +91,53 @@ public class LoginController {
 		}
 	}
 	
+
 	//sns로그인
-	@RequestMapping("snslogin")
-	public String snslogin() {
+	@RequestMapping(value="member/snsloginFrm", method=RequestMethod.GET)
+	public ModelAndView snslogin(HttpSession session) {
+		System.out.println("SNS LoginFrm 진입");
+		ModelAndView mav = new ModelAndView();
 		
-		return "../../index";
+		String kakaoUrl  = KakaoController.getAuthiruzationURI(session);
+		
+		mav.setViewName("loginFrm");
+		mav.addObject("kakao_url", kakaoUrl);
+		
+		return mav;
 	}
+	
+	@RequestMapping(value="member/kakaologin", 
+			produces="application/json", method={RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView KakaoLogin(@RequestParam("code") String code, 
+			HttpServletRequest request, HttpServletResponse response, 
+			HttpSession session) throws Exception {
+		System.out.println("KakaoLogin 진입");
+		ModelAndView mav = new ModelAndView();
+		
+		//결과값을 node에 전달
+		JsonNode node = KakaoController.getAccessToken(code);
+		
+		//accessToken에 사용자의 Login한 정보가 담겨있다.
+		JsonNode accessToken = node.get("access_token");
+		
+		//사용자 정보
+		JsonNode userInfo = KakaoController.getKakaoUserInfo(accessToken);
+		String kemail = null;
+		String kname  = null;
+		
+		//유저정보를 KAKAO에서 받아오기.
+		JsonNode properties = userInfo.path("properties");
+		JsonNode kakao_account = userInfo.path("kakao_account");
+		kemail = kakao_account.path("email").asText();
+		kname  = kakao_account.path("nickname").asText();
+		session.setAttribute("kemail", kemail);
+		session.setAttribute("kname", kname);
+		mav.setViewName("main");
+		
+		return mav;	
+	}
+	
+	
 	
 	//로그아웃 로직 수행
 	@RequestMapping("member/logoutProc")
