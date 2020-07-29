@@ -1,0 +1,45 @@
+.member-graph{
+	width:500px;
+	float:left;
+}
+.visitor-graph{
+	width:500px;
+	float:left;
+}
+#admin{
+	text-align:center;
+	font-family: 'Noto Sans KR', sans-serif;
+	margin:50px auto;
+	width:100%;
+	text-align:center;
+  display: flex;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.admin-heading{
+	margin-top:20px;
+	margin-bottom:30px;
+	font-size:30px;
+	font-family: 'Do Hyeon', sans-serif;
+	margin-left:10%;
+}
+#admin-table{
+	width:100%;
+	font-size:15px;
+	margin:10px auto;
+}
+#admin-user-select{
+	width:100px;
+}
+#member-content{
+	width:200px;
+}
+.admin-user{
+	margin:0 auto;
+	width:80%;
+	text-align:center;
+}
+#a-paging{
+	justify-content: center;
+}
+

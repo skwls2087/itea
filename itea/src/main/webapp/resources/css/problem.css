@@ -1,71 +1,225 @@
-/* problem-main */
+/* 문제풀이 메인화면 : problem-main */
 #problem-main-container{
 	text-align:center;
+}
+#problem-main-header{
+	font-family: 'Do Hyeon', sans-serif;
+}
+#problem-highlight{
+	background:linear-gradient(to top, #f7ca3e 50%, transparent 50% )
 }
 #problem-main{
 	padding:30px;
 	margin:50px;
-	font-family: 'Noto Sans KR', sans-serif;
 	display:inline-block;
-	background:#e9ecef;
 	text-align:center;
 	max-width:1200px;
 }
+.start-cont{
+	/* font-family: 'Do Hyeon', sans-serif; */
+	font-family: 'Jua', sans-serif;
+	font-size:40px;
+	/* text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black; */
+}
 .createProblem{
-	width:50%;
+	width:40%;
 	padding:3% 5%;
 	float:left;
+	/* background:#f7ca3e; */
+	border-radius:10px;
+	margin:5px 5%;
+	border:2px solid black;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight:500;
 }
 .solveProblem{
-	width:50%;
+	width:40%;
 	padding:3% 5%;
 	float:left;
+	border-radius:10px;
+	/* background:#f7ca3e; */
+	margin:5px 5%;
+	border:2px solid black;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight:500;
 }
-.start-cont{
-	font-size:30px;
+#start-button1, #start-button2, #select-test-button{
+	font-weight:900;
+	background:#1f3661;
+  border-color: black;
+  margin:0 auto;
 }
 
-/* problem-create */
+/* 문제 출제하기 : problem-create */
 #problem-create{
+	padding:30px;
+	width:90%;
+	max-width:700px;
+	margin:20px auto;
+	font-family: 'Noto Sans KR', sans-serif;
+	text-align:center;
+}
+#problem-header{
+	background:linear-gradient(to top, #f7ca3e 30%, transparent 30% );
+	font-weight:900;
+	font-size:2rem;
+	font-family: 'Do Hyeon', sans-serif;
+}
+textarea{
+	resize:none;
+}
+.filebox label { 
+	display: inline-block; 
+	padding: .5em .75em; 
+	color: white; 
+	font-size: inherit; 
+	line-height: normal; 
+	vertical-align: middle; 
+	background-color: #408080; 
+	cursor: pointer; 
+	border: 1px solid #ebebeb; 
+	border-bottom-color: #e2e2e2; 
+	border-radius: .25em; 
+} 
+.filebox input[type="file"] { 
+	/* 파일 필드 숨기기 */ 
+	position: absolute; 
+	width: 1px; 
+	height: 1px; 
+	padding: 0; 
+	margin: -1px; 
+	overflow: hidden; 
+	clip:rect(0,0,0,0); 
+	border: 0;
+	float:right; 
+}
+.form-group{
+	margin-bottom:40px;
+}
+.img_wrap{
+	width:300px;
+	margin-top:50px
+}
+.img_wrap img{
+	max-width:100%;
+}
+
+/* problem-create:choice-problem */
+/* .choice-Problem{
 	border:1px solid #ced4da;
 	border-radius:10px;
+	padding:50px 80px;
+	width:800px;
+	margin:50px auto;
+	text-align:center;
+} */
+
+/* problem-create:short-problem */
+/* .short-Problem{
+	border:1px solid #ced4da;
+	border-radius:10px;
+	padding:50px 80px;
+	width:800px;
+	margin:50px auto;
+	text-align:center;
+} */
+#inputLarge{
+	width:100px;
+	display:inline-block;
+}
+#img_wrap{
+	margin:0 auto;
+}
+.filebox{
+	text-align: right;
+}
+/* problem-create:essay-problem */
+/* .essay-Problem{
+	border:1px solid #ced4da;
+	border-radius:10px;
+	padding:50px 80px;
+	width:800px;
+	margin:50px auto;
+} */
+
+.close-img{
+	vertical-align: top;
+  border-style: none;
+  padding-top: 5px;
+  cursor:pointer;
+  position:absolute;
+  right:5px;
+  top:1px;
+}
+
+.correct-box{
+	display:inline-block;
+	position:relative;
+	margin:0 10px 10px;
+}
+
+/* problem-solve */
+#problem-solve{
 	padding:50px 80px;
 	width:400px;
 	margin:50px auto;
 	text-align:center;
 }
-.form-group{
-	margin-bottom:40px;
-}
 
-/* problem-create:choice-problem */
-.choice-Problem{
-	border:1px solid #ced4da;
-	border-radius:10px;
-	padding:50px 80px;
-	width:800px;
-	margin:50px auto;
+/*문제풀기*/
+#problem-solve{
+	padding:30px;
+	width:90%;
+	max-width:700px;
+	margin:20px auto;
+	font-family: 'Noto Sans KR', sans-serif;
 	text-align:center;
-}
-
-/* problem-create:short-problem */
-.short-Problem{
-	border:1px solid #ced4da;
+}	
+#problem-proc{
+	padding:30px;
+	width:90%;
+	max-width:700px;
+	border:1px solid gray;
 	border-radius:10px;
-	padding:50px 80px;
-	width:800px;
-	margin:50px auto;
+	margin:20px auto;
+	font-family: 'Noto Sans KR', sans-serif;
 }
-#inputLarge{
-	width:100px;
+#problemScore{
+	padding:30px;
+	width:90%;
+	max-width:700px;
+	border:1px solid gray;
+	border-radius:10px;
+	margin:20px auto;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+#solve-process{
+	width: 100%;
+	height: 50px;
+	clear:both;
+}
+.processing{
+	float:right;
+	font-family: 'Do Hyeon', sans-serif;
+	font-size:1.5rem;
+}
+.problem-nick{
+	float:left;
 	display:inline-block;
 }
-
-/* problem-create:essay-problem */
-.essay-Problem{
-	border:1px solid #ced4da;
-	border-radius:10px;
-	padding:50px 80px;
-	width:800px;
-	margin:50px auto;
+.problem-percent{
+	float:right;
+	display:inline-block;
+}
+#problem-question{
+	font-size:1.3rem;
+	clear:both;
+}
+#problem-info{
+	width:100%;
+	color:gray;
+	float:right;
+}
+#processing-bar{
+	clear:both;
 }

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- xml선언부-->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- myBatis-config.xml의     mapper로 반드시 등록되어야 한다 --> 
+<mapper namespace="problem">
+
+	<!-- 문제 출제 자격증 종류 -->
+	<select id="selectCkind" resultType="licenseDTO">
+		select lname,lno from license
+	</select>
+	
+	<!-- 문제 출제 자격증 시험 유형 -->
+	<select id="selectLclass" parameterType="int" resultType="string">
+		SELECT c.lqclass 
+		from license AS l
+		JOIN licenseclass AS c
+		ON l.lno = c.lno
+		WHERE l.lno=#{lno}
+	</select>
+	
+	<!-- 문제 출제 자격증 시험 유형 -->
+	<select id="selectLqno" parameterType="Hashmap" resultType="int">
+		SELECT lqno FROM licenseclass
+		WHERE lno=#{lno} and lqclass=#{lqclass}
+	</select>
+	
+	<!-- 데이터 입력 시 no가져오기 -->
+	<select id="selectPno" resultType="int">
+		SELECT pno FROM problem
+		ORDER BY pno desc
+		LIMIT 1
+	</select>
+	
+	<!-- 문제 입력 -->
+	<insert id="insertProblem" parameterType="problemDTO">
+		INSERT INTO problem (lqno,pyear,ptype,mno,pdetail,pcomment,pimg) VALUES (#{lqno},#{pyear},#{ptype},#{mno},#{pdetail},#{pcomment},#{pimg})
+	</insert>
+	
+	<!-- 객관식 선지 입력 -->
+	<insert id="insertChoicePchoice" parameterType="problemDTO">
+		INSERT INTO pchoice (pno,pcnumber,pccontent) 
+		VALUES 
+		<foreach collection="choice" index="index" item="item" separator=",">
+			(#{pno},#{index}+1,#{item})
+		</foreach>
+	</insert>
+	
+	<!-- 객관식 답안 입력 -->
+	<insert id="insertChoiceCorrect" parameterType="problemDTO">
+		INSERT INTO correct (pno,lcor) VALUES (#{pno},#{correct})
+	</insert>
+	
+	<!-- 주관식 서술형 답안 입력 -->
+	<insert id="insertCorrectList" parameterType="problemDTO">
+		INSERT INTO correct (pno,lcor) 
+		VALUES 
+		<foreach collection="correctList" item="item" separator=",">
+			(#{pno},#{item})
+		</foreach>
+	</insert>
+	
+	<!-- 문제풀기-문제번호리스트 -->
+	<select id="selectPnoList" parameterType="Hashmap" resultType="string">
+		SELECT p.pno
+		FROM problem AS p
+		join licenseclass AS l ON p.lqno=l.lqno
+		join member AS m ON m.mno=p.mno
+		WHERE l.lno=#{ckind} AND l.lqclass=#{ctype} and (p.pyear=0
+		<foreach collection="qyear" item="item">
+			or pyear=#{item}
+		</foreach>
+		)
+		<if test='qtype.equals("1")'>
+			and m.mnick='관리자'
+		</if>
+		<if test='qtype.equals("2")'>
+			and m.mnick!='관리자'
+		</if>
+	</select>
+	
+	<!-- 해당 글번호의 기본정보 -->
+	<select id="problemInfo" parameterType="int" resultType="problemDTO">
+		SELECT p.*,m.mnick
+		FROM problem AS p
+		join member AS m ON m.mno=p.mno
+		where p.pno=#{pno}
+	</select>
+	
+	<!-- 객관식 선지리스트 -->
+	<select id="selectChoice" parameterType="int" resultType="string">
+		SELECT pccontent FROM pchoice WHERE pno=#{pno} order by pcnumber
+	</select>
+	
+	<!-- 객관식 정답 받기 -->
+	<select id="selectChoiceCorrect" parameterType="int" resultType="string">
+		SELECT lcor FROM correct WHERE pno=#{pno}
+	</select>
+	
+	<!-- 주관식서술형 정답 리스트 -->
+	<select id="selectCorrectList" parameterType="int" resultType="string">
+		SELECT lcor FROM correct WHERE pno=#{pno}
+	</select>
+	
+	<!-- 문제 조회수 up -->
+	<update id="problemCountUp" parameterType="int">
+		update problem set psolve=IFNULL(psolve, 0) + 1 where pno=#{pno}
+	</update>
+	<update id="problemCorrectUp" parameterType="int">
+		update problem set pcorrect=IFNULL(pcorrect, 0) + 1 where pno=#{pno}
+	</update>
+	
+</mapper>

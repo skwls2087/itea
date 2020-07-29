@@ -1,13 +1,14 @@
-/*textarea¼³Á¤*/
+/*textareaï¿½ï¿½ï¿½ï¿½*/
 textarea{
 	resize:none;
 }
 
-/*ÀÚ°ÝÁõ ¼Ò°³ ¸®½ºÆ®*/
+/*ï¿½Ú°ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®*/
 .license-heading{
 	margin-top:10px;
 	margin-bottom:30px;
-	font-family: 'Noto Sans KR', sans-serif;
+	font-size:30px;
+	font-family: 'Do Hyeon', sans-serif;
 }
 .bd-placeholder-img {
   font-size: 1.125rem;
@@ -30,7 +31,7 @@ textarea{
 	font-family: 'Noto Sans KR', sans-serif;
 }
 
-/*ÀÚ°ÝÁõ µî·Ï*/
+/*ï¿½Ú°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½*/
 #license-container{
 	margin-top:50px;
 }
@@ -47,8 +48,10 @@ textarea{
 
 .license-head{
 	background:#F2F2F2;
-} 
+}
 #license-insert-button,#license-back-button {
-	text-align:center;
 	width:80px;
+}
+#license-button{
+	text-align:center;
 }

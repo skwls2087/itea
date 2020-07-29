@@ -66,14 +66,14 @@
 	</update> -->
 	
 	<delete id="deleteClass" parameterType="licenseDTO">
-	DELETE 
-	FROM licenseclass
-	WHERE lno=#{lno}
+		DELETE 
+		FROM licenseclass
+		WHERE lno=#{lno}
 	</delete>
 	<delete id="delete" parameterType="licenseDTO">
-	DELETE 
-	FROM license
-	WHERE lno=#{lno}
+		DELETE 
+		FROM license
+		WHERE lno=#{lno}
 	</delete>
 
 </mapper>

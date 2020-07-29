@@ -1,0 +1,127 @@
+/*파랑:#08324d*/
+/*노랑:#ffb535*/
+
+.itLab{
+	width:80%;
+	margin:0 auto;
+}
+#itLab-heading{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size:30px;
+	margin:20px 0;
+}
+.itLab-highlight{
+	background:linear-gradient(to top, #f7ca3e 50%, transparent 50% )
+}
+
+/*it연구소-직업만족도 테스트*/
+#itTest{
+	width:100%;
+	min-height:250px;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size:30px;
+	background:#08324d;
+	margin:0 auto;
+	color:#ffb535;
+	display:flex;
+}
+#it-test-button{
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight:700;
+	font-size:30px;
+}
+.itTest-left{
+	padding:40px;
+	width:70%;
+}
+.itTest-right{
+	padding-top:40px;
+	width:30%;
+	text-align:center;
+}
+.itTest-right img{
+	width:110px;
+	margin-bottom:20px;
+}
+#itTest-left-sub{
+	color:white;
+	font-size:14px;
+	padding-top:10px;
+}
+#itTest-left-sub a{
+	color:#ffb535;
+}
+
+@media (max-width: 750px) {
+  .itTest-right img{
+		display:none;
+		height:0px;
+	}
+	#itTest{
+		display:block;
+	}
+	.itTest-left{
+		width:100%;
+		padding-bottom:0px;
+	}
+	.itTest-right{
+		width:100%;
+		padding-top:0px;
+		padding-bottom:20px;
+	}
+}
+
+/*it연구소-워드클라우드*/
+#itKeyword{
+	width:100%;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size:30px;
+	background:#08324d;
+	margin:20px auto;
+	color:#ffb535;
+	display:flex;
+}
+#itKeyword-left{
+	width:50%;
+	padding:40px;
+  line-height: 1.0;
+}
+#itKeyword-left a{
+	color:white;
+	font-size:14px;
+}
+#itKeyword-right{
+	width:50%;
+}
+.wordcloud{
+	width:80%;
+}
+.wordcloudArrow{
+	width:8%;
+}
+@media (max-width: 750px) {
+	#itKeyword{
+		display:block;
+	}
+  #itKeyword-left a{
+		font-size:0px;
+	}
+	#itKeyword-left{
+		width:100%;
+	}
+	#itKeyword-right{
+		width:100%;
+	}
+}
+
+/*it연구소-인포그래픽*/
+#itInfo{
+	clear:both;
+	width:100%;
+	text-align:center;
+}
+#itInfo img{
+	margin:0 auto;
+	width:80%;
+	max-width:1000px;
+}

@@ -13,10 +13,28 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
 <!-- 구글폰트-굵은글씨표현 -->
-<!-- font-family: 'Black Han Sans', sans-serif; -->
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+<!-- font-family: 'Do Hyeon', sans-serif; -->
+
 <!-- 얇은 글씨 -->
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+<!-- font-family: 'Noto Sans KR', sans-serif; -->
+
+<!-- 굵은 글씨 -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+<!-- font-family: 'Noto Sans KR', sans-serif; -->
+
+<!-- 통통 특이한 글씨 -->
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap" rel="stylesheet">
+<!-- font-family: 'Black Han Sans', sans-serif; -->
+
+<!-- 귀욤 손글씨 -->
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+<!-- font-family: 'Nanum Pen Script', cursive; -->
+
+<!-- 동글동그한 글씨 -->
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<!-- font-family: 'Jua', sans-serif; -->
 
 <!-- JSTL 선언 -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -62,7 +80,7 @@
         <a class="nav-link" href="<%= request.getContextPath()%>/qa/qaFrm.co">Q&A</a>
       </li>
       <li class="nav-item  m-2">
-        <a class="nav-link" id="it-test" href="<%= request.getContextPath()%>/it/itMain.co">IT연구소</a>
+        <a class="nav-link" id="it-test" href="<%= request.getContextPath()%>/itLab/itLab.co">IT연구소</a>
       </li>
     </ul>
     
