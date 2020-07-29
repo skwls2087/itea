@@ -1,6 +1,7 @@
 .survey{
 	margin-top:50px;
 	text-align:center;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 .survey-answer{
@@ -8,23 +9,55 @@
 	width:80%;
 	height:300px;
 	margin:0 auto;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.survey-answer a{
+	width:50%
 }
 
 .survey1{
-	width:45%;
-	margin:5%;
-	float:left;
-	padding:20px;
-	background:#819FF7;
-	border:2px solid black;
-	border-radius:10px;
+	width: 80%;
+  margin: 5%;
+  float: left;
+  padding: 20px;
+  background: rgb(247, 247, 247);
+  border-radius: 10px;
+  font-weight:bold;
+  font-family: 'Noto Sans KR', sans-serif;
 }
+
+.survey1:hover{
+	width: 80%;
+  margin: 5%;
+  float: left;
+  padding: 20px;
+  background: #3282b8;
+  border-radius: 10px;
+  color: white;
+  font-weight:bold;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
 .survey2{
-	width:45%;
-	margin:5%;
-	float:left;
-	padding:20px;
-	background:#819FF7;
-	border:2px solid black;
-	border-radius:10px;
+	width: 80%;
+  margin: 5%;
+  float: left;
+  padding: 20px;
+  background: rgb(247, 247, 247);
+  border-radius: 10px;
+  font-weight:bold;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.survey2:hover{
+	width: 80%;
+  margin: 5%;
+  float: left;
+  padding: 20px;
+  background: #3282b8;
+  border-radius: 10px;
+  color: white;
+  font-weight:bold;
+  font-family: 'Noto Sans KR', sans-serif;
 }
