@@ -3,6 +3,8 @@
     
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/itLab.css">
 
+
+	
 <div class="itLab">
 	<div id="itLab-heading"><span>IT 연구소</span></div>
 	<div id="itTest">
@@ -13,8 +15,8 @@
 		</div>
 		<div class="itTest-right">
 			<img src="${pageContext.request.contextPath}/resources/img/test.png" ><br/>
-			<a href="<%= request.getContextPath()%>/itLab/itTest.co">
-			<input type="button" class="btn btn-outline-warning" value="TEST하기" id="it_test_button"></a>
+			<a href="<%= request.getContextPath()%>/it/itTest.co">
+			<input type="button" class="btn btn-outline-warning" value="TEST하기" id="it-test-button"></a>
 		</div>
 	</div>
 	

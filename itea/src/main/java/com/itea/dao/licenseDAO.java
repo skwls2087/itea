@@ -49,17 +49,16 @@ public class licenseDAO {
 
 
 	public void modify(licenseDTO lDto) {
-		System.out.println("naii###########"+lDto);
 		session.update("license.modify",lDto);	
 		session.delete("license.deleteClass",lDto.getLno());
 		if(Integer.parseInt(lDto.getLqclass())==1) {
-		session.insert("license.insertProc11",lDto);
-		session.insert("license.insertProc22",lDto);
+		session.insert("license.insertProc1",lDto);
+		session.insert("license.insertProc2",lDto);
 		}else if(Integer.parseInt(lDto.getLqclass())==2) {
-		session.insert("license.insertProc33",lDto);
-		session.insert("license.insertProc44",lDto);
+		session.insert("license.insertProc3",lDto);
+		session.insert("license.insertProc4",lDto);
 		}else {
-		session.insert("license.insertProc55",lDto);	
+		session.insert("license.insertProc5",lDto);	
 		}
 	}
 
