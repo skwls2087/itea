@@ -16,6 +16,10 @@
 	SELECT lno,lname, lorg, lfee, lclass, lreq, ldetail, lcut, linfo,la FROM license
 	WHERE lno=#{lno}	
 	</select> 
+	<select id="selectLqno" parameterType="licenseDTO" resultType="String">
+	SELECT l.lqno FROM license li, licenseclass l
+	 WHERE li.lno=#{lno}
+	</select>
 	<insert id="insertProc" parameterType="licenseDTO" >
 		insert into license  ( lname, lorg, lfee, lclass, lreq, ldetail, lcut, linfo,la) 
 		values (#{lname},#{lorg},#{lfee},#{lclass},#{lreq},#{ldetail},#{lcut},#{linfo},#{la}) 
@@ -35,7 +39,7 @@
 	<insert id="insertProc5" parameterType="licenseDTO" >
 		insert into licenseclass (lno,lqclass) values ((select lno from license where lname=#{lname}),'단독') 	
 	</insert>
-	<insert id="insertProc11" parameterType="licenseDTO" >
+	<!-- <insert id="insertProc11" parameterType="licenseDTO" >
 		insert into licenseclass (lqno,lno,lqclass) values (#{lqno},(select lno from license where lname=#{lname}),'필기')		 
 	</insert>
 	<insert id="insertProc22" parameterType="licenseDTO" >
@@ -49,7 +53,7 @@
 	</insert>
 	<insert id="insertProc55" parameterType="licenseDTO" >
 		insert into licenseclass (lqno,lno,lqclass) values (#{lqno},(select lno from license where lname=#{lname}),'단독') 	
-	</insert>
+	</insert> -->
 	<select id="modifyInfo" resultType="licenseDTO">
 	SELECT l.lno, lname, lorg, lfee, lclass, lreq, ldetail, lcut, linfo,la,c.lqclass,c.lqno FROM license l,licenseclass c WHERE l.lno=c.lno AND l.lno=#{lno} LIMIT 1
 	</select>

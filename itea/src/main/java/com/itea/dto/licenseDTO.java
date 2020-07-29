@@ -20,12 +20,12 @@ public class licenseDTO {
 	public void setLno(int lno) {
 		this.lno = lno;
 	}
-	public int getLqno() {
+	/*public int getLqno() {
 		return lqno;
 	}
 	public void setLqno(int lqno) {
 		this.lqno = lqno;
-	}
+	}*/
 	public String getLname() {
 		return lname;
 	}
@@ -90,7 +90,7 @@ public class licenseDTO {
 	public String toString() {
 		return "licenseDTO [lno=" + lno + ", lname=" + lname + ", lorg=" + lorg + ", lfee=" + lfee + ", lclass="
 				+ lclass + ", lreq=" + lreq + ", ldetail=" + ldetail + ", lcut=" + lcut + ", linfo=" + linfo + ", la="
-				+ la + ", lqclass=" + lqclass + ", lqno=" + lqno + "]";
+				+ la + ", lqclass=" + lqclass+"]";
 	}
 	
 	

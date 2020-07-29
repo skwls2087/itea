@@ -10,10 +10,7 @@ $(function(){
 		$("#test9").hide();
 		$("#test10").hide();
 		$("#test-result").hide();
-		/* $(".survey-answer").click(function(){
-		$("#test1").hide();
-		$("#test2").show();
-		}) */
+		
 		 $("#answer1_1").click(function(){
 			$("#test1").hide();
 			str=str+"0,"

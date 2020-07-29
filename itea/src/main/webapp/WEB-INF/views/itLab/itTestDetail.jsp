@@ -95,7 +95,7 @@
    </div>
 </div>
 <div id="test-result">
-	<input type="button" id="test-result" class="survey1" value="결과보기">
+	<a href="<%= request.getContextPath()%>/itLab/itTestResult.co"><input type="button" id="test-result" class="survey1" value="결과보기"></a>
 </div>	
 			
 </body>
