@@ -7,6 +7,8 @@
 
 <div id="problem-proc">
 
+	<div id="problemPNO">${problem.pno}</div>
+
 	<div class="processing">
 		<span id="psolve">${solve}</span>/<span id="ptotal">${total}</span>
 	</div>
@@ -25,20 +27,23 @@
 		</c:if>
 		</div>
 		<div class="problem-percent">
-		정답률: 10%
+		<c:if test="${problem.psolve!=0}">
+			정답률: ${problem.pcorrect/problem.psolve}%
+		</c:if>
 		</div>
 	</div>
 	<div id="problem-question">Q. ${problem.pdetail}</div>
 	${problem.pimg}
-	<img src="${pageContext.request.contextPath}/upload/dd.jsp"><br/>
+	<%-- <img src="${pageContext.request.contextPath}/upload/dd.jsp"> --%><br/>
 	
 	<!-- 객관식일때 -->
 	<table>
 	<c:if test="${problem.ptype==1}">
 		<c:forEach items="${problem.choice}" var="choice" varStatus="status">
 		<tr>
-		<td>${status.count}. </td>
-		<td><div class="choice">${choice}</div></td>
+			<td valign=top>${status.count}. </td>
+			<td><span id="solveChoice${status.count}">${choice}
+				</span></td>
 		</tr>
 		</c:forEach>
 	</c:if>
@@ -49,8 +54,8 @@
 	<c:if test="${problem.ptype!=1}">
 		<input type="text"/>
 	</c:if>
-
-	<input type="submit" class="btn btn-success center" id="problem-scoring" value="채점하기" >
+	
+	<input type="button" class="btn btn-success center" id="problemScoring" value="채점하기" >
 	
 	<form id="nextProblem" action="nextProblem.co" method="post">
 		<c:forEach items="${pnoList}" var="pno">
@@ -65,8 +70,9 @@
 </div>
 
 
-<div id="problem-score">
+<div id="problemScore" style="display:none">
 	<a href="#">좋아요</a><a href="#">싫어요</a><a href="#">즐겨찾기</a><a href="#">토론하기</a><br/>
+	정답:<span id="problem-choice-correct">${problem.correct}</span><br/>
 	해설:${problem.pcomment}<br/>
 	<c:if test="${problem.ptype!=1}">
 		<c:forEach items="${problem.correctList}" var="correct">

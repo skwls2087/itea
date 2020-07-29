@@ -7,7 +7,7 @@
 <div id="problem-create-container">
 	<div id="problem-create">
 	<form action="selectTest.co" method="post">
-		<span id="cert-select">자격증 선택</span><br/><br/>
+		<span id="problem-header">자격증 선택</span><br/><br/>
 		<hr><br/>
 	    <div class="form-group">
 	    

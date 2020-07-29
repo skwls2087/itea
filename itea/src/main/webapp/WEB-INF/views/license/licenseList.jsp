@@ -42,7 +42,6 @@
         </div><!-- class="col-md-4" -->
        </c:forEach>  
      
-      
     </div>
   </div>
 </form>

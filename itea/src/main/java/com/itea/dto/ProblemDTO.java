@@ -17,6 +17,8 @@ public class ProblemDTO {
 	private String pcomment; //해설
 	private int plike; //좋아요 수
 	private int phate; //싫어요 수
+	private int psolve; //전체 푼 수
+	private int pcorrect; //문제 맞은 수
 	
 	private MultipartFile file; //파일받기
 	
@@ -114,6 +116,22 @@ public class ProblemDTO {
 		this.phate = phate;
 	}
 
+	public int getPsolve() {
+		return psolve;
+	}
+
+	public void setPsolve(int psolve) {
+		this.psolve = psolve;
+	}
+
+	public int getPcorrect() {
+		return pcorrect;
+	}
+
+	public void setPcorrect(int pcorrect) {
+		this.pcorrect = pcorrect;
+	}
+
 	public MultipartFile getFile() {
 		return file;
 	}
@@ -166,10 +184,9 @@ public class ProblemDTO {
 	public String toString() {
 		return "ProblemDTO [pno=" + pno + ", mno=" + mno + ", mnick=" + mnick + ", lqno=" + lqno + ", pyear=" + pyear
 				+ ", ptype=" + ptype + ", pdetail=" + pdetail + ", pcomment=" + pcomment + ", plike=" + plike
-				+ ", phate=" + phate + ", file=" + file + ", pimg=" + pimg + ", choice=" + Arrays.toString(choice)
-				+ ", correct=" + correct + ", correctList=" + Arrays.toString(correctList) + ", pyearList="
-				+ Arrays.toString(pyearList) + "]";
+				+ ", phate=" + phate + ", psolve=" + psolve + ", pcorrect=" + pcorrect + ", file=" + file + ", pimg="
+				+ pimg + ", choice=" + Arrays.toString(choice) + ", correct=" + correct + ", correctList="
+				+ Arrays.toString(correctList) + ", pyearList=" + Arrays.toString(pyearList) + "]";
 	}
-
 
 }

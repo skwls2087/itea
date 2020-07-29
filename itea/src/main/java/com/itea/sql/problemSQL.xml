@@ -102,4 +102,12 @@
 		SELECT lcor FROM correct WHERE pno=#{pno}
 	</select>
 	
+	<!-- 문제 조회수 up -->
+	<update id="problemCountUp" parameterType="int">
+		update problem set psolve=IFNULL(psolve, 0) + 1 where pno=#{pno}
+	</update>
+	<update id="problemCorrectUp" parameterType="int">
+		update problem set pcorrect=IFNULL(pcorrect, 0) + 1 where pno=#{pno}
+	</update>
+	
 </mapper>

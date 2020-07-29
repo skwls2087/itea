@@ -37,7 +37,7 @@
 		  </div>
   
 		<!-- Q&A 테이블 -->
-        <table class="table" id="qa-table">
+    <table class="table" id="admin-table">
         <tr>
         	<th width="10%">번호</th>
         	<th width="10%">작성자</th>

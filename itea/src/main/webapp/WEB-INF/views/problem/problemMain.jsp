@@ -6,7 +6,7 @@
 
 <div id="problem-main-container">
 	<div id="problem-main">
-	  <h1 id="problem-header" class="display-5">자격증 <span id="problem-highlight">문제풀이</span> 시작하기</h1>
+	  <h1 id="problem-main-header" class="display-5">자격증 <span id="problem-highlight">문제풀이</span> 시작하기</h1>
 	  <hr class="my-4">
 	  <div class="createProblem">
 		  <p class="start-cont">문제출제</p>
