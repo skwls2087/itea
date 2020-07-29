@@ -9,3 +9,12 @@
    font-family: 'Noto Sans KR', sans-serif;
 }
 	
+#startBtn{
+	font-size: 20px;
+	background-color: #008CBA;
+	color: white;
+	text-align: center;
+	border-radius: 10px;
+	padding:20px 40px;
+	font-family: 'Noto Sans KR', sans-serif;
+}
