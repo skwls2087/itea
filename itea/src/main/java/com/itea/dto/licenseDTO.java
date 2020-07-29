@@ -13,12 +13,18 @@ public class licenseDTO {
 	private String linfo; 	//자격증정보
 	private String la;		//관련페이지(시험일정)
 	private String lqclass; //시험 유형
-	private int lqno;
+	private int lqno;       //번호
 	public int getLno() {
 		return lno;
 	}
 	public void setLno(int lno) {
 		this.lno = lno;
+	}
+	public int getLqno() {
+		return lqno;
+	}
+	public void setLqno(int lqno) {
+		this.lqno = lqno;
 	}
 	public String getLname() {
 		return lname;
@@ -80,12 +86,13 @@ public class licenseDTO {
 	public void setLqclass(String lqclass) {
 		this.lqclass = lqclass;
 	}
-	
 	@Override
 	public String toString() {
 		return "licenseDTO [lno=" + lno + ", lname=" + lname + ", lorg=" + lorg + ", lfee=" + lfee + ", lclass="
 				+ lclass + ", lreq=" + lreq + ", ldetail=" + ldetail + ", lcut=" + lcut + ", linfo=" + linfo + ", la="
-				+ la + ", lqclass=" + lqclass + "]";
+				+ la + ", lqclass=" + lqclass + ", lqno=" + lqno + "]";
 	}
+	
+	
 
 }

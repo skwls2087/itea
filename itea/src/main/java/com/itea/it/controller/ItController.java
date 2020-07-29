@@ -38,7 +38,7 @@ public class ItController {
 	 
 	    
 	}
-	@RequestMapping("/it/itTest.co")
+	@RequestMapping("/itLab/itTest.co")
 	public void  itTest(){
 		System.out.println("itTest 진입");
 		
