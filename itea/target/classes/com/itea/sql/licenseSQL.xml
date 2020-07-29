@@ -35,7 +35,21 @@
 	<insert id="insertProc5" parameterType="licenseDTO" >
 		insert into licenseclass (lno,lqclass) values ((select lno from license where lname=#{lname}),'단독') 	
 	</insert>
-
+	<insert id="insertProc11" parameterType="licenseDTO" >
+		insert into licenseclass (lqno,lno,lqclass) values (#{lqno},(select lno from license where lname=#{lname}),'필기')		 
+	</insert>
+	<insert id="insertProc22" parameterType="licenseDTO" >
+		insert into licenseclass (lqno,lno,lqclass) values (#{lqno},(select lno from license where lname=#{lname}),'실기')		 
+	</insert>
+	<insert id="insertProc33" parameterType="licenseDTO" >	
+		insert into licenseclass (lqno,lno,lqclass) values (#{lqno},(select lno from license where lname=#{lname}),'1차') 
+	</insert>
+	<insert id="insertProc44" parameterType="licenseDTO" >	
+		insert into licenseclass (lqno,lno,lqclass) values (#{lqno},(select lno from license where lname=#{lname}),'2차') 
+	</insert>
+	<insert id="insertProc55" parameterType="licenseDTO" >
+		insert into licenseclass (lqno,lno,lqclass) values (#{lqno},(select lno from license where lname=#{lname}),'단독') 	
+	</insert>
 	<select id="modifyInfo" resultType="licenseDTO">
 	SELECT l.lno, lname, lorg, lfee, lclass, lreq, ldetail, lcut, linfo,la,c.lqclass,c.lqno FROM license l,licenseclass c WHERE l.lno=c.lno AND l.lno=#{lno} LIMIT 1
 	</select>
@@ -44,6 +58,27 @@
 	UPDATE license SET lname=#{lname}, lorg=#{lorg}, lfee=#{lfee}, lclass=#{lclass}, lreq=#{lreq}, ldetail=#{ldetail}, lcut=#{lcut}, linfo=#{linfo},la=#{la}	
 	WHERE lno=#{lno}
 	</update> 
+	<!-- <update id="updateProc1" parameterType="licenseDTO" >
+		update licenseclass set lno=(select lno from license where lname=#{lname}), lqclass='필기'
+		insert into licenseclass (lno,lqclass) values ((select lno from license where lname=#{lname}),'필기')		 
+	</update>
+	<update id="updateProc2" parameterType="licenseDTO" >
+		update licenseclass set lno=(select lno from license where lname=#{lname}), lqclass='실기'
+		insert into licenseclass (lno,lqclass) values ((select lno from license where lname=#{lname}),'실기')		 
+	</update>
+	<update id="updateProc3" parameterType="licenseDTO" >	
+		update licenseclass set lno=(select lno from license where lname=#{lname}), lqclass='1차'
+		insert into licenseclass (lno,lqclass) values ((select lno from license where lname=#{lname}),'1차') 
+	</update>
+	<update id="updateProc4" parameterType="licenseDTO" >	
+		update licenseclass set lno=(select lno from license where lname=#{lname}), lqclass='2차'
+		insert into licenseclass (lno,lqclass) values ((select lno from license where lname=#{lname}),'2차') 
+	</update>
+	<update id="updateProc5" parameterType="licenseDTO" >
+		update licenseclass set lno=(select lno from license where lname=#{lname}), lqclass='단독'
+		insert into licenseclass (lno,lqclass) values ((select lno from license where lname=#{lname}),'단독') 	
+	</update>  -->
+	
 	<delete id="deleteClass" parameterType="licenseDTO">
 		DELETE 
 		FROM licenseclass
