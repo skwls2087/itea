@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/problem.css">
 
 <div id="problem-proc">
-
+${problem }
 	<div id="problemPNO">#${problem.pno}</div>
 
 	<div class="processing">
@@ -71,14 +71,37 @@
 
 
 <div id="problemScore" style="display:none">
-	<a href="#">좋아요</a><a href="#">싫어요</a><a href="#">즐겨찾기</a><a href="#">토론하기</a><br/>
-	정답:<span id="problem-choice-correct">${problem.correct}</span><br/>
-	해설:${problem.pcomment}<br/>
-	<c:if test="${problem.ptype!=1}">
-		<c:forEach items="${problem.correctList}" var="correct">
-		핵심키워드:${correct} 
-		</c:forEach>
-	</c:if>
+	<div id="problemScore-left">
+		<img src="${pageContext.request.contextPath}/resources/img/correct.png" width="20"/>
+		정답입니다!
+	</div>
+	<div id="problemScore-right">
+		<a href="#">좋아요</a><a href="#">싫어요</a><a href="#">즐겨찾기</a><a href="#">토론하기</a><br/>
+		정답:<span id="problem-choice-correct">${problem.correct}</span><br/>
+		해설:${problem.pcomment}<br/>
+		<c:if test="${problem.ptype!=1}">
+			<c:forEach items="${problem.correctList}" var="correct">
+			핵심키워드:${correct} 
+			</c:forEach>
+		</c:if>
+	</div>
+</div>
+
+<div id="problemScore" style="display:none">
+	<div id="problemScore-left">
+		<img src="${pageContext.request.contextPath}/resources/img/close.png" width="20"/>
+		틀렸습니다!
+	</div>
+	<div id="problemScore-right">
+		<a href="#">좋아요</a><a href="#">싫어요</a><a href="#">즐겨찾기</a><a href="#">토론하기</a><br/>
+		정답:<span id="problem-choice-correct">${problem.correct}</span><br/>
+		해설:${problem.pcomment}<br/>
+		<c:if test="${problem.ptype!=1}">
+			<c:forEach items="${problem.correctList}" var="correct">
+			핵심키워드:${correct} 
+			</c:forEach>
+		</c:if>
+	</div>
 </div>
 
 

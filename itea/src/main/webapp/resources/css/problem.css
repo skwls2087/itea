@@ -28,7 +28,7 @@
 	/* background:#f7ca3e; */
 	border-radius:10px;
 	margin:5px 5%;
-	border:2px solid black;
+	border:1px solid #adb5bd;
 	font-family: 'Noto Sans KR', sans-serif;
 	font-weight:500;
 }
@@ -39,11 +39,11 @@
 	border-radius:10px;
 	/* background:#f7ca3e; */
 	margin:5px 5%;
-	border:2px solid black;
+	border:1px solid #adb5bd;
 	font-family: 'Noto Sans KR', sans-serif;
 	font-weight:500;
 }
-#start-button1, #start-button2, #select-test-button{
+#start-button1, #start-button2, #select-test-button, #create-problem-submit, #create-text-problem-submit{
 	font-weight:900;
 	background:#1f3661;
   border-color: black;
@@ -103,26 +103,6 @@ textarea{
 .img_wrap img{
 	max-width:100%;
 }
-
-/* problem-create:choice-problem */
-/* .choice-Problem{
-	border:1px solid #ced4da;
-	border-radius:10px;
-	padding:50px 80px;
-	width:800px;
-	margin:50px auto;
-	text-align:center;
-} */
-
-/* problem-create:short-problem */
-/* .short-Problem{
-	border:1px solid #ced4da;
-	border-radius:10px;
-	padding:50px 80px;
-	width:800px;
-	margin:50px auto;
-	text-align:center;
-} */
 #inputLarge{
 	width:100px;
 	display:inline-block;
@@ -133,15 +113,6 @@ textarea{
 .filebox{
 	text-align: right;
 }
-/* problem-create:essay-problem */
-/* .essay-Problem{
-	border:1px solid #ced4da;
-	border-radius:10px;
-	padding:50px 80px;
-	width:800px;
-	margin:50px auto;
-} */
-
 .close-img{
 	vertical-align: top;
   border-style: none;
@@ -156,6 +127,17 @@ textarea{
 	display:inline-block;
 	position:relative;
 	margin:0 10px 10px;
+}
+#plus-keyword{
+	float:left;
+}
+#correct-boxes{
+	clear:both;
+	text-align:left;
+}
+#short-keyword{
+	color:gray;
+	text-align:left;
 }
 
 /* problem-solve */
@@ -222,4 +204,10 @@ textarea{
 }
 #processing-bar{
 	clear:both;
+}
+#problemScore-left{
+	background:red;
+}
+#problemScore-right{
+	background:green;
 }

@@ -153,7 +153,14 @@ public class SolveProblemController {
 	//문제를 풀면 정답률에 반영하기
 	@RequestMapping("/problemScore")
 	@ResponseBody
-	public void problemScore(int pno, int correct) {
-		problemSV.problemCountUp(pno,correct);
+	public void problemScore(HttpServletRequest request) {
+		System.out.println(request.getRequestURI());
+		String pno=request.getParameter("pno");
+		String correct=request.getParameter("correct");
+		System.out.println("pno="+pno);
+		System.out.println("correct="+correct);
+		int ppno=Integer.parseInt(pno);
+		int pcorrect=Integer.parseInt(correct);
+		problemSV.problemCountUp(ppno,pcorrect);
 	}
 }

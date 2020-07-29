@@ -4,19 +4,8 @@
 <script src="${pageContext.request.contextPath}/resources/js/problem.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/problem.css">
 
-<script>
-if(!window.HashChangeEvent)(function(){
-	var lastURL=document.URL;
-	window.addEventListener("hashchange",function(event){
-		Object.defineProperty(event,"oldURL",{enumerable:true,configurable:true,value:lastURL});
-		Object.defineProperty(event,"newURL",{enumerable:true,configurable:true,value:document.URL});
-		lastURL=document.URL;
-	});
-}());
-</script>
-
 <div id="problem-create">
-	<span id="problem-header">문제출제</span><br/><br/>
+	<span id="problem-header">서술형 출제</span><br/><br/>
 	<form id="choice-problem-create" method="post" action="createProblemProc.co" encType="multipart/form-data">
 		<table width="100%">
 		<!-- 문제 -->
@@ -34,7 +23,9 @@ if(!window.HashChangeEvent)(function(){
     		<img id="img">
     	</div>
     </div>
+    <br/><br/>
     </td>
+    <br/>
     <!-- 지문 -->
    	<div class="form-group">
    	<!-- 1번 -->
@@ -90,14 +81,14 @@ if(!window.HashChangeEvent)(function(){
 		<!-- 해설 -->
 		<tr>
 			<td valign=top>해설.</td>
-			<td><textarea class="form-control" name="pcomment" placeholder="내용을 입력해주세요" id="pcomment" rows="3">
-			</textarea></td>
+			<td><textarea class="form-control" name="pcomment" placeholder="내용을 입력해주세요" id="pcomment" rows="3"></textarea></td>
     </tr>
     </table>
 	    <input type="hidden" name="lqno" value="${lqno}"/>
 	    <input type="hidden" name="pyear" value="${pyear}"/>
 	    <input type="hidden" name="ptype" value="${ptype}"/>
-	    <input type="submit" id="create-problem-submit" class="btn btn-primary" value="출제하기">
+	    <br/><br/>
+	    <input type="submit" id="create-problem-submit" class="btn btn-primary btn-lg" value="출제하기">
     </form>
 	
 </div>

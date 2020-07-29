@@ -104,7 +104,26 @@ $(function(){
 		}
 	})
 	//주관식,서술형문제 출제 유효성검사
-	$("#create-text-problem-submit").submit(function(){
+	$("#create-short-submit").submit(function(){
+		if($("#pdetail").val()==""){
+			alert("문제를 입력해주세요")
+			return false;
+		}
+		
+		var noword=0;
+		
+		$('input[type="text"]').each(function(){
+			if($(this).val()==""){
+				alert("키워드를 모두 입력해주세요")
+				noword++
+				return;
+			}
+		})
+		if(noword!=0){
+			return false;
+		}
+	})
+	$("#create-essay-submit").submit(function(){
 		if($("#pdetail").val()==""){
 			alert("문제를 입력해주세요")
 			return false;
@@ -157,13 +176,20 @@ $(function(){
 		return false;
 	})
 	
-	//텍스트박스 크기 자동조절
+	//텍스트area 크기 자동조절
 	$("#choice-problem-create").find("textarea").on('keydown keyup', function () {
 		$(this).height(1).height( $(this).prop('scrollHeight')+12 );	
 	});
 	
+	$("#create-short-submit").find("textarea").on('keydown keyup', function () {
+		$(this).height(1).height( $(this).prop('scrollHeight')+40 );	
+	});
+	$("#create-essay-submit").find("textarea").on('keydown keyup', function () {
+		$(this).height(1).height( $(this).prop('scrollHeight')+40 );	
+	});
 	
-	$("#problem-scoring").click(function(){
+	
+	$("#create-text-problem-submit").click(function(){
 		
 		$.ajax({
 			url : 'problemScore.co?lno='+ lno,
@@ -194,32 +220,6 @@ $(function(){
 			return false;
 		}
 		
-	});
-	
-	$("#Ckind").change(function(){
-		var lno=$(this).val()
-		
-		$.ajax({
-			url : 'testType.co?lno='+ lno,
-			type : 'post',
-			contentType:"application/json; charset=utf-8;",
-			dataType:"json",
-			success : function(data) {					
-				if(typeof data.first!="undefined"){
-					$('#ctype-select').css('display','');
-					
-					$('#type1').val(data.first);
-					$('#type1').text(data.first);
-					$('#type2').val(data.second);
-					$('#type2').text(data.second);
-					
-				}
-				if(typeof data.first=="undefined"){
-					$('#ctype-select').css('display','none');
-					$('#type0').val("단일");
-				}
-			}
-		})
 	});
 	
 	//선지를 눌렀을때 체크한거 표시하고 정답체크 class부여하기
@@ -279,32 +279,21 @@ $(function(){
 		//선택과 정답이 일치하는지 확인
 		if(select=='correct'){
 			correct=1;
+			$("#problemScore").css('display','')
+			$("#problemScore").css('border','1px solid green')
 		}else{
 			correct=0;
+			$("#problemScore").css('display','')
+			$("#problemScore").css('border','1px solid red')
 		}
 		
-		//해당 문제의 정답률에 반영
+		//해당 문제의 정답률에 반영	
 		$.ajax({
-			url : 'problemScore.co?pno='+ pno+'&correct='+correct ,
-			type : 'post',
-			contentType:"application/json; charset=utf-8;",
-			dataType:"json",
+			url : 'problemScore.co?pno='+pno+'&correct='+correct,
+			type : 'get',
 			success : function(data) {					
-				if(typeof data.first!="undefined"){
-					$('#ctype-select').css('display','');
-					
-					$('#type1').val(data.first);
-					$('#type1').text(data.first);
-					$('#type2').val(data.second);
-					$('#type2').text(data.second);
-					
-				}
-				if(typeof data.first=="undefined"){
-					$('#ctype-select').css('display','none');
-					$('#type0').val("단일");
-				}
+
 			}
 		})
-		$("#problemScore").css('display','')
 	});
 });
