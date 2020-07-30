@@ -15,17 +15,21 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+@RequestMapping(value="/member/snslogin.co", produces="application/json", method={RequestMethod.GET, RequestMethod.POST})
 public class KakaoController {
+	
 
 	//KAKAO REST API KEY
 	private final static String K_CLIENT_ID    = "dddf9e1f05cdd30409acd606d146afe9";
 	
 	//KAKAO API Redirect URI	
-	private final static String K_REDIRECT_URI = "http://localhost:8080/spring/member/login/kakaologin.co";
+	private final static String K_REDIRECT_URI = "http://localhost:8080/spring";
 	
 	public static String getAuthiruzationURI(HttpSession session) {
 		String kakaoUrl 
@@ -36,7 +40,7 @@ public class KakaoController {
 	
 	
 	public static JsonNode getAccessToken(String autorize_code) {
-		
+		System.out.println("카카오 로그인 API 연결을 요청합니다.");
 		final String RequestUrl 			 = "https://kauth.kakao.com/oauth/token";
 		final List<NameValuePair> postParams = new ArrayList<NameValuePair>();
 		
@@ -44,7 +48,7 @@ public class KakaoController {
 		//KAKAO REST API KEY
 		postParams.add(new BasicNameValuePair("client_id", "dddf9e1f05cdd30409acd606d146afe9"));
 		//KAKAO API Redirect URI	
-		postParams.add(new BasicNameValuePair("redirect_uri", "http://localhost:8080/spring/member/login/kakaologin.co"));
+		postParams.add(new BasicNameValuePair("redirect_uri", "http://localhost:8080/spring"));
 		//Login 중 받은 code값.
 		postParams.add(new BasicNameValuePair("code", autorize_code));
 		
@@ -68,6 +72,7 @@ public class KakaoController {
 			e.printStackTrace();
 		} finally {
 			//입력된 데이터 clear
+			System.out.println("현재 입력된 로그인 데이터를 정리합니다.");
 		}
 		return returnNode;
 	}
