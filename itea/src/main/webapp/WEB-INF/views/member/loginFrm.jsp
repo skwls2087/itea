@@ -3,7 +3,6 @@
 <%@ page import="java.security.SecureRandom" %>
 <%@ page import="java.math.BigInteger" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <style>
 	.form-signin{
 		max-width:300px;
@@ -47,30 +46,15 @@
 		</script>
 
 		<br/>
-		
-		
 		<!-- 2.카카오 -->
-		<form>
-			<div id="kakao_id_login" style="text-align:center">
-				<a href="<%= request.getContextPath()%>/member/snsloginFrm.co">
-				<img width="280" src="https://usefulpa.s3.amazonaws.com/images/2014/kakao_account_login_btn_large_narrow_ov.png" /></a>
-			</div>
-		</form>
-		<br/>
-		
-		
+		<div id="kakao_id_login" style="text-align:center">
+			<a href="<%= request.getContextPath()%>/member/snsloginFrm.co">
+			<img width="300" src="https://usefulpa.s3.amazonaws.com/images/2014/kakao_account_login_btn_large_narrow_ov.png" /></a>
+		</div>
+		 
+	
 		<!-- 3.구글 -->
-		<form>
-			<script src="https://apis.google.com/js/platform.js" async defer></script>
-			<meta name="google-signin-client_id" content="166692119557-0b567megrl9q30husoocc390db33q3tk.apps.googleusercontent.com">
-			<div class="g-signin2" data-onsuccess="onSignIn"></div>
-			<script type="text/javascript">
-				function onSignIn(googleUser) {
-					  var profile = googleUser.getBasicProfile();
-					  console.log('ID: ' + profile.getId()); 		//백엔드로 보내지 마! 대신 ID 토큰을 사용하십시오.
-					  console.log('Image URL: ' + profile.getImageUrl());
-					  console.log('Email: ' + profile.getEmail());  //'Email' 범위가 없는 경우 이 값은 null입니다.
-				}
-			</script>	
-		</form> 	
+			 
+			
+			 
 
