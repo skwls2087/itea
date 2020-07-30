@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', function() {
        },
       {
         googleCalendarId: '468luudes1qj4bdj1p4d8k6mro@group.calendar.google.com',
-        className: '워드프로세서',
-     	  color: '#ffe4e4',
+        className: '정보처리기사',
+     	  color: '#e8505b',
      	  //textColor: 'black' 
       },
       {
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
       {
           googleCalendarId: 'a6u1bplljppb20h1ctss39k9eg@group.calendar.google.com',
-          className: '정보처리기사',
+          className: '워드프로세서',
        	  color: '#3b6978',
        	  //textColor: 'black' 
         },
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
          googleCalendarId: 'vgk12clr874eogdvn31ut6foio@group.calendar.google.com',
          className: 'PC 정비사',
        	color: '#f4ebc1',
-       	//textColor: 'black' 
+       	textColor: 'black' 
        },
      {
          googleCalendarId: '687kr198d3f0uv22u8t8uh4na0@group.calendar.google.com',
