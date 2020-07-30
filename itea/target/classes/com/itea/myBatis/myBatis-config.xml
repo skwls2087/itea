@@ -20,6 +20,7 @@
 	</settings>
 	
 	<typeAliases>  
+	<typeAlias type="com.itea.dto.ChatDTO" alias="chatDTO"/>
     <typeAlias type="com.itea.dto.MemberDTO"  alias="memberDTO"/>
     <typeAlias type="com.itea.dto.licenseDTO"  alias="licenseDTO"/>
     <typeAlias type="com.itea.util.Visitor"  alias="visitor"/>
@@ -35,6 +36,7 @@
 	
 	<mappers>
 		<!-- mappers의 자식요소로서 mapper등록 -->
+		<mapper resource="/com/itea/sql/chatSQL.xml"/>
 		<mapper resource="/com/itea/sql/memberSQL.xml"/>
 		<mapper resource="/com/itea/sql/qaSQL.xml"/>
 		<mapper resource="/com/itea/sql/licenseSQL.xml"/>

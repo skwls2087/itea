@@ -46,13 +46,6 @@
 		</tr>
 		</c:forEach>
 	</table>
-	<table class="table" style="text-align:right">
-		<tr>
-			<td>
-				<input type="button" id="wBtn" value="글쓰기"/>
-			</td>
-		</tr>
-	</table>
 	<table style="text-align:center" width="100%">
 		<tr>
 			<td>

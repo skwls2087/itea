@@ -87,6 +87,10 @@ public class AskDAO {
 		session.delete("ask.askcoReplyDelete",acno);
 	}
 
+	public ArrayList problemBoard(AskDTO askDTO) {
+		return (ArrayList) session.selectList("ask.problemBoard",askDTO);
+	}
+
 
 }
 
