@@ -117,5 +117,23 @@
 		wehre acno=#{acno}
 	</delete>
 	
+	<!-- 문제풀기 게시판 검색 -->
+	<select id="problemBoard" resultType="askDTO">
+		SELECT k.ano,atitle,k.pno,p.mnick,k.lname,adate,ahit FROM
+		(SELECT ano,atitle,aplc.pno,l.lname,adate,ahit from
+		(SELECT ano,atitle,lc.lno,ap.pno,lc.lqno,adate,ahit FROM
+		(SELECT askboard.pno,ano, problem.lqno, atitle, adate, ahit FROM 
+				askboard JOIN problem ON askboard.pno=problem.pno) ap
+		JOIN licenseClass lc ON ap.lqno=lc.lqno) aplc
+		JOIN license l ON aplc.lno=l.lno)k
+		join
+		(SELECT ano, a.mno, m.mnick from
+		askboard a JOIN member m ON a.mno=m.mno) p
+		ON p.ano=k.ano
+		where pno=#{pno}
+		ORDER BY k.ano desc	
+		LIMIT #{start}, #{size}	
+	</select>
+	
 </mapper>
 	

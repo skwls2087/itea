@@ -36,6 +36,9 @@
 		$.get('./getMessages.co', {
 			from : Chat__lastReceivedMessageId+1
 		},  function(data){
+				/* data.id.sort(function(a,b){
+					return b-a;
+				}); */
 				for(var i=0; i<data.length;i++){
 					var message = data[i];
 					
@@ -70,5 +73,5 @@
 		<input type="submit" value="입력"/>
 	</form>
 	
-	<div class="chat-list" style="overflow-y"></div>
+	<div class="chat-list"></div>
 </div>
