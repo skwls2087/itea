@@ -79,11 +79,12 @@ public class AdminController {
 		public String delete(HttpServletRequest request) throws Exception {
 			//1.파라미터 받기
 			String mnick=(String)request.getParameter("userNick"); 
+			String nowPage = request.getParameter("nowPage"); 
 			System.out.println(mnick+"님 강제탈퇴완료");
 			//2.비즈니스 로직 수행
 			adminSV.deleteMember(mnick);
 			//4.View
-			return "../../index";
+			return "/admin/userManage";
 		}
 		
 	
