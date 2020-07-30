@@ -89,3 +89,8 @@ input:focus{
 :-moz-placeholder { /* Firefox 18- */
     color: #d4d4d4;
 }   
+
+/*채팅방 디자인*/
+.container{
+	background:gray;
+}
