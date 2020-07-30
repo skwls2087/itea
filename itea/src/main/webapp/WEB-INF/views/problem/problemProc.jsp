@@ -93,7 +93,8 @@
 	
 	<!-- 문제 신고하기 -->
 	<div id="problem-sub-right">
-		<img id="error" src="${pageContext.request.contextPath}/resources/img/error.png" style="cursor:pointer" width="40"/>
+		<a data-toggle="modal" href="#e-Modal">
+		<img id="error" src="${pageContext.request.contextPath}/resources/img/error.png" style="cursor:pointer" width="40"/></a>
 	</div>
 	
 </div>
@@ -131,6 +132,40 @@
 		</c:if>
 	</div>
 </div>
+
+<!-- 신고하기 -->
+	<div class="modal fade" id="e-Modal" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <h4 class="modal-title">문제 신고하기</h4>
+	          <button type="button" class="close" data-dismiss="modal">×</button>
+	        </div>
+	        <div class="modal-body">
+	        
+	        <div class="problem-error-container">
+	
+				<form id="error-form" method="post" action="aInsert.co">
+				
+					<input type='hidden' name='nowPage' value='${PINFO.nowPage}'/>
+					<input type='hidden' id='aaa' name='qno' value=''/>
+        	<div class="form-group">
+			      <textarea class="form-control" placeholder="신고내용을 입력해주세요" id="errorTextarea" name="acont" rows="3"></textarea>
+			    </div>
+	
+	        <div class="modal-footer">
+	      		<input type="button" class="btn btn-info" id="s-submit" value="등록하기"/>
+	        </div>
+	      </div>
+	      
+	      </form>
+				</div>
+	        
+	        </div>
+	    </div>
+	  </div>
 
 
 	

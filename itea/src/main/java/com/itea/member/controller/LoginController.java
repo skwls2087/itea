@@ -91,7 +91,6 @@ public class LoginController {
 		}
 	}
 	
-
 	//sns로그인
 	@RequestMapping(value="member/snsloginFrm", method=RequestMethod.GET)
 	public ModelAndView snslogin(HttpSession session) {

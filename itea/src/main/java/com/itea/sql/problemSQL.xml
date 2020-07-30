@@ -142,4 +142,10 @@
 		DELETE FROM interest WHERE mno=#{mno} AND pno=#{pno}
 	</delete>
 	
+	<!-- 해당문제 즐겨찾기로 추가 -->
+	<insert id="problemError" parameterType="Hashmap">
+		INSERT INTO error (mno,pno,econtent) 
+		VALUES (#{mno},#{pno},#{econtent})
+	</insert>
+	
 </mapper>

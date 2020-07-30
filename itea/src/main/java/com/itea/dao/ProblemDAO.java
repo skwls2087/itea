@@ -111,5 +111,10 @@ public class ProblemDAO {
 		session.delete("problem.problemNonScrap",map);
 	}
 
+	public void problemError(HashMap map) {
+		session.insert("problem.problemError",map);
+		
+	}
+
 	
 }

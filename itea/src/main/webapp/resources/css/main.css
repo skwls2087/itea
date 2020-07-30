@@ -1,0 +1,15 @@
+
+.itea-main{
+	width:80%;
+	margin:40px auto;
+}
+.main-calendar{
+	width:70%;
+	display:inline-block;
+	float:left;
+}
+.main-chat{
+	width:30%;
+	display:inline-block;
+	float:left;
+}

@@ -220,4 +220,21 @@ public class SolveProblemController {
 		
 		return 1;
 	}
+	
+	//즐겨찾기 삭제 눌렀을 때
+	@RequestMapping("/problemError")
+	@ResponseBody
+	public int problemError(int pno,String econtent,HttpSession session) {
+
+		int mno=(int)session.getAttribute("MNO");
+		
+		HashMap map=new HashMap();
+		map.put("pno", pno);
+		map.put("mno", mno);
+		map.put("econtent", econtent);
+		
+		problemSV.problemError(map);
+		
+		return 1;
+	}
 }

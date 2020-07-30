@@ -98,6 +98,11 @@ public class ProblemService {
 		
 	}
 
+	public void problemError(HashMap map) {
+		problemDAO.problemError(map);
+		
+	}
+
 	
 
 }

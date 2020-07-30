@@ -373,12 +373,14 @@ $(function(){
 	});
 	
 	//즐겨찾기 마우스 이벤트
-	/*$('#problemScrap').mouseenter(function(){
+	$(document).on("mouseenter",".problemScrap",function(event){
+	//$('.problemScrap').mouseenter(function(){
 		$('#problemScrap').attr('src','../resources/img/star-click.png');
 	});
-	$('#problemScrap').mouseleave(function(){
+	$(document).on("mouseleave",".problemScrap",function(event){
+	//$('.problemScrap').mouseleave(function(){
 		$('#problemScrap').attr('src','../resources/img/star.png');
-	});*/
+	});
 	
 	//해당 문제 즐겨찾기로 추가하기
 	$(document).on("click",".problemScrap",function(event){
@@ -394,11 +396,11 @@ $(function(){
 			contentType:"application/json; charset=utf-8;",
 			dataType:"json",
 			success : function(data) {	
-				$('.problemScrap').attr('src','../resources/img/star-click.png');
+				$('#problemScrap').attr('src','../resources/img/star-click.png');
 				$('.problemScrap').removeAttr('id')
-				$('.problemScrap').attr('id','problemScrap');
-				$('#problemScrap').removeClass();
-				$('#problemScrap').addClass('problemNonScrap');
+				$('.problemScrap').attr('id','problemNonScrap');
+				$('#problemNonScrap').removeClass();
+				$('#problemNonScrap').addClass('problemNonScrap');
 			}
 		})
 	});
@@ -416,11 +418,11 @@ $(function(){
 			contentType:"application/json; charset=utf-8;",
 			dataType:"json",
 			success : function(data) {	
-				$('.problemNonScrap').attr('src','../resources/img/star.png');
+				$('#problemNonScrap').attr('src','../resources/img/star.png');
 				$('.problemNonScrap').removeAttr('id')
-				$('.problemNonScrap').attr('id','problemNonScrap');
-				$('#problemNonScrap').removeClass();
-				$('#problemNonScrap').addClass('problemScrap');
+				$('.problemNonScrap').attr('id','problemScrap');
+				$('#problemScrap').removeClass();
+				$('#problemScrap').addClass('problemScrap');
 			}
 		})
 	});
@@ -431,5 +433,28 @@ $(function(){
 	});
 	$('#error').mouseleave(function(){
 		$('#error').attr('src','../resources/img/error.png');
+	});
+	
+	$('#s-submit').click(function(){
+		
+		pno=$("#problemPNO").html();
+		
+		alert("신고합니다.");
+		error=$('#errorTextarea').val();
+		alert(error);
+		
+		$.ajax({
+			url : 'problemError.co?pno='+pno+'&econtent='+error,
+			type : 'post',
+			contentType:"application/json; charset=utf-8;",
+			dataType:"json",
+			success : function(data) {	
+				alert("aaa")
+				$('.modal-backdrop').remove();
+				$("#e-Modal").hide();
+				$('#error').attr('src','../resources/img/errorhover.png');
+				$("#error").css('pointer-events','none')
+			}
+		});
 	});
 });
