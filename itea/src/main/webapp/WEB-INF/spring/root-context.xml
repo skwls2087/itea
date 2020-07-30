@@ -61,6 +61,8 @@
 		<bean id="itLabDAO" class="com.itea.dao.itLabDAO">
 		<property name="sqlSessionTemplate" ref ="sqlSession"/>
 	</bean>	
+	
+
 
 	
 	<!-- Service -->
@@ -90,6 +92,7 @@
 	<bean id="GoogleCalendarService" class="com.itea.calendar.service.GoogleCalendarService"></bean>
 	
 </beans>
+
 
 
 
