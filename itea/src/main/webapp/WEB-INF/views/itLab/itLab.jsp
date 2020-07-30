@@ -3,7 +3,40 @@
     
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/itLab.css">
 
-
+<script>
+$(function(){
+	
+	var date = new Date();
+	var year=date.getYear();
+	var month=date.getMonth()+1;
+	var moveyear
+	var movemonth
+	
+	$("#wordcloud").addClass()
+	
+	$("#pre").click(function(){
+		alert("이전으로")
+		$("#wordcloud").removeClass()
+		
+		movemonth= month-1;
+		$("#wordcloud").addClass(movemonth)
+		
+		str="${pageContext.request.contextPath}/resources/wordcloud/word200"+movemonth+".PNG"
+		alert(str)
+		
+		$('#wordcloud').attr('src',str);
+	});
+	
+	$("#post").click(function(){
+		alert("다음으로")
+		var date = new Date();
+		var month=date.getMonth()+1;
+		var word = month+1;
+		document.getElementById("img").src = "${pageContext.request.contextPath}/resources/wordcloud/word2007.PNG";
+	});
+	
+});
+</script>
 	
 <div class="itLab">
 	<div id="itLab-heading"><span>IT 연구소</span></div>
@@ -33,9 +66,10 @@
 			
 		</div>
 		<div id="itKeyword-right">
-			<img class="wordcloudArrow" src="${pageContext.request.contextPath}/resources/img/pre.png">
-			<img class="wordcloud" src="${pageContext.request.contextPath}/resources/wordcloud/word2007.png">
-			<img class="wordcloudArrow" src="${pageContext.request.contextPath}/resources/img/post.png">
+		<p><span id="wordYear">2020</span>년 <span id="wordMonth">7</span>월</p>
+			<img class="wordcloudArrow" id="pre" src="${pageContext.request.contextPath}/resources/img/pre.png" style="cursor:pointer">
+			<img class="" id="wordcloud" src="${pageContext.request.contextPath}/resources/wordcloud/word2007.PNG">
+			<img class="wordcloudArrow" id="post" src="${pageContext.request.contextPath}/resources/img/post.png" style="cursor:pointer">
 		</div>
 	</div>
 </div>
