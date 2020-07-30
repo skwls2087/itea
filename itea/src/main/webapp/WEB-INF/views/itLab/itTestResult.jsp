@@ -11,17 +11,19 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/survey.css">
 </head>	
 <body>
-<h1>결과다~! 집중해라~!</h1>
+
 <c:if test="${RESULT==0 }"> 
 <div class="survey1">
-	0이 나온 당신, 그냥 꿈 접어 아직 인생 길어 다른거 공부해 <br/>
+ <img src="${pageContext.request.contextPath}/resources/img/0.PNG" ><br/>
+	그냥 꿈 접어 아직 인생 길어 다른거 공부해 <br/>
 	니가 하고 싶다고 해서 잘 될 가능성은 제로인데<br/>
 	정말 열정이 있으면 해봐.. 근데 겁나 노력해야해
 </div>
 </c:if>
 <c:if test="${RESULT==1 }">
 <div class="survey1">
- 	1이 나온 당신, 애매하게 공부할 거면 나중에 기분만 나빠 다른거 공부해<br/>
+ <img src="${pageContext.request.contextPath}/resources/img/1.PNG" ><br/>
+      애매하게 공부할 거면 나중에 기분만 나빠 다른거 공부해<br/>
  	원래 잘하고 못하는 것보다도 애매한게 제일 위험해<br/>
  	10년을 고생해서 배웠는데, 매일 출근이 지옥 같으면<br/>
  	인생살맛 나겠어?<br/>
@@ -31,7 +33,8 @@
 </c:if>
 <c:if test="${RESULT==2 }"> 
 <div class="survey1">
- 2가 나온 당신, 개발자에 좋다고 하는데 그 마음 유지할 거 아님 다른거 공부해<br/>
+<img src="${pageContext.request.contextPath}/resources/img/2.PNG" ><br/>
+ 개발자에 좋다고 하는데 그 마음 유지할 거 아님 다른거 공부해<br/>
  너가 개발자로 살면 직업에 대한 만족도는 좋을거야 .<br/>
  즉 평생 행복하게 돈 벌고 싶으면 지금의 테스트에선 어울린다는데...<br/>
 너가 노력안하면 말짱 꽝이야.. <br/>

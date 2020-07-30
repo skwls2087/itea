@@ -121,13 +121,13 @@ $(function(){
 			/* alert(str); */
 		})
 		$("#answer10_1").click(function(){
-			$("#test10").hide();
+			/*$("#test10").hide();*/
 			str=str+"0"
 			$("#test-result").show();
 //			alert(str); 
 		})
 		$("#answer10_2").click(function(){
-			$("#test10").hide();
+		/*	$("#test10").hide();*/
 			str=str+"1"
 			$("#test-result").show();
 //			alert(str); 
