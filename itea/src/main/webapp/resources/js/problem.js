@@ -1,6 +1,7 @@
 $(function(){
 	
 	$('#ctype-select').css('display','none');
+	
 	var c
 
 	$("#Ckind option:eq(0)").attr("selected", "selected");
@@ -294,7 +295,6 @@ $(function(){
 		//선택과 정답이 일치하는지 확인
 		if(select=='correct'){
 			$("#problem-correct").css('display','')
-			$("#").css('display','')
 			$("#problemScoring").css('display','none')
 			correct=1;
 		}else if(select=='wrong'){
@@ -313,9 +313,123 @@ $(function(){
 			contentType:"application/json; charset=utf-8;",
 			dataType:"json",
 			success : function(data) {					
-
+				
 			}
 		})
+	});
+	
+	//문제 좋아요 눌렀을 때
+	$("#plike").click(function(){
 		
+		pno=$("#problemPNO").html();
+		
+		$.ajax({
+			url : 'problemLike.co?pno='+ pno,
+			type : 'post',
+			contentType:"application/json; charset=utf-8;",
+			dataType:"json",
+			success : function(data) {					
+				$("#likecnt").html(data);
+				$("#plike").css('pointer-events','none')
+				$("#phate").css('pointer-events','none')
+			}
+		})
+	});
+	
+	//문제 싫어요 눌렀을 때
+	$("#phate").click(function(){
+		
+		pno=$("#problemPNO").html();
+		
+		$.ajax({
+			url : 'problemHate.co?pno='+ pno,
+			type : 'post',
+			contentType:"application/json; charset=utf-8;",
+			dataType:"json",
+			success : function(data) {					
+				$("#hatecnt").html(data);
+				$("#plike").css('pointer-events','none')
+				$("#phate").css('pointer-events','none')
+			}
+		})
+	});
+	
+	//즐겨찾기 추가 눌렀을 때
+	$("#phate").click(function(){
+		
+		pno=$("#problemPNO").html();
+		
+		$.ajax({
+			url : 'problemHate.co?pno='+ pno,
+			type : 'post',
+			contentType:"application/json; charset=utf-8;",
+			dataType:"json",
+			success : function(data) {					
+				$("#hatecnt").html(data);
+				$("#plike").css('pointer-events','none')
+				$("#phate").css('pointer-events','none')
+			}
+		})
+	});
+	
+	//즐겨찾기 마우스 이벤트
+	/*$('#problemScrap').mouseenter(function(){
+		$('#problemScrap').attr('src','../resources/img/star-click.png');
+	});
+	$('#problemScrap').mouseleave(function(){
+		$('#problemScrap').attr('src','../resources/img/star.png');
+	});*/
+	
+	//해당 문제 즐겨찾기로 추가하기
+	$(document).on("click",".problemScrap",function(event){
+
+	//$('.problemScrap').click(function(){
+		
+		alert("즐겨찾기에 추가되었습니다.")
+		pno=$("#problemPNO").html();
+		
+		$.ajax({
+			url : 'problemScrap.co?pno='+ pno,
+			type : 'post',
+			contentType:"application/json; charset=utf-8;",
+			dataType:"json",
+			success : function(data) {	
+				$('.problemScrap').attr('src','../resources/img/star-click.png');
+				$('.problemScrap').removeAttr('id')
+				$('.problemScrap').attr('id','problemScrap');
+				$('#problemScrap').removeClass();
+				$('#problemScrap').addClass('problemNonScrap');
+			}
+		})
+	});
+	
+	//해당 문제 즐겨찾기에서 삭제
+	$(document).on("click",".problemNonScrap",function(event){
+	//$('.problemNonScrap').click(function(){
+		
+		alert("즐겨찾기에서 삭제되었습니다.")
+		pno=$("#problemPNO").html();
+		
+		$.ajax({
+			url : 'problemNonScrap.co?pno='+ pno,
+			type : 'post',
+			contentType:"application/json; charset=utf-8;",
+			dataType:"json",
+			success : function(data) {	
+				$('.problemNonScrap').attr('src','../resources/img/star.png');
+				$('.problemNonScrap').removeAttr('id')
+				$('.problemNonScrap').attr('id','problemNonScrap');
+				$('#problemNonScrap').removeClass();
+				$('#problemNonScrap').addClass('problemScrap');
+			}
+		})
+	});
+	
+	//신고하기 마우스 이벤트
+	$('#error').mouseenter(function(){
+		$('#error').attr('src','../resources/img/errorhover.png');
+	});
+	$('#error').mouseleave(function(){
+		$('#error').attr('src','../resources/img/error.png');
 	});
 });

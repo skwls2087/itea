@@ -83,5 +83,33 @@ public class ProblemDAO {
 		}
 	}
 
+	public void problemLike(int pno) {
+		session.update("problem.problemLike",pno);
+	}
+
+	public void problemHate(int pno) {
+		session.update("problem.problemHate",pno);
+	}
+
+	public int selectPlike(int pno) {
+		return session.selectOne("problem.selectPlike",pno);
+	}
+
+	public int selectPhate(int pno) {
+		return session.selectOne("problem.selectPhate",pno);
+	}
+
+	public int pScrap(HashMap map) {
+		return session.selectOne("problem.pScrap",map);
+	}
+
+	public void problemScrap(HashMap map) {
+		session.update("problem.problemScrap",map);
+	}
+
+	public void problemNonScrap(HashMap map) {
+		session.delete("problem.problemNonScrap",map);
+	}
+
 	
 }

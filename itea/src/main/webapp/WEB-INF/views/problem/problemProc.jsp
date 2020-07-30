@@ -7,9 +7,9 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/problem.css">
 
 <div id="problem-proc">
-	<div id="problem-pno">#<span id="problemPNO">${problem.pno}</span></div>
+	<a href="${pageContext.request.contextPath}/ask/problemBoard.co?pno=${problem.pno}" id="problem-board">
+	<div id="problem-pno">#<span id="problemPNO">${problem.pno}</span></div></a>
 	<a href="${pageContext.request.contextPath}/ask/problemAsk.co?pno=${problem.pno}" id="problem-ask">질문하기</a>
-	<a href="${pageContext.request.contextPath}/ask/problemBoard.co?pno=${problem.pno}" id="problem-board">질문검색</a>
 
 	<div class="processing">
 		<span id="psolve">${solve+1}</span>/<span id="ptotal">${total+1}</span>
@@ -30,9 +30,8 @@
 		</div>
 		<div class="problem-percent">
 		<c:if test="${problem.psolve!=0}">
-		<fmt:parseNumber var="correct" integerOnly="true" value="${problem.pcorrect/problem.psolve*100}"/>
-		정답률: ${correct}%
-			
+			<fmt:parseNumber var="correct" integerOnly="true" value="${problem.pcorrect/problem.psolve*100}"/>
+			정답률: ${correct}%
 		</c:if>
 		</div>
 	</div>
@@ -67,6 +66,38 @@
 		<input type="hidden" name="total" value="${total}"/>
 		<input type="submit" id="next-problem-submit" class="btn btn-outline-secondary" value="다음문제" >
 	</form>
+	<br/>
+	<hr>
+	
+<div id="problem-sub">
+
+	<!-- 문제 즐겨찾기 -->
+	<div id="problem-sub-left">
+	<c:if test="${interest==0}">
+		<img class="problemScrap" id="problemScrap" src="${pageContext.request.contextPath}/resources/img/star.png" style="cursor:pointer" width="30"/>
+	</c:if>
+	<c:if test="${interest!=0}">
+		<img class="problemNonScrap" id="problemNonScrap" src="${pageContext.request.contextPath}/resources/img/star-click.png" style="cursor:pointer" width="30"/>
+	</c:if>
+	</div>
+	
+	<!-- 문제 좋아요 싫어요 -->
+	<div id="problem-sub-center">
+		<div id="plike" class="sub-a" name="" href="#" style="cursor:pointer" >
+		<img src="${pageContext.request.contextPath}/resources/img/like.png" width="25"/>
+		추천해요<br/><span id="likecnt">${problem.plike}</span></div>
+		<div id="phate" class="sub-a" name="" href="#" style="cursor:pointer" >
+		<img src="${pageContext.request.contextPath}/resources/img/hate.png" width="25"/>
+		별로에요<br/><span id="hatecnt">${problem.phate}</span></div>
+	</div>
+	
+	<!-- 문제 신고하기 -->
+	<div id="problem-sub-right">
+		<img id="error" src="${pageContext.request.contextPath}/resources/img/error.png" style="cursor:pointer" width="40"/>
+	</div>
+	
+</div>
+
 </div>
 
 <div class="problemScore" id="problem-wrong" style="display:none">
@@ -75,7 +106,6 @@
 			틀렸습니다!
 		</div>
 		<div id="problemScore-right">
-			<a href="#">좋아요</a><a href="#">싫어요</a><a href="#"><img src="${pageContext.request.contextPath}/resources/img/star.png" style="cursor:pointer" width="20"/></a><br/>
 			정답:<span id="problem-choice-correct">${problem.correct}</span><br/>
 			해설:${problem.pcomment}<br/>
 			<c:if test="${problem.ptype!=1}">
@@ -92,7 +122,6 @@
 		정답입니다!
 	</div>
 	<div id="problemScore-right">
-		<a href="#">좋아요</a><a href="#">싫어요</a><a href="#">즐겨찾기</a><br/>
 		정답:<span id="problem-choice-correct">${problem.correct}</span><br/>
 		해설:${problem.pcomment}<br/>
 		<c:if test="${problem.ptype!=1}">
@@ -102,7 +131,6 @@
 		</c:if>
 	</div>
 </div>
-
 
 
 	

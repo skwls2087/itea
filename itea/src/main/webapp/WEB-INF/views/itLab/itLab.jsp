@@ -21,12 +21,12 @@ $(function(){
    $("#wordcloud").addClass()
    
    $("#pre").click(function(){
+	   if(movemonth=='1'){
+		   movemonth=1;
+		   moveyear=moveyear-1
+	   }
 	   if(moveyear!='2019'){
 
-		   if(movemonth=='1'){
-			   moveyear=moveyear-1
-			   movemonth=13;
-		   }
 	      $("#wordcloud").removeClass()
 	      
 	      movemonth= movemonth-1;
@@ -39,6 +39,7 @@ $(function(){
 	      
 	      $('#wordcloud').attr('src',str);
 	   }else{
+		   moveyear=moveyear+1
 		   alert("마지막 달입니다.")
 	   }
    });
@@ -80,7 +81,7 @@ $(function(){
 			<p id="library">[Python Library] tesnorflow numpy</p>
 		</div>
 		<div class="itTest-right">
-			<a href="<%= request.getContextPath()%>/it/itTest.co"><br/>
+			<a href="<%= request.getContextPath()%>/itLab/itTest.co"><br/>
 			<input type="button" class="btn btn-outline-warning" value="TEST하기" id="it-test-button"></a>
 		</div>
 	</div>

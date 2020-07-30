@@ -67,6 +67,37 @@ public class ProblemService {
 		problemDAO.problemCountUp(pno,correct);
 	}
 
+	public void problemLike(int pno) {
+		problemDAO.problemLike(pno);
+	}
+
+	public void problemHate(int pno) {
+		problemDAO.problemHate(pno);
+		
+	}
+
+	public int selectPlike(int pno) {
+		return problemDAO.selectPlike(pno);
+	}
+
+	public int selectPhate(int pno) {
+		return problemDAO.selectPhate(pno);
+	}
+
+	public int pScrap(HashMap map) {
+		return problemDAO.pScrap(map);
+	}
+
+	public void problemScrap(HashMap map) {
+		problemDAO.problemScrap(map);
+		
+	}
+
+	public void problemNonScrap(HashMap map) {
+		problemDAO.problemNonScrap(map);
+		
+	}
+
 	
 
 }

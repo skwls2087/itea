@@ -102,12 +102,44 @@
 		SELECT lcor FROM correct WHERE pno=#{pno}
 	</select>
 	
-	<!-- 문제 조회수 up -->
+	<!-- 문제 조회수,정답률 up -->
 	<update id="problemCountUp" parameterType="int">
 		update problem set psolve=IFNULL(psolve, 0) + 1 where pno=#{pno}
 	</update>
 	<update id="problemCorrectUp" parameterType="int">
 		update problem set pcorrect=IFNULL(pcorrect, 0) + 1 where pno=#{pno}
 	</update>
+	
+	<!-- 문제 좋아요,싫어요 up -->
+	<update id="problemLike" parameterType="int">
+		update problem set plike=IFNULL(plike, 0) + 1 where pno=#{pno}
+	</update>
+	<update id="problemHate" parameterType="int">
+		update problem set phate=IFNULL(phate, 0) + 1 where pno=#{pno}
+	</update>
+	
+	<!-- 문제 좋아요,싫어요 up -->
+	<select id="selectPlike" parameterType="int" resultType="int">
+		select plike from problem where pno=#{pno}
+	</select>
+	<select id="selectPhate" parameterType="int" resultType="int">
+		select phate from problem where pno=#{pno}
+	</select>
+	
+	<!-- 해당문제를 즐겨찾기로 가지고 있는지 확인 -->
+	<select id="pScrap" parameterType="Hashmap" resultType="int">
+		select count(*) from interest where pno=#{pno} and mno=#{mno}
+	</select>
+	
+	<!-- 해당문제 즐겨찾기로 추가 -->
+	<insert id="problemScrap" parameterType="Hashmap">
+		INSERT INTO interest (mno,pno) 
+		VALUES (#{mno},#{pno})
+	</insert>
+	
+	<!-- 해당문제 즐겨찾기에서 삭제 -->
+	<delete id="problemNonScrap" parameterType="Hashmap">
+		DELETE FROM interest WHERE mno=#{mno} AND pno=#{pno}
+	</delete>
 	
 </mapper>

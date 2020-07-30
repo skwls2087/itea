@@ -32,6 +32,8 @@ public class SolveProblemController {
 		
 		System.out.println("문제풀기페이지 첫화면 진입");
 		
+		int mno=(int)session.getAttribute("MNO");
+		
 		//자격증,출제 유형및 종류 파라미터로 받기
 		String ckind=request.getParameter("Ckind");
 		String ctype=request.getParameter("Ctype");
@@ -72,7 +74,7 @@ public class SolveProblemController {
 		//첫번째 문제의 상세정보 가져오기
 		int pno=Integer.parseInt(pnoList.get(0));
 		
-		int size=problemLogic(pno,pnoList,request);
+		int size=problemLogic(pno,mno,pnoList,request);
 		
 		request.setAttribute("total", size);
 		request.setAttribute("solve", 0);
@@ -83,9 +85,11 @@ public class SolveProblemController {
 	
 	//다음 문제 클릭
 	@RequestMapping("/nextProblem")
-	public String nextProblem(HttpServletRequest request) {
+	public String nextProblem(HttpServletRequest request,HttpSession session) {
 		
 		System.out.println("다음문제");
+		
+		int mno=(int)session.getAttribute("MNO");
 		
 		String[] pnoList=request.getParameterValues("pnoList");
 		int total=Integer.parseInt(request.getParameter("total"));
@@ -101,7 +105,7 @@ public class SolveProblemController {
 
 		int pno=Integer.parseInt(pnoList[0]);
 		
-		int size=problemLogic(pno,pnoArray,request);
+		int size=problemLogic(pno,mno,pnoArray,request);
 		
 		int solve=total-size;
 		
@@ -112,7 +116,7 @@ public class SolveProblemController {
 	}
 	
 	//pno에따른 리스트 검색하는 로직
-	public int problemLogic(int pno,List<String> pnoList,HttpServletRequest request) {
+	public int problemLogic(int pno,int mno,List<String> pnoList,HttpServletRequest request) {
 		ProblemDTO problemInfo=problemSV.problemInfo(pno);
 		
 		//객관식일 때
@@ -143,9 +147,16 @@ public class SolveProblemController {
 		}
 		System.out.println(pnoList);
 		
+		HashMap map=new HashMap();
+		map.put("pno", pno);
+		map.put("mno", mno);
+		
+		int isScrap=problemSV.pScrap(map);
+		
 		pnoList.remove(0);
 		request.setAttribute("pnoList", pnoList); //문제번호리스트 보내기
 		request.setAttribute("problem", problemInfo); //1번 문제 보내기
+		request.setAttribute("interest", isScrap); //즐겨찾기 여부 보내기
 		
 		return pnoList.size();
 	}
@@ -156,5 +167,57 @@ public class SolveProblemController {
 	public void problemScore(int pno, String correct) {
 		System.out.println(pno+correct);
 		problemSV.problemCountUp(pno,Integer.parseInt(correct));
+	}
+	
+	//문제 좋아요 눌렀을 때
+	@RequestMapping("/problemLike")
+	@ResponseBody
+	public int problemLike(int pno) {
+		System.out.println(pno);
+		problemSV.problemLike(pno);
+		int plike=problemSV.selectPlike(pno);
+		return plike;
+	}
+	
+	//문제 싫어요 눌렀을 때
+	@RequestMapping("/problemHate")
+	@ResponseBody
+	public int problemHate(int pno) {
+		System.out.println(pno);
+		problemSV.problemHate(pno);
+		int phate=problemSV.selectPhate(pno);
+		return phate;
+	}
+	
+	//즐겨찾기 추가 눌렀을 때
+	@RequestMapping("/problemScrap")
+	@ResponseBody
+	public int problemScrap(int pno,HttpSession session) {
+
+		int mno=(int)session.getAttribute("MNO");
+		
+		HashMap map=new HashMap();
+		map.put("pno", pno);
+		map.put("mno", mno);
+		
+		problemSV.problemScrap(map);
+		
+		return 1;
+	}
+	
+	//즐겨찾기 삭제 눌렀을 때
+	@RequestMapping("/problemNonScrap")
+	@ResponseBody
+	public int problemNonScrap(int pno,HttpSession session) {
+		
+		int mno=(int)session.getAttribute("MNO");
+		
+		HashMap map=new HashMap();
+		map.put("pno", pno);
+		map.put("mno", mno);
+		
+		problemSV.problemNonScrap(map);
+		
+		return 1;
 	}
 }

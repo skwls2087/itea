@@ -228,3 +228,35 @@ textarea{
 	color:#808080;
 	padding-left:5px;
 }
+#problem-like{
+	float:right;
+}
+
+/*문제 추가기능*/
+#problem-sub{
+	width:100%;
+}
+#problem-sub-left{
+	width:10%;
+	text-align:left;
+	display:inline-block;
+}
+#problem-sub-center{
+	width:75%;
+	display:flex;
+	text-align:center;
+	display:inline-block;
+}
+#problem-sub-right{
+	width:10%;
+	text-align:right;
+	display:inline-block;
+}
+.sub-a{
+	width:150px;
+	border:2px solid #dee2e6;
+	border-radius:5px;
+	padding:5px 20px 10px 8px;
+	text-align:center;
+	display:inline-block;
+}
