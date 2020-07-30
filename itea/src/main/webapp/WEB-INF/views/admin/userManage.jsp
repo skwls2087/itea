@@ -82,7 +82,21 @@ $( document ).ready(function() {
 </script>
 <div class="admin-heading">관리자 페이지</div>
 
+<div id="admin" class="admin">
+<!-- 기간별 회원 추이 그래프 -->
 
+<div class="member-graph">
+	<b>누적 회원 수</b>
+	  <!-- 기간별 방문자 차트  -->
+	  <div id="chart_div1"></div>
+</div>
+ 	<!-- 기간별 방문자 추이 그래프 -->
+<div class="visitor-graph">
+	<b>누적 방문자 수</b>
+	  <!-- 기간별 방문자 차트  -->
+	  <div id="chart_div2"></div>
+</div>
+</div>
 <div class="admin-user">
 	<div class="admin-div">
 		<!-- 회원을 닉네임이나 아이디로 검색 가능 -->
@@ -239,19 +253,5 @@ $( document ).ready(function() {
 				</c:if>
      </table>
     </div>
-<div id="admin" class="admin">
-<!-- 기간별 회원 추이 그래프 -->
 
-<div class="member-graph">
-	<b>누적 회원 수</b>
-	  <!-- 기간별 방문자 차트  -->
-	  <div id="chart_div1"></div>
-</div>
- 	<!-- 기간별 방문자 추이 그래프 -->
-<div class="visitor-graph">
-	<b>누적 방문자 수</b>
-	  <!-- 기간별 방문자 차트  -->
-	  <div id="chart_div2"></div>
-</div>
-</div>
 </div>
