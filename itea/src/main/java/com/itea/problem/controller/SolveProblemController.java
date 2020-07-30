@@ -59,6 +59,7 @@ public class SolveProblemController {
 			 out.println("<script>");
 	         out.println("alert('선택한 조건에 해당되는 문제가 없습니다');");
 	         //out.println("$(location).attr(\"href\",\"problemMain.co\");");
+	         out.println("history.go(-2);");
 	         out.println("</script>");
 	         out.close();
 	         System.out.println("아이디 x");
@@ -152,7 +153,8 @@ public class SolveProblemController {
 	//문제를 풀면 정답률에 반영하기
 	@RequestMapping("/problemScore")
 	@ResponseBody
-	public void problemScore(int pno, int correct) {
-		problemSV.problemCountUp(pno,correct);
+	public void problemScore(int pno, String correct) {
+		System.out.println(pno+correct);
+		problemSV.problemCountUp(pno,Integer.parseInt(correct));
 	}
 }
