@@ -28,11 +28,16 @@ $(function(){
 	});
 	
 	$("#post").click(function(){
-		alert("다음으로")
-		var date = new Date();
-		var month=date.getMonth()+1;
-		var word = month+1;
-		document.getElementById("img").src = "${pageContext.request.contextPath}/resources/wordcloud/word2007.PNG";
+		alert("다음")
+		$("#wordcloud").removeClass()
+		
+		movemonth= month+1;
+		$("#wordcloud").addClass(movemonth)
+		
+		str="${pageContext.request.contextPath}/resources/wordcloud/word200"+movemonth+".PNG"
+		alert(str)
+		
+		$('#wordcloud').attr('src',str);
 	});
 	
 });

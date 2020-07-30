@@ -83,7 +83,7 @@
         <a class="nav-link" id="it-test" href="<%= request.getContextPath()%>/itLab/itLab.co">IT연구소</a>
       </li>
             <li class="nav-item  m-2">
-        <a class="nav-link" href="<%= request.getContextPath()%>/calendar/GoogleCalendar.co">달력</a>
+        <a class="nav-link" href="<%= request.getContextPath()%>/calendar.co">달력</a>
       </li>
     </ul>
     
