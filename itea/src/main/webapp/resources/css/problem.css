@@ -218,3 +218,7 @@ textarea{
 #nextProblem{
 	height:30px;
 }
+#problem-pno{
+	font-size:1.5rem;
+	font-family: 'Black Han Sans', sans-serif;
+}

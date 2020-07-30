@@ -2,13 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-
 <!-- js/css 참조 -->
 <script src="${pageContext.request.contextPath}/resources/js/problem.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/problem.css">
 
 <div id="problem-proc">
-	#<span id="problemPNO">${problem.pno}</span>
+	<a href="${pageContext.request.contextPath}/ask/problemAsk.co?pno=${problem.pno}" id="problem-pno">#<span id="problemPNO">${problem.pno}</span></a>
 
 	<div class="processing">
 		<span id="psolve">${solve+1}</span>/<span id="ptotal">${total+1}</span>
@@ -74,7 +73,7 @@
 			틀렸습니다!
 		</div>
 		<div id="problemScore-right">
-			<a href="#">좋아요</a><a href="#">싫어요</a><a href="#"><img src="${pageContext.request.contextPath}/resources/img/star.png" style="cursor:pointer" width="20"/></a><a href="#">토론하기</a><br/>
+			<a href="#">좋아요</a><a href="#">싫어요</a><a href="#"><img src="${pageContext.request.contextPath}/resources/img/star.png" style="cursor:pointer" width="20"/></a><br/>
 			정답:<span id="problem-choice-correct">${problem.correct}</span><br/>
 			해설:${problem.pcomment}<br/>
 			<c:if test="${problem.ptype!=1}">
@@ -91,7 +90,7 @@
 		정답입니다!
 	</div>
 	<div id="problemScore-right">
-		<a href="#">좋아요</a><a href="#">싫어요</a><a href="#">즐겨찾기</a><a href="#">토론하기</a><br/>
+		<a href="#">좋아요</a><a href="#">싫어요</a><a href="#">즐겨찾기</a><br/>
 		정답:<span id="problem-choice-correct">${problem.correct}</span><br/>
 		해설:${problem.pcomment}<br/>
 		<c:if test="${problem.ptype!=1}">

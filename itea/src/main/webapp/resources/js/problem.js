@@ -1,6 +1,3 @@
-
-
-
 $(function(){
 	
 	$('#ctype-select').css('display','none');
