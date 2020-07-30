@@ -13,3 +13,17 @@
 	display:inline-block;
 	float:left;
 }
+
+/*채팅*/
+.main-chat{
+}
+#chatbox{
+	height:700px;
+	border:1px solid black;
+}
+.chat-list{
+	border:1px solid black;
+	width:80%;
+	background:gray;
+	padding:10px;
+}

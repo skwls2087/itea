@@ -17,7 +17,7 @@
 		}
 		
 		//서버로 전송
-		$.post('/chat/addMessage.co',{
+		$.post('chat/addMessage.co',{
 			writer : form.writer.value,
 			body : form.body.value
 		},function(data){
@@ -30,7 +30,7 @@
 	var Chat__lastReceivedMessageId= -1;
 	
 	function Chat__loadNewMessages(){
-		$.get('/chat/getMessages.co', {
+		$.get('chat/getMessages.co', {
 			from : Chat__lastReceivedMessageId+1
 		},  function(data){
 				/* data.id.sort(function(a,b){
@@ -67,7 +67,10 @@
 	</div>
 	<div class="main-chat">
 	<h1>채팅</h1>
-		<div class="container">
+		<div class="container" id="chatbox">
+		
+		<div class="chat-list" style="overflow-y:scroll; width:300px; height:550px; padding:4px; border:1 solid #000000;"></div>
+		
 			<form onsubmit="sendMessage(this); return false;">
 				<c:if test="${!empty MNO}">
 					<input type="hidden" name="writer" value="비회원">
@@ -78,8 +81,6 @@
 				<input type="text" name="body" placeholder="내용을 입력해주세요"/>
 				<input type="submit" value="입력"/>
 			</form>
-			
-			<div class="chat-list"></div>
 		</div>
 	</div>
 

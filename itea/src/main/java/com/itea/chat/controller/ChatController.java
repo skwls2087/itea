@@ -18,12 +18,12 @@ public class ChatController {
 		messages = new ArrayList<>();
 	}
 	
-	@RequestMapping("/chat/main")
+	@RequestMapping("chat/main")
 	public String showMain() {
 		return "chat/main";
 	}
 	
-	@RequestMapping("/chat/addMessage")
+	@RequestMapping("chat/addMessage")
 	@ResponseBody
 	public Map addMessage(String writer, String body) {
 		long id = messages.size();
