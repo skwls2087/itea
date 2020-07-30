@@ -7,11 +7,12 @@
 1.자격증별 문제
 2.내가 만든 문제
 3.즐겨찾기 문제
-
+		  
 <div id="problem-solve-container">
 	<div id="problem-solve">
 	<form action="selectForTest.co" method="post">
-		<p>자격증 시험의 종류와 유형을 선택해주세요.</p><br/>
+		<span id="problem-header">시험 선택</span><br/><br/>
+		<hr><br/>
 	    <div class="form-group">
 		    <select id="Ckind" name="Ckind" class="custom-select">
 		      <option value="" selected="">자격증 종류</option>
@@ -38,7 +39,7 @@
 		  </div>
 		  
 		  <div class="form-group">
-		    <select id="Qyear" name="pyearList" class="custom-select" multiple>
+		    <select id="Qyear" name="pyearList" size="10" class="custom-select" multiple>
 		      <option value="" selected="">출제년도</option>
 		      <option value="2020">2020년도</option>
 		      <option value="2019">2019년도</option>

@@ -1,0 +1,16 @@
+thead {
+    text-align: center;
+}
+
+thead td {
+    width: 100px;
+}
+
+#tbody td {
+    height: 150px;
+}
+
+#yearMonth {
+    font: bold;
+    font-size: 18px;
+}

@@ -1,14 +1,19 @@
 package com.itea.problem.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.itea.dto.ProblemDTO;
 import com.itea.problem.service.ProblemService;
 
@@ -21,7 +26,9 @@ public class SolveProblemController {
 	
 	//문제 풀기
 	@RequestMapping("/selectForTest")
-	public String problemMain(ProblemDTO pDTO,HttpServletRequest request,HttpSession session) {
+	public String problemMain(
+			ProblemDTO pDTO,HttpServletResponse response,HttpServletRequest request,HttpSession session) 
+					throws IOException {
 		
 		System.out.println("문제풀기페이지 첫화면 진입");
 		
@@ -41,6 +48,26 @@ public class SolveProblemController {
 		//조건에 맞는 문제번호 리스트 작성 후 순서 섞기
 		List<String> pnoList=problemSV.selectPnoList(tinfo);
 		Collections.shuffle(pnoList);
+		
+		if(pnoList.isEmpty()) {
+			System.out.println("문제가 없어유");
+			
+			 response.setContentType("text/html;charset=utf-8");
+		     PrintWriter out = response.getWriter();
+
+		      
+			 out.println("<script>");
+	         out.println("alert('선택한 조건에 해당되는 문제가 없습니다');");
+	         //out.println("$(location).attr(\"href\",\"problemMain.co\");");
+	         out.println("history.go(-2);");
+	         out.println("</script>");
+	         out.close();
+	         System.out.println("아이디 x");
+	         
+	         response.sendRedirect("/problemMain.jsp");
+			
+			return "problem/problemMain";
+		}
 		
 		//첫번째 문제의 상세정보 가져오기
 		int pno=Integer.parseInt(pnoList.get(0));
@@ -122,6 +149,12 @@ public class SolveProblemController {
 		
 		return pnoList.size();
 	}
-
-
+	
+	//문제를 풀면 정답률에 반영하기
+	@RequestMapping("/problemScore")
+	@ResponseBody
+	public void problemScore(int pno, String correct) {
+		System.out.println(pno+correct);
+		problemSV.problemCountUp(pno,Integer.parseInt(correct));
+	}
 }

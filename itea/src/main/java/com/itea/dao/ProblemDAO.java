@@ -76,5 +76,12 @@ public class ProblemDAO {
 		return session.selectList("problem.selectCorrectList",pno);
 	}
 
+	public void problemCountUp(int pno, int correct) {
+		session.update("problem.problemCountUp",pno);
+		if(correct==1) {
+			session.update("problem.problemCorrectUp",pno);
+		}
+	}
+
 	
 }

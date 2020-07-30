@@ -1,7 +1,10 @@
 $(function(){
+	
 	$('#ctype-select').css('display','none');
 	var c
-	
+
+	$("#Ckind option:eq(0)").attr("selected", "selected");
+
 	//회원이 질문 등록할 때
 	$("#Ckind").change(function(){
 		var lno=$(this).val()
@@ -54,7 +57,7 @@ $(function(){
 		$("#problemFile").on("change",handleImgFileSelect);
 	})
 	function handleImgFileSelect(e){
-		alert("c")
+		
 		var files=e.target.files;
 		var filesArr=Array.prototype.slice.call(files);
 		
@@ -69,6 +72,7 @@ $(function(){
 			var reader=new FileReader();
 			reader.onload=function(e){
 				$("#img").attr("src",e.target.result);
+				$('#img_wrap').css('display','');
 			}
 			reader.readAsDataURL(f);
 		})
@@ -102,7 +106,26 @@ $(function(){
 		}
 	})
 	//주관식,서술형문제 출제 유효성검사
-	$("#create-text-problem-submit").submit(function(){
+	$("#create-short-submit").submit(function(){
+		if($("#pdetail").val()==""){
+			alert("문제를 입력해주세요")
+			return false;
+		}
+		
+		var noword=0;
+		
+		$('input[type="text"]').each(function(){
+			if($(this).val()==""){
+				alert("키워드를 모두 입력해주세요")
+				noword++
+				return;
+			}
+		})
+		if(noword!=0){
+			return false;
+		}
+	})
+	$("#create-essay-submit").submit(function(){
 		if($("#pdetail").val()==""){
 			alert("문제를 입력해주세요")
 			return false;
@@ -155,7 +178,20 @@ $(function(){
 		return false;
 	})
 	
-	$("#problem-scoring").click(function(){
+	//텍스트area 크기 자동조절
+	$("#choice-problem-create").find("textarea").on('keydown keyup', function () {
+		$(this).height(1).height( $(this).prop('scrollHeight')+12 );	
+	});
+	
+	$("#create-short-submit").find("textarea").on('keydown keyup', function () {
+		$(this).height(1).height( $(this).prop('scrollHeight')+40 );	
+	});
+	$("#create-essay-submit").find("textarea").on('keydown keyup', function () {
+		$(this).height(1).height( $(this).prop('scrollHeight')+40 );	
+	});
+	
+	
+	$("#create-text-problem-submit").click(function(){
 		
 		$.ajax({
 			url : 'problemScore.co?lno='+ lno,
@@ -185,6 +221,101 @@ $(function(){
 			alert("마지막 문제입니다.")
 			return false;
 		}
+		
+	});
+	
+	//선지를 눌렀을때 체크한거 표시하고 정답체크 class부여하기
+	$("#solveChoice1").click(function(){
+		$("#solveChoice1").removeClass();
+		$("#solveChoice2").removeClass();
+		$("#solveChoice3").removeClass();
+		$("#solveChoice4").removeClass();
+		$(this).css('color','red');
+		$("#solveChoice2").css('color','black')
+		$("#solveChoice3").css('color','black')
+		$("#solveChoice4").css('color','black')
+		$(this).addClass('correct');
+		$("#solveChoice2").addClass('wrong');
+		$("#solveChoice3").addClass('wrong');
+		$("#solveChoice4").addClass('wrong');
+	});
+	$("#solveChoice2").click(function(){
+		$("#solveChoice1").removeClass();
+		$("#solveChoice2").removeClass();
+		$("#solveChoice3").removeClass();
+		$("#solveChoice4").removeClass();
+		$(this).css('color','red');
+		$("#solveChoice1").css('color','black')
+		$("#solveChoice3").css('color','black')
+		$("#solveChoice4").css('color','black')
+		$(this).addClass('correct');
+		$("#solveChoice1").addClass('wrong');
+		$("#solveChoice3").addClass('wrong');
+		$("#solveChoice4").addClass('wrong');
+	});
+	$("#solveChoice3").click(function(){
+		$("#solveChoice1").removeClass();
+		$("#solveChoice2").removeClass();
+		$("#solveChoice3").removeClass();
+		$("#solveChoice4").removeClass();
+		$(this).css('color','red');
+		$("#solveChoice1").css('color','black')
+		$("#solveChoice2").css('color','black')
+		$("#solveChoice4").css('color','black')
+		$(this).addClass('correct');
+		$("#solveChoice1").addClass('wrong');
+		$("#solveChoice2").addClass('wrong');
+		$("#solveChoice4").addClass('wrong');
+	});
+	$("#solveChoice4").click(function(){
+		$("#solveChoice1").removeClass();
+		$("#solveChoice2").removeClass();
+		$("#solveChoice3").removeClass();
+		$("#solveChoice4").removeClass();
+		$(this).css('color','red');
+		$("#solveChoice1").css('color','black')
+		$("#solveChoice2").css('color','black')
+		$("#solveChoice3").css('color','black')
+		$(this).addClass('correct');
+		$("#solveChoice1").addClass('wrong');
+		$("#solveChoice2").addClass('wrong');
+		$("#solveChoice3").addClass('wrong');
+	});
+	
+	//채점하기 눌렀을 때
+	$("#problemScoring").click(function(){
+		
+		//정답번호와 선택한 번호를 가져오기
+		correct=$("#problem-choice-correct").html();
+		select=$("#solveChoice"+correct).attr('class');
+		
+		pno=$("#problemPNO").html();
+		
+		//선택과 정답이 일치하는지 확인
+		if(select=='correct'){
+			$("#problem-correct").css('display','')
+			$("#").css('display','')
+			$("#problemScoring").css('display','none')
+			correct=1;
+		}else if(select=='wrong'){
+			$("#problem-wrong").css('display','')
+			$("#problemScoring").css('display','none')
+			correct=0;
+		}else{
+			alert("정답을 골라주세요")
+			return false;
+		}
+		
+		//해당 문제의 정답률에 반영
+		$.ajax({
+			url : 'problemScore.co?pno='+ pno+'&correct='+correct ,
+			type : 'post',
+			contentType:"application/json; charset=utf-8;",
+			dataType:"json",
+			success : function(data) {					
+
+			}
+		})
 		
 	});
 });
