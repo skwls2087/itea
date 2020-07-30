@@ -12,8 +12,8 @@
 	 <h2>1/10</h2>
    <h4>나는 문제에 직면했을때,</h4>
    <div class="survey-answer"> 
-         	<a><div id=answer1_1 name="answer1" class="survey1">직접 해결하기를 선호한다.</div></a>
-         	<a><div id=answer1_2 name="answer1" class="survey2">전문가에게 알리고 해결을 기다린다.</div></a>  
+         	<a><div id=answer1_1 name="answer1" class="survey1" >직접 해결하기를 선호한다.</div></a>
+         	<a><div id=answer1_2 name="answer1" class="survey2" >전문가에게 알리고 해결을 기다린다.</div></a>  
    </div>
 </div>
 <div class="survey" id="test2">	
@@ -89,5 +89,22 @@
    </div>
 </div>
 <div id="test-result">
-	<a href="<%= request.getContextPath()%>/itLab/itTestResult.co"><input type="button" id="test-result" class="survey1" value="결과보기"></a>
-</div>	
+	<%-- <a href="<%= request.getContextPath()%>/itLab/itTestResult.co"> --%><input type="button" id="test-result" class="survey1" value="결과보기"><!-- </a> -->
+</div>
+<form name="testfrm" id="testfrm" action="<%= request.getContextPath()%>/itLab/itTestResult.co" method="post">
+	<input type="hidden" id="str" name="str"/>
+</form>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+

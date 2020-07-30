@@ -1,15 +1,23 @@
 package com.itea.itLab.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.itea.dto.licenseDTO;
+import com.itea.itLab.service.ItLabService;
 
 @Controller
 @RequestMapping("/itLab")
 public class itLabController {
+	
+	@Autowired
+	ItLabService  iservice;
 	
 	@RequestMapping("/itLab")
 	public void itLabMain() {
@@ -28,18 +36,19 @@ public class itLabController {
 	}
 	
 	@RequestMapping("/itTestResult")
-	public  void itTestResult() {
+	public  ModelAndView itTestResult(HttpServletRequest request, ModelAndView mv) {
 		System.out.println("결과페이지 ");
 		//1파라미터 받기
-		
+		String test = request.getParameter("str");
+		System.out.println(test);
 		//2비즈니스 로직 수행
-//		ArrayList<licenseDTO>list=lService.getLicenseList();
-//		//3모델
-//		mv.addObject("LIST",list );
-//		//4뷰
-//		mv.setViewName("/license/licenseList");
-//		return mv;
-//		
+		int result = iservice.checkResult(test);
+		//3모델
+		mv.addObject("RESULT",result );
+		//4뷰
+		mv.setViewName("/itLab/itTestResult");
+		return mv;
+		
 		
 	}
 }

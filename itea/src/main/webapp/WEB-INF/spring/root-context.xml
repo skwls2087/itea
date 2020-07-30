@@ -55,7 +55,9 @@
 	<bean id="ProblemDAO" class="com.itea.dao.ProblemDAO">
 		<property name="sqlSessionTemplate" ref ="sqlSession"/>
 	</bean>
-	
+		<bean id="itLabDAO" class="com.itea.dao.itLabDAO">
+		<property name="sqlSessionTemplate" ref ="sqlSession"/>
+	</bean>	
 
 	
 	<!-- Service -->
@@ -69,7 +71,8 @@
 	<bean id="adminSV" class="com.itea.admin.service.AdminService"/>
 	<bean id="lService" class="com.itea.license.service.LicenseService"/>
 	
-	
+	<!--it 성향테스트 관련 서비스  -->
+	<bean id="iservice" class="com.itea.itLab.service.ItLabService"/>
 	<!-- Q&A 관련 서비스 -->
 	<bean id="qaSV" class="com.itea.qa.service.QaService"/>
 	
