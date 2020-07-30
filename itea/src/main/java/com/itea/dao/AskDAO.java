@@ -57,11 +57,15 @@ public class AskDAO {
 		session.update("ask.askCnt",ano);
 	}
 	
-	//검색
-	public ArrayList askSearch(AskDTO askDTO) {
-		return (ArrayList) session.selectList("ask.search",askDTO);
+	//검색 제목
+	public ArrayList askSearchT(AskDTO askDTO) {
+		return (ArrayList) session.selectList("ask.searchT",askDTO);
 	}
 
+	//검색 번호
+	public ArrayList askSearchA(AskDTO askDTO) {
+		return (ArrayList) session.selectList("ask.searchA",askDTO);
+	}
 	//댓글 리스트
 	public ArrayList replyList(int ano) {
 		return (ArrayList) session.selectList("ask.replyList",ano);

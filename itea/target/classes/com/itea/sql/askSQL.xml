@@ -9,8 +9,8 @@
 		select count(*) from askboard
 	</select>
 	
-	<!-- 검색 -->
-	<select id="search" resultType="askDTO">
+	<!-- 검색 제목 -->
+	<select id="searchT" resultType="askDTO">
 		SELECT k.ano,atitle,k.pno,p.mnick,k.lname,adate,ahit FROM
 		(SELECT ano,atitle,aplc.pno,l.lname,adate,ahit from
 		(SELECT ano,atitle,lc.lno,ap.pno,lc.lqno,adate,ahit FROM
@@ -27,6 +27,23 @@
 		LIMIT #{start}, #{size}
 	</select>
 	
+		<!-- 검색 번호 -->
+	<select id="searchA" resultType="askDTO">
+		SELECT k.ano,atitle,k.pno,p.mnick,k.lname,adate,ahit FROM
+		(SELECT ano,atitle,aplc.pno,l.lname,adate,ahit from
+		(SELECT ano,atitle,lc.lno,ap.pno,lc.lqno,adate,ahit FROM
+		(SELECT askboard.pno,ano, problem.lqno, atitle, adate, ahit FROM 
+				askboard JOIN problem ON askboard.pno=problem.pno) ap
+		JOIN licenseClass lc ON ap.lqno=lc.lqno) aplc
+		JOIN license l ON aplc.lno=l.lno)k
+		join
+		(SELECT ano, a.mno, m.mnick from
+		askboard a JOIN member m ON a.mno=m.mno) p
+		ON p.ano=k.ano
+		where k.ano = #{search}
+		ORDER BY k.ano desc	
+		LIMIT #{start}, #{size}
+	</select>
 	
 	
 	<!-- 게시판 목록 -->

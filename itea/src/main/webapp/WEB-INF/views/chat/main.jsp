@@ -53,7 +53,7 @@
 		
 	function Chat__drawMessages(message){
 		var html = '['+message.id+']('+message.writer+'):'+message.body;
-		$('.chat-list').append('<div>'+html+'</div>')
+		$('.chat-list').prepend('<div>'+html+'</div>')
 	}
 		
 
@@ -61,21 +61,17 @@
 		Chat__loadNewMessages();
 	});
 	
-</script>
-
-<h1>채팅</h1>
-
-<div class="container">
-	<div class="chat-list" style="overflow-y:scroll; width:300px; height:500px; padding:4px; border:1 solid #000000;"></div>
 	
+	
+	
+</script>
+<h1>채팅</h1>
+<div class="container">
 	<form onsubmit="sendMessage(this); return false;">
-		<c:if test="${empty MNICK}">
-			<input type="hidden" name="writer" value="비회원">
-		</c:if>
-		<c:if test="${!empty MNICK}">
-			<input type="hidden" name="writer" value="${MNICK}">
-		</c:if>
+		<input type="text" name="writer" placeholder="작성자">
 		<input type="text" name="body" placeholder="내용을 입력해주세요"/>
 		<input type="submit" value="입력"/>
 	</form>
+	
+	<div class="chat-list"></div>
 </div>

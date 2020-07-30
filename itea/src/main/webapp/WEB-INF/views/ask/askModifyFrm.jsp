@@ -43,7 +43,7 @@ $(function(){
 					size="50" value="${askDTO.atitle}"/></td>
 				<th>문제번호</th>
 				<td>
-					<input type="text" id="pno" name="pno" value="${askDTO.pno}"/>
+					<input type="text" id="pno" name="pno" value="${askDTO.pno}" readonly="readonly"/>
 					<input type="hidden" id="ano" name="ano" value="${askDTO.ano}"/>
 				</td>
 				

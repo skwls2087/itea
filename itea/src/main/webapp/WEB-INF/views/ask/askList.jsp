@@ -1,25 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<script>
-	$(function(){
-		$("#wBtn").click(function(){
-				if(${mnick==null}){
-					answer=confirm("회원인 경우만 글을 입력하실 수 있습니다. \n로그인 페이지로 이동하시겠습니까?");
-					if (answer==true){
-						location.href="../member/loginFrm.co";
-					}else{
-						return false;
-					}
 
-				}else{
-					location.href="../ask/aWriteFrm.co";
-				}
-		});
-	});
-</script>
 <div class="container" style="margin-top:100px">
 	<form action="../ask/askSearch.co" style="text-align:right">
+		<select id="category" name="category">
+			<option value="title" selected>제목</option>
+			<option value="ano">번호</option>
+		</select>
 		<input type="text" id="asearch" name="asearch"/>
 		<input type="submit" id="sBtn" value="검색"/>
 	</form>
