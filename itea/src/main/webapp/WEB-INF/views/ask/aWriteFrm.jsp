@@ -42,7 +42,7 @@ th {
 				<td width="200"><input type="text" id="atitle" name="atitle"
 					size="50" placeholder="제목을 입력하세요" /></td>
 				<th>문제번호</th>
-				<td><input type="text" id="pno" name="pno" placeholder="문제번호를 입력하세요"/></td>
+				<td><input type="text" id="pno" name="pno" value="${pno}" readonly="readonly"/></td>
 			</tr>
 			<tr>
 				<th>내용</th>

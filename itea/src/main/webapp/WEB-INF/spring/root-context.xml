@@ -37,6 +37,9 @@
 	<!-- DI선언 -->
 	
 	<!-- DAO -->
+	<bean id="chatDAO" class="com.itea.dao.ChatDAO">
+		<property name="sqlSessionTemplate" ref ="sqlSession"/>
+	</bean>
 	<bean id="memberDAO" class="com.itea.dao.memberDAO">
 		<property name="sqlSessionTemplate" ref ="sqlSession"/>
 	</bean>
@@ -61,6 +64,8 @@
 
 	
 	<!-- Service -->
+	<!-- chat관련 서비스 -->
+	<bean id="chatSV" class="com.itea.chat.service.ChatService"/>
 	<!-- member관련 서비스 -->
 	<bean id="loginSV" class="com.itea.member.service.LoginService"/>
 	<bean id="findidpwSV" class="com.itea.member.service.FindIdPwService"/>
