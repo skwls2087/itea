@@ -1,24 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<script>
-	$(function(){
-		$("#wBtn").click(function(){
-				if(${mnick==null}){
-					answer=confirm("회원인 경우만 글을 입력하실 수 있습니다. \n로그인 페이지로 이동하시겠습니까?");
-					if (answer==true){
-						location.href="../member/loginFrm.co";
-					}else{
-						return false;
-					}
-
-				}else{
-					location.href="../ask/aWriteFrm.co";
-				}
-		});
-	});
-</script>
+	
 <div class="container">
 	<form action="../ask/asksearch.co">
+		<select id="category" name="category">
+			<option value="title" selected>제목</option>
+			<option value="ano">번호</option>
+		</select>
 		<input type="text" id="asearch" name="asearch" placeholder="검색어를 입력하세요"/>
 		<input type="button" id="sBtn" value="검색"/>
 	</form>
@@ -62,13 +50,6 @@
 				<c:if test="${pInfo.nowPage ne pInfo.totalPage}">
 					<a href="../ask/askList.co?nowPage=${pInfo.nowPage+1}">다음</a>
 				</c:if>	
-			</td>
-		</tr>
-	</table>
-	<table class="row text-left">
-		<tr>
-			<td colspan="7">
-				<input type="button" id="wBtn" value="글쓰기"/>
 			</td>
 		</tr>
 	</table>

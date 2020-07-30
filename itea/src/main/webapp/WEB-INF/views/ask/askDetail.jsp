@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="u" tagdir="/WEB-INF/tags" %>
 <style>
+
 	th{text-align:center}
 	.table{margin-top:100px}
 	#sBtn{height:85px;width:120px;}
@@ -70,8 +72,8 @@
 	
 	
 </script>
-<div class="container">
-	<table class="table">
+<div class="container" style="margin-bottom:150px;">
+	<table class="table" style="margin-top:0px">
 		<tr>
 			<th>번호</th>
 			<td>${askDTO.ano}</td>
@@ -89,12 +91,12 @@
 			<td colspan="3">${askDTO.atitle}</td>
 		</tr>
 		<tr>
-			<td colspan="4"></br>${askDTO.acontent}</td>
+			<td colspan="4"></br><u:pre value="${askDTO.acontent}"/></td>
 		</tr>
 		<tr>
 			<td colspan="4" class="text-right">
 				<input type="button" id="lBtn" value="목록"/>
-				<c:if test="${userNick!=null}">
+				<c:if test="${userNick==askDTO.mnick}">
 				<input type="button" id="mBtn" value="수정"/>
 				<input type="button" id="dBtn" value="삭제"/>
 				</c:if>
@@ -119,7 +121,7 @@
 			<td>
 				${reply.mnick}(<fmt:formatDate value="${reply.acdate}" pattern="yyyy-MM-dd HH:mm:ss"/>)
 				<br>
-				${reply.accontent}
+				<u:pre value="${reply.accontent}"/>
 				<br>
 				<div class="tog">답글쓰기
 				<c:if test="${userNick eq reply.mnick}">
@@ -148,7 +150,7 @@
 			<td>
 				${reply.mnick}(<fmt:formatDate value="${reply.acdate}" pattern="yyyy-MM-dd HH:mm:ss"/>)
 				<br>
-				${reply.accontent}
+				<u:pre value="${reply.accontent}"/>
 				<br>
 				<c:if test="${userNick eq reply.mnick}">
 					<a href="askReplyDelete.co?acdepth=${reply.acdepth}&acno=${reply.acno}&nowPage=${askDTO.nowPage}&ano=${askDTO.ano}">삭제</a>

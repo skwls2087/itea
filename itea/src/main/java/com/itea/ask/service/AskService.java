@@ -85,8 +85,8 @@ public class AskService {
 		
 	}
 	
-	//검색
-	public ArrayList<AskDTO> askSearch(String search,PageUtil pInfo) {
+	//검색 제목
+	public ArrayList<AskDTO> askSearchT(String search, PageUtil pInfo) {
 		int start = 
 				(pInfo.getNowPage()-1)*pInfo.getLineCount();
 		int end   = start+pInfo.getLineCount()-1;
@@ -94,9 +94,23 @@ public class AskService {
 		askDTO.setStart(start);
 		askDTO.setEnd(end);
 		askDTO.setSearch(search);
-		
 		ArrayList<AskDTO> list = 
-				askDAO.askSearch(askDTO);
+				askDAO.askSearchT(askDTO);
+		return list;
+		
+	}
+	
+	//검색 번호
+	public ArrayList<AskDTO> askSearchA(String search,PageUtil pInfo) {
+		int start = 
+				(pInfo.getNowPage()-1)*pInfo.getLineCount();
+		int end   = start+pInfo.getLineCount()-1;
+		AskDTO askDTO = new AskDTO();
+		askDTO.setStart(start);
+		askDTO.setEnd(end);
+		askDTO.setSearch(search);
+		ArrayList<AskDTO> list = 
+				askDAO.askSearchA(askDTO);
 		return list;
 		
 	}

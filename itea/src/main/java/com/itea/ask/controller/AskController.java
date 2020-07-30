@@ -196,14 +196,21 @@ public class AskController {
 	@RequestMapping("ask/askSearch")
 	public String askSearch(HttpServletRequest request,HttpSession session) {
 		String search = request.getParameter("asearch");
+		String category = request.getParameter("category");
 		int nowPage=1;
 		if(request.getParameter("nowPage")!=null) {
 			nowPage=Integer.parseInt(request.getParameter("nowPage"));
 		}
 		String mnick=(String) session.getAttribute("MNICK");
 		PageUtil pInfo = askSV.getPageInfo(nowPage);
-		
-		ArrayList<AskDTO> list = askSV.askSearch(search,pInfo);
+		ArrayList<AskDTO> list=null;
+		if(category.equals("title")) {
+			list = askSV.askSearchT(search,pInfo);
+		}else if(category.equals("ano")) {
+			list = askSV.askSearchA(search,pInfo);
+		}
+		System.out.println("list="+list);
+		request.setAttribute("category", category);
 		request.setAttribute("mnick", mnick);
 		request.setAttribute("pInfo", pInfo);
 		request.setAttribute("list", list);

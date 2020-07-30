@@ -14,6 +14,7 @@ public class AskDTO {
 	 private Date	adate; 
 	 private int	ahit;
 	 private String search;
+	 private String category;	//검색 구분 카테고리
 	 private int    start;	 	 //시작 글번호
 	 private int    end;		 //끝 글번호
 	 private int    nowPage; 	 //보고싶은 페이지
@@ -134,16 +135,31 @@ public class AskDTO {
 	public void setMnick(String mnick) {
 		this.mnick = mnick;
 	}
+	
+	
+	
+	
+	
+	
+	
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
 	@Override
 	public String toString() {
 		return "AskDTO [ano=" + ano + ", atitle=" + atitle + ", acontent=" + acontent + ", mno=" + mno + ", mnick="
 				+ mnick + ", lname=" + lname + ", pno=" + pno + ", adate=" + adate + ", ahit=" + ahit + ", search="
-				+ search + ", start=" + start + ", end=" + end + ", nowPage=" + nowPage + ", size=" + size + "]";
+				+ search + ", category=" + category + ", start=" + start + ", end=" + end + ", nowPage=" + nowPage
+				+ ", size=" + size + "]";
 	}
 
 
-	
 
 	
 	
