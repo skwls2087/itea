@@ -127,6 +127,22 @@ public class AskService {
 		askDAO.askcoReplyInsert(replyDTO);
 	}
 
+	//문제풀기에서 질문찾기
+	public ArrayList<AskDTO> problemBoard(int pno,PageUtil pInfo) {
+		int start = 
+				(pInfo.getNowPage()-1)*pInfo.getLineCount();
+		int end   = start+pInfo.getLineCount()-1;
+		AskDTO askDTO = new AskDTO();
+		askDTO.setStart(start);
+		askDTO.setEnd(end);
+		askDTO.setPno(pno);
+		
+		ArrayList<AskDTO> list = 
+				askDAO.problemBoard(askDTO);
+		return list;
+		
+	}
+
 	
 
 }

@@ -39,8 +39,11 @@ public class AskController {
 	}
 	
 	//글 입력 폼
-	@RequestMapping("ask/aWriteFrm")
-	public void aWriteFrm() {
+	@RequestMapping("ask/problemAsk")
+	public String aWriteFrm(HttpServletRequest request) {
+		int pno = Integer.parseInt(request.getParameter("pno"));
+		request.setAttribute("pno", pno);
+		return "ask/aWriteFrm";
 		
 	}
 	
@@ -205,6 +208,27 @@ public class AskController {
 		request.setAttribute("pInfo", pInfo);
 		request.setAttribute("list", list);
 		return "ask/askList";
+	}
+	
+	//문제풀기에서 넘어오기
+	@RequestMapping("ask/problemBoard")
+	public ModelAndView problemBoard(HttpServletRequest request,HttpSession session,ModelAndView mv) {
+		int pno = Integer.parseInt(request.getParameter("pno"));
+		int nowPage=1;
+		if(request.getParameter("nowPage")!=null) {
+			nowPage=Integer.parseInt(request.getParameter("nowPage"));
+		}
+		String mnick=(String) session.getAttribute("MNICK");
+		PageUtil pInfo = askSV.getPageInfo(nowPage);
+		
+		ArrayList<AskDTO> list = askSV.problemBoard(pno, pInfo);
+		
+		mv.setViewName("ask/askList");
+		mv.addObject("mnick", mnick);
+		mv.addObject("pInfo", pInfo);
+		mv.addObject("list", list);
+	
+		return mv;
 	}
 	
 	
