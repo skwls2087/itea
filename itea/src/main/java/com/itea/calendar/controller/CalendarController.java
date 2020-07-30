@@ -8,6 +8,6 @@ public class CalendarController {
 	
 	@RequestMapping("/calendar")
 	public String Calendar() {
-		return "calendar/Calendar";
+		return "calendar/Calendar5";
 	}
 }
