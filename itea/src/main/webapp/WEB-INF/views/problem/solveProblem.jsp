@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/problem.css">
 	
 1.자격증별 문제
-2.내가 만든 문제
+<a href="${pageContext.request.contextPath}/problem/cProblemList.co">2.내가 만든 문제</a>
 3.즐겨찾기 문제
 		  
 <div id="problem-solve-container">

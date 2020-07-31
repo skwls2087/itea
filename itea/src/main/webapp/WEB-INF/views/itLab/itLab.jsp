@@ -70,7 +70,6 @@ $(function(){
 });
 </script>
 
-
 <div class="itLab">
 	<div id="itLab-heading"><span>IT 연구소</span></div>
 	<div id="itTest">
@@ -99,10 +98,12 @@ $(function(){
 			<a href="http://www.inews24.com/list/it" target="_blank">아이뉴스24</a><br/>
 		</div>
 		<div id="itKeyword-right">
+
 			<p><span id="wordYear">2020</span>년 <span id="wordMonth">7</span>월</p>
 			<img class="wordcloudArrow" id="pre" src="${pageContext.request.contextPath}/resources/img/pre.png" style="cursor:pointer">
       <img class="" id="wordcloud" src="">
       <img class="wordcloudArrow" id="post" src="${pageContext.request.contextPath}/resources/img/post.png" style="cursor:pointer">
+
 		</div>
 	</div>
 </div>

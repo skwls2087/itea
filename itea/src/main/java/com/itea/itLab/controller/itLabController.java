@@ -1,7 +1,5 @@
 package com.itea.itLab.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -48,7 +46,7 @@ public class itLabController {
 		//4뷰
 		mv.setViewName("/itLab/itTestResult");
 		return mv;
-		
+	}
 		
 	}
-}
+	

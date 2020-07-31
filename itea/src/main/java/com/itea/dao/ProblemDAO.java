@@ -1,11 +1,13 @@
 package com.itea.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.itea.dto.ProblemDTO;
+import com.itea.dto.QaDTO;
 import com.itea.dto.licenseDTO;
 
 public class ProblemDAO {
@@ -115,6 +117,17 @@ public class ProblemDAO {
 		session.insert("problem.problemError",map);
 		
 	}
+
+	
+	public int getmyTotalCnt(int mno) {
+		int qcnt=session.selectOne("problem.cProblemListCnt",mno);
+		return qcnt;
+	}
+
+	public ArrayList<ProblemDTO> getcProblemList(ProblemDTO ProblemDTO) {
+			return  (ArrayList)session.selectList("problem.getcProblemList", ProblemDTO);
+	}
+		
 
 	
 }

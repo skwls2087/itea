@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.itea.dto.MemberDTO;
+import com.itea.dto.Statistics;
 import com.itea.util.Visitor;
 @Repository
 public class adminDAO {
@@ -49,13 +50,13 @@ public class adminDAO {
 		visitor=(ArrayList)session.selectList("admin.WeekVisitor", vo);
 		return visitor;
 	}
-		
 	
 	//-------------------------------------------------------------------------------
 	//한 주간 가입자 수 검색
 	public ArrayList<MemberDTO> WeekMember(MemberDTO mdto) throws Exception {
 		ArrayList<MemberDTO> member = null;
-		member=(ArrayList)session.selectList("admin.WeekMember", mdto);
+		member=(ArrayList)session.selectList("admin.WeekMember",mdto);
+		System.out.println("dao "+member);
 		return member;
 	}
 	

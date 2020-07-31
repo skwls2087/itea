@@ -1,5 +1,5 @@
-/*파랑:#08324d*/
-/*노랑:#ffb535*/
+/*�뙆�옉:#08324d*/
+/*�끂�옉:#ffb535*/
 
 .itLab{
 	width:80%;
@@ -14,7 +14,7 @@
 	background:linear-gradient(to top, #f7ca3e 50%, transparent 50% )
 }
 
-/*it연구소-직업만족도 테스트*/
+/*it�뿰援ъ냼-吏곸뾽留뚯”�룄 �뀒�뒪�듃*/
 #itTest{
 	width:100%;
 	min-height:250px;
@@ -71,7 +71,7 @@
 	}
 }
 
-/*it연구소-워드클라우드*/
+/*it�뿰援ъ냼-�썙�뱶�겢�씪�슦�뱶*/
 #itKeyword{
 	width:100%;
 	font-family: 'Noto Sans KR', sans-serif;
@@ -93,7 +93,7 @@
 #itKeyword-right{
 	width:50%;
 }
-.wordcloud{
+#wordcloud{
 	width:80%;
 }
 .wordcloudArrow{
@@ -114,7 +114,7 @@
 	}
 }
 
-/*it연구소-인포그래픽*/
+/*it�뿰援ъ냼-�씤�룷洹몃옒�뵿*/
 #itInfo{
 	clear:both;
 	width:100%;

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.itea.admin.service.AdminService;
 import com.itea.dto.MemberDTO;
+import com.itea.dto.Statistics;
 import com.itea.util.PageUtil;
 import com.itea.util.Visitor;
 
@@ -76,14 +77,15 @@ public class AdminController {
 	
 	//회원탈퇴
 		@RequestMapping("deleteMember")
-		public String delete(HttpServletRequest request) throws Exception {
+		public void delete(HttpServletRequest request,HttpServletResponse response) throws Exception {
 			//1.파라미터 받기
 			String mnick=(String)request.getParameter("userNick"); 
+			String nowPage = request.getParameter("nowPage"); 
 			System.out.println(mnick+"님 강제탈퇴완료");
 			//2.비즈니스 로직 수행
 			adminSV.deleteMember(mnick);
 			//4.View
-			return "../../index";
+			response.sendRedirect("../admin/memberList.co");
 		}
 		
 	
