@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,15 +21,32 @@ import com.itea.calendar.service.GoogleCalendarService;
 
 @Controller
 public class GoogleCalendarController {
+	
+	@Autowired
+	GoogleCalendarService service;
+	
+	@RequestMapping("/GoogleCalendar")
+	public String GoogleCalendar() {
+		System.out.println("구글 달력 접속합니다.");
+		return "calendar/GoogleCalendar";
+	}
+	
+	@RequestMapping("/schedule")
+	public String GoogleCalendarSchedule() {
+		System.out.println("구글 달력 스케쥴 항목에 접속합니다.");
+		return "calendar/schedule";
+	}
 
 	private Logger logger = LoggerFactory.getLogger(GoogleCalendarController.class);
 	
 	//Calendar List
-	@RequestMapping(value="/GoogleCalendar.co", method=RequestMethod.GET)
+	@RequestMapping(value="/GoogleCalendarList", method=RequestMethod.GET)
 	public String GoogleCalendar(Model model) {
-		logger.info("calendarList");
+		System.out.println("구글 달력 리스트를 출력합니다.");
+		logger.info("GoogleCalendarList");
 		try {
-			Calendar service		  = GoogleCalendarService.getCalendarService();
+			Calendar service		  = 
+					GoogleCalendarService.getCalendarService();
 			CalendarList calendarList = 
 					service.calendarList().list().setPageToken(null).execute();
 			List<CalendarListEntry> items = calendarList.getItems();
@@ -40,47 +58,6 @@ public class GoogleCalendarController {
 		return "GoogleCalendar";
 	}
 	
-	//Calendar Modify
-	@RequestMapping(value="GoogleCalendarModify.co", method=RequestMethod.POST)
-	public String GoogleCalendarModify(GoogleCalendarDTO calDto) {
-		logger.info("GoogleCalendarModify", calDto.toString());
-		try {
-			Calendar service = GoogleCalendarService.getCalendarService();
-			com.google.api.services.calendar.model.Calendar calendar = 
-					service.calendars().get(calDto.getCalendarId()).execute();
-			calendar.setSummary(calDto.getSummary());
-			service.calendars().update(calendar.getId(), calendar).execute();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return "redirect:/GoogleCalendar.co";
-	}
-	
-	//Calendar Delete
-	
-	public String GoogleCalendarDelete(HttpServletRequest httpreq) {
-		logger.info("GoogleCalendarDelete");
-		
-		String[] chkVal = httpreq.getParameterValues("chkVal");
-		try {
-			Calendar service = GoogleCalendarService.getCalendarService();
-			for (String calendarId : chkVal) {
-				service.calendars().delete(calendarId).execute();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return "redirect:/GoogleCalendar.co";
-	}
-	
-	//Calendar Moving
-	
-	public String GoogleSchdule(Model model, String calendarId, String title) {
-		logger.info("GoogleSchdule");
-		model.addAttribute("calendarId", calendarId);
-		model.addAttribute("title", title);
-		return "GoogleSchdule";
-	}
 }
 
 

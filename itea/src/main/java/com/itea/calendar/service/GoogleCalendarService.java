@@ -29,7 +29,7 @@ public class GoogleCalendarService {
 	
 	private static final File DATA_STORE_DIR
 		= new File(System.getProperty("user.home"),
-				".credentials/calendar-java-quickstart");
+				".credentials/google_client_secret.json");
 	
 	private static FileDataStoreFactory DATA_STORE_FACTORY;
 	
@@ -59,7 +59,7 @@ public class GoogleCalendarService {
 		//클라이언트 암호 로드
 		System.out.println("client_secret.json 파일 로드!");
 		InputStream in = GoogleCalendarService.class
-				.getResourceAsStream("/client_secret.json");
+				.getResourceAsStream("/credentials/google_client_secret.json");
 		
 		GoogleClientSecrets clientSecrets 
 			= GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
