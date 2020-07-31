@@ -65,8 +65,8 @@
 	
 	<!-- 게시글 입력 -->
 	<insert id="aWriteProc">
-		insert into askboard(mno,pno,atitle,acontent)
-		values(#{mno},#{pno},#{atitle},#{acontent})
+		insert into askboard(mno,pno,atitle,acontent,adate)
+		values(#{mno},#{pno},#{atitle},#{acontent},curdate())
 	</insert>
 	
 	<!-- 상세보기 -->
