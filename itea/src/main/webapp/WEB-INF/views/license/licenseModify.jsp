@@ -70,10 +70,10 @@
 			placeholder="자격증에 대한 전반적 소개를 입력하세요" cols="50" rows="10">${lDto.linfo}</textarea> </div>
 				</td>
 			</tr>
-			<tr>
+			<%--<tr>
 				<td colspan="2" class="license-head">자격증 시험유형</td>
 			</tr>
-			<tr>
+			 <tr>
 				<td colspan="2"><div class="wrap">
 						<select name="lqclass" id="lqclass" size="3">
 							<option value="1" <c:if test="${lDto.lqclass=='필기'}"> selected='selected' </c:if>>필기,실기</option>
@@ -82,7 +82,7 @@
 						</select>
 					</div>
 				</td>
-			</tr>
+			</tr> --%>
 			<tr id="license-button">
 			<td colspan="2">
 				<input type="button" class="btn btn-info" id="sBtn" value="수정">

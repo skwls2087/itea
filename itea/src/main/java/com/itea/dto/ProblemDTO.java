@@ -24,6 +24,68 @@ public class ProblemDTO {
 	
 	private String pimg; //출제이미지
 	
+	//시험 유형 
+	private String lqclass; 
+	//페이지 변수
+	private int		start; 		//시작글번호
+	private	int		end;		//끝글번호
+	private int		nowPage;	//보고싶은페이지
+	private int 	size=10;
+	
+	
+	//시험 유형 
+	public String getLqclass() {
+		return lqclass;
+	}
+	public void setLqclass(String lqclass) {
+		this.lqclass = lqclass;
+	}
+
+
+	//현재 로그인 한 회원번호		
+	private int logno; 
+	//페이지 관련
+	public int getStart() {
+		return start;
+	}
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+	public int getEnd() {
+		return end;
+	}
+
+	public void setEnd(int end) {
+		this.end = end;
+	}
+
+	public int getNowPage() {
+		return nowPage;
+	}
+
+	public void setNowPage(int nowPage) {
+		this.nowPage = nowPage;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	//로그인한 회원번호
+	public int getLogno() {
+		return logno;
+	}
+
+	public void setLogno(int logno) {
+		this.logno = logno;
+	}
+
+
 	//객관식 선지
 	private String[] choice;
 	

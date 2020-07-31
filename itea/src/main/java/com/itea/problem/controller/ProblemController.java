@@ -1,15 +1,21 @@
 package com.itea.problem.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import com.itea.dto.ProblemDTO;
 import com.itea.dto.licenseDTO;
 import com.itea.problem.service.ProblemService;
-
+import com.itea.util.PageUtil;
 
 @Controller
 @RequestMapping("/problem")
@@ -105,5 +111,26 @@ public class ProblemController {
 		List<licenseDTO> ckind=problemSV.selectCkind();
 		request.setAttribute("ckind", ckind);
 		
+	}
+	@RequestMapping("/cProblemList")
+	public ModelAndView cProblemList(@RequestParam(value="nowPage",
+				required=false,
+				defaultValue="1")  int  nowPage,HttpServletRequest request,HttpSession session,ModelAndView mv) {
+		System.out.println("내가 낸 문제 list 진입");
+		PageUtil pInfo;
+		//회원 닉네임 받기
+		String mnick =(String) session.getAttribute("MNICK");
+		int mno=(Integer) session.getAttribute("MNO");
+				System.out.println("닉네임"+mnick);
+				System.out.println("mno"+mno);
+				ArrayList<ProblemDTO> list;
+				pInfo = problemSV.getPageInfo(nowPage,mno);
+				list= problemSV.getcProblemList(pInfo,mno);
+				
+				mv.addObject("PINFO",pInfo);//페이징관련 정보
+				mv.addObject("LIST",list);
+				mv.setViewName("problem/cProblemList");
+				
+				return mv;
 	}
 }

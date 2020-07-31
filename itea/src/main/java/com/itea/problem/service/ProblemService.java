@@ -1,5 +1,6 @@
 package com.itea.problem.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -7,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.itea.dao.ProblemDAO;
 import com.itea.dto.ProblemDTO;
+import com.itea.dto.QaDTO;
 import com.itea.dto.licenseDTO;
+import com.itea.util.PageUtil;
 
 public class ProblemService {
 
@@ -66,7 +69,31 @@ public class ProblemService {
 	public void problemCountUp(int pno, int correct) {
 		problemDAO.problemCountUp(pno,correct);
 	}
+	//페이징관련 정보
 
+	public PageUtil getPageInfo(int nowPage, int mno) {
+		int totalCount= problemDAO.getmyTotalCnt(mno);
+		PageUtil pInfo = new PageUtil(nowPage, totalCount,4,5);
+		return pInfo;  
+	}
+
+	public ArrayList<ProblemDTO> getcProblemList(PageUtil pInfo, int mno) {
+			int start= 
+				(pInfo.getNowPage()-1)*pInfo.getLineCount()+1;
+			int end  = start+pInfo.getLineCount()-1;
+			ProblemDTO ProblemDTO = new ProblemDTO();
+			ProblemDTO.setStart(start-1);
+			ProblemDTO.setEnd(end);
+			ProblemDTO.setLogno(mno);
+			
+			ArrayList<ProblemDTO> list = problemDAO.getcProblemList(ProblemDTO);
+			return list;
+	}
+	  
+	
+	
+			
+			
 	
 
 }

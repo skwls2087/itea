@@ -31,7 +31,22 @@
 		ORDER BY pno desc
 		LIMIT 1
 	</select>
-	
+	<!-- 내가 작성한 질문 개수 구하기 -->
+	<select id="cProblemListCnt" parameterType="int" resultType="int">
+		select count(*) from problem where mno=#{mno}
+	</select>
+	<!-- 해당 페이지에 맞는 내가 선택한 질문리스트 구하기 -->
+	<select id="getcProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
+		SELECT p.pno, p.lqno,l.lqclass,m.mno, p.ptype,p.pcomment,p.pcorrect,p.psolve,p.plike,p.phate
+		FROM problem AS p
+		JOIN member AS m
+		ON p.mno=m.mno
+		join licenseclass as l
+		on p.lqno=l.lqno
+		WHERE m.mno=#{logno}
+		ORDER BY p.pno desc
+	<!-- 	limit #{start}, #{size} -->
+	</select>
 	<!-- 문제 입력 -->
 	<insert id="insertProblem" parameterType="problemDTO">
 		INSERT INTO problem (lqno,pyear,ptype,mno,pdetail,pcomment,pimg) VALUES (#{lqno},#{pyear},#{ptype},#{mno},#{pdetail},#{pcomment},#{pimg})

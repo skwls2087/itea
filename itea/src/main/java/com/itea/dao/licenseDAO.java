@@ -53,23 +53,23 @@ public class licenseDAO {
 		session.update("license.modify",lDto);	
 		/*lqno를  불러오는 select 문 만들어서 따로 lqno로 set하기*/
 //		List<String> lqnoList=session.selectList("license.selectLqno",lDto);
-		/*System.out.println("naii###########"+lqnoList);*/
-		session.delete("license.deleteClass",lDto.getLno());
-		if(Integer.parseInt(lDto.getLqclass())==1) {
-		/*lDto.setLqno(Integer.parseInt(lqnoList.get(0)));*/	
-		session.insert("license.insertProc1",lDto);//필기
-		/*lDto.setLqno(Integer.parseInt(lqnoList.get(1)));*/
-		session.insert("license.insertProc2",lDto);//실기
-		}else if(Integer.parseInt(lDto.getLqclass())==2) {
-		/*lDto.setLqno(Integer.parseInt(lqnoList.get(0)));*/
-		session.insert("license.insertProc3",lDto);//1차
-		/*lDto.setLqno(Integer.parseInt(lqnoList.get(1)));*/
-		session.insert("license.insertProc4",lDto);//2차
-		}else {
-		/*lDto.setLqno(Integer.parseInt(lqnoList.get(0)));	*/
-		session.insert("license.insertProc5",lDto);//단독	
+//		/*System.out.println("naii###########"+lqnoList);*/
+//		session.delete("license.deleteClass",lDto.getLno());
+//		if(Integer.parseInt(lDto.getLqclass())==1) {
+//		/*lDto.setLqno(Integer.parseInt(lqnoList.get(0)));*/	
+//		session.insert("license.insertProc1",lDto);//필기
+//		/*lDto.setLqno(Integer.parseInt(lqnoList.get(1)));*/
+//		session.insert("license.insertProc2",lDto);//실기
+//		}else if(Integer.parseInt(lDto.getLqclass())==2) {
+//		/*lDto.setLqno(Integer.parseInt(lqnoList.get(0)));*/
+//		session.insert("license.insertProc3",lDto);//1차
+//		/*lDto.setLqno(Integer.parseInt(lqnoList.get(1)));*/
+//		session.insert("license.insertProc4",lDto);//2차
+//		}else {
+//		/*lDto.setLqno(Integer.parseInt(lqnoList.get(0)));	*/
+//		session.insert("license.insertProc5",lDto);//단독	
 		}
-	}
+//	}
 
 
 	public void delete(int lno) {
