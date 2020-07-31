@@ -52,7 +52,7 @@ public class LoginController {
 			session.setAttribute("MNICK", member.getMnick());
 		}
 		
-		return "../../index";
+		return "redirect:/";
 	}
 	
 	//네이버로그인
@@ -146,7 +146,7 @@ public class LoginController {
 		
 		System.out.println("로그아웃 됨");
 		
-		return "../../index";
+		return "redirect:/";
 	}
 	
 	

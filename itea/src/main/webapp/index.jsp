@@ -72,10 +72,10 @@
 		<div class="chat-list" style="overflow-y:scroll; width:300px; height:550px; padding:4px; border:1 solid #000000;"></div>
 		
 			<form onsubmit="sendMessage(this); return false;">
-				<c:if test="${!empty MNO}">
+				<c:if test="${empty MNO}">
 					<input type="hidden" name="writer" value="비회원">
 				</c:if>
-				<c:if test="${empty MNO}">
+				<c:if test="${!empty MNO}">
 					<input type="hidden" name="writer" value="${MNICK}">
 				</c:if>
 				<input type="text" name="body" placeholder="내용을 입력해주세요"/>
