@@ -39,6 +39,12 @@ $( document ).ready(function() {
 				
     var options = {
     	legend:'none',
+    	vAxis:{
+    		format:'#',
+    		viewWindow:{
+    			min:0
+    		}
+    	},
       lineWidth: 2,
       series: {
     	  legend:{position: 'none'},
@@ -83,19 +89,19 @@ $( document ).ready(function() {
 <div class="admin-heading">관리자 페이지</div>
 
 <div id="admin" class="admin">
-	<!-- 기간별 회원 추이 그래프 -->
-	
-	<div class="member-graph">
-		<b>누적 회원 수</b>
-		  <!-- 기간별 방문자 차트  -->
-		  <div id="chart_div1"></div>
- </div>
-	 	<!-- 기간별 방문자 추이 그래프 -->
-	<div class="visitor-graph">
-		<b>누적 방문자 수</b>
-		  <!-- 기간별 방문자 차트  -->
-		  <div id="chart_div2"></div>
- </div>
+<!-- 기간별 회원 추이 그래프 -->
+
+<div class="member-graph">
+	<b>누적 회원 수</b>
+	  <!-- 기간별 방문자 차트  -->
+	  <div id="chart_div1"></div>
+</div>
+ 	<!-- 기간별 방문자 추이 그래프 -->
+<div class="visitor-graph">
+	<b>누적 방문자 수</b>
+	  <!-- 기간별 방문자 차트  -->
+	  <div id="chart_div2"></div>
+</div>
 </div>
 <div class="admin-user">
 	<div class="admin-div">
@@ -108,7 +114,7 @@ $( document ).ready(function() {
 			        <option value="mnick">닉네임</option>
 			        <option value="mmail">이메일</option> 
 			    </select>
-			    <input type="text" name="value" class="form-control"  id="member-content" placeholder="검색어를 입력하세요."/>
+			    <input type="text" name="value" class="form-control" id="member-content" placeholder="검색어를 입력하세요."/>
 			    <img src="${pageContext.request.contextPath}/resources/img/search.png" width="20">
 			    <input type="submit" value="검색" class="btn btn-secondary"/>
 		    </div>
@@ -221,11 +227,6 @@ $( document ).ready(function() {
 	  				    	<a class="page-link" href="#">&laquo;</a>
 					    </li>
 						</c:if>
-						<c:if test="${PINFO.nowPage ne 1}">
-  				    <li class="page-item">
-				      <a class="page-link" href="<%= request.getContextPath()%>/admin/memberList.co?nowPage=${PINFO.nowPage-1}&column=${column}&value=${value}">&laquo;</a>
-				    </li>
-						</c:if>
 						
 						<!-- 페이지 -->
 						<c:forEach var="pg"	 begin="${PINFO.startPage}" end="${PINFO.endPage}">
@@ -258,4 +259,5 @@ $( document ).ready(function() {
 				</c:if>
      </table>
     </div>
+
 </div>

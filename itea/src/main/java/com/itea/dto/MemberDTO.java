@@ -30,7 +30,6 @@ public class MemberDTO {
    private String week;
    private int weekCnt;
    
-   
    public MemberDTO() {
 		
    }

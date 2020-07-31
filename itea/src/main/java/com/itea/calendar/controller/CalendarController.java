@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class CalendarController {
 	
-	@RequestMapping("/calendar")
+	@RequestMapping("/")
 	public String Calendar() {
-		return "calendar/Calendar5";
+		return "index";
 	}
 }
