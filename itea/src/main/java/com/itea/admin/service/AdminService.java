@@ -81,24 +81,19 @@ public class AdminService<Hashmap> {
 		ArrayList visitor= adminDAO.WeekVisitor(vo);
 		ArrayList list = new ArrayList();
 		ArrayList cntList = new ArrayList();
-		System.out.println("service visitor "+visitor);
 		
-		int sum = adminDAO.getVisitTotalCount();
+		//int sum = adminDAO.totalCount();
+		int sum = 0;
 		
 		for(int i=0;i<visitor.size();i++) {
 			if(i!=0) {
 				int cntstr = (int) visitor.get(i);
-				System.out.println("service cntstr "+cntstr);
-				if(cntstr==0) {
-					sum=0;
-					System.out.println("service sum "+sum);
-				}else {
-					sum = sum-cntstr;
-				}
+				sum=sum+cntstr;
 			}
 			list.add(sum);
-			System.out.println("service list "+list);
+			System.out.println("service list"+list);
 		}
+		Collections.reverse(list);
 			for(int i=0;i<7;i++) {
 				int weekNum=today.get(Calendar.DAY_OF_WEEK)-i; //오늘부터 7일전까지의 요일 구하기
 				String week="";
@@ -118,6 +113,7 @@ public class AdminService<Hashmap> {
 					week="토";
 				}
 				int vscount=(int)list.get(i);
+				System.out.println("service vscount"+vscount);
 				vo.setWeek(week);
 				vo.setVscount(vscount);
 				cntList.add(new Visitor(week,vscount));
@@ -135,24 +131,20 @@ public class AdminService<Hashmap> {
 		ArrayList list = new ArrayList();
 		ArrayList cntList = new ArrayList();
 		
-		int sum = adminDAO.totalCount();
-		//System.out.println(sum);
+		//int sum = adminDAO.totalCount();
+		int sum = 0;
 		
 		for(int i=0;i<member.size();i++) {
 			if(i!=0) {
 				int cntstr = (int) member.get(i);
-				if(cntstr==0) {
-					sum=0;
-					System.out.println("service sum "+sum);
-				}else {
-					sum = sum-cntstr;
-				}
+				sum=sum+cntstr;
 			}
 			list.add(sum);
+			//System.out.println("service list "+list);
 		}
+		Collections.reverse(list);
 		
 			for(int i=0;i<7;i++) {
-				//map = new HashMap<String,Integer>();
 				int weekNum=today.get(Calendar.DAY_OF_WEEK)-i; //오늘부터 7일전까지의 요일 구하기
 				String week="";
 				if(weekNum==1 || weekNum==-6 ) {
