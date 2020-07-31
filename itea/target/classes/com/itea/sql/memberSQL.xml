@@ -93,13 +93,13 @@
 	<!-- 회원가입 일반-->
 	<insert id="joinProc" parameterType="memberDTO">
 		insert into member(mclass,mmail,mpw,mname,mnick,mphone,mbirth,msex,mgradu,mdate,mnickdate)
-		values(#{mclass},#{mmail},#{mpw},#{mname},#{mnick},#{mphone},#{mbirth},#{msex},#{mgradu},curdate(),curdate())
+		values(#{mclass},#{mmail},#{mpw},#{mname},#{mnick},#{mphone},#{mbirth},#{msex},#{mgradu},now(),now())
 	</insert>
 	
 	<!-- 회원가입 SNS-->
 	<insert id="joinProcSNS" parameterType="memberDTO">
 		insert into member(mclass,mmail,mname,mnick,mphone,mbirth,msex,mgradu,madate,mnickdate)
-		values(#{mclass},#{mmail},#{mname},#{mnick},#{mphone},#{mbirth},#{msex},#{mgradu},curdate(),curdate())
+		values(#{mclass},#{mmail},#{mname},#{mnick},#{mphone},#{mbirth},#{msex},#{mgradu},now(),now())
 	</insert>
 	
 	<!-- 메일에 해당하는 회원 존재하는지 검색 신나진 -->
