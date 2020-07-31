@@ -3,10 +3,21 @@
 <!-- js/css 참조 -->
 <script src="${pageContext.request.contextPath}/resources/js/problem.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/problem.css">
-	
-1.자격증별 문제
-<a href="${pageContext.request.contextPath}/problem/cProblemList.co">2.내가 만든 문제</a>
-3.즐겨찾기 문제
+
+<ul class="nav nav-pills">
+<li class="nav-item dropdown show">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Dropdown</a>
+    <div class="dropdown-menu show" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
+      <a class="dropdown-item" href="#">자격증별 문제</a>
+      <a class="dropdown-item" href="${pageContext.request.contextPath}/problem/myProblemList.co">내가 만든 문제</a>
+      <a class="dropdown-item" href="#">즐겨찾기 문제</a>
+      <c:if test="${MNICK=='관리자'}">
+	      <div class="dropdown-divider"></div>
+	      <a class="dropdown-item" href="#">신고된 문제</a>
+      </c:if>
+    </div>
+  </li>
+</ul>
 		  
 <div id="problem-solve-container">
 	<div id="problem-solve">

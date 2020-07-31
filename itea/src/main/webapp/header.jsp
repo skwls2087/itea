@@ -38,6 +38,7 @@
 
 <!-- JSTL 선언 -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!-- 네이버 아이디찾기 링크 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
@@ -74,17 +75,10 @@
         <a class="nav-link" href="<%= request.getContextPath()%>/ask/askList.co">질문/토론</a>
       </li>
       <li class="nav-item  m-2">
-        <a class="nav-link" href="#">채팅방</a>
-      </li>
-      <li class="nav-item  m-2">
         <a class="nav-link" href="<%= request.getContextPath()%>/qa/qaFrm.co">Q&A</a>
       </li>
       <li class="nav-item  m-2">
         <a class="nav-link" id="it-test" href="<%= request.getContextPath()%>/itLab/itLab.co">IT연구소</a>
-      </li>
-            <li class="nav-item  m-2">
-        <a class="nav-link" href="<%= request.getContextPath()%>/calendar.co">달력</a>
-      </li>
     </ul>
     
     <ul class="navbar-nav navbar-right">

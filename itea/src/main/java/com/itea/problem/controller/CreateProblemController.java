@@ -2,11 +2,9 @@ package com.itea.problem.controller;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +23,7 @@ public class CreateProblemController {
 	
 	//문제 출제하기
 	@RequestMapping("/createProblemProc")
-	public void problemMain(ProblemDTO pDTO,HttpServletRequest request,HttpServletResponse response, HttpSession session) throws IOException {
+	public String problemMain(ProblemDTO pDTO,HttpServletRequest request,HttpSession session) throws FileNotFoundException {
 		
 		if(pDTO.getFile().getSize()!=0) {
 			//1.첨부파일이 있다면 저장하기
@@ -65,6 +63,6 @@ public class CreateProblemController {
 		}
 		
 		System.out.println(pDTO);
-		response.sendRedirect("createProblem.co");
+		return "problem/createProblem";
 	}
 }

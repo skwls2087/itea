@@ -39,7 +39,7 @@
 		   var naverLogin = new naver.LoginWithNaverId(
 		      {
 		         clientId: "68tNfP0GUh1VB4b0suSF",
-		         callbackUrl: "http://localhost:8080/spring/callback.co",
+		         callbackUrl: "http://itealab.com/callback",
 		         isPopup: false,
 		         loginButton: {color: "green", type: 3, height: 60}
 		      }

@@ -124,8 +124,12 @@ public class ProblemDAO {
 		return qcnt;
 	}
 
-	public ArrayList<ProblemDTO> getcProblemList(ProblemDTO ProblemDTO) {
-			return  (ArrayList)session.selectList("problem.getcProblemList", ProblemDTO);
+	public ArrayList<ProblemDTO> myProblemList(ProblemDTO ProblemDTO) {
+			return  (ArrayList)session.selectList("problem.myProblemList", ProblemDTO);
+	}
+
+	public List<String> selectPnoCorrects(int pno) {
+		return session.selectList("problem.selectCorrectList",pno);
 	}
 		
 

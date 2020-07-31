@@ -112,25 +112,31 @@ public class ProblemController {
 		request.setAttribute("ckind", ckind);
 		
 	}
-	@RequestMapping("/cProblemList")
-	public ModelAndView cProblemList(@RequestParam(value="nowPage",
+	@RequestMapping("/myProblemList")
+	public ModelAndView myProblemList(@RequestParam(value="nowPage",
 				required=false,
 				defaultValue="1")  int  nowPage,HttpServletRequest request,HttpSession session,ModelAndView mv) {
+		
 		System.out.println("내가 낸 문제 list 진입");
 		PageUtil pInfo;
+		
+		//자격증 종류 보내기
+		List<licenseDTO> ckind=problemSV.selectCkind();
+		request.setAttribute("ckind", ckind);
+		
 		//회원 닉네임 받기
-		String mnick =(String) session.getAttribute("MNICK");
 		int mno=(Integer) session.getAttribute("MNO");
-				System.out.println("닉네임"+mnick);
-				System.out.println("mno"+mno);
-				ArrayList<ProblemDTO> list;
-				pInfo = problemSV.getPageInfo(nowPage,mno);
-				list= problemSV.getcProblemList(pInfo,mno);
-				
-				mv.addObject("PINFO",pInfo);//페이징관련 정보
-				mv.addObject("LIST",list);
-				mv.setViewName("problem/cProblemList");
-				
-				return mv;
+		
+		System.out.println("mno"+mno);
+		ArrayList<ProblemDTO> list;
+		
+		pInfo = problemSV.getPageInfo(nowPage,mno);
+		list= problemSV.myProblemList(pInfo,mno);
+		
+		mv.addObject("PINFO",pInfo);//페이징관련 정보
+		mv.addObject("LIST",list);
+		mv.setViewName("problem/myProblemList");
+		
+		return mv;
 	}
 }

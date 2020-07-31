@@ -111,11 +111,11 @@ public class ProblemService {
 
 	public PageUtil getPageInfo(int nowPage, int mno) {
 		int totalCount= problemDAO.getmyTotalCnt(mno);
-		PageUtil pInfo = new PageUtil(nowPage, totalCount,4,5);
+		PageUtil pInfo = new PageUtil(nowPage, totalCount,10,5);
 		return pInfo;  
 	}
 
-	public ArrayList<ProblemDTO> getcProblemList(PageUtil pInfo, int mno) {
+	public ArrayList<ProblemDTO> myProblemList(PageUtil pInfo, int mno) {
 			int start= 
 				(pInfo.getNowPage()-1)*pInfo.getLineCount()+1;
 			int end  = start+pInfo.getLineCount()-1;
@@ -124,8 +124,12 @@ public class ProblemService {
 			ProblemDTO.setEnd(end);
 			ProblemDTO.setLogno(mno);
 			
-			ArrayList<ProblemDTO> list = problemDAO.getcProblemList(ProblemDTO);
+			ArrayList<ProblemDTO> list = problemDAO.myProblemList(ProblemDTO);
 			return list;
+	}
+
+	public List<String> selectPnoCorrects(int pno) {
+		return problemDAO.selectPnoCorrects(pno);
 	}
 	  
 	
