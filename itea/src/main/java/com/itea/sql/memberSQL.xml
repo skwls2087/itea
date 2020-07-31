@@ -70,8 +70,8 @@
 		set	mphone	= #{mphone},
 				mgradu	= #{mgradu},
 		      mpw = case when mclass=1 then #{mpw} end, 
-		      mnickdate = case when (SELECT DATEDIFF(now(), mnickdate)>30 FROM member WHERE mno= #{mno})=1 then now() else mnickdate end,
-		      mnick = case when (SELECT DATEDIFF(now(), mnickdate)>30 FROM member WHERE mno= #{mno})=1  then #{mnick} else mnick end	
+		      mnickdate = case when (SELECT DATEDIFF(now(), mnickdate)>30 FROM member WHERE mno= #{mno}=1 then now() else mnickdate end,
+		      mnick = case when ((SELECT DATEDIFF(now(), mnickdate)>30 FROM member WHERE mno= #{mno})=1  then #{mnick} else mnick end	
 		where mno=  #{mno};
 		</update>
 	<!-- 회원탈퇴하기 -->	
