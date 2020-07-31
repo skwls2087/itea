@@ -36,16 +36,18 @@
 		select count(*) from problem where mno=#{mno}
 	</select>
 	<!-- 해당 페이지에 맞는 내가 선택한 질문리스트 구하기 -->
-	<select id="getcProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
-		SELECT p.pno, p.lqno,l.lqclass,m.mno, p.ptype,p.pcomment,p.pcorrect,p.psolve,p.plike,p.phate
+	<select id="myProblemList" parameterType="int" resultType="ProblemDTO">
+	  SELECT p.pno, p.lqno,lc.lqclass,m.mno, p.ptype,p.plike,p.phate,p.pdetail,l.lname
 		FROM problem AS p
 		JOIN member AS m
 		ON p.mno=m.mno
-		join licenseclass as l
-		on p.lqno=l.lqno
+		join licenseclass as lc
+		on p.lqno=lc.lqno
+		join license as l
+		on lc.lno=l.lno
 		WHERE m.mno=#{logno}
 		ORDER BY p.pno desc
-	<!-- 	limit #{start}, #{size} -->
+		limit #{start}, #{size} 
 	</select>
 	<!-- 문제 입력 -->
 	<insert id="insertProblem" parameterType="problemDTO">

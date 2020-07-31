@@ -153,12 +153,30 @@ public class SolveProblemController {
 		
 		int isScrap=problemSV.pScrap(map);
 		
-		pnoList.remove(0);
-		request.setAttribute("pnoList", pnoList); //문제번호리스트 보내기
 		request.setAttribute("problem", problemInfo); //1번 문제 보내기
 		request.setAttribute("interest", isScrap); //즐겨찾기 여부 보내기
 		
-		return pnoList.size();
+		if(pnoList==null) {
+			pnoList.remove(0);
+			request.setAttribute("pnoList", pnoList); //문제번호리스트 보내기
+			return pnoList.size();
+		}
+		
+		return 0;
+	}
+	
+	//선택한 문제 하나만 풀기
+	@RequestMapping("/selectMyProblem")
+	public String selectMyProblem(HttpServletRequest request,HttpSession session) {
+		
+		System.out.println("문제 하나만 출력");
+		
+		int pno=Integer.parseInt(request.getParameter("pno"));
+		int mno=(int)session.getAttribute("MNO");
+		
+		problemLogic(pno,mno,null,request);
+		
+		return "problem/problemProc";
 	}
 	
 	//문제를 풀면 정답률에 반영하기

@@ -32,6 +32,10 @@ public class ProblemDTO {
 	private int		nowPage;	//보고싶은페이지
 	private int 	size=10;
 	
+	//현재 로그인 한 회원번호		
+	private int logno; 
+	
+	private String lname;
 	
 	//시험 유형 
 	public String getLqclass() {
@@ -40,10 +44,13 @@ public class ProblemDTO {
 	public void setLqclass(String lqclass) {
 		this.lqclass = lqclass;
 	}
-
-
-	//현재 로그인 한 회원번호		
-	private int logno; 
+	
+	public String getLname() {
+		return lname;
+	}
+	public void setLname(String lname) {
+		this.lname = lname;
+	}
 	//페이지 관련
 	public int getStart() {
 		return start;
@@ -241,14 +248,16 @@ public class ProblemDTO {
 	public void setPyearList(int[] pyearList) {
 		this.pyearList = pyearList;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "ProblemDTO [pno=" + pno + ", mno=" + mno + ", mnick=" + mnick + ", lqno=" + lqno + ", pyear=" + pyear
 				+ ", ptype=" + ptype + ", pdetail=" + pdetail + ", pcomment=" + pcomment + ", plike=" + plike
 				+ ", phate=" + phate + ", psolve=" + psolve + ", pcorrect=" + pcorrect + ", file=" + file + ", pimg="
-				+ pimg + ", choice=" + Arrays.toString(choice) + ", correct=" + correct + ", correctList="
-				+ Arrays.toString(correctList) + ", pyearList=" + Arrays.toString(pyearList) + "]";
+				+ pimg + ", lqclass=" + lqclass + ", start=" + start + ", end=" + end + ", nowPage=" + nowPage
+				+ ", size=" + size + ", logno=" + logno + ", lname=" + lname + ", choice=" + Arrays.toString(choice)
+				+ ", correct=" + correct + ", correctList=" + Arrays.toString(correctList) + ", pyearList="
+				+ Arrays.toString(pyearList) + "]";
 	}
 
 }

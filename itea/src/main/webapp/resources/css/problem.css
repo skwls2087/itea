@@ -260,3 +260,7 @@ textarea{
 	text-align:center;
 	display:inline-block;
 }
+.problemList{
+	width:80%;
+	margin:20px auto;
+}

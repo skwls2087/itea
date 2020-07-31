@@ -63,6 +63,6 @@ public class CreateProblemController {
 		}
 		
 		System.out.println(pDTO);
-		return "problem/problemMain";
+		return "problem/createProblem";
 	}
 }

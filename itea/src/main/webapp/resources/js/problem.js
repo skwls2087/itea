@@ -3,7 +3,7 @@ $(function(){
 	$('#ctype-select').css('display','none');
 	
 	var c
-
+	
 	$("#Ckind option:eq(0)").attr("selected", "selected");
 
 	//회원이 질문 등록할 때
@@ -283,7 +283,7 @@ $(function(){
 		$("#solveChoice3").addClass('wrong');
 	});
 	
-	//채점하기 눌렀을 때
+	//객관식-채점하기 눌렀을 때
 	$("#problemScoring").click(function(){
 		
 		//정답번호와 선택한 번호를 가져오기
@@ -314,6 +314,68 @@ $(function(){
 			dataType:"json",
 			success : function(data) {					
 				
+			}
+		})
+	});
+	
+	//주관식 채점하기 눌렀을 때
+	$("#problemShortScoring").click(function(){
+
+		//정답번호와 선택한 번호를 가져오기
+		correct=$("#shortText").val();
+		pno=$("#problemPNO").html();
+
+		//정답을 입력했는지 확인
+		if(correct==""){
+			alert("정답을 작성해주세요.")
+			return false;
+		}
+			
+		//해당 문제의 정답률에 반영
+		$.ajax({
+			url : 'problemShortScore.co?pno='+ pno+'&correct='+correct ,
+			type : 'post',
+			contentType:"application/json; charset=utf-8;",
+			dataType:"json",
+			success : function(data) {	
+				if(data==0){
+					$("#problem-wrong").css('display','')
+					$("#problemShortScoring").css('display','none')
+				}else{
+					$("#problem-correct").css('display','')
+					$("#problemShortScoring").css('display','none')
+				}
+			}
+		})
+	});
+	
+	//서술형 채점하기 눌렀을 때
+	$("#problemEssayScoring").click(function(){
+
+		//정답번호와 선택한 번호를 가져오기
+		correct=$("#shortText").val();
+		pno=$("#problemPNO").html();
+
+		//정답을 입력했는지 확인
+		if(correct==""){
+			alert("정답을 작성해주세요")
+			return false;
+		}
+			
+		//해당 문제의 정답률에 반영
+		$.ajax({
+			url : 'problemEssayScore.co?pno='+ pno+'&correct='+correct ,
+			type : 'post',
+			contentType:"application/json; charset=utf-8;",
+			dataType:"json",
+			success : function(data) {	
+				if(data==0){
+					$("#problem-wrong").css('display','')
+					$("#problemEssayScoring").css('display','none')
+				}else{
+					$("#problem-correct").css('display','')
+					$("#problemEssayScoring").css('display','none')
+				}
 			}
 		})
 	});
