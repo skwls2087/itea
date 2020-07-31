@@ -57,21 +57,18 @@
 	<!--회원정보 수정--> 
 		<update id="modify" parameterType="memberDTO" >
 		<!-- update member
-		set		mnick		= #{mnick},
-				mphone	= #{mphone},
-				mgradu	= #{mgradu},
-				mnickdate = CURDATE(),
-		      mpw = case when mclass=1 then #{mpw}
-		      mnickdate = case when ((select TIMESTAMPDIFF(DAY,mnickdate,CURDATE())) >=30) then CURDATE()
-		      mnick = case when ((select TIMESTAMPDIFF(DAY,mnickdate,CURDATE())) >=30)  then #{mnick}
-				end	
-		where mno=  #{mno}; -->
-		 update member
 		set	mphone	= #{mphone},
 				mgradu	= #{mgradu},
 		      mpw = case when mclass=1 then #{mpw} end, 
-		      mnickdate = case when (SELECT DATEDIFF(now(), mnickdate)>30 FROM member WHERE mno= #{mno}=1 then now() else mnickdate end,
-		      mnick = case when ((SELECT DATEDIFF(now(), mnickdate)>30 FROM member WHERE mno= #{mno})=1  then #{mnick} else mnick end	
+		      mnickdate = case when (SELECT DATEDIFF(CURDATE(), mnickdate)>30 FROM member WHERE mno= #{mno})=1 then CURDATE() else mnickdate end,
+		      mnick = case when (SELECT DATEDIFF(CURDATE(), mnickdate)>30 FROM member WHERE mno= #{mno})=1  then #{mnick} else mnick end	
+		where mno=  #{mno}; -->
+		 update member 
+		set	mphone	= #{mphone},
+				mgradu	= #{mgradu},
+		      mpw = case when mclass=1 then #{mpw} end, 
+		      mnickdate = case when  (SELECT * FROM (SELECT DATEDIFF(now(),m.mnickdate)>30 FROM member as m WHERE mno= #{mno}) _dummy)=1 then now() else mnickdate end,
+		      mnick = case when  (SELECT * FROM (SELECT DATEDIFF(now(),m.mnickdate)>30 FROM member as m WHERE mno= #{mno}) _dummy)=1  then #{mnick} else mnick end	
 		where mno=  #{mno};
 		</update>
 	<!-- 회원탈퇴하기 -->	
