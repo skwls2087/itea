@@ -27,7 +27,7 @@ public class GoogleCalendarAjaxController {
 	private Logger logger = LoggerFactory.getLogger(GoogleCalendarAjaxController.class);
 	
 	//달력 일정 데이터 처리
-	@RequestMapping(value="GoogleCalendarEventList.co", method=RequestMethod.POST)
+	@RequestMapping(value="/GoogleCalendarEventList", method=RequestMethod.POST)
 	public List<Event> GoogleCalendarEventList(GoogleCalendarDTO calDto) {
 		logger.info("GoogleCalendarEventList" + calDto.toString());
 		
@@ -49,7 +49,7 @@ public class GoogleCalendarAjaxController {
 		
 		
 	//달력 일정 저장 처리	
-	@RequestMapping(value="/GoogleCalendarEventAdd.co", method=RequestMethod.POST)
+	@RequestMapping(value="/GoogleCalendarEventAdd", method=RequestMethod.POST)
     public Map<String, Boolean> GoogleCalendarEventAdd(GoogleCalendarDTO calDto) {
 
         logger.info("GoogleCalendarEventAdd" + calDto.toString());
@@ -114,7 +114,7 @@ public class GoogleCalendarAjaxController {
 	}
 	
 	//달력 일정 삭제
-	@RequestMapping(value="/GoogleCalendarEventDeleteOne.co", method=RequestMethod.POST)
+	@RequestMapping(value="/GoogleCalendarEventDeleteOne", method=RequestMethod.POST)
 	public Map<String, Boolean> GoogleCalendarEventDeleteOne(GoogleCalendarDTO calDto) {
 		logger.info("GoogleCalendarEventDeleteOne" + calDto.toString());
 		

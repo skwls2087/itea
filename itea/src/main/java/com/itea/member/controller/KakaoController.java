@@ -25,7 +25,7 @@ public class KakaoController {
 	private final static String K_CLIENT_ID    = "dddf9e1f05cdd30409acd606d146afe9";
 	
 	//KAKAO API Redirect URI	
-	private final static String K_REDIRECT_URI = "http://localhost:8080/spring/member/login/kakaologin.co";
+	private final static String K_REDIRECT_URI = "http://localhost:8080/spring";
 	
 	public static String getAuthiruzationURI(HttpSession session) {
 		String kakaoUrl 
@@ -44,7 +44,7 @@ public class KakaoController {
 		//KAKAO REST API KEY
 		postParams.add(new BasicNameValuePair("client_id", "dddf9e1f05cdd30409acd606d146afe9"));
 		//KAKAO API Redirect URI	
-		postParams.add(new BasicNameValuePair("redirect_uri", "http://localhost:8080/spring/member/login/kakaologin.co"));
+		postParams.add(new BasicNameValuePair("redirect_uri", "http://localhost:8080/spring"));
 		//Login 중 받은 code값.
 		postParams.add(new BasicNameValuePair("code", autorize_code));
 		
