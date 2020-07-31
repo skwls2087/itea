@@ -81,17 +81,23 @@ public class AdminService<Hashmap> {
 		ArrayList visitor= adminDAO.WeekVisitor(vo);
 		ArrayList list = new ArrayList();
 		ArrayList cntList = new ArrayList();
+		System.out.println("service visitor "+visitor);
 		
 		int sum = adminDAO.getVisitTotalCount();
 		
 		for(int i=0;i<visitor.size();i++) {
 			if(i!=0) {
 				int cntstr = (int) visitor.get(i);
-				//System.out.println("service cntstr "+cntstr);
-				//System.out.println("service visitor "+(int) visitor.get(i));
-				sum = sum-cntstr;
+				System.out.println("service cntstr "+cntstr);
+				if(cntstr==0) {
+					sum=0;
+					System.out.println("service sum "+sum);
+				}else {
+					sum = sum-cntstr;
+				}
 			}
 			list.add(sum);
+			System.out.println("service list "+list);
 		}
 			for(int i=0;i<7;i++) {
 				int weekNum=today.get(Calendar.DAY_OF_WEEK)-i; //오늘부터 7일전까지의 요일 구하기
@@ -125,27 +131,22 @@ public class AdminService<Hashmap> {
 	//member 통계데이터 구하는 메서드	
 	public ArrayList WeekMember(MemberDTO mdto) throws Exception {
 		Calendar today = Calendar.getInstance();
-		java.util.Date today1 = today.getTime();
 		ArrayList member= adminDAO.WeekMember(mdto);
 		ArrayList list = new ArrayList();
 		ArrayList cntList = new ArrayList();
 		
-		Calendar cal = Calendar.getInstance();
-		cal.add(Calendar.DAY_OF_MONTH, -6);
-		java.util.Date date = cal.getTime();
-		//date가 일주일전 Date 객체 입니다.
-		String weekago = new SimpleDateFormat("yyyy-MM-dd").format(date);
-		System.out.println(weekago);
-		
 		int sum = adminDAO.totalCount();
-		System.out.println(sum);
+		//System.out.println(sum);
 		
 		for(int i=0;i<member.size();i++) {
 			if(i!=0) {
 				int cntstr = (int) member.get(i);
-				//System.out.println("service cntstr "+cntstr);
-				//System.out.println("service member "+(int) member.get(i-1));
-				sum = sum-cntstr;
+				if(cntstr==0) {
+					sum=0;
+					System.out.println("service sum "+sum);
+				}else {
+					sum = sum-cntstr;
+				}
 			}
 			list.add(sum);
 		}
