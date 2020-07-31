@@ -16,7 +16,7 @@
 		(SELECT ano,atitle,lc.lno,ap.pno,lc.lqno,adate,ahit FROM
 		(SELECT askboard.pno,ano, problem.lqno, atitle, adate, ahit FROM 
 				askboard JOIN problem ON askboard.pno=problem.pno) ap
-		JOIN licenseClass lc ON ap.lqno=lc.lqno) aplc
+		JOIN licenseclass lc ON ap.lqno=lc.lqno) aplc
 		JOIN license l ON aplc.lno=l.lno)k
 		join
 		(SELECT ano, a.mno, m.mnick from
@@ -34,7 +34,7 @@
 		(SELECT ano,atitle,lc.lno,ap.pno,lc.lqno,adate,ahit FROM
 		(SELECT askboard.pno,ano, problem.lqno, atitle, adate, ahit FROM 
 				askboard JOIN problem ON askboard.pno=problem.pno) ap
-		JOIN licenseClass lc ON ap.lqno=lc.lqno) aplc
+		JOIN licenseclass lc ON ap.lqno=lc.lqno) aplc
 		JOIN license l ON aplc.lno=l.lno)k
 		join
 		(SELECT ano, a.mno, m.mnick from
@@ -53,7 +53,7 @@
 		(SELECT ano,atitle,lc.lno,ap.pno,lc.lqno,adate,ahit FROM
 		(SELECT askboard.pno,ano, problem.lqno, atitle, adate, ahit FROM 
 				askboard JOIN problem ON askboard.pno=problem.pno) ap
-		JOIN licenseClass lc ON ap.lqno=lc.lqno) aplc
+		JOIN licenseclass lc ON ap.lqno=lc.lqno) aplc
 		JOIN license l ON aplc.lno=l.lno)k
 		join
 		(SELECT ano, a.mno, m.mnick from
@@ -141,7 +141,7 @@
 		(SELECT ano,atitle,lc.lno,ap.pno,lc.lqno,adate,ahit FROM
 		(SELECT askboard.pno,ano, problem.lqno, atitle, adate, ahit FROM 
 				askboard JOIN problem ON askboard.pno=problem.pno) ap
-		JOIN licenseClass lc ON ap.lqno=lc.lqno) aplc
+		JOIN licenseclass lc ON ap.lqno=lc.lqno) aplc
 		JOIN license l ON aplc.lno=l.lno)k
 		join
 		(SELECT ano, a.mno, m.mnick from
