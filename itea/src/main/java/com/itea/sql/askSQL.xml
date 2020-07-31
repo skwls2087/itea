@@ -110,14 +110,14 @@
 	
 	<!-- 댓글 삽입 -->
 	<insert id="askReplyInsert">
-		insert into askcoment(ano,mno,accontent,acdepth,acorder)
-		values(#{ano},#{mno},#{accontent},#{acdepth},1)
+		insert into askcoment(ano,mno,accontent,acdepth,acorder,acdate)
+		values(#{ano},#{mno},#{accontent},#{acdepth},1,now())
 	</insert>
 	
 	<!-- 대댓글 삽입 -->
 	<insert id="askcoReplyInsert">
-		insert into askcoment(ano,mno,accontent,acparent,acdepth,acorder)
-		values(#{ano},#{mno},#{accontent},#{acparent},#{acdepth},(select acorder from askcoment a where acno=#{acparent} order by acno desc limit 1)+1)
+		insert into askcoment(ano,mno,accontent,acparent,acdepth,acorder,acdate)
+		values(#{ano},#{mno},#{accontent},#{acparent},#{acdepth},(select acorder from askcoment a where acno=#{acparent} order by acno desc limit 1)+1,now())
 	
 	</insert>
 	
