@@ -1,31 +1,27 @@
 package com.itea.admin.service;
 
 import java.sql.Date;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.itea.dao.adminDAO;
 import com.itea.dto.MemberDTO;
+import com.itea.dto.Statistics;
 import com.itea.util.PageUtil;
-import com.itea.util.Statistics;
 import com.itea.util.Visitor;
-
-
 
 public class AdminService<Hashmap> {
 	
 	@Autowired
 	adminDAO adminDAO;
 	
-	//today,total 통계데이터 구하는 메서드
-	public Statistics staticService(MemberDTO mdto) throws Exception {
-		Statistics memberStatistics= new Statistics();
+	/*today,total 통계데이터 구하는 메서드
+	public Statistics1 staticService(MemberDTO mdto) throws Exception {
+		Statistics1 memberStatistics= new Statistics1();
 		ArrayList<MemberDTO> member=new ArrayList<MemberDTO>();
 
 		int totalMember=adminDAO.totalCount();
@@ -44,7 +40,7 @@ public class AdminService<Hashmap> {
 		System.out.println("service todaymember "+todayMember);
 		memberStatistics.setTotalMember(totalMember);
 		return memberStatistics;
-	}
+	}*/
 	
 	//방문자수 추가
 	public void setVisitTotalCount(Visitor vo) throws Exception {
@@ -121,7 +117,7 @@ public class AdminService<Hashmap> {
 				cntList.add(new Visitor(week,vscount));
 			}
 			Collections.reverse(cntList); //리스트 순서를 반대로
-			System.out.println("service"+cntList);
+			//System.out.println("service"+cntList);
 		return cntList;
 	}	
 	
@@ -129,11 +125,20 @@ public class AdminService<Hashmap> {
 	//member 통계데이터 구하는 메서드	
 	public ArrayList WeekMember(MemberDTO mdto) throws Exception {
 		Calendar today = Calendar.getInstance();
+		java.util.Date today1 = today.getTime();
 		ArrayList member= adminDAO.WeekMember(mdto);
 		ArrayList list = new ArrayList();
 		ArrayList cntList = new ArrayList();
 		
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DAY_OF_MONTH, -6);
+		java.util.Date date = cal.getTime();
+		//date가 일주일전 Date 객체 입니다.
+		String weekago = new SimpleDateFormat("yyyy-MM-dd").format(date);
+		System.out.println(weekago);
+		
 		int sum = adminDAO.totalCount();
+		System.out.println(sum);
 		
 		for(int i=0;i<member.size();i++) {
 			if(i!=0) {
@@ -144,8 +149,9 @@ public class AdminService<Hashmap> {
 			}
 			list.add(sum);
 		}
+		
 			for(int i=0;i<7;i++) {
-				//HashMap<String,Integer> map = new HashMap<String,Integer>();
+				//map = new HashMap<String,Integer>();
 				int weekNum=today.get(Calendar.DAY_OF_WEEK)-i; //오늘부터 7일전까지의 요일 구하기
 				String week="";
 				if(weekNum==1 || weekNum==-6 ) {
@@ -172,8 +178,8 @@ public class AdminService<Hashmap> {
 				mdto.setWeekCnt(weekCnt);
 				cntList.add(new MemberDTO(week,weekCnt));
 			}
-			Collections.reverse(cntList); //리스트 순서를 반대로
-			//System.out.println("service"+cntList);
+		Collections.reverse(cntList); //리스트 순서를 반대로
+		//System.out.println("service"+cntList);
 		return cntList;
 	}
 	

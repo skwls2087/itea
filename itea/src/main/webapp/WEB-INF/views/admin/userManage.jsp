@@ -39,6 +39,12 @@ $( document ).ready(function() {
 				
     var options = {
     	legend:'none',
+    	vAxis:{
+    		format:'#',
+    		viewWindow:{
+    			min:0
+    		}
+    	},
       lineWidth: 2,
       series: {
     	  legend:{position: 'none'},

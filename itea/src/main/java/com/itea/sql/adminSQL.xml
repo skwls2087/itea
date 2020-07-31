@@ -28,10 +28,13 @@
 
 	<!-- 한 주간 방문자 수 검색-->
 	<select id="WeekVisitor" resultType="int">
-		select vscount
-		from visitor 
-		group by vsdate
-		desc limit 7
+		SELECT IFNULL(vscount,0)+z AS weekCnt FROM  
+			(select DATE_sub(CURDATE(),INTERVAL a DAY) AS vsdate, 0 as z  FROM 
+			(SELECT 0 AS a UNION ALL SELECT 1 AS a UNION ALL SELECT 2 AS a UNION all SELECT 3 AS a 
+		 UNION all SELECT 4 AS a UNION all SELECT 5 AS a UNION all SELECT 6 AS a ) AS b) AS c
+		LEFT outer JOIN
+			(SELECT vsdate,vscount FROM visitor group BY vsdate) AS d 
+			on c.vsdate=d.vsdate		
 	</select>
 
 	<!-- 전체회원 수 조회-->
@@ -43,11 +46,13 @@
 
 	<!-- 한 주간 가입자 수 검색-->
 	<select id="WeekMember" resultType="int">
-		select count(*) as weekCnt
-		from member 
-		where mnick!='관리자'
-		group by mdate
-		desc limit 7
+		SELECT IFNULL(cnt,0)+z AS weekCnt FROM  
+		(select DATE_sub(CURDATE(),INTERVAL a DAY) AS mdate, 0 as z  FROM 
+		(SELECT 0 AS a UNION ALL SELECT 1 AS a UNION ALL SELECT 2 AS a UNION all SELECT 3 AS a 
+	 	UNION all SELECT 4 AS a UNION all SELECT 5 AS a UNION all SELECT 6 AS a ) AS b) AS c
+		LEFT outer JOIN
+		(SELECT mdate,COUNT(*) cnt FROM member where mnick!='관리자' group BY mdate) AS d 
+		on c.mdate=d.mdate	
 	</select>
 	
 	<!-- 하루 가입자 수 검색-->

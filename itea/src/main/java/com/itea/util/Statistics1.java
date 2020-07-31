@@ -1,7 +1,7 @@
 package com.itea.util;
 
 //통계자료를 담아 뷰단으로 넘겨주는 객체를 생성하기위해 VO클래스생성
-public class Statistics {
+public class Statistics1 {
 	
 	private int todayMember;
 	private int todayPost;
