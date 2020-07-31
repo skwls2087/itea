@@ -51,7 +51,7 @@ public class licenseDAO {
 	public void modify(licenseDTO lDto) {
 		session.update("license.modify",lDto);	
 
-		session.delete("license.deleteClass",lDto.getLno());
+		/*session.delete("license.deleteClass",lDto.getLno());
 		if(Integer.parseInt(lDto.getLqclass())==1) {
 		session.insert("license.insertProc1",lDto);
 		session.insert("license.insertProc2",lDto);
@@ -60,7 +60,7 @@ public class licenseDAO {
 		session.insert("license.insertProc4",lDto);
 		}else {
 		session.insert("license.insertProc5",lDto);	
-
+*/
 		/*lqno를  불러오는 select 문 만들어서 따로 lqno로 set하기*/
 //		List<String> lqnoList=session.selectList("license.selectLqno",lDto);
 //		/*System.out.println("naii###########"+lqnoList);*/
@@ -80,7 +80,7 @@ public class licenseDAO {
 //		session.insert("license.insertProc5",lDto);//단독	
 
 		}
-	}
+	
 
 
 	public void delete(int lno) {
