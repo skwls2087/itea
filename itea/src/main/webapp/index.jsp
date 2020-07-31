@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
       {
          googleCalendarId: 'bockikpkbi8al3sq8u5c74ik6c@group.calendar.google.com',
          className: '네트워크관리사',
-       	 color: '848ccf',
+       	 color: '#848ccf',
          //textColor: 'black' 
       },
       {
