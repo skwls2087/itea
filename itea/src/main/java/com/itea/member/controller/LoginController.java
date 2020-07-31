@@ -56,11 +56,11 @@ public class LoginController {
 	}
 	
 	//네이버로그인
-	@RequestMapping(value = "/callback")
+	/*@RequestMapping(value = "/callback")
 	public String loginPOSTNaver(HttpSession session) {
-		
+		System.out.println("네아로");
 		return "member/navercallback";
-	}
+	}*/
 	
 	//네아로-회원가입 여부 체크하기
 	@RequestMapping(value = "/joincheck")
