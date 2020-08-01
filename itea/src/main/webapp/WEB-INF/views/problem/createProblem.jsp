@@ -4,15 +4,6 @@
 <script src="${pageContext.request.contextPath}/resources/js/problem.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/problem.css">
 
-<script>
-
-window.addEventListener('popstate', function(event) {    //  뒤로가기 이벤트 등록
-	 alert("aa")
-   history.pushState(null, document.title, location.href);  // 다시 push함으로 뒤로가기 Block
-
-});
-</script>
-
 <div id="problem-create-container">
 	<div id="problem-create">
 	<form action="selectTest.co" method="post">
@@ -20,7 +11,7 @@ window.addEventListener('popstate', function(event) {    //  뒤로가기 이벤
 		<hr><br/>
 	    <div class="form-group">
 		    <select id="Ckind" name="lqno" class="custom-select">
-		      <option value="ss" selected="selected">자격증 종류</option>
+		      <option value="" selected="selected">자격증 종류</option>
 		      <c:forEach var="ckind" items="${ckind}">
 			      <option value="${ckind.lqno}">${ckind.lname}<c:if test="${ckind.lqclass!='단독'}">(${ckind.lqclass})</c:if></option>
 		      </c:forEach>

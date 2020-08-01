@@ -1,10 +1,7 @@
 $(function(){
 	
-	$('#ctype-select').css('display','none');
-	
+	//$('#ctype-select').css('display','none');
 	var c
-	
-	$("#Ckind option:eq(0)").attr("selected", "selected");
 
 	/*//회원이 질문 등록할 때
 	$("#Ckind").change(function(){
@@ -35,19 +32,15 @@ $(function(){
 	
 	$("#select-test-button").click(function(){
 		if($("#Ckind").val()==""){
-			alert("자격증 종류를 입력해주세요")
-			return false;
-		}
-		if($("#Ctype").val()==""){
-			alert("자격증 유형를 입력해주세요")
+			alert("자격증 종류를 선택해주세요")
 			return false;
 		}
 		if($("#Qtype").val()==""){
-			alert("출제 유형을 입력해주세요")
+			alert("출제 유형을 선택해주세요")
 			return false;
 		}
 		if($("#Qyear").val()==""){
-			alert("출제 년도를 입력해주세요")
+			alert("출제 년도를 선택해주세요")
 			return false;
 		}
 	});
@@ -224,6 +217,43 @@ $(function(){
 		}
 		
 	});
+	
+	$("#solveChoice1").mouseenter(function(){
+		$(this).css('color','red');
+	})
+	$("#solveChoice1").mouseleave(function(){
+
+		if($(this).attr('class')!='correct'){
+			$(this).css('color','black');
+		}
+	})
+	$("#solveChoice2").mouseenter(function(){
+		$(this).css('color','red');
+	})
+	$("#solveChoice2").mouseleave(function(){
+
+		if($(this).attr('class')!='correct'){
+			$(this).css('color','black');
+		}
+	})
+	$("#solveChoice3").mouseenter(function(){
+		$(this).css('color','red');
+	})
+	$("#solveChoice3").mouseleave(function(){
+
+		if($(this).attr('class')!='correct'){
+			$(this).css('color','black');
+		}
+	})
+	$("#solveChoice4").mouseenter(function(){
+		$(this).css('color','red');
+	})
+	$("#solveChoice4").mouseleave(function(){
+
+		if($(this).attr('class')!='correct'){
+			$(this).css('color','black');
+		}
+	})
 	
 	//선지를 눌렀을때 체크한거 표시하고 정답체크 class부여하기
 	$("#solveChoice1").click(function(){
@@ -482,10 +512,12 @@ $(function(){
 	$('#s-submit').click(function(){
 		
 		pno=$("#problemPNO").html();
-		
-		alert("신고합니다.");
 		error=$('#errorTextarea').val();
-		alert(error);
+		
+		if(error==""){
+			alert("신고 내용을 입력해주세요")
+			return false;
+		}
 		
 		$.ajax({
 			url : 'problemError.co?pno='+pno+'&econtent='+error,
@@ -493,12 +525,41 @@ $(function(){
 			contentType:"application/json; charset=utf-8;",
 			dataType:"json",
 			success : function(data) {	
-				alert("aaa")
 				$('.modal-backdrop').remove();
 				$("#e-Modal").hide();
 				$('#error').attr('src','../resources/img/errorhover.png');
 				$("#error").css('pointer-events','none')
+				$("#error-modal").attr('href','#')
 			}
 		});
+	});
+	
+	$('#a-submit').click(function(){
+		
+		pno=$("#problemPNO").html();
+		atitle=$("#atitle").val();
+		acontent=$('#acontent').val();
+		
+		if(atitle==""){
+			alert("제목을 입력해주세요")
+			return false;
+		}
+		if(acontent==""){
+			alert("내용을 입력해주세요")
+			return false;
+		}
+		
+		$.ajax({
+			url : 'aWriteProc.co?pno='+pno+'&atitle='+atitle+'&acontent='+acontent,
+			type : 'post',
+			contentType:"application/json; charset=utf-8;",
+			dataType:"json",
+			success : function(data) {	
+				$('.modal-backdrop').remove();
+				$("#ask-Modal").hide();
+				alert("질문이 등록되었습니다.")
+			}
+		});
+		
 	});
 });

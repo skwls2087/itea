@@ -1,32 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!-- js/css 참조 -->
-<script src="${pageContext.request.contextPath}/resources/js/problem.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/resources/js/problemList.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/problem.css">
 
-<div class="problemList">
+<div>
+	<div class="problemList">
     <p>내가 낸 문제 (List)</p>
-    <div>
+    <div class="ptype-search">
     <form name="problemSearch" id="problemSearch" method ="post" class="problemSearch" 
-			action="<%= request.getContextPath()%>/problem/myProblemList.co" onsubmit="return checkForm();">
-		<div class="form-group">
-	    <select id="selectKind" name="lno" class="custom-select" onChange="javascript:problemSearch.submit();">
+			action="<%= request.getContextPath()%>/problem/myProblemList.co">
+		<div>
+	    <select id="selectKind" name="lqno" class="custom-select" onChange="javascript:problemSearch.submit();">
 	      <option value="" selected="selected">자격증 종류</option>
 	      <c:forEach var="ckind" items="${ckind}">
-		      <option value="${ckind.lqno}" <c:if test="${selectKind == ckind.lqno}">selected='selected'</c:if>>${ckind.lname}
+		      <option value="${ckind.lqno}" <c:if test="${lqno == ckind.lqno}">selected='selected'</c:if>>${ckind.lname}
 		      <c:if test="${ckind.lqclass!='단독'}">(${ckind.lqclass})</c:if></option>
 	      </c:forEach>
 	    </select>
 	  </div>
 	  </form>
+  </div>
+	  <div class="pcontent-search">
+	  <form name="problemContentSearch" id="problemContentSearch"
+	  	action="<%= request.getContextPath()%>/problem/myProblemList.co" method ="post" onsubmit="return checkForm();">
+	  <select id="selectSearch" name="search" class="custom-select">
+	      <option value="pno" selected="selected">번호</option>
+	      <option value="pdetail" selected="">내용</option>
+	    </select>
+	  	<input type="text" name="scontent" class="form-control"/>
+	  	<input type="hidden" name="lqno" value="${lqno}"/>
+	  	<img src="${pageContext.request.contextPath}/resources/img/search.png" id="problemContentSearchClick" 
+	  		style="cursor:pointer" width="20" onclick="document.getElementById('problemContentSearch').submit();"/>
+	  </form>
+	  </div>
 	  
 	<table class="table" style="table-layout:fixed">
     <tr>
         <td width="5%">번호</td>
-        <td width="15%">자격증</td>
-        <td width="5%">유형</td>
-        <td width="10%">유형</td>
-        <td width="50%">문제</td>
+        <td width="20%">자격증</td>
+        <td width="40%">문제</td>
         <td width="10%">정답률</td>
         <td width="5%">
         	<img src="${pageContext.request.contextPath}/resources/img/like.png" width="20"/>
@@ -37,22 +50,17 @@
         <td width="5%">
         	<img src="${pageContext.request.contextPath}/resources/img/errorhover.png" width="25"/>
         </td>
+        <td width="5%"></td><td width="5%"></td>
     </tr>
-    <c:forEach items="${LIST}" var="list">
+    <c:forEach items="${LIST}" var="list" varStatus="status">
     <tr>
-        <td>${list.pno }</td>
-        <td style="white-space:nowrap">${list.lname }</td>
-        <td>${list.lqclass }</td>
         <td>
-        <c:if test="${list.ptype==1}">
-        	객관식
-        </c:if>
-        <c:if test="${list.ptype==2}">
-        	단답식
-        </c:if>
-        <c:if test="${list.ptype==3}">
-        	서술형
-        </c:if>
+        	<a href="${pageContext.request.contextPath}/ask/problemBoard.co?pno=${list.pno }" id="problem-board" target="_blank">
+        		${list.pno }
+       		</a>
+        </td>
+        <td>
+        ${list.lname}<c:if test="${list.lqclass!='단독'}">_${list.lqclass}</c:if>
         </td>
         <td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
         <a href="<%= request.getContextPath()%>/problem/selectMyProblem.co?pno=${list.pno}">Q.${list.pdetail }</a></td>
@@ -66,19 +74,27 @@
         <td>${list.plike}</td>
         <td>${list.phate}</td>
         <td>${list.perror}</td>
+        <td>
+     			<a>
+     			<img src="${pageContext.request.contextPath}/resources/img/edit.png" width="20"/></a>
+       	</td>
+        <td>
+     			<a href="problemDelete.co?pno=${list.pno}" onclick="alert('해당 문제가 삭제되었습니다.')">
+     			<img src="${pageContext.request.contextPath}/resources/img/trash.png" width="20"/></a>
+       	</td>
     </tr>
     </c:forEach>
     <!-- 페이징처리 -->
         
         <tr>
-				<td colspan="9">
+				<td colspan="8">
 				<div>
   				<ul class="pagination" id="q-paging">
   				
   				<!-- 이전페이지 -->
   				<c:if test="${PINFO.nowPage ne 1}">
   				  <li class="page-item">
-				      <a class="page-link" href="<%= request.getContextPath()%>/problem/myProblemList.co?nowPage=${PINFO.nowPage-5}&lno=${selectKind}">&laquo;</a>
+				      <a class="page-link" href="<%= request.getContextPath()%>/problem/myProblemList.co?nowPage=${PINFO.nowPage-5}&lqno=${selectKind}&search=${search}&scontent=${scontent}">&laquo;</a>
 				    </li>
 					</c:if>
 					<c:if test="${PINFO.nowPage eq 1}">
@@ -94,7 +110,7 @@
 						<c:if test="${PINFO.nowPage!=pg}">
 							<li id="q-nowpage" class="page-item">
 						</c:if>
-				      <a class="page-link" href="<%= request.getContextPath()%>/problem/myProblemList.co?nowPage=${pg}&lno=${selectKind}">${pg}</a>
+				      <a class="page-link" href="<%= request.getContextPath()%>/problem/myProblemList.co?nowPage=${pg}&lqno=${selectKind}&search=${search}&scontent=${scontent}">${pg}</a>
 				    </li>
 				    
 					</c:forEach>
@@ -102,7 +118,7 @@
 					<!-- 다음페이지 -->
 					<c:if test="${PINFO.nowPage ne PINFO.totalPage}">
 					<li class="page-item">
-				      <a class="page-link" href="<%= request.getContextPath()%>/problem/myProblemList.co?nowPage=${PINFO.nowPage+5}&lno=${selectKind}">&raquo;</a>
+				      <a class="page-link" href="<%= request.getContextPath()%>/problem/myProblemList.co?nowPage=${PINFO.nowPage+5}&lqno=${selectKind}&search=${search}&scontent=${scontent}">&raquo;</a>
 				    </li>
 					</c:if>
 					<c:if test="${PINFO.nowPage eq PINFO.totalPage}">

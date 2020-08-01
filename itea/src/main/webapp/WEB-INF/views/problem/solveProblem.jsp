@@ -10,7 +10,7 @@
 		<span id="problem-header">시험 선택</span><br/><br/>
 		<hr><br/>
 	    <div class="form-group">
-		    <select id="Ckind" name="Ckind" class="custom-select">
+		    <select id="Ckind" name="lqno" class="custom-select">
 		      <option value="" selected="">자격증 종류</option>
 		      <c:forEach var="ckind" items="${ckind}">
 			      <option value="${ckind.lqno}">${ckind.lname}<c:if test="${ckind.lqclass!='단독'}">(${ckind.lqclass})</c:if></option>

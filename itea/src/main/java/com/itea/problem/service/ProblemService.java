@@ -112,29 +112,32 @@ public class ProblemService {
 	public PageUtil getPageInfo(int nowPage, HashMap cert) {
 		int totalCount= problemDAO.getmyTotalCnt(cert);
 		PageUtil pInfo = new PageUtil(nowPage, totalCount,10,5);
-		return pInfo;  
+		System.out.println(pInfo);
+		return pInfo;
 	}
 
 	public ArrayList<ProblemDTO> myProblemList(PageUtil pInfo, HashMap cert) {
 		
+		
 			int start= (pInfo.getNowPage()-1)*pInfo.getLineCount()+1;
 			int end  = start+pInfo.getLineCount()-1;
 			
-			int mno=(int) cert.get("mno");
-			int lqno=(int) cert.get("selectKind");
-			
 			ProblemDTO ProblemDTO = new ProblemDTO();
-			ProblemDTO.setStart(start-1);
-			ProblemDTO.setEnd(end);
-			ProblemDTO.setLogno(mno);
-			ProblemDTO.setLqno(lqno);
 			
-			ArrayList<ProblemDTO> list = problemDAO.myProblemList(ProblemDTO);
+			cert.put("start", start);
+			cert.put("size", ProblemDTO.getSize());
+			
+			ArrayList<ProblemDTO> list = problemDAO.myProblemList(cert);
 			return list;
 	}
 
 	public List<String> selectPnoCorrects(int pno) {
 		return problemDAO.selectPnoCorrects(pno);
+	}
+
+	//문제 삭제
+	public void deleteProblem(int pno) {
+		problemDAO.deleteProblem(pno);
 	}
 	  
 	

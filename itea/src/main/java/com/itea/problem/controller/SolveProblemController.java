@@ -14,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.itea.ask.service.AskService;
+import com.itea.dto.AskDTO;
 import com.itea.dto.ProblemDTO;
 import com.itea.problem.service.ProblemService;
 
@@ -23,6 +25,9 @@ public class SolveProblemController {
 	
 	@Autowired
 	ProblemService problemSV;
+	
+	@Autowired
+	AskService askSV;
 	
 	//문제 풀기
 	@RequestMapping("/selectForTest")
@@ -34,16 +39,17 @@ public class SolveProblemController {
 		
 		int mno=(int)session.getAttribute("MNO");
 		
-		//자격증,출제 유형및 종류 파라미터로 받기
-		String ckind=request.getParameter("Ckind");
-		String ctype=request.getParameter("Ctype");
+		//출제자 선택
 		String qtype=request.getParameter("Qtype");
-		//선택한 연도 목록 불러오기
+		
+		//선택한 연도 목록&lqno 불러오기
 		int[] qyear=pDTO.getPyearList();
+		int lqno=pDTO.getLqno();
+		
+		System.out.println("컨"+pDTO);
 		
 		HashMap tinfo=new HashMap();
-		tinfo.put("ckind", ckind); //자격증 종류
-		tinfo.put("ctype", ctype); //자격증 유형
+		tinfo.put("lqno", lqno); //자격증 종류
 		tinfo.put("qtype", qtype); //출제유형
 		tinfo.put("qyear", qyear); //출제년도
 		
@@ -255,5 +261,21 @@ public class SolveProblemController {
 		problemSV.problemError(map);
 		
 		return 1;
+	}
+	
+	//문제 질문하기
+	@RequestMapping("/aWriteProc")
+	@ResponseBody
+	public int aWriteProc(HttpServletRequest request,HttpSession session) {
+		
+		String atitle=request.getParameter("atitle");
+		String acontent=request.getParameter("acontent");
+		int pno=Integer.parseInt(request.getParameter("pno"));
+		
+		int mno=(Integer)session.getAttribute("MNO");
+		AskDTO askDTO= new AskDTO(mno,pno,atitle,acontent);
+		askSV.aWriteProc(askDTO);
+		
+		return 0;
 	}
 }

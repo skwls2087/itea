@@ -52,6 +52,7 @@ public class ProblemDAO {
 	}
 
 	public void insertEssay(ProblemDTO pDTO) {
+		System.out.println("DAO에서의 디티오"+pDTO);
 		session.insert("problem.insertProblem",pDTO);
 		int pno= session.selectOne("problem.selectPno");
 		pDTO.setPno(pno);
@@ -60,6 +61,7 @@ public class ProblemDAO {
 	}
 
 	public List<String> selectPnoList(HashMap tinfo) {
+		System.out.println("tinfo="+tinfo);
 		return session.selectList("problem.selectPnoList",tinfo);
 	}
 	public ProblemDTO problemInfo(int pno) {
@@ -125,29 +127,67 @@ public class ProblemDAO {
 		
 		int selectKind=(int) cert.get("selectKind");
 		int mno=(int) cert.get("mno");
+		String search=(String) cert.get("search");
+		String scontent=(String) cert.get("scontent");
 		
 		if(selectKind==0) {
-			qcnt=session.selectOne("problem.cProblemListCnt",mno);
+			if(search.equals("")) {
+				qcnt=session.selectOne("problem.cProblemListCnt",mno);
+			}else {
+				if(search.equals("pno")) {
+					qcnt=session.selectOne("problem.pnosearchedProblemListCnt",cert);
+				}else {
+					qcnt=session.selectOne("problem.pdetailsearchedProblemListCnt",cert);
+				}
+			}
 		}else {
-			qcnt=session.selectOne("problem.selectedProblemListCnt",cert);
+			if(search.equals("")) {
+				qcnt=session.selectOne("problem.selectedProblemListCnt",cert);
+			}else {
+				if(search.equals("pno")) {
+					qcnt=session.selectOne("problem.pnoselectedSearchProblemListCnt",cert);
+				}else {
+					qcnt=session.selectOne("problem.pdetailselectedSearchProblemListCnt",cert);
+				}
+			}
 		}
 		return qcnt;
 	}
 
-	public ArrayList<ProblemDTO> myProblemList(ProblemDTO ProblemDTO) {
+	public ArrayList<ProblemDTO> myProblemList(HashMap cert) {
 		
-		int lqno=ProblemDTO.getLqno();
-		System.out.println(lqno);
+		int lqno=(int) cert.get("selectKind");
+		String search=(String) cert.get("search");
 		
 		if(lqno==0) {
-			return  (ArrayList)session.selectList("problem.myProblemList", ProblemDTO);
+			if(search.equals("")){
+				return  (ArrayList)session.selectList("problem.myProblemList", cert);
+			}else {
+				if(search.equals("pno")) {
+					return  (ArrayList)session.selectList("problem.pnosearchmyProblemList", cert);
+				}else {
+					return  (ArrayList)session.selectList("problem.pdetailsearchmyProblemList", cert);
+				}
+			}
 		}else {
-			return  (ArrayList)session.selectList("problem.selectedmyProblemList", ProblemDTO);
+			if(search.equals("")){
+				return  (ArrayList)session.selectList("problem.selectedmyProblemList", cert);
+			}else {
+				if(search.equals("pno")) {
+					return  (ArrayList)session.selectList("problem.pnoselectedsearchmyProblemList", cert);
+				}else {
+					return  (ArrayList)session.selectList("problem.pdetailselectedsearchmyProblemList", cert);
+				}
+			}
 		}
 	}
 
 	public List<String> selectPnoCorrects(int pno) {
 		return session.selectList("problem.selectCorrectList",pno);
+	}
+
+	public void deleteProblem(int pno) {
+		session.selectList("problem.deleteProblem",pno);
 	}
 		
 

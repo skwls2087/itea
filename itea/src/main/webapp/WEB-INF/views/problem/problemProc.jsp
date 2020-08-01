@@ -6,9 +6,10 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/problem.css">
 
 <div id="problem-proc">
-	<a href="${pageContext.request.contextPath}/ask/problemBoard.co?pno=${problem.pno}" id="problem-board">
+	<a href="${pageContext.request.contextPath}/ask/problemBoard.co?pno=${problem.pno}" id="problem-board" target="_blank">
 	<div id="problem-pno">#<span id="problemPNO">${problem.pno}</span></div></a>
-	<a href="${pageContext.request.contextPath}/ask/problemAsk.co?pno=${problem.pno}" id="problem-ask">질문하기</a>
+	<a id="problem-ask" data-toggle="modal" href="#ask-Modal" target="_blank">질문하기</a>
+
 	
 	<div class="processing">
 		<span id="psolve">${solve+1}</span>/<span id="ptotal">${total+1}</span>
@@ -107,7 +108,7 @@
 	
 	<!-- 문제 신고하기 -->
 	<div id="problem-sub-right">
-		<a data-toggle="modal" href="#e-Modal">
+		<a id="error-modal" data-toggle="modal" href="#e-Modal">
 		<img id="error" src="${pageContext.request.contextPath}/resources/img/error.png" style="cursor:pointer" width="40"/></a>
 	</div>
 </div>
@@ -195,8 +196,6 @@
 	
 				<form id="error-form" method="post" action="aInsert.co">
 				
-					<input type='hidden' name='nowPage' value='${PINFO.nowPage}'/>
-					<input type='hidden' id='aaa' name='qno' value=''/>
         	<div class="form-group">
 			      <textarea class="form-control" placeholder="신고내용을 입력해주세요" id="errorTextarea" name="acont" rows="3"></textarea>
 			    </div>
@@ -211,9 +210,38 @@
 	        
 	        </div>
 	    </div>
-	  </div>
+  </div>
 
+<!-- 문제등록하기 -->
+	<div class="modal fade" id="ask-Modal" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <h4 class="modal-title">질문 등록하기</h4>
+	          <button type="button" class="close" data-dismiss="modal">×</button>
+	        </div>
+	        <div class="modal-body">
+	        <div class="problem-ask-container">
 
+				<form id="ask-form" method="post" action="aWriteProc.co">
+				
+        	<div class="form-group">
+			      <textarea class="atitle" placeholder="제목을 입력해주세요" id="atitle" name="atitle" rows="3"></textarea>
+			      <textarea class="acontent" placeholder="내용을 입력해주세요" id="acontent" name="acontent" rows="3"></textarea>
+			    </div>
 	
+	        <div class="modal-footer">
+	      		<input type="button" class="btn btn-info" id="a-submit" value="등록하기"/>
+	        </div>
+	      </div>
+	      
+	      </form>
+	      
+        </div>
+    	</div>
+   	</div>
+</div>
 
-    
+

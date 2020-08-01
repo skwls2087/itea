@@ -45,8 +45,6 @@ public class ProblemDTO {
 	private int		nowPage;	//보고싶은페이지
 	private int 	size=10;
 	
-	//현재 로그인 한 회원번호		
-	private int logno; 
 	private String lname;
 	public int getPno() {
 		return pno;
@@ -192,12 +190,6 @@ public class ProblemDTO {
 	public void setSize(int size) {
 		this.size = size;
 	}
-	public int getLogno() {
-		return logno;
-	}
-	public void setLogno(int logno) {
-		this.logno = logno;
-	}
 	public String getLname() {
 		return lname;
 	}
@@ -213,7 +205,7 @@ public class ProblemDTO {
 				+ ", file=" + file + ", pimg=" + pimg + ", choice=" + Arrays.toString(choice) + ", correct=" + correct
 				+ ", correctList=" + Arrays.toString(correctList) + ", pyearList=" + Arrays.toString(pyearList)
 				+ ", lqclass=" + lqclass + ", start=" + start + ", end=" + end + ", nowPage=" + nowPage + ", size="
-				+ size + ", logno=" + logno + ", lname=" + lname + "]";
+				+ size + ", lname=" + lname + "]";
 	}
 	
 }

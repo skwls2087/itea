@@ -17,6 +17,10 @@
 		left outer JOIN (select pno,COUNT(*) AS perror from error GROUP BY pno) AS e
 		ON e.pno=p.pno
 	</sql>
+	
+	<sql id="selectProblemCnt">
+		select count(*) from problem as p
+	</sql>
 
 	<!-- 문제 출제 자격증 종류 -->
 	<select id="selectCkind" resultType="licenseDTO">
@@ -48,31 +52,70 @@
 		LIMIT 1
 	</select>
 	
-	<!-- 내가 작성한 질문 개수 구하기 -->
+	<!-- 자격증 필터 x 내용 검색 x -->
 	<select id="cProblemListCnt" parameterType="int" resultType="int">
-		select count(*) from problem where mno=#{mno}
+		<include refid="selectProblemCnt" /> 
+		where mno=#{mno}
 	</select>
-	
-	<!-- 내가 작성한 질문중 특정 조건의 개수 구하기 -->
-	<select id="selectedProblemListCnt" parameterType="Hashmap" resultType="int">
-		select COUNT(*)
-		from problem p
-		JOIN licenseclass lc
-		ON p.lqno=lc.lqno
-		WHERE mno=#{mno} AND lc.lqno=#{selectKind}
-	</select>
-	
-	<!-- 해당 페이지에 맞는 내가 선택한 질문리스트 구하기 -->
-	<select id="myProblemList" parameterType="int" resultType="ProblemDTO">
+	<select id="myProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
 	  <include refid="selectProblemList" />
-		WHERE m.mno=#{logno}
+		WHERE m.mno=#{mno}
 		ORDER BY p.pno desc
 		limit #{start}, #{size} 
 	</select>
 	
-	<select id="selectedmyProblemList" parameterType="int" resultType="ProblemDTO">
+	<!-- 자격증 필터 x 내용 검색 o -->
+	<select id="pnosearchedProblemListCnt" parameterType="Hashmap" resultType="int">
+		<include refid="selectProblemCnt" /> 
+		where mno=#{mno} and pno=#{scontent}
+	</select>
+	<select id="pdetailsearchedProblemListCnt" parameterType="Hashmap" resultType="int">
+		<include refid="selectProblemCnt" /> 
+		where mno=#{mno} and pdetail like CONCAT('%',#{scontent},'%') 
+	</select>
+	<select id="pnosearchmyProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
 	  <include refid="selectProblemList" />
-		WHERE m.mno=#{logno} and p.lqno=#{lqno}
+		WHERE m.mno=#{mno} and p.pno =#{scontent}
+		ORDER BY p.pno desc
+		limit #{start}, #{size}
+	</select>
+	<select id="pdetailsearchmyProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
+	  <include refid="selectProblemList" />
+		WHERE m.mno=#{mno} and pdetail like CONCAT('%',#{scontent},'%') 
+		ORDER BY p.pno desc
+		limit #{start}, #{size}
+	</select>
+	
+	<!-- 자격증 필터 o 내용 검색 x -->
+	<select id="selectedProblemListCnt" parameterType="Hashmap" resultType="int">
+		<include refid="selectProblemCnt" /> 
+		WHERE mno=#{mno} AND p.lqno=#{selectKind}
+	</select>
+	<select id="selectedmyProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
+	  <include refid="selectProblemList" />
+		WHERE m.mno=#{mno} and p.lqno=#{selectKind}
+		ORDER BY p.pno desc
+		limit #{start}, #{size}
+	</select>
+
+	<!-- 자격증 필터 o 내용 검색 o -->
+	<select id="pnoselectedSearchProblemListCnt" parameterType="Hashmap" resultType="int">
+		<include refid="selectProblemCnt" /> 
+		WHERE mno=#{mno} AND p.lqno=#{selectKind} and pno=#{scontent}
+	</select>
+	<select id="pdetailselectedSearchProblemListCnt" parameterType="Hashmap" resultType="int">
+		<include refid="selectProblemCnt" /> 
+		WHERE mno=#{mno} AND p.lqno=#{selectKind} and pdetail like CONCAT('%',#{scontent},'%') 
+	</select>
+	<select id="pdetailselectedsearchmyProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
+	  <include refid="selectProblemList" />
+		WHERE m.mno=#{mno} and p.lqno=#{selectKind} and pdetail like CONCAT('%',#{scontent},'%') 
+		ORDER BY p.pno desc
+		limit #{start}, #{size}
+	</select>
+	<select id="pnoselectedsearchmyProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
+	  <include refid="selectProblemList" />
+		WHERE m.mno=#{mno} and p.lqno=#{selectKind} and p.pno=#{scontent}
 		ORDER BY p.pno desc
 		limit #{start}, #{size}
 	</select>
@@ -107,11 +150,11 @@
 	
 	<!-- 문제풀기-문제번호리스트 -->
 	<select id="selectPnoList" parameterType="Hashmap" resultType="string">
-		SELECT p.pno
+		SELECT p.pno,lc.lqno
 		FROM problem AS p
-		join licenseclass AS l ON p.lqno=l.lqno
+		join licenseclass AS lc ON p.lqno=lc.lqno
 		join member AS m ON m.mno=p.mno
-		WHERE l.lno=#{ckind} AND l.lqclass=#{ctype} and (p.pyear=0
+		WHERE lc.lqno=#{lqno} AND (p.pyear=0
 		<foreach collection="qyear" item="item">
 			or pyear=#{item}
 		</foreach>
@@ -192,5 +235,10 @@
 		INSERT INTO error (mno,pno,econtent) 
 		VALUES (#{mno},#{pno},#{econtent})
 	</insert>
+	
+	<!-- 문제 삭제하기 -->
+	<delete id="deleteProblem" parameterType="int">
+		DELETE FROM problem WHERE pno=#{pno}
+	</delete>
 	
 </mapper>

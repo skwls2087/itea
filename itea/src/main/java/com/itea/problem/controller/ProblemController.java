@@ -49,7 +49,7 @@ public class ProblemController {
 		request.setAttribute("ckind", ckind);
 	}
 	
-	//자격증 종류를 선택하면 그에맞는 유형을 리턴하기(ajax)
+	/*//자격증 종류를 선택하면 그에맞는 유형을 리턴하기(ajax)
 	@ResponseBody
 	@RequestMapping("/testType")
 	public Object testType(HttpServletRequest request) {
@@ -72,7 +72,7 @@ public class ProblemController {
 		}
 		
 		return map;
-	}
+	}*/
 	
 	//자격증을 모두 선택한 경우 로직 
 	@RequestMapping("/selectTest.co")
@@ -89,7 +89,6 @@ public class ProblemController {
 		
 		request.setAttribute("ptype", qtype);
 		request.setAttribute("pyear", qyear);
-
 		request.setAttribute("lqno", lqno);
 		
 		//출제 유형에 맞는 폼 보여주기
@@ -118,26 +117,34 @@ public class ProblemController {
 	@RequestMapping("/myProblemList")
 	public ModelAndView myProblemList(
 			@RequestParam(value="nowPage",required=false, defaultValue="1") int nowPage,
-			@RequestParam(value="lno",required=false, defaultValue="0") int selectKind, 
+			@RequestParam(value="lqno",required=false, defaultValue="0") int selectKind, 
+			@RequestParam(value="search",required=false, defaultValue="") String search,
+			@RequestParam(value="scontent",required=false, defaultValue="") String scontent,
 			HttpServletRequest request,HttpSession session,ModelAndView mv) {
+		
+		System.out.println("내가 낸 문제 list 진입"+":페이지"+nowPage+":선택한자격증"+selectKind+":검색부분"+search+":검색내용"+scontent);
 		
 		//자격증 종류 보내기
 		List<licenseDTO> ckind=problemSV.selectCkind();
 		request.setAttribute("ckind", ckind);
-		request.setAttribute("selectKind", selectKind);
-		System.out.println(ckind);
-		System.out.println("내가 낸 문제 list 진입");
+		
+		//내가 선택한 자격증 저장
+		request.setAttribute("lqno", selectKind);
+		request.setAttribute("search", search);
+		request.setAttribute("scontent", scontent);
+
 		PageUtil pInfo;
 
 		//회원 닉네임 받기
 		int mno=(Integer) session.getAttribute("MNO");
 		
-		System.out.println("mno"+mno);
 		ArrayList<ProblemDTO> list;
 		
 		HashMap cert = new HashMap();
 		cert.put("mno", mno);
 		cert.put("selectKind", selectKind);
+		cert.put("search", search);
+		cert.put("scontent", scontent);
 		
 		pInfo = problemSV.getPageInfo(nowPage,cert);
 		list= problemSV.myProblemList(pInfo,cert);
@@ -148,5 +155,14 @@ public class ProblemController {
 		
 		return mv;
 	}
+	
+	//문제 삭제하기
+	@RequestMapping("/problemDelete")
+	public String problemDelete(int pno) {
+		problemSV.deleteProblem(pno);
+		
+		myProblemList
+	}
+	
 	
 }

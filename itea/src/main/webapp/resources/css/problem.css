@@ -263,9 +263,30 @@ textarea{
 .problemList{
 	width:80%;
 	margin:20px auto;
+	
 }
 
 /*특정 문제 리스트*/
 #selectKind{
-	width:300px;
+	width:250px;
+}
+.ptype-search{
+	float:left;
+	margin:10px;
+}
+.pcontent-search{
+	float:right;
+	position:relative;
+}
+#problemContentSearch{
+	display: flex;
+}
+.pcontent-search img{
+	position:absolute;
+  right: 9px;
+  top: 10px;
+}
+#selectSearch{
+  width: 80px;
+  margin-right:5px;
 }
