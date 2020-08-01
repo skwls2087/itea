@@ -6,7 +6,7 @@
 
 <div>
 	<div class="problemList">
-    <p>내가 낸 문제 (List)</p>
+    <p>즐겨찾기한 문제</p>
     <div class="ptype-search">
     <form name="problemSearch" id="problemSearch" method ="post" class="problemSearch" 
 			action="<%= request.getContextPath()%>/problem/myProblemList.co">
@@ -50,7 +50,6 @@
         <td width="5%">
         	<img src="${pageContext.request.contextPath}/resources/img/errorhover.png" width="25"/>
         </td>
-        <td width="5%"></td><td width="5%"></td>
     </tr>
     <c:forEach items="${LIST}" var="list" varStatus="status">
     <tr>
@@ -74,21 +73,12 @@
         <td>${list.plike}</td>
         <td>${list.phate}</td>
         <td>${list.perror}</td>
-        <td>
-     			<a href="problemModify.co?pno=${list.pno}">
-     			<img src="${pageContext.request.contextPath}/resources/img/edit.png" width="20"/></a>
-       	</td>
-        <td>
-     			<a href="problemDelete.co?pno=${list.pno}&nowPage=${PINFO.nowPage}&lqno=${lqno}&search=${search}&scontent=${scontent}" 
-     				onclick="alert('해당 문제가 삭제되었습니다.')">
-     			<img src="${pageContext.request.contextPath}/resources/img/trash.png" width="20"/></a>
-       	</td>
     </tr>
     </c:forEach>
     <!-- 페이징처리 -->
         
         <tr>
-				<td colspan="9">
+				<td colspan="7">
 				<div>
   				<ul class="pagination" id="q-paging">
   				

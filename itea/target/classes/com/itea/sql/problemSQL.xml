@@ -21,6 +21,12 @@
 	<sql id="selectProblemCnt">
 		select count(*) from problem as p
 	</sql>
+	
+	<sql id="joinInterest">
+		inner JOIN interest AS i
+		ON i.pno=p.pno
+	</sql>
+	
 
 	<!-- 문제 출제 자격증 종류 -->
 	<select id="selectCkind" resultType="licenseDTO">
@@ -52,11 +58,20 @@
 		LIMIT 1
 	</select>
 	
-	<!-- 자격증 필터 x 내용 검색 x -->
+	
+	
+	<!-- 1.자격증 필터 x 내용 검색 x -->
 	<select id="cProblemListCnt" parameterType="int" resultType="int">
 		<include refid="selectProblemCnt" /> 
-		where mno=#{mno}
+		<if test='type=="my"'>
+			where mno=#{mno}
+		</if> 
+		<if test='type=="scrap"'>
+			<include refid="joinInterest" />
+			WHERE i.mno=#{mno}
+		</if>
 	</select>
+	
 	<select id="myProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
 	  <include refid="selectProblemList" />
 		WHERE m.mno=#{mno}
@@ -64,14 +79,27 @@
 		limit #{start}, #{size} 
 	</select>
 	
-	<!-- 자격증 필터 x 내용 검색 o -->
+	<!-- 2.자격증 필터 x 내용 검색 o -->
 	<select id="pnosearchedProblemListCnt" parameterType="Hashmap" resultType="int">
 		<include refid="selectProblemCnt" /> 
-		where mno=#{mno} and pno=#{scontent}
+		<if test='type=="my"'>
+			where mno=#{mno} and pno=#{scontent}
+		</if> 
+		<if test='type=="scrap"'>
+			<include refid="joinInterest" />
+			WHERE i.mno=#{mno} and i.pno=#{scontent}
+		</if>
 	</select>
 	<select id="pdetailsearchedProblemListCnt" parameterType="Hashmap" resultType="int">
 		<include refid="selectProblemCnt" /> 
-		where mno=#{mno} and pdetail like CONCAT('%',#{scontent},'%') 
+		<if test='type=="my"'>
+			where mno=#{mno} and pdetail like CONCAT('%',#{scontent},'%') 
+		</if> 
+		<if test='type=="scrap"'>
+			<include refid="joinInterest" />
+			WHERE i.mno=#{mno} and pdetail like CONCAT('%',#{scontent},'%') 
+		</if>
+		
 	</select>
 	<select id="pnosearchmyProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
 	  <include refid="selectProblemList" />
@@ -89,7 +117,14 @@
 	<!-- 자격증 필터 o 내용 검색 x -->
 	<select id="selectedProblemListCnt" parameterType="Hashmap" resultType="int">
 		<include refid="selectProblemCnt" /> 
-		WHERE mno=#{mno} AND p.lqno=#{selectKind}
+		<if test='type=="my"'>
+			WHERE mno=#{mno} AND p.lqno=#{selectKind}
+		</if> 
+		<if test='type=="scrap"'>
+			<include refid="joinInterest" />
+			WHERE i.mno=#{mno} AND p.lqno=#{selectKind}
+		</if>
+		
 	</select>
 	<select id="selectedmyProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
 	  <include refid="selectProblemList" />
@@ -101,11 +136,24 @@
 	<!-- 자격증 필터 o 내용 검색 o -->
 	<select id="pnoselectedSearchProblemListCnt" parameterType="Hashmap" resultType="int">
 		<include refid="selectProblemCnt" /> 
-		WHERE mno=#{mno} AND p.lqno=#{selectKind} and pno=#{scontent}
+		<if test='type=="my"'>
+			WHERE mno=#{mno} AND p.lqno=#{selectKind} and pno=#{scontent}
+		</if> 
+		<if test='type=="scrap"'>
+			<include refid="joinInterest" />
+			WHERE i.mno=#{mno} AND p.lqno=#{selectKind} and pno=#{scontent}
+		</if>
+		
 	</select>
 	<select id="pdetailselectedSearchProblemListCnt" parameterType="Hashmap" resultType="int">
 		<include refid="selectProblemCnt" /> 
-		WHERE mno=#{mno} AND p.lqno=#{selectKind} and pdetail like CONCAT('%',#{scontent},'%') 
+		<if test='type=="my"'>
+			WHERE mno=#{mno} AND p.lqno=#{selectKind} and pdetail like CONCAT('%',#{scontent},'%') 
+		</if> 
+		<if test='type=="scrap"'>
+			<include refid="joinInterest" />
+			WHERE i.mno=#{mno} AND p.lqno=#{selectKind} and pdetail like CONCAT('%',#{scontent},'%') 
+		</if>
 	</select>
 	<select id="pdetailselectedsearchmyProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
 	  <include refid="selectProblemList" />
@@ -119,6 +167,10 @@
 		ORDER BY p.pno desc
 		limit #{start}, #{size}
 	</select>
+	
+	
+	
+	
 	
 	<!-- 문제 입력 -->
 	<insert id="insertProblem" parameterType="problemDTO">

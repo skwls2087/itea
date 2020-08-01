@@ -123,6 +123,65 @@ public class ProblemDAO {
 	
 	public int getmyTotalCnt(HashMap cert) {
 		
+		int selectKind=(int) cert.get("selectKind");
+		int mno=(int) cert.get("mno");
+		String search=(String) cert.get("search");
+		String scontent=(String) cert.get("scontent");
+		
+		if(selectKind==0) {
+			if(search.equals("")) {
+				return session.selectOne("problem.cProblemListCnt",cert);
+			}else {
+				if(search.equals("pno")) {
+					return session.selectOne("problem.pnosearchedProblemListCnt",cert);
+				}else {
+					return session.selectOne("problem.pdetailsearchedProblemListCnt",cert);
+				}
+			}
+		}else {
+			if(search.equals("")) {
+				return session.selectOne("problem.selectedProblemListCnt",cert);
+			}else {
+				if(search.equals("pno")) {
+					return session.selectOne("problem.pnoselectedSearchProblemListCnt",cert);
+				}else {
+					return session.selectOne("problem.pdetailselectedSearchProblemListCnt",cert);
+				}
+			}
+		}
+
+	}
+
+	public ArrayList<ProblemDTO> myProblemList(HashMap cert) {
+		
+		int lqno=(int) cert.get("selectKind");
+		String search=(String) cert.get("search");
+		
+		if(lqno==0) {
+			if(search.equals("")){
+				return  (ArrayList)session.selectList("problem.myProblemList", cert);
+			}else {
+				if(search.equals("pno")) {
+					return  (ArrayList)session.selectList("problem.pnosearchmyProblemList", cert);
+				}else {
+					return  (ArrayList)session.selectList("problem.pdetailsearchmyProblemList", cert);
+				}
+			}
+		}else {
+			if(search.equals("")){
+				return  (ArrayList)session.selectList("problem.selectedmyProblemList", cert);
+			}else {
+				if(search.equals("pno")) {
+					return  (ArrayList)session.selectList("problem.pnoselectedsearchmyProblemList", cert);
+				}else {
+					return  (ArrayList)session.selectList("problem.pdetailselectedsearchmyProblemList", cert);
+				}
+			}
+		}
+	}
+	
+	public int getScrapTotalCnt(HashMap cert) {
+		
 		int qcnt;
 		
 		int selectKind=(int) cert.get("selectKind");
@@ -152,34 +211,6 @@ public class ProblemDAO {
 			}
 		}
 		return qcnt;
-	}
-
-	public ArrayList<ProblemDTO> myProblemList(HashMap cert) {
-		
-		int lqno=(int) cert.get("selectKind");
-		String search=(String) cert.get("search");
-		
-		if(lqno==0) {
-			if(search.equals("")){
-				return  (ArrayList)session.selectList("problem.myProblemList", cert);
-			}else {
-				if(search.equals("pno")) {
-					return  (ArrayList)session.selectList("problem.pnosearchmyProblemList", cert);
-				}else {
-					return  (ArrayList)session.selectList("problem.pdetailsearchmyProblemList", cert);
-				}
-			}
-		}else {
-			if(search.equals("")){
-				return  (ArrayList)session.selectList("problem.selectedmyProblemList", cert);
-			}else {
-				if(search.equals("pno")) {
-					return  (ArrayList)session.selectList("problem.pnoselectedsearchmyProblemList", cert);
-				}else {
-					return  (ArrayList)session.selectList("problem.pdetailselectedsearchmyProblemList", cert);
-				}
-			}
-		}
 	}
 
 	public List<String> selectPnoCorrects(int pno) {
