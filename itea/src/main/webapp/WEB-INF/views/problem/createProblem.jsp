@@ -19,19 +19,11 @@ window.addEventListener('popstate', function(event) {    //  뒤로가기 이벤
 		<span id="problem-header">자격증 선택</span><br/><br/>
 		<hr><br/>
 	    <div class="form-group">
-		    <select id="Ckind" name="Ckind" class="custom-select">
+		    <select id="Ckind" name="lqno" class="custom-select">
 		      <option value="ss" selected="selected">자격증 종류</option>
 		      <c:forEach var="ckind" items="${ckind}">
-			      <option value="${ckind.lno}">${ckind.lname}</option>
+			      <option value="${ckind.lqno}">${ckind.lname}<c:if test="${ckind.lqclass!='단독'}">(${ckind.lqclass})</c:if></option>
 		      </c:forEach>
-		    </select>
-		  </div>
-		  
-		  <div class="form-group" id="ctype-select">
-		    <select id="Ctype" name="Ctype" class="custom-select">
-		      <option id="type0" value="" selected="">자격증 유형</option>
-		      <option id="type1" value=""></option>
-		      <option id="type2" value=""></option>
 		    </select>
 		  </div>
 		  

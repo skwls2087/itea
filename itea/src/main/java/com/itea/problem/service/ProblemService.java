@@ -109,20 +109,25 @@ public class ProblemService {
 	}
 
 
-	public PageUtil getPageInfo(int nowPage, int mno) {
-		int totalCount= problemDAO.getmyTotalCnt(mno);
+	public PageUtil getPageInfo(int nowPage, HashMap cert) {
+		int totalCount= problemDAO.getmyTotalCnt(cert);
 		PageUtil pInfo = new PageUtil(nowPage, totalCount,10,5);
 		return pInfo;  
 	}
 
-	public ArrayList<ProblemDTO> myProblemList(PageUtil pInfo, int mno) {
-			int start= 
-				(pInfo.getNowPage()-1)*pInfo.getLineCount()+1;
+	public ArrayList<ProblemDTO> myProblemList(PageUtil pInfo, HashMap cert) {
+		
+			int start= (pInfo.getNowPage()-1)*pInfo.getLineCount()+1;
 			int end  = start+pInfo.getLineCount()-1;
+			
+			int mno=(int) cert.get("mno");
+			int lqno=(int) cert.get("selectKind");
+			
 			ProblemDTO ProblemDTO = new ProblemDTO();
 			ProblemDTO.setStart(start-1);
 			ProblemDTO.setEnd(end);
 			ProblemDTO.setLogno(mno);
+			ProblemDTO.setLqno(lqno);
 			
 			ArrayList<ProblemDTO> list = problemDAO.myProblemList(ProblemDTO);
 			return list;

@@ -19,7 +19,7 @@
 		  <p class="start-cont">문제풀기</p>
 		  <p class="lead">기출문제와 다른 회원들이 낸 문제를 모두 풀어보세요. 다양한 문제를 푸는 것은 합격의 지름길입니다.</p>
 		  <p class="lead">
-		    <a class="btn btn-primary btn-lg" id="start-button1" href="solveProblem.co" role="button">START</a>
+		    <a class="btn btn-primary btn-lg" id="start-button1" href="selectProblem.co" role="button">START</a>
 		  </p>
 	  </div>
 	</div>

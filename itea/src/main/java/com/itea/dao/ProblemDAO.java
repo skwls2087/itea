@@ -119,13 +119,31 @@ public class ProblemDAO {
 	}
 
 	
-	public int getmyTotalCnt(int mno) {
-		int qcnt=session.selectOne("problem.cProblemListCnt",mno);
+	public int getmyTotalCnt(HashMap cert) {
+		
+		int qcnt;
+		
+		int selectKind=(int) cert.get("selectKind");
+		int mno=(int) cert.get("mno");
+		
+		if(selectKind==0) {
+			qcnt=session.selectOne("problem.cProblemListCnt",mno);
+		}else {
+			qcnt=session.selectOne("problem.selectedProblemListCnt",cert);
+		}
 		return qcnt;
 	}
 
 	public ArrayList<ProblemDTO> myProblemList(ProblemDTO ProblemDTO) {
+		
+		int lqno=ProblemDTO.getLqno();
+		System.out.println(lqno);
+		
+		if(lqno==0) {
 			return  (ArrayList)session.selectList("problem.myProblemList", ProblemDTO);
+		}else {
+			return  (ArrayList)session.selectList("problem.selectedmyProblemList", ProblemDTO);
+		}
 	}
 
 	public List<String> selectPnoCorrects(int pno) {

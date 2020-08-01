@@ -3,22 +3,7 @@
 <!-- js/css 참조 -->
 <script src="${pageContext.request.contextPath}/resources/js/problem.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/problem.css">
-
-<ul class="nav nav-pills">
-<li class="nav-item dropdown show">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Dropdown</a>
-    <div class="dropdown-menu show" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start">
-      <a class="dropdown-item" href="#">자격증별 문제</a>
-      <a class="dropdown-item" href="${pageContext.request.contextPath}/problem/myProblemList.co">내가 만든 문제</a>
-      <a class="dropdown-item" href="#">즐겨찾기 문제</a>
-      <c:if test="${MNICK=='관리자'}">
-	      <div class="dropdown-divider"></div>
-	      <a class="dropdown-item" href="#">신고된 문제</a>
-      </c:if>
-    </div>
-  </li>
-</ul>
-		  
+	  
 <div id="problem-solve-container">
 	<div id="problem-solve">
 	<form action="selectForTest.co" method="post">
@@ -28,19 +13,11 @@
 		    <select id="Ckind" name="Ckind" class="custom-select">
 		      <option value="" selected="">자격증 종류</option>
 		      <c:forEach var="ckind" items="${ckind}">
-			      <option value="${ckind.lno}">${ckind.lname}</option>
+			      <option value="${ckind.lqno}">${ckind.lname}<c:if test="${ckind.lqclass!='단독'}">(${ckind.lqclass})</c:if></option>
 		      </c:forEach>
 		    </select>
 		  </div>
-		  
-		  <div class="form-group" id="ctype-select">
-		    <select id="Ctype" name="Ctype" class="custom-select">
-		      <option id="type0" value="" selected="">문제 유형</option>
-		      <option id="type1" value=""></option>
-		      <option id="type2" value=""></option>
-		    </select>
-		  </div>
-		  
+
 		  <div class="form-group">
 		    <select id="Qtype" name="Qtype" class="custom-select">
 		      <option value="1">기출문제만 풀기</option>

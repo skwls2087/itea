@@ -156,7 +156,7 @@ public class SolveProblemController {
 		request.setAttribute("problem", problemInfo); //1번 문제 보내기
 		request.setAttribute("interest", isScrap); //즐겨찾기 여부 보내기
 		
-		if(pnoList==null) {
+		if(pnoList!=null) {
 			pnoList.remove(0);
 			request.setAttribute("pnoList", pnoList); //문제번호리스트 보내기
 			return pnoList.size();
@@ -204,6 +204,7 @@ public class SolveProblemController {
 		System.out.println(pno);
 		problemSV.problemHate(pno);
 		int phate=problemSV.selectPhate(pno);
+		System.out.println("문제싫어요");
 		return phate;
 	}
 	
@@ -239,7 +240,7 @@ public class SolveProblemController {
 		return 1;
 	}
 	
-	//즐겨찾기 삭제 눌렀을 때
+	//문제 신고 눌렀을 때
 	@RequestMapping("/problemError")
 	@ResponseBody
 	public int problemError(int pno,String econtent,HttpSession session) {

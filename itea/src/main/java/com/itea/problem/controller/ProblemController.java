@@ -31,6 +31,13 @@ public class ProblemController {
 		System.out.println("문제 메인화면 진입");
 
 	}
+
+	//문제 유형 고르기
+	@RequestMapping("/selectProblem")
+	public void selectProblem(HttpServletRequest request) {
+		
+	}
+	
 	//문제출제 : 자격증 선택 페이지
 	@RequestMapping("/createProblem")
 	public void createProblem(HttpServletRequest request) {
@@ -41,6 +48,7 @@ public class ProblemController {
 		List<licenseDTO> ckind=problemSV.selectCkind();
 		request.setAttribute("ckind", ckind);
 	}
+	
 	//자격증 종류를 선택하면 그에맞는 유형을 리턴하기(ajax)
 	@ResponseBody
 	@RequestMapping("/testType")
@@ -66,29 +74,22 @@ public class ProblemController {
 		return map;
 	}
 	
-	//자격증을 모두 선택한 수 
+	//자격증을 모두 선택한 경우 로직 
 	@RequestMapping("/selectTest.co")
 	public String selectTest(HttpServletRequest request) {
 		
 		System.out.println("자격증 선택 페이지");
 		
 		//시험종류와 유형을 파라미터로 받아 셋팅하기
-		String ckind=request.getParameter("Ckind");
-		String ctype=request.getParameter("Ctype");
+		String lqno=request.getParameter("lqno");
 		String qtype=request.getParameter("Qtype");
 		String qyear=request.getParameter("Qyear");
 		
-		System.out.println(ckind+ctype+qtype+qyear);
+		System.out.println(lqno+qtype+qyear);
 		
 		request.setAttribute("ptype", qtype);
 		request.setAttribute("pyear", qyear);
-		
-		HashMap map = new HashMap();
-		map.put("lno",    ckind);
-		map.put("lqclass", ctype);
 
-		int lqno=problemSV.selectLqno(map);
-		
 		request.setAttribute("lqno", lqno);
 		
 		//출제 유형에 맞는 폼 보여주기
@@ -112,26 +113,34 @@ public class ProblemController {
 		request.setAttribute("ckind", ckind);
 		
 	}
+	
+	//내가 출제한 문제 리스트
 	@RequestMapping("/myProblemList")
-	public ModelAndView myProblemList(@RequestParam(value="nowPage",
-				required=false,
-				defaultValue="1")  int  nowPage,HttpServletRequest request,HttpSession session,ModelAndView mv) {
-		
-		System.out.println("내가 낸 문제 list 진입");
-		PageUtil pInfo;
+	public ModelAndView myProblemList(
+			@RequestParam(value="nowPage",required=false, defaultValue="1") int nowPage,
+			@RequestParam(value="lno",required=false, defaultValue="0") int selectKind, 
+			HttpServletRequest request,HttpSession session,ModelAndView mv) {
 		
 		//자격증 종류 보내기
 		List<licenseDTO> ckind=problemSV.selectCkind();
 		request.setAttribute("ckind", ckind);
-		
+		request.setAttribute("selectKind", selectKind);
+		System.out.println(ckind);
+		System.out.println("내가 낸 문제 list 진입");
+		PageUtil pInfo;
+
 		//회원 닉네임 받기
 		int mno=(Integer) session.getAttribute("MNO");
 		
 		System.out.println("mno"+mno);
 		ArrayList<ProblemDTO> list;
 		
-		pInfo = problemSV.getPageInfo(nowPage,mno);
-		list= problemSV.myProblemList(pInfo,mno);
+		HashMap cert = new HashMap();
+		cert.put("mno", mno);
+		cert.put("selectKind", selectKind);
+		
+		pInfo = problemSV.getPageInfo(nowPage,cert);
+		list= problemSV.myProblemList(pInfo,cert);
 		
 		mv.addObject("PINFO",pInfo);//페이징관련 정보
 		mv.addObject("LIST",list);
@@ -139,4 +148,5 @@ public class ProblemController {
 		
 		return mv;
 	}
+	
 }

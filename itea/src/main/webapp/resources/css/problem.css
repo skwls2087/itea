@@ -264,3 +264,8 @@ textarea{
 	width:80%;
 	margin:20px auto;
 }
+
+/*특정 문제 리스트*/
+#selectKind{
+	width:300px;
+}

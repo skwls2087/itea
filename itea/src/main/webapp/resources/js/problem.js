@@ -6,7 +6,7 @@ $(function(){
 	
 	$("#Ckind option:eq(0)").attr("selected", "selected");
 
-	//회원이 질문 등록할 때
+	/*//회원이 질문 등록할 때
 	$("#Ckind").change(function(){
 		var lno=$(this).val()
 		
@@ -31,7 +31,7 @@ $(function(){
 				}
 			}
 		})
-	});
+	});*/
 	
 	$("#select-test-button").click(function(){
 		if($("#Ckind").val()==""){
@@ -399,24 +399,6 @@ $(function(){
 	});
 	
 	//문제 싫어요 눌렀을 때
-	$("#phate").click(function(){
-		
-		pno=$("#problemPNO").html();
-		
-		$.ajax({
-			url : 'problemHate.co?pno='+ pno,
-			type : 'post',
-			contentType:"application/json; charset=utf-8;",
-			dataType:"json",
-			success : function(data) {					
-				$("#hatecnt").html(data);
-				$("#plike").css('pointer-events','none')
-				$("#phate").css('pointer-events','none')
-			}
-		})
-	});
-	
-	//즐겨찾기 추가 눌렀을 때
 	$("#phate").click(function(){
 		
 		pno=$("#problemPNO").html();
