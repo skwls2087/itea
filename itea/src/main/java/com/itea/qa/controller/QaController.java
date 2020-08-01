@@ -56,11 +56,11 @@ public class QaController {
 			}
 		}
 		
+		System.out.println(pInfo);
 		
-
 		mv.addObject("LIST", list);//실제조회목록
 		mv.addObject("PINFO",pInfo);//페이징관련 정보
-		mv.addObject("field",field);//페이징관련 정보
+		mv.addObject("field",field);//검색관련 정보
 		
 		mv.setViewName("qa/qaFrm");
 		
@@ -87,13 +87,25 @@ public class QaController {
 	
 	//질문삭제
 	@RequestMapping("/qDelete")
-	public ModelAndView qDelete(@RequestParam("qno") int qno,@RequestParam("nowPage") int page,ModelAndView mv) {
+	public ModelAndView qDelete(@RequestParam("qno") int qno,ModelAndView mv,
+			@RequestParam("nowPage") int page,
+			@RequestParam("pageGroup") int pageGroup,
+			@RequestParam("totalCount") int totalCount,
+			@RequestParam(value="field",required=false,defaultValue="all") String field) {
 		
 		System.out.println("Q&A 질문 삭제하기");
 		
 		qaSV.deleteQuestion(qno);
 		
-		RedirectView rv = new RedirectView("../qa/qaFrm.co?nowPage="+page);
+		System.out.println((totalCount%pageGroup));
+		
+		if((totalCount%pageGroup)==1) {
+			if(page!=1) {
+				page=page-1;
+			}
+		}
+		
+		RedirectView rv = new RedirectView("../qa/qaFrm.co?nowPage="+page+"&field="+field);
 		
 		mv.setView(rv);
 		return mv;
@@ -102,14 +114,16 @@ public class QaController {
 	
 	//질문에 답변하기
 	@RequestMapping("/aInsert")
-	public ModelAndView aInsert(HttpServletRequest request,QaDTO qaDTO,@RequestParam("nowPage") int page, ModelAndView mv) {
+	public ModelAndView aInsert(HttpServletRequest request,QaDTO qaDTO,ModelAndView mv,
+			@RequestParam("nowPage") int page,
+			@RequestParam(value="field",required=false,defaultValue="all") String field) {
 		
 		System.out.println("Q&A 질문 답변하기");
 		
 		System.out.println(qaDTO);
 		qaSV.insertAnswer(qaDTO);
 		
-		RedirectView rv = new RedirectView("../qa/qaFrm.co?nowPage="+page);
+		RedirectView rv = new RedirectView("../qa/qaFrm.co?nowPage="+page+"&field="+field);
 		
 		mv.setView(rv);
 		return mv;

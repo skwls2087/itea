@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html>
+<html lang = "ko">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>아이티어</title>
 
 <!-- 부트스트랩 url 연결 -->
@@ -35,6 +36,10 @@
 <!-- 동글동그한 글씨 -->
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <!-- font-family: 'Jua', sans-serif; -->
+
+<!-- 로봇같은 글씨 -->
+<link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300;500&display=swap" rel="stylesheet">
+<!-- font-family: 'Sunflower', sans-serif; -->
 
 <!-- JSTL 선언 -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

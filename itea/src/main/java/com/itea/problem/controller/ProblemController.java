@@ -33,9 +33,7 @@ public class ProblemController {
 	//문제풀이 메인화면
 	@RequestMapping("/problemMain")
 	public void problemMain() {
-		
 		System.out.println("문제 메인화면 진입");
-
 	}
 
 	//문제 유형 고르기

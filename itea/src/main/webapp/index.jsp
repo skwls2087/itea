@@ -1,20 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-
+<!-- 참조 문서 링크 -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
-
-<!DOCTYPE html>
-<html lang='en'>
-  <head>
-    <meta charset='utf-8' />
 <link href='${pageContext.request.contextPath}/resources/fullcalendar-5.1.0/lib/main.css' rel='stylesheet' />
 <script src='${pageContext.request.contextPath}/resources/fullcalendar-5.1.0/lib/main.js'></script>
+
+
 <script type='text/javascript'>
 
-document.addEventListener('DOMContentLoaded', function() {
-  var calendarEl = document.getElementById('calendar');
+	/* 예인-달력 */
+	document.addEventListener('DOMContentLoaded', function() {
+  	var calendarEl = document.getElementById('calendar');
 
-  var calendar = new FullCalendar.Calendar(calendarEl, {
+ 	var calendar = new FullCalendar.Calendar(calendarEl, {
     googleCalendarApiKey: 'AIzaSyAVIOOupclxyUQEFJ_XtOcfdc7BzbQYWgY',
     eventSources: [
       {
@@ -85,24 +83,9 @@ document.addEventListener('DOMContentLoaded', function() {
        }
     ]
   
-  });
-  calendar.render();
-});
-</script>
-<style>
-#calendar{
-	width:60%;
-	margin:20px auto;
-}
-</style>
-  </head>
-  <body>
-    <div id='calendar'></div>
-  </body>
-</html>
-
-
-<script>
+  	});
+  		calendar.render();
+	});
 
 	/*태강-채팅*/
 	function sendMessage(form){
@@ -149,37 +132,111 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 		
 	function Chat__drawMessages(message){
-		var html = '['+message.id+']('+message.writer+'):'+message.body;
-		$('.chat-list').append('<div>'+html+'</div>')
+		
+		name=document.getElementById("chatname").innerText;
+		
+		if(name==message.writer){
+			
+			var html = 
+				'<div class="myname">'+message.writer+'</div><br/>'+
+				'<div class="mychat">'+message.body+'</div><br/>'
+				
+				$('.chat-list').append(html)
+		}else{
+			var html = 
+				'<div class="othername">'+message.writer+'</div><br/>'+
+				'<div class="otherchat">'+message.body+'</div><br/>'
+				
+				$('.chat-list').append(html)
+		}
+			
+		var objDiv=document.getElementById("chat-list");
+		objDiv.scrollTop=objDiv.scrollHeight;
+		
 	}
 		
-
-	$(function(){
-		Chat__loadNewMessages();
-	});
 	
+	
+	$(function(){
+		
+		Chat__loadNewMessages();
+		
+		$(document).on("keyup","#chattext",function(event){
+	        var flag = true;
+	        flag = $(this).val().length > 0 ? false : true;
+	       	if(flag==true){
+	       		$("#chat-submit").attr('src','${pageContext.request.contextPath}/resources/img/up.png');
+	       		$("#chat-submit").removeClass();
+	       	}else{
+	       		$("#chat-submit").attr('src','${pageContext.request.contextPath}/resources/img/uphover.png');
+	       		$("#chat-submit").addClass('chat-submit');
+	       	}
+	    });
+		
+		$(document).on("click",".chat-submit",function(event){
+			$("#chat-form").submit();
+		});
+		
+	})
+
 </script>
 
+<style>
+.mychat{ 
+	background:#ffd043; 
+	word-break:break-all; 
+	display:inline-block; 
+	padding:5px; 
+	border-radius:5px; 
+	text-align:right;
+	float:right;
+	margin-bottom:5px;
+}
+.myname{
+	color:black; 
+	display:inline-block; 
+	width:100%;
+	text-align:right;
+}
+.otherchat{ 
+	background:white; 
+	word-break:break-all; 
+	display:inline-block; 
+	padding:5px; 
+	border-radius:5px; 
+	text-align:left;
+	float:left;
+	margin-bottom:5px;
+}
+.othername{
+	color:black; 
+	display:inline-block; 
+	width:100%;
+	text-align:left;
+}
+</style>
 
 <div class="itea-main">
 	<div class="main-calendar">
-	달력
+		<div id='calendar'></div>
 	</div>
 	<div class="main-chat">
-	<h1>채팅</h1>
+		<div style="display:none" id="chatname">${MNICK}</div>
 		<div class="container" id="chatbox">
+		<div class="chat-header">아이티어 채팅</div>
+		<div class="chat-list" id="chat-list" style="overflow-y:scroll;height:550px; padding:4px; border:1 solid #000000;"></div>
 		
-		<div class="chat-list" style="overflow-y:scroll; width:300px; height:550px; padding:4px; border:1 solid #000000;"></div>
-		
-			<form onsubmit="sendMessage(this); return false;">
+			<form id="chat-form" onsubmit="sendMessage(this); return false;">
 				<c:if test="${empty MNO}">
 					<input type="hidden" name="writer" value="비회원">
 				</c:if>
 				<c:if test="${!empty MNO}">
 					<input type="hidden" name="writer" value="${MNICK}">
 				</c:if>
-				<input type="text" name="body" placeholder="내용을 입력해주세요"/>
-				<input type="submit" value="입력"/>
+				<div class="chat-footer">
+					<textarea name="body" id="chattext" style="resize: none;" placeholder="내용을 입력해주세요"></textarea>
+					<img src="${pageContext.request.contextPath}/resources/img/up.png" width="25" id="chat-submit" style="cursor:pointer"/>
+				</div>
 			</form>
 		</div>
 	</div>

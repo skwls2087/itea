@@ -6,7 +6,7 @@
 <mapper namespace="problem">
 
 	<sql id="selectProblemList">
-		SELECT p.pno, p.lqno,lc.lqclass,m.mno, p.ptype,p.plike,p.phate,p.pdetail,l.lname,ifnull(e.perror,0)
+		SELECT p.pno, p.lqno,lc.lqclass,m.mno, p.ptype,p.plike,p.phate,p.pdetail,l.lname,ifnull(e.perror,0) as perror
 		FROM problem AS p
 		JOIN member AS m
 		ON p.mno=m.mno
@@ -74,9 +74,18 @@
 	
 	<select id="myProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
 	  <include refid="selectProblemList" />
-		WHERE m.mno=#{mno}
-		ORDER BY p.pno desc
-		limit #{start}, #{size} 
+	  <if test='type=="my"'>
+			WHERE m.mno=#{mno}
+			ORDER BY p.pno desc
+			limit #{start}, #{size}
+		</if> 
+		<if test='type=="scrap"'>
+			<include refid="joinInterest" />
+			WHERE i.mno=#{mno}
+			ORDER BY p.pno desc
+			limit #{start}, #{size}
+		</if>
+		 
 	</select>
 	
 	<!-- 2.자격증 필터 x 내용 검색 o -->
@@ -103,15 +112,33 @@
 	</select>
 	<select id="pnosearchmyProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
 	  <include refid="selectProblemList" />
-		WHERE m.mno=#{mno} and p.pno =#{scontent}
-		ORDER BY p.pno desc
-		limit #{start}, #{size}
+	  <if test='type=="my"'>
+			WHERE m.mno=#{mno} and p.pno =#{scontent}
+			ORDER BY p.pno desc
+			limit #{start}, #{size}
+		</if> 
+		<if test='type=="scrap"'>
+			<include refid="joinInterest" />
+			WHERE i.mno=#{mno} and p.pno =#{scontent}
+			ORDER BY p.pno desc
+			limit #{start}, #{size}
+		</if>
+		
 	</select>
 	<select id="pdetailsearchmyProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
 	  <include refid="selectProblemList" />
-		WHERE m.mno=#{mno} and pdetail like CONCAT('%',#{scontent},'%') 
-		ORDER BY p.pno desc
-		limit #{start}, #{size}
+	  <if test='type=="my"'>
+			WHERE m.mno=#{mno} and pdetail like CONCAT('%',#{scontent},'%') 
+			ORDER BY p.pno desc
+			limit #{start}, #{size}
+		</if> 
+		<if test='type=="scrap"'>
+			<include refid="joinInterest" />
+			WHERE i.mno=#{mno} and pdetail like CONCAT('%',#{scontent},'%') 
+			ORDER BY p.pno desc
+			limit #{start}, #{size}
+		</if>
+		
 	</select>
 	
 	<!-- 자격증 필터 o 내용 검색 x -->
@@ -128,9 +155,18 @@
 	</select>
 	<select id="selectedmyProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
 	  <include refid="selectProblemList" />
-		WHERE m.mno=#{mno} and p.lqno=#{selectKind}
-		ORDER BY p.pno desc
-		limit #{start}, #{size}
+	   <if test='type=="my"'>
+			WHERE m.mno=#{mno} and p.lqno=#{selectKind}
+			ORDER BY p.pno desc
+			limit #{start}, #{size}
+		</if> 
+		<if test='type=="scrap"'>
+			<include refid="joinInterest" />
+			WHERE i.mno=#{mno} and p.lqno=#{selectKind}
+			ORDER BY p.pno desc
+			limit #{start}, #{size}
+		</if>
+		
 	</select>
 
 	<!-- 자격증 필터 o 내용 검색 o -->
@@ -157,15 +193,33 @@
 	</select>
 	<select id="pdetailselectedsearchmyProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
 	  <include refid="selectProblemList" />
-		WHERE m.mno=#{mno} and p.lqno=#{selectKind} and pdetail like CONCAT('%',#{scontent},'%') 
-		ORDER BY p.pno desc
-		limit #{start}, #{size}
+	  <if test='type=="my"'>
+			WHERE m.mno=#{mno} and p.lqno=#{selectKind} and pdetail like CONCAT('%',#{scontent},'%') 
+			ORDER BY p.pno desc
+			limit #{start}, #{size}
+		</if> 
+		<if test='type=="scrap"'>
+			<include refid="joinInterest" />
+			WHERE i.mno=#{mno} and p.lqno=#{selectKind} and pdetail like CONCAT('%',#{scontent},'%') 
+			ORDER BY p.pno desc
+			limit #{start}, #{size}
+		</if>
+		
 	</select>
 	<select id="pnoselectedsearchmyProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
 	  <include refid="selectProblemList" />
-		WHERE m.mno=#{mno} and p.lqno=#{selectKind} and p.pno=#{scontent}
-		ORDER BY p.pno desc
-		limit #{start}, #{size}
+	  <if test='type=="my"'>
+			WHERE m.mno=#{mno} and p.lqno=#{selectKind} and p.pno=#{scontent}
+			ORDER BY p.pno desc
+			limit #{start}, #{size}
+		</if> 
+		<if test='type=="scrap"'>
+			<include refid="joinInterest" />
+			WHERE i.mno=#{mno} and p.lqno=#{selectKind} and p.pno=#{scontent}
+			ORDER BY p.pno desc
+			limit #{start}, #{size}
+		</if>
+		
 	</select>
 	
 	

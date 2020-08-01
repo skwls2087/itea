@@ -9,7 +9,7 @@
     <p>즐겨찾기한 문제</p>
     <div class="ptype-search">
     <form name="problemSearch" id="problemSearch" method ="post" class="problemSearch" 
-			action="<%= request.getContextPath()%>/problem/myProblemList.co">
+			action="<%= request.getContextPath()%>/problem/scrapProblemList.co">
 		<div>
 	    <select id="selectKind" name="lqno" class="custom-select" onChange="javascript:problemSearch.submit();">
 	      <option value="" selected="selected">자격증 종류</option>
@@ -23,7 +23,7 @@
   </div>
 	  <div class="pcontent-search">
 	  <form name="problemContentSearch" id="problemContentSearch"
-	  	action="<%= request.getContextPath()%>/problem/myProblemList.co" method ="post" onsubmit="return checkForm();">
+	  	action="<%= request.getContextPath()%>/problem/scrapProblemList.co" method ="post" onsubmit="return checkForm();">
 	  <select id="selectSearch" name="search" class="custom-select">
 	      <option value="pno" selected="selected">번호</option>
 	      <option value="pdetail" selected="">내용</option>
@@ -85,7 +85,7 @@
   				<!-- 이전페이지 -->
   				<c:if test="${PINFO.nowPage ne 1}">
   				  <li class="page-item">
-				      <a class="page-link" href="<%= request.getContextPath()%>/problem/myProblemList.co?nowPage=${PINFO.nowPage-5}&lqno=${lqno}&search=${search}&scontent=${scontent}">&laquo;</a>
+				      <a class="page-link" href="<%= request.getContextPath()%>/problem/scrapProblemList.co?nowPage=${PINFO.nowPage-5}&lqno=${lqno}&search=${search}&scontent=${scontent}">&laquo;</a>
 				    </li>
 					</c:if>
 					<c:if test="${PINFO.nowPage eq 1}">
@@ -101,7 +101,7 @@
 						<c:if test="${PINFO.nowPage!=pg}">
 							<li id="q-nowpage" class="page-item">
 						</c:if>
-				      <a class="page-link" href="<%= request.getContextPath()%>/problem/myProblemList.co?nowPage=${pg}&lqno=${lqno}&search=${search}&scontent=${scontent}">${pg}</a>
+				      <a class="page-link" href="<%= request.getContextPath()%>/problem/scrapProblemList.co?nowPage=${pg}&lqno=${lqno}&search=${search}&scontent=${scontent}">${pg}</a>
 				    </li>
 				    
 					</c:forEach>
@@ -109,7 +109,7 @@
 					<!-- 다음페이지 -->
 					<c:if test="${PINFO.nowPage ne PINFO.totalPage}">
 					<li class="page-item">
-				      <a class="page-link" href="<%= request.getContextPath()%>/problem/myProblemList.co?nowPage=${PINFO.nowPage+5}&lqno=${lqno}&search=${search}&scontent=${scontent}">&raquo;</a>
+				      <a class="page-link" href="<%= request.getContextPath()%>/problem/scrapProblemList.co?nowPage=${PINFO.nowPage+5}&lqno=${lqno}&search=${search}&scontent=${scontent}">&raquo;</a>
 				    </li>
 					</c:if>
 					<c:if test="${PINFO.nowPage eq PINFO.totalPage}">

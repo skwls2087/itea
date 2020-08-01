@@ -25,7 +25,7 @@
 	  <form name="problemContentSearch" id="problemContentSearch"
 	  	action="<%= request.getContextPath()%>/problem/myProblemList.co" method ="post" onsubmit="return checkForm();">
 	  <select id="selectSearch" name="search" class="custom-select">
-	      <option value="pno" selected="selected">번호</option>
+	      <option value="pno" selected="selected">#</option>
 	      <option value="pdetail" selected="">내용</option>
 	    </select>
 	  	<input type="text" name="scontent" class="form-control"/>

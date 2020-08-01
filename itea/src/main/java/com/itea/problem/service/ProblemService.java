@@ -119,7 +119,7 @@ public class ProblemService {
 	public ArrayList<ProblemDTO> myProblemList(PageUtil pInfo, HashMap cert) {
 		
 		
-			int start= (pInfo.getNowPage()-1)*pInfo.getLineCount()+1;
+			int start= (pInfo.getNowPage()-1)*pInfo.getLineCount();
 			int end  = start+pInfo.getLineCount()-1;
 			
 			ProblemDTO ProblemDTO = new ProblemDTO();

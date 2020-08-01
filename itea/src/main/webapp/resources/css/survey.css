@@ -3,13 +3,17 @@
 	text-align:center;
 	font-family: 'Noto Sans KR', sans-serif;
 }
-
+.sNumber{
+	font-family: 'Black Han Sans', sans-serif;
+}
+.survey h4{
+	font-family: 'Sunflower', sans-serif;
+}
 .survey-answer{
 	display:flex;
 	width:80%;
 	height:300px;
 	margin:0 auto;
-	font-family: 'Noto Sans KR', sans-serif;
 }
 
 .survey-answer a{
