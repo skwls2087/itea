@@ -3,10 +3,9 @@
 	text-align:center;
 	font-family: 'Noto Sans KR', sans-serif;
 }
-.sNumber{
+
+.survey h2{
 	font-family: 'Black Han Sans', sans-serif;
-}
-.survey h4{
 }
 .survey-answer{
 	display:flex;

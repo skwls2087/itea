@@ -11,7 +11,9 @@ $(function(){
 })
 </script>
 
-<div class="container" style="margin-top:100px">
+<div class="container">
+
+<h2 class="ask-heading">질문/토론 게시판</h2>
 
 <form action="../ask/askSearch.co" style="text-align:right" id="askSearchFrm">
 	<select id="category" class="custom-select" name="category">

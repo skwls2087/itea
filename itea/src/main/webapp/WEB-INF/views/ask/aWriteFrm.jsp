@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/ask.css">
 
 <style>
 th {
@@ -35,6 +37,7 @@ th {
 </script>
 
 <div class="container">
+	<h2 class="ask-heading">질문/토론 게시판</h2>
 	<form id="aWriteFrm" action="../ask/aWriteProc.co">
 		<table class="table">
 			<tr>

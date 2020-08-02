@@ -6,7 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/itTest.css">
 	
 <div class="survey" id="test1">	
-	 <h2 class="sNumber">1/10</h2>
+	 <h2>1/10</h2>
    <h4>나는 문제에 직면했을때,</h4>
    <br/>
    <br/>

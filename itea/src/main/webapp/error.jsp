@@ -10,6 +10,7 @@
 }
 .error-header{
 	font-size:35px;
+	margin:33px 0;
 }
 .error-main{
 	font-size:20px;

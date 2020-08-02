@@ -213,7 +213,7 @@
 	    </div>
   </div>
 
-<!-- 문제등록하기 -->
+<!-- 질문 등록하기 -->
 	<div class="modal fade" id="ask-Modal" role="dialog">
 	    <div class="modal-dialog">
 	    
@@ -228,10 +228,16 @@
 
 				<form id="ask-form" method="post" action="aWriteProc.co">
 				
-        	<div class="form-group">
-			      <textarea class="atitle" placeholder="제목을 입력해주세요" id="atitle" name="atitle" rows="3"></textarea>
-			      <textarea class="acontent" placeholder="내용을 입력해주세요" id="acontent" name="acontent" rows="3"></textarea>
-			    </div>
+				<table style="width:100%">
+					<tr>
+						<th width="10%">제목</th>
+						<td><input type="text" id="atitle" name="atitle" value="${askDTO.atitle}" style="width:100%"/></td>
+					</tr>
+					<tr>
+						<th>내용</th>
+						<td><textarea id="acontent" name="acontent" rows="10" style="width:100%">${askDTO.acontent}</textarea></td>
+					</tr>
+				</table>
 	
 	        <div class="modal-footer">
 	      		<input type="button" class="btn btn-info" id="a-submit" value="등록하기"/>

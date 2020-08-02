@@ -9,26 +9,11 @@
     <span id="problem-header">신고된 문제</span><br/><br/>
    	<div class="ptype-search">
 </div>
-
-	  <div class="pcontent-search">
-	  <form name="problemContentSearch" id="problemContentSearch"
-	  	action="<%= request.getContextPath()%>/problem/myProblemList.co" method ="post" onsubmit="return checkForm();">
-	  <select id="selectSearch" name="search" class="custom-select">
-	      <option value="pno" selected="selected">#</option>
-	      <option value="pdetail" selected="">내용</option>
-	    </select>
-	  	<input type="text" name="scontent" class="form-control"/>
-	  	<input type="hidden" name="lqno" value="${lqno}"/>
-	  	<img src="${pageContext.request.contextPath}/resources/img/search.png" id="problemContentSearchClick" 
-	  		style="cursor:pointer" width="20" onclick="document.getElementById('problemContentSearch').submit();"/>
-	  </form>
-	  </div>
 	  
 	<table class="table" style="table-layout:fixed">
     <tr>
         <td width="10%">번호</td>
         <td width="40%">신고내용</td>
-        <td>신고수</td>
         <td width="5%">
         	<img src="${pageContext.request.contextPath}/resources/img/like.png" width="20"/>
         </td>
@@ -39,40 +24,27 @@
         	<img src="${pageContext.request.contextPath}/resources/img/errorhover.png" width="25"/>
         </td>
         <td width="5%"></td>
+        <td width="5%"></td>
     </tr>
     <c:forEach items="${LIST}" var="list" varStatus="status">
     <tr>
         <td>
-        	<a href="${pageContext.request.contextPath}/ask/problemBoard.co?pno=${list.pno }" id="problem-board" target="_blank">
-        		${list.pno }
+        	<a href="${pageContext.request.contextPath}/ask/problemBoard.co?pno=${list.pno}" id="problem-board" target="_blank">
+        		${list.pno}
        		</a>
         </td>
-        <td>
-        ${list.lname}<c:if test="${list.lqclass!='단독'}">_${list.lqclass}</c:if>
-        </td>
-        <td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
-        <a href="<%= request.getContextPath()%>/problem/selectMyProblem.co?pno=${list.pno}">Q.${list.pdetail }</a></td>
-        
-        <td>
-        <c:if test="${problem.psolve!=0}">
-					<fmt:parseNumber var="correct" integerOnly="true" value="${problem.pcorrect/problem.psolve*100}"/>
-					${correct}%
-				</c:if>
-        </td>
+        <td>${list.econtent}</td>
+		<td>${list.cnt}</td>
         <td>${list.plike}</td>
         <td>${list.phate}</td>
-        <td>${list.perror}</td>
-        <td>
-     			<a href="problemDelete.co?pno=${list.pno}&nowPage=${PINFO.nowPage}&lqno=${lqno}&search=${search}&scontent=${scontent}" 
-     				onclick="alert('해당 문제가 삭제되었습니다.')">
-     			<img src="${pageContext.request.contextPath}/resources/img/trash.png" width="20"/></a>
-       	</td>
+		<td></td>
+		<td></td>
     </tr>
     </c:forEach>
     <!-- 페이징처리 -->
         
         <tr>
-				<td colspan="8">
+				<td colspan="7">
 				<div>
   				<ul class="pagination" id="q-paging">
   				
