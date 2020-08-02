@@ -204,8 +204,8 @@
 			ORDER BY p.pno desc
 			limit #{start}, #{size}
 		</if>
-		
 	</select>
+	
 	<select id="pnoselectedsearchmyProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
 	  <include refid="selectProblemList" />
 	  <if test='type=="my"'>
@@ -223,7 +223,23 @@
 	</select>
 	
 	
-	
+	<!-- 신고된 문제 관리 -->
+	<select id="getErrorTotalCnt" resultType="int">
+			SELECT COUNT(*)
+			FROM error
+	</select>
+	<select id="errorProblemList" parameterType="Hashmap" resultType="errorDTO">
+			SELECT e.pno,econtent,c.cnt,p.plike,p.phate
+			FROM error AS e
+			JOIN 
+			(SELECT pno,COUNT(*) AS cnt
+			FROM error
+			GROUP BY pno) AS c
+			ON c.pno=e.pno
+			JOIN problem AS p
+			ON p.pno=e.pno
+			limit #{start},#{size}
+	</select>
 	
 	
 	<!-- 문제 입력 -->

@@ -6,9 +6,11 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.itea.dto.ErrorDTO;
 import com.itea.dto.ProblemDTO;
 import com.itea.dto.QaDTO;
 import com.itea.dto.licenseDTO;
+import com.itea.util.PageUtil;
 
 public class ProblemDAO {
 
@@ -219,6 +221,14 @@ public class ProblemDAO {
 
 	public void deleteProblem(int pno) {
 		session.selectList("problem.deleteProblem",pno);
+	}
+
+	public int getErrorTotalCnt() {
+		return session.selectOne("problem.getErrorTotalCnt");
+	}
+
+	public ArrayList<ErrorDTO> errorProblemList(HashMap page) {
+		return  (ArrayList)session.selectList("problem.errorProblemList", page);
 	}
 		
 

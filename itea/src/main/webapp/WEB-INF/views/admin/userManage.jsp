@@ -85,7 +85,18 @@ $( document ).ready(function() {
     chart.draw(data, options);
   	}
 });
+
+$(function(){
+	$("#memberSearch").click(function(){
+		$("#memberSearchFrm").submit();
+	})
+	$("#memberOut").click(function(){
+		$("#memberOutFrm").submit();
+	})
+})
+
 </script>
+
 <div class="admin-heading">관리자 페이지</div>
 
 <div id="admin" class="admin">
@@ -107,7 +118,7 @@ $( document ).ready(function() {
 	<div class="admin-div">
 		<!-- 회원을 닉네임이나 아이디로 검색 가능 -->
 		<div class="board-search text-right">
-			<form action="<%= request.getContextPath()%>/admin/memberList.co" name="user-search" 
+			<form action="<%= request.getContextPath()%>/admin/memberList.co" name="user-search"  id="memberSearchFrm"
 				method ="get" class="user-search" onsubmit="return checkForm();">
 				<div class="insertFavorite pull-right">
 			    <select name="column" class="custom-select" id="admin-user-select">	
@@ -115,8 +126,7 @@ $( document ).ready(function() {
 			        <option value="mmail">이메일</option> 
 			    </select>
 			    <input type="text" name="value" class="form-control" id="member-content" placeholder="검색어를 입력하세요."/>
-			    <img src="${pageContext.request.contextPath}/resources/img/search.png" width="20">
-			    <input type="submit" value="검색" class="btn btn-secondary"/>
+			    <img src="${pageContext.request.contextPath}/resources/img/search.png" id="memberSearch" width="20" style="cursor:pointer;">
 		    </div>
 			</form>
 		</div>
@@ -124,13 +134,13 @@ $( document ).ready(function() {
 		<table class="table" id="admin-table">
        <thead class="thead-light">
        	<tr>
-        	<th>닉네임</th>
-        	<th>이메일</th>
-        	<th>로그인경로</th>
-        	<th>회원명</th>
-        	<th style="text-align:center">전화번호</th>
-        	<th style="text-align:center">가입일</th>
-        	<th>강제탈퇴</th>
+        	<th width="10%">닉네임</th>
+        	<th width="30%">이메일</th>
+        	<th width="10%">로그인경로</th>
+        	<th width="10%">회원명</th>
+        	<th width="20%" style="text-align:center">전화번호</th>
+        	<th width="10%" style="text-align:center">가입일</th>
+        	<th width="10%">강제탈퇴</th>
        	<tr>
        </thead>
        <c:forEach var="member" items="${PINFO.content}">
@@ -159,11 +169,11 @@ $( document ).ready(function() {
         	<td>${member.mphone}</td>
         	<td style="text-align:center">${member.mdate}</td>
         	<td>
-        	<form name="delete" method="post" action="<%= request.getContextPath()%>/admin/deleteMember.co"
+        	<form name="delete" method="post" action="<%= request.getContextPath()%>/admin/deleteMember.co" id="memberOutFrm"
         		onsubmit="return checkDelete('${member.mnick}');">
         		<input type="hidden" name="userNick" value="${member.mnick}"/>
 						<input type="hidden" name="deleteMember" value="deleteMember"/>
-						<input type="submit" value="탈퇴" class="button2">
+						<img src="${pageContext.request.contextPath}/resources/img/logout.png" id="memberOut" width="20" style="cursor:pointer;">
 					</form>
         	</td>
         </tr>

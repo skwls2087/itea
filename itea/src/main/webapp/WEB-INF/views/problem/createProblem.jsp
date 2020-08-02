@@ -3,9 +3,7 @@
 <!-- js/css 참조 -->
 <script src="${pageContext.request.contextPath}/resources/js/problem.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/problem.css">
-저장경로=${path}, 이름=${name}
-<img src="/itea2020/20200802.png">
-<img src="/itea2020/files/20200802.png">
+
 <div id="problem-create-container">
 	<div id="problem-create">
 	<form action="selectTest.co" method="post">

@@ -6,7 +6,7 @@
 
 <div>
 	<div class="problemList">
-    <p>즐겨찾기한 문제</p>
+    <span id="problem-header">즐겨찾기한 문제</span><br/><br/>
     <div class="ptype-search">
     <form name="problemSearch" id="problemSearch" method ="post" class="problemSearch" 
 			action="<%= request.getContextPath()%>/problem/scrapProblemList.co">

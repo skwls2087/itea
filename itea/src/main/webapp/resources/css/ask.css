@@ -1,0 +1,14 @@
+.custom-select{
+	width:100px;
+    margin-bottom: 5px;
+}
+#asearch{
+	width:200px;
+	display:inline-block;
+	position:relative;
+}
+#askSearch{
+	position:relative;
+    right: 34px;
+    top: -3px;
+}

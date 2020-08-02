@@ -6,8 +6,8 @@
    <script>
       var naverLogin = new naver.LoginWithNaverId(
          {
-            clientId: "68tNfP0GUh1VB4b0suSF",
-            callbackUrl: "http://itealab.com/callback",
+            clientId: "d2LqO26x_yJC_yXrKI3h",
+            callbackUrl: "http://itealab.com/callback.co",
             isPopup: false,
             callbackHandle: true
          }

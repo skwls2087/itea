@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.itea.dto.ErrorDTO;
 import com.itea.dto.ProblemDTO;
 import com.itea.dto.licenseDTO;
 import com.itea.problem.service.ProblemService;
@@ -205,6 +206,26 @@ public class ProblemController {
 		mv.addObject("PINFO",pInfo);//페이징관련 정보
 		mv.addObject("LIST",list);
 		mv.setViewName("problem/scrapProblemList");
+		
+		return mv;
+	}
+	
+	//즐겨찾기한 문제
+	@RequestMapping("/errorProblemList")
+	public ModelAndView errorProblemList(
+			@RequestParam(value="nowPage",required=false, defaultValue="1") int nowPage,
+			HttpServletRequest request,HttpSession session,ModelAndView mv) {
+
+		PageUtil pInfo;
+		
+		ArrayList<ErrorDTO> list;
+		
+		pInfo = problemSV.getErrorPageInfo(nowPage);
+		list= problemSV.errorProblemList(pInfo);
+		
+		mv.addObject("PINFO",pInfo);//페이징관련 정보
+		mv.addObject("LIST",list);
+		mv.setViewName("problem/errorProblemList");
 		
 		return mv;
 	}

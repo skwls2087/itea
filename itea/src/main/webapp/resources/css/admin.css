@@ -12,9 +12,9 @@
 	margin:50px auto;
 	width:100%;
 	text-align:center;
-  display: flex;
-  justify-content:center;
-  flex-wrap:wrap;
+  	display: flex;
+  	justify-content:center;
+  	flex-wrap:wrap;
 }
 .admin-heading{
 	margin-top:20px;
@@ -30,10 +30,12 @@
 }
 #admin-user-select{
 	width:100px;
+    margin-bottom: 5px;
 }
 #member-content{
 	width:200px;
 	display:inline-block;
+	position:relative;
 }
 .admin-user{
 	margin:0 auto;
@@ -43,4 +45,8 @@
 #a-paging{
 	justify-content: center;
 }
-
+#memberSearch{
+	position:relative;
+    right: 34px;
+    top: -3px;
+}

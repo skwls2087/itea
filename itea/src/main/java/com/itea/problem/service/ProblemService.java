@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.itea.dao.ProblemDAO;
+import com.itea.dto.ErrorDTO;
 import com.itea.dto.ProblemDTO;
 import com.itea.dto.QaDTO;
 import com.itea.dto.licenseDTO;
@@ -139,11 +140,26 @@ public class ProblemService {
 	public void deleteProblem(int pno) {
 		problemDAO.deleteProblem(pno);
 	}
-	  
 	
-	
-			
-			
-	
+	public PageUtil getErrorPageInfo(int nowPage) {
+		int totalCount= problemDAO.getErrorTotalCnt();
+		PageUtil pInfo = new PageUtil(nowPage, totalCount,10,5);
+		System.out.println(pInfo);
+		return pInfo;
+	}
 
+	public ArrayList<ErrorDTO> errorProblemList(PageUtil pInfo) {
+		
+		int start= (pInfo.getNowPage()-1)*pInfo.getLineCount();
+		int end  = start+pInfo.getLineCount()-1;
+		
+		HashMap page=new HashMap();
+		
+		ProblemDTO ProblemDTO = new ProblemDTO();
+		
+		page.put("start", start);
+		page.put("size", ProblemDTO.getSize());
+		
+		return problemDAO.errorProblemList(page);
+	}
 }

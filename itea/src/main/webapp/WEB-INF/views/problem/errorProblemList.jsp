@@ -6,21 +6,10 @@
 
 <div>
 	<div class="problemList">
-    <span id="problem-header">내가 낸 문제</span><br/><br/>
-    <div class="ptype-search">
-    <form name="problemSearch" id="problemSearch" method ="post" class="problemSearch" 
-			action="<%= request.getContextPath()%>/problem/myProblemList.co">
-		<div>
-	    <select id="selectKind" name="lqno" class="custom-select" onChange="javascript:problemSearch.submit();">
-	      <option value="" selected="selected">자격증 종류</option>
-	      <c:forEach var="ckind" items="${ckind}">
-		      <option value="${ckind.lqno}" <c:if test="${lqno == ckind.lqno}">selected='selected'</c:if>>${ckind.lname}
-		      <c:if test="${ckind.lqclass!='단독'}">(${ckind.lqclass})</c:if></option>
-	      </c:forEach>
-	    </select>
-	  </div>
-	  </form>
-  </div>
+    <span id="problem-header">신고된 문제</span><br/><br/>
+   	<div class="ptype-search">
+</div>
+
 	  <div class="pcontent-search">
 	  <form name="problemContentSearch" id="problemContentSearch"
 	  	action="<%= request.getContextPath()%>/problem/myProblemList.co" method ="post" onsubmit="return checkForm();">
@@ -38,9 +27,8 @@
 	<table class="table" style="table-layout:fixed">
     <tr>
         <td width="10%">번호</td>
-        <td width="20%">자격증</td>
-        <td width="40%">문제</td>
-        <td width="10%">정답률</td>
+        <td width="40%">신고내용</td>
+        <td>신고수</td>
         <td width="5%">
         	<img src="${pageContext.request.contextPath}/resources/img/like.png" width="20"/>
         </td>
