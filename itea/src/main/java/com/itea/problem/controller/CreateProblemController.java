@@ -2,6 +2,8 @@ package com.itea.problem.controller;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
@@ -27,9 +29,10 @@ public class CreateProblemController {
 		
 		if(pDTO.getFile().getSize()!=0) {
 			//1.첨부파일이 있다면 저장하기
-			String path=request.getSession().getServletContext().getRealPath("/")+"resources/files/";
-			System.out.println(path);
-			
+			Path relativePath = Paths.get("");
+	        String path = relativePath.toAbsolutePath().toString()+"/tomcat/webapps/ROOT/resources/files";
+	        System.out.println("Working Directory = " + path);
+	        
 			Date date=new Date();
 			SimpleDateFormat transFormat = new SimpleDateFormat("yyyyMMdd");
 			String today = transFormat.format(date);
@@ -42,6 +45,8 @@ public class CreateProblemController {
 			File file=new File(path,saveName);
 			System.out.println(saveName+"으로 저장할게~");
 			
+			request.setAttribute("name", saveName);
+			request.setAttribute("path", path);
 			try {
 				pDTO.getFile().transferTo(file);
 			} catch (Exception e) {
@@ -64,7 +69,7 @@ public class CreateProblemController {
 		
 		System.out.println(pDTO);
 		
-		return "redirect:createProblem.co";
-    
+		//return "redirect:createProblem.co";
+		return "problem/createProblem";
 	}
 }
