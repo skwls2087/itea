@@ -13,13 +13,25 @@
   	var calendarEl = document.getElementById('calendar');
 
  	var calendar = new FullCalendar.Calendar(calendarEl, {
+ 		/*Boolean, default: true,
+		windowResize: function(arg) {
+			    alert('The calendar has adjusted to a window resize. Current view: ' + arg.view.type);
+			  },*/
+	  dayMaxEventRows: true, // for all non-TimeGrid views
+	  views: {
+	    timeGrid: {
+	      dayMaxEventRows: 2 // adjust to 6 only for timeGridWeek/timeGridDay
+	    }
+	  }	 , 
+ 		aspectRatio: 2,
+ 		contentHeight: 650,
     googleCalendarApiKey: 'AIzaSyAVIOOupclxyUQEFJ_XtOcfdc7BzbQYWgY',
     eventSources: [
       {
          googleCalendarId: 'bockikpkbi8al3sq8u5c74ik6c@group.calendar.google.com',
          className: '네트워크관리사',
        	 color: '#848ccf',
-         //textColor: 'black' 
+         //textColor: 'black',
       },
       {
           googleCalendarId: 'p6vuu22cdfbbtof421l05u2v20@group.calendar.google.com',
@@ -79,7 +91,7 @@
          googleCalendarId: '687kr198d3f0uv22u8t8uh4na0@group.calendar.google.com',
          className: 'SQL 전문가/개발자',
        	color: '#127681',
-       	//textColor: 'black' 
+       	//textColor: 'black' ,
        }
     ]
   
