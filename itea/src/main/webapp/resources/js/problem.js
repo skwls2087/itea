@@ -184,6 +184,10 @@ $(function(){
 		$(this).height(1).height( $(this).prop('scrollHeight')+40 );	
 	});
 	
+	$("#problem-proc").find("textarea").on('keydown keyup', function () {
+		$(this).height(1).height( $(this).prop('scrollHeight')+30 );	
+	});
+	
 	
 	$("#create-text-problem-submit").click(function(){
 		
@@ -383,7 +387,7 @@ $(function(){
 	$("#problemEssayScoring").click(function(){
 
 		//정답번호와 선택한 번호를 가져오기
-		correct=$("#shortText").val();
+		correct=$("#essayText").val();
 		pno=$("#problemPNO").html();
 
 		//정답을 입력했는지 확인
@@ -562,4 +566,14 @@ $(function(){
 		});
 		
 	});
+	
+	$('#p-login1').click(function(){
+		alert("로그인 후 이용해주세요")
+		return false;
+	})
+	
+	$('#p-login2').click(function(){
+		alert("로그인 후 이용해주세요")
+		return false;
+	})
 });

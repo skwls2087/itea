@@ -44,15 +44,17 @@ public class CorrectProblemController {
 		
 		//해당 pno에 맞는 정답리스트 받아오기
 		List<String> clist=problemSV.selectPnoCorrects(pno);
-		System.out.println("정답리스트는="+clist);
-		System.out.println(clist.size());
 		
 		int iscorrect=0;
 		for(String list:clist) {
-			if(correct.contains(list)) iscorrect++;
+
+			if(correct.contains(list)) {
+				iscorrect++;
+			}
 		}
-		if(clist.size()==iscorrect) return 1;
-		else return 0;
+		
+		if(clist.size()==iscorrect) {return 1;}
+		else {return 0;}
 		
 	}
 

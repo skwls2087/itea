@@ -69,7 +69,6 @@ public class CreateProblemController {
 		
 		System.out.println(pDTO);
 		
-		//return "redirect:createProblem.co";
-		return "problem/createProblem";
+		return "redirect:createProblem.co";
 	}
 }

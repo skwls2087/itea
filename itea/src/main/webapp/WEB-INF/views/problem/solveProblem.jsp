@@ -25,10 +25,9 @@
 		      <option value="3">종합문제</option>
 		    </select>
 		  </div>
-		  
+		  <div style="color:gray;text-align:left;margin-bottom:10px;">출제년도는 중복 선택 가능합니다.</div>
 		  <div class="form-group">
 		    <select id="Qyear" name="pyearList" size="10" class="custom-select" multiple>
-		      <option value="" selected="">출제년도</option>
 		      <option value="2020">2020년도</option>
 		      <option value="2019">2019년도</option>
 		      <option value="2018">2018년도</option>

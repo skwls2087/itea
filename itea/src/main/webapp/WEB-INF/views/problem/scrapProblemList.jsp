@@ -85,7 +85,7 @@
   				<!-- 이전페이지 -->
   				<c:if test="${PINFO.nowPage ne 1}">
   				  <li class="page-item">
-				      <a class="page-link" href="<%= request.getContextPath()%>/problem/scrapProblemList.co?nowPage=${PINFO.nowPage-5}&lqno=${lqno}&search=${search}&scontent=${scontent}">&laquo;</a>
+				      <a class="page-link" href="<%= request.getContextPath()%>/problem/scrapProblemList.co?nowPage=${PINFO.nowPage-1}&lqno=${lqno}&search=${search}&scontent=${scontent}">&laquo;</a>
 				    </li>
 					</c:if>
 					<c:if test="${PINFO.nowPage eq 1}">
@@ -109,7 +109,7 @@
 					<!-- 다음페이지 -->
 					<c:if test="${PINFO.nowPage ne PINFO.totalPage}">
 					<li class="page-item">
-				      <a class="page-link" href="<%= request.getContextPath()%>/problem/scrapProblemList.co?nowPage=${PINFO.nowPage+5}&lqno=${lqno}&search=${search}&scontent=${scontent}">&raquo;</a>
+				      <a class="page-link" href="<%= request.getContextPath()%>/problem/scrapProblemList.co?nowPage=${PINFO.nowPage+1}&lqno=${lqno}&search=${search}&scontent=${scontent}">&raquo;</a>
 				    </li>
 					</c:if>
 					<c:if test="${PINFO.nowPage eq PINFO.totalPage}">

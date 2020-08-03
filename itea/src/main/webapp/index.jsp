@@ -5,7 +5,6 @@
 <link href='${pageContext.request.contextPath}/resources/fullcalendar-5.1.0/lib/main.css' rel='stylesheet' />
 <script src='${pageContext.request.contextPath}/resources/fullcalendar-5.1.0/lib/main.js'></script>
 
-
 <script type='text/javascript'>
 
 	/* 예인-달력 */
@@ -99,158 +98,11 @@
   		calendar.render();
 	});
 
-	/*태강-채팅*/
-	function sendMessage(form){
-		form.writer.value = form.writer.value.trim();
-		
-		form.body.value = form.body.value.trim();
-		
-		if(form.body.value.length==0){
-			alert('내용을 입력해주세요.');
-			form.body.focus();
-			return false;
-		}
-		
-		//서버로 전송
-		$.post('chat/addMessage.co',{
-			writer : form.writer.value,
-			body : form.body.value
-		},function(data){
-
-		},'json');
-		form.body.value='';
-		form.body.focus();
-	}
-	
-	var Chat__lastReceivedMessageId= -1;
-	
-	function Chat__loadNewMessages(){
-		$.get('chat/getMessages.co', {
-			from : Chat__lastReceivedMessageId+1
-		},  function(data){
-				/* data.id.sort(function(a,b){
-					return b-a;
-				}); */
-				for(var i=0; i<data.length;i++){
-					var message = data[i];
-					
-					Chat__lastReceivedMessageId=message.id;
-					Chat__drawMessages(message);
-				}
-			
-				setTimeout(Chat__loadNewMessages,3000);
-			
-		}, 'json');
-	}
-		
-	function Chat__drawMessages(message){
-		
-		name=document.getElementById("chatname").innerText;
-		
-		if(name==message.writer){
-			
-			var html = 
-				'<div class="myname">'+message.writer+'</div><br/>'+
-				'<div class="mychat">'+message.body+'</div><br/>'
-				
-				$('.chat-list').append(html)
-		}else{
-			var html = 
-				'<div class="othername">'+message.writer+'</div><br/>'+
-				'<div class="otherchat">'+message.body+'</div><br/>'
-				
-				$('.chat-list').append(html)
-		}
-			
-		var objDiv=document.getElementById("chat-list");
-		objDiv.scrollTop=objDiv.scrollHeight;
-		
-	}
-		
-	
-	
-	$(function(){
-		
-		Chat__loadNewMessages();
-		
-		$(document).on("keyup","#chattext",function(event){
-	        var flag = true;
-	        flag = $(this).val().length > 0 ? false : true;
-	       	if(flag==true){
-	       		$("#chat-submit").attr('src','${pageContext.request.contextPath}/resources/img/up.png');
-	       		$("#chat-submit").removeClass();
-	       	}else{
-	       		$("#chat-submit").attr('src','${pageContext.request.contextPath}/resources/img/uphover.png');
-	       		$("#chat-submit").addClass('chat-submit');
-	       	}
-	    });
-		
-		$(document).on("click",".chat-submit",function(event){
-			$("#chat-form").submit();
-		});
-		
-	})
-
 </script>
-
-<style>
-.mychat{ 
-	background:#ffd043; 
-	word-break:break-all; 
-	display:inline-block; 
-	padding:5px; 
-	border-radius:5px; 
-	text-align:right;
-	float:right;
-	margin-bottom:5px;
-}
-.myname{
-	color:black; 
-	display:inline-block; 
-	width:100%;
-	text-align:right;
-}
-.otherchat{ 
-	background:white; 
-	word-break:break-all; 
-	display:inline-block; 
-	padding:5px; 
-	border-radius:5px; 
-	text-align:left;
-	float:left;
-	margin-bottom:5px;
-}
-.othername{
-	color:black; 
-	display:inline-block; 
-	width:100%;
-	text-align:left;
-}
-</style>
 
 <div class="itea-main">
 	<div class="main-calendar">
 		<div id='calendar'></div>
 	</div>
-	<div class="main-chat">
-		<div style="display:none" id="chatname">${MNICK}</div>
-		<div class="container" id="chatbox">
-		<div class="chat-header">아이티어 채팅</div>
-		<div class="chat-list" id="chat-list" style="overflow-y:scroll;height:550px; padding:4px; border:1 solid #000000;"></div>
-		
-			<form id="chat-form" onsubmit="sendMessage(this); return false;">
-				<c:if test="${empty MNO}">
-					<input type="hidden" name="writer" value="비회원">
-				</c:if>
-				<c:if test="${!empty MNO}">
-					<input type="hidden" name="writer" value="${MNICK}">
-				</c:if>
-				<div class="chat-footer">
-					<textarea name="body" id="chattext" style="resize: none;" placeholder="내용을 입력해주세요"></textarea>
-					<img src="${pageContext.request.contextPath}/resources/img/up.png" width="25" id="chat-submit" style="cursor:pointer"/>
-				</div>
-			</form>
-		</div>
-	</div>
-
+	
 </div>
