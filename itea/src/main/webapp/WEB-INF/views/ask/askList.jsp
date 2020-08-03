@@ -48,7 +48,7 @@ $(function(){
 		</c:forEach>
 	</table>
 	<table style="text-align:center" width="100%">
-		<tr>
+		<!--  <tr>
 			<td>
 				<c:if test="${pInfo.nowPage eq 1}">
 					이전
@@ -64,8 +64,94 @@ $(function(){
 				</c:if>
 				<c:if test="${pInfo.nowPage ne pInfo.totalPage}">
 					<a href="../ask/askList.co?nowPage=${pInfo.nowPage+1}">다음</a>
-				</c:if>	
-			</td>
-		</tr>
+				</c:if>	-->
+				<!-- 회원목록 페이징 -->		
+			 <c:if test="${pInfo.totalCount>0}">
+				<tr>
+				<td colspan="7">
+				<div>
+  			<ul class="pagination" id="a-paging">
+				<!-- 검색조건이 없을 때는 페이지넘버만 파라미터로 보내기 -->
+					<c:if test="${null eq asearch}">
+	  				<!-- 이전페이지 -->
+	  				<c:if test="${pInfo.nowPage ne 1}">
+	  				    <li class="page-item">
+					      <a class="page-link" href="<%= request.getContextPath()%>/ask/askList.co?nowPage=${pInfo.nowPage-1}">&laquo;</a>
+					    </li>
+						</c:if>
+						<c:if test="${pInfo.nowPage eq 1}">
+	  				    <li class="page-item disabled">
+	  				    	<a class="page-link" href="#">&laquo;</a>
+					    </li>
+						</c:if>
+						
+						<!-- 페이지 -->
+							<c:forEach var="pg"	 begin="${pInfo.startPage}" end="${pInfo.endPage}">
+								<c:if test="${pInfo.nowPage==pg}">
+									<li id="q-nowPage" class="page-item active">
+								</c:if>
+								<c:if test="${pInfo.nowPage!=pg}">
+									<li id="q-nowPage" class="page-item">
+								</c:if>
+						      <a class="page-link" href="<%= request.getContextPath()%>/ask/askList.co?nowPage=${pg}">${pg}</a>
+						    </li>
+							</c:forEach>
+							
+							<!-- 다음페이지 -->
+							<c:if test="${pInfo.nowPage ne pInfo.totalPage}">
+							<li class="page-item">
+						      <a class="page-link" href="<%= request.getContextPath()%>/ask/askList.co?nowPage=${pInfo.nowPage+1}">&raquo;</a>
+						    </li>
+							</c:if>
+							<c:if test="${pInfo.nowPage eq pInfo.totalPage}">
+							<li class="page-item disabled">
+								<a class="page-link" href="#}">&raquo;</a>
+						    </li>
+							</c:if>
+						</c:if>
+					
+					<!-- 검색조건이 있을 때는 페이지넘버와 검색조건도 파라미터로 보내기 -->
+					<c:if test="${null ne asearch}">
+							<%-- [이전prev]출력 --%>
+							<c:if test="${pInfo.nowPage ne 1}">
+	  				    <li class="page-item">
+					      <a class="page-link" href="<%= request.getContextPath()%>/ask/askList.co?nowPage=${pInfo.nowPage-1}&column=${category}&value=${asearch}">&laquo;</a>
+					    </li>
+						</c:if>
+						<c:if test="${pInfo.nowPage eq 1}">
+	  				    <li class="page-item disabled">
+	  				    	<a class="page-link" href="#">&laquo;</a>
+					    </li>
+						</c:if>
+						
+						<!-- 페이지 -->
+						<c:forEach var="pg"	 begin="${pInfo.startPage}" end="${pInfo.endPage}">
+							<c:if test="${pInfo.nowPage==pg}">
+								<li id="q-nowPage" class="page-item active">
+							</c:if>
+							<c:if test="${pInfo.nowPage!=pg}">
+								<li id="q-nowPage" class="page-item">
+							</c:if>
+					      <a class="page-link" href="<%= request.getContextPath()%>/ask/askList.co?nowPage=${pg}&column=${category}&value=${asearch}">${pg}</a>
+					    </li>
+						</c:forEach>
+						
+							<!-- 다음페이지 -->
+						<c:if test="${pInfo.nowPage ne pInfo.totalPage}">
+						<li class="page-item">
+					      <a class="page-link" href="<%= request.getContextPath()%>/ask/askList.co?nowPage=${pInfo.nowPage+1}&column=${category}&value=${asearch}">&raquo;</a>
+					    </li>
+						</c:if>
+						<c:if test="${pInfo.nowPage eq pInfo.totalPage}">
+						<li class="page-item disabled">
+							<a class="page-link" href="#}">&raquo;</a>
+					    </li>
+						</c:if>
+						</c:if>
+				  </ul>
+				</div>
+				</td>
+				</tr>
+				</c:if>
 	</table>
 </div>
