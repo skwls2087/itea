@@ -87,8 +87,8 @@ public class AdminService<Hashmap> {
 		
 		for(int i=0;i<visitor.size();i++) {
 			if(i!=0) {
-				int cntstr = (int) visitor.get(i);
-				//System.out.println("service visitor "+(int) visitor.get(i));
+				int cntstr = (int) visitor.get(i-1);
+				System.out.println("service visitor "+(int) visitor.get(i-1));
 				sum=sum-cntstr;
 			}
 			list.add(sum);
@@ -137,7 +137,7 @@ public class AdminService<Hashmap> {
 		
 		for(int i=0;i<member.size();i++) {
 			if(i!=0) {
-				int cntstr = (int) member.get(i);
+				int cntstr = (int) member.get(i-1);
 				sum=sum-cntstr;
 			}
 			list.add(sum);
