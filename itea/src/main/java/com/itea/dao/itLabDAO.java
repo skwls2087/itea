@@ -1,12 +1,7 @@
 package com.itea.dao;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.itea.dto.licenseDTO;
 
 public class itLabDAO {
 
@@ -21,14 +16,9 @@ public class itLabDAO {
 	}
 
 	public int resultCheck(String test) {
+		System.out.println("dao"+test);
 		int result=session.selectOne("itLab.select1", test);
 		
 		return result;
 	}
-
-
-
-
-	
-	
 }

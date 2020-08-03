@@ -14,6 +14,15 @@ public class licenseDTO {
 	private String la;		//관련페이지(시험일정)
 	private String lqclass; //시험 유형
 	
+	private String lqno;
+	
+	
+	public String getLqno() {
+		return lqno;
+	}
+	public void setLqno(String lqno) {
+		this.lqno = lqno;
+	}
 	public int getLno() {
 		return lno;
 	}
@@ -85,7 +94,7 @@ public class licenseDTO {
 	public String toString() {
 		return "licenseDTO [lno=" + lno + ", lname=" + lname + ", lorg=" + lorg + ", lfee=" + lfee + ", lclass="
 				+ lclass + ", lreq=" + lreq + ", ldetail=" + ldetail + ", lcut=" + lcut + ", linfo=" + linfo + ", la="
-				+ la + ", lqclass=" + lqclass + "]";
+				+ la + ", lqclass=" + lqclass + ", lqno=" + lqno + "]";
 	}
-
+	
 }

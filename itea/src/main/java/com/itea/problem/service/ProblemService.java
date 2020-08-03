@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.itea.dao.ProblemDAO;
+import com.itea.dto.ErrorDTO;
 import com.itea.dto.ProblemDTO;
 import com.itea.dto.QaDTO;
 import com.itea.dto.licenseDTO;
@@ -109,29 +110,56 @@ public class ProblemService {
 	}
 
 
-	public PageUtil getPageInfo(int nowPage, int mno) {
-		int totalCount= problemDAO.getmyTotalCnt(mno);
-		PageUtil pInfo = new PageUtil(nowPage, totalCount,4,5);
-		return pInfo;  
+	public PageUtil getPageInfo(int nowPage, HashMap cert) {
+		int totalCount= problemDAO.getmyTotalCnt(cert);
+		PageUtil pInfo = new PageUtil(nowPage, totalCount,10,5);
+		System.out.println(pInfo);
+		return pInfo;
 	}
 
-	public ArrayList<ProblemDTO> getcProblemList(PageUtil pInfo, int mno) {
-			int start= 
-				(pInfo.getNowPage()-1)*pInfo.getLineCount()+1;
+	public ArrayList<ProblemDTO> myProblemList(PageUtil pInfo, HashMap cert) {
+		
+		
+			int start= (pInfo.getNowPage()-1)*pInfo.getLineCount();
 			int end  = start+pInfo.getLineCount()-1;
-			ProblemDTO ProblemDTO = new ProblemDTO();
-			ProblemDTO.setStart(start-1);
-			ProblemDTO.setEnd(end);
-			ProblemDTO.setLogno(mno);
 			
-			ArrayList<ProblemDTO> list = problemDAO.getcProblemList(ProblemDTO);
+			ProblemDTO ProblemDTO = new ProblemDTO();
+			
+			cert.put("start", start);
+			cert.put("size", ProblemDTO.getSize());
+			
+			ArrayList<ProblemDTO> list = problemDAO.myProblemList(cert);
 			return list;
 	}
-	  
-	
-	
-			
-			
-	
 
+	public List<String> selectPnoCorrects(int pno) {
+		return problemDAO.selectPnoCorrects(pno);
+	}
+
+	//문제 삭제
+	public void deleteProblem(int pno) {
+		problemDAO.deleteProblem(pno);
+	}
+	
+	public PageUtil getErrorPageInfo(int nowPage) {
+		int totalCount= problemDAO.getErrorTotalCnt();
+		PageUtil pInfo = new PageUtil(nowPage, totalCount,10,5);
+		System.out.println(pInfo);
+		return pInfo;
+	}
+
+	public ArrayList<ErrorDTO> errorProblemList(PageUtil pInfo) {
+		
+		int start= (pInfo.getNowPage()-1)*pInfo.getLineCount();
+		int end  = start+pInfo.getLineCount()-1;
+		
+		HashMap page=new HashMap();
+		
+		ProblemDTO ProblemDTO = new ProblemDTO();
+		
+		page.put("start", start);
+		page.put("size", ProblemDTO.getSize());
+		
+		return problemDAO.errorProblemList(page);
+	}
 }

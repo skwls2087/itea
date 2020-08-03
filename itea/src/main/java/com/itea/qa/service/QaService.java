@@ -17,14 +17,14 @@ public class QaService {
 	public PageUtil getPageInfo(int nowPage) {
 		int totalCount= qaDAO.getTotalCnt();
 		
-		PageUtil pInfo = new PageUtil(nowPage, totalCount,4,5);
+		PageUtil pInfo = new PageUtil(nowPage, totalCount,5,5);
 		return pInfo;   
 	}
 	
 	//내 질문 페이징관련 정보
 	public PageUtil getmyPageInfo(int nowPage,int mno) {
 		int totalCount= qaDAO.getmyTotalCnt(mno);
-		PageUtil pInfo = new PageUtil(nowPage, totalCount,4,5);
+		PageUtil pInfo = new PageUtil(nowPage, totalCount,5,5);
 		return pInfo;   
 	}
 	
@@ -32,7 +32,7 @@ public class QaService {
 	public PageUtil getfieldPageInfo(int nowPage,String field) {
 		int totalCount= qaDAO.getfieldCnt(field);
 		
-		PageUtil pInfo = new PageUtil(nowPage, totalCount,4,5);
+		PageUtil pInfo = new PageUtil(nowPage, totalCount,5,5);
 		return pInfo;   
 	}
 
@@ -41,11 +41,11 @@ public class QaService {
 
 		
 		int start= 
-			(pInfo.getNowPage()-1)*pInfo.getLineCount()+1;
+			(pInfo.getNowPage()-1)*pInfo.getLineCount();
 		int end  = start+pInfo.getLineCount()-1;
 		
 		QaDTO qaDTO = new QaDTO();
-		qaDTO.setStart(start-1);
+		qaDTO.setStart(start);
 		qaDTO.setEnd(end);
 		
 		ArrayList<QaDTO> list = qaDAO.getListView(qaDTO);

@@ -6,8 +6,8 @@
    <script>
       var naverLogin = new naver.LoginWithNaverId(
          {
-            clientId: "68tNfP0GUh1VB4b0suSF",
-            callbackUrl: "http://localhost:9000/spring/callback.co",
+            clientId: "d2LqO26x_yJC_yXrKI3h",
+            callbackUrl: "http://itealab.com/callback.co",
             isPopup: false,
             callbackHandle: true
          }
@@ -26,7 +26,7 @@
                }
                
                //이메일이 DB에 있는지 확인
-               $.ajax({
+          $.ajax({
        			url : 'joincheck.co?email='+ email,
        			type : 'post',
        			success : function(data) {		

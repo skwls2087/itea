@@ -7,11 +7,12 @@
 <div id="problem-create">
 	<span id="problem-header">객관식 출제</span><br/><br/>
 	<form id="choice-problem-create" method="post" action="createProblemProc.co" encType="multipart/form-data">
+	
 		<table width="100%">
 		<!-- 문제 -->
 		<tr>
 		<td valign=top width="10px">
-		Q.</td>
+		Q.${pinfo}</td>
 		<td>
 		<textarea class="form-control" name="pdetail" id="pdetail" placeholder="문제를 입력해주세요" rows="2"></textarea>
 		  <div class="filebox">

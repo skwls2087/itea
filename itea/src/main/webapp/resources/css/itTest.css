@@ -1,20 +1,35 @@
-.center{
+.itTest{
 	text-align:center;
-	margin:0 auto;
+	margin:20px auto;
 	padding-top:50px;
-	
+	padding:20px;
+	font-family: 'Sunflower', sans-serif;
+}
+.itTest p{
+	font-size:50px;
+	color:#2f67a2;
+	font-family: 'Do Hyeon', sans-serif;
 }
 .font{
    box-sizing: border-box;
-   font-family: 'Noto Sans KR', sans-serif;
+   color:#3c3c40;
 }
 	
 #startBtn{
 	font-size: 20px;
-	background-color: #008CBA;
-	color: white;
 	text-align: center;
 	border-radius: 10px;
 	padding:20px 40px;
 	font-family: 'Noto Sans KR', sans-serif;
+	font-weight:bold;
+}
+#startBtn:hover{
+	font-size: 20px;
+	background-color: #008CBA;
+	text-align: center;
+	border-radius: 10px;
+	padding:20px 40px;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight:bold;
+	color:white;
 }

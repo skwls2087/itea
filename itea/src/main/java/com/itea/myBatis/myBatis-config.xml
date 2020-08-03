@@ -27,6 +27,7 @@
     <typeAlias type="com.itea.dto.ProblemDTO"  alias="problemDTO"/>
     <typeAlias type="com.itea.dto.AskDTO" alias="askDTO"/>
     <typeAlias type="com.itea.dto.ReplyDTO" alias="replyDTO"/>
+    <typeAlias type="com.itea.dto.ErrorDTO"  alias="errorDTO"/>
     <typeAlias type="com.itea.dto.QaDTO"  alias="qaDTO"/>
 		<typeAlias type="java.lang.Integer" alias="int"/> 
 		<typeAlias type="java.lang.String" alias="string"/>  

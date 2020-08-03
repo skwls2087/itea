@@ -35,7 +35,6 @@
 	        	<button type="button" id="q-login" class="btn btn-info" >질문하기</button>
 	        </c:if>
 		  </div>
-  
 		<!-- Q&A 테이블 -->
     <table class="table" id="admin-table">
         <tr>
@@ -49,6 +48,7 @@
         </tr>
         
         <!-- 질문 리스트 -->
+        <c:if test="${PINFO.totalCount!=0}">
         <c:forEach  items="${LIST}" var="qa" varStatus="status">
         <tr>
         	<td>${qa.qno}</td>
@@ -97,7 +97,7 @@
         	
         	<td>
         		<c:if test="${qa.mno==MNO||MNICK=='관리자'}">
-        			<a href="qDelete.co?qno=${qa.qno}&nowPage=${PINFO.nowPage}" onclick="alert('해당 질문이 삭제되었습니다.')">
+        			<a href="qDelete.co?qno=${qa.qno}&nowPage=${PINFO.nowPage}&field=${field}&totalCount=${PINFO.totalCount}&pageGroup=${PINFO.pageGroup}" onclick="alert('해당 질문이 삭제되었습니다.')">
         			<img src="${pageContext.request.contextPath}/resources/img/trash.png" width="20"/></a>
         		</c:if>
         	</td>
@@ -116,49 +116,55 @@
         <!-- 페이징처리 -->
         
         <tr>
-				<td colspan="7">
-				<div>
-  				<ul class="pagination" id="q-paging">
-  				
-  				<!-- 이전페이지 -->
-  				<c:if test="${PINFO.nowPage ne 1}">
-  				  <li class="page-item">
-				      <a class="page-link" href="<%= request.getContextPath()%>/qa/qaFrm.co?nowPage=${PINFO.nowPage-1}&field=${field}">&laquo;</a>
-				    </li>
+			<td colspan="7">
+			<div>
+ 				<ul class="pagination" id="q-paging">
+ 				
+ 				<!-- 이전페이지 -->
+ 				<c:if test="${PINFO.nowPage ne 1}">
+ 				  <li class="page-item">
+			      <a class="page-link" href="<%= request.getContextPath()%>/qa/qaFrm.co?nowPage=${PINFO.nowPage-1}&field=${field}">&laquo;</a>
+			    </li>
+				</c:if>
+				<c:if test="${PINFO.nowPage eq 1}">
+ 				    <li class="page-item disabled">
+ 				    	<a class="page-link" href="#">&laquo;</a>
+			    </li>
+				</c:if>
+				<!-- 페이지 -->
+				<c:forEach var="pg"	 begin="${PINFO.startPage}" end="${PINFO.endPage}">
+					<c:if test="${PINFO.nowPage==pg}">
+						<li id="q-nowpage" class="page-item active">
 					</c:if>
-					<c:if test="${PINFO.nowPage eq 1}">
-  				    <li class="page-item disabled">
-  				    	<a class="page-link" href="#">&laquo;</a>
-				    </li>
+					<c:if test="${PINFO.nowPage!=pg}">
+						<li id="q-nowpage" class="page-item">
 					</c:if>
-					<!-- 페이지 -->
-					<c:forEach var="pg"	 begin="${PINFO.startPage}" end="${PINFO.endPage}">
-						<c:if test="${PINFO.nowPage==pg}">
-							<li id="q-nowpage" class="page-item active">
-						</c:if>
-						<c:if test="${PINFO.nowPage!=pg}">
-							<li id="q-nowpage" class="page-item">
-						</c:if>
-				      <a class="page-link" href="<%= request.getContextPath()%>/qa/qaFrm.co?nowPage=${pg}&field=${field}">${pg}</a>
-				    </li>
-					</c:forEach>
-					
-					<!-- 다음페이지 -->
-					<c:if test="${PINFO.nowPage ne PINFO.totalPage}">
-					<li class="page-item">
-				      <a class="page-link" href="<%= request.getContextPath()%>/qa/qaFrm.co?nowPage=${PINFO.nowPage+1}&field=${field}">&raquo;</a>
-				    </li>
-					</c:if>
-					<c:if test="${PINFO.nowPage eq PINFO.totalPage}">
-					<li class="page-item disabled">
-						<a class="page-link" href="#}">&raquo;</a>
-				    </li>
-					</c:if>
+			      <a class="page-link" href="<%= request.getContextPath()%>/qa/qaFrm.co?nowPage=${pg}&field=${field}">${pg}</a>
+			    </li>
+				</c:forEach>
+				
+				<!-- 다음페이지 -->
+				<c:if test="${PINFO.nowPage ne PINFO.totalPage}">
+				<li class="page-item">
+			      <a class="page-link" href="<%= request.getContextPath()%>/qa/qaFrm.co?nowPage=${PINFO.nowPage+1}&field=${field}">&raquo;</a>
+			    </li>
+				</c:if>
+				<c:if test="${PINFO.nowPage eq PINFO.totalPage}">
+				<li class="page-item disabled">
+					<a class="page-link" href="#}">&raquo;</a>
+			    </li>
+				</c:if>
 
-				  </ul>
-					</div>
-				</td>
+			  </ul>
+				</div>
+			</td>
 			</tr>
+		</c:if>
+		<c:if test="${PINFO.totalCount==0}">
+			<tr>
+				<td id="noQcount" colspan="7">등록된 질문이 없습니다.</td>
+			</tr>
+		</c:if>
         </table>
         
         </div>
@@ -227,6 +233,7 @@
 				<form id="question-form" method="post" action="aInsert.co">
 				
 					<input type='hidden' name='nowPage' value='${PINFO.nowPage}'/>
+					<input type='hidden' name='field' value='${field}'/>
 					<input type='hidden' id='aaa' name='qno' value=''/>
         	<div class="form-group">
 			      <textarea class="form-control" placeholder="답변을 입력해주세요" id="answerTextarea" name="acont" rows="3"></textarea>

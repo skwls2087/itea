@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html>
+<html lang = "ko">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>아이티어</title>
 
 <!-- 부트스트랩 url 연결 -->
@@ -36,8 +37,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
 <!-- font-family: 'Jua', sans-serif; -->
 
+<!-- 로봇같은 글씨 -->
+<link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300;500&display=swap" rel="stylesheet">
+<!-- font-family: 'Sunflower', sans-serif; -->
+
 <!-- JSTL 선언 -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!-- 네이버 아이디찾기 링크 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
@@ -57,7 +63,7 @@
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <a class="navbar-brand " href="<%= request.getContextPath()%>" id="main-logo"><strong>아이티:어</strong></a>
+  <a class="navbar-brand " href="<%= request.getContextPath()%>/" id="main-logo"><strong>아이티:어</strong></a>
   <button class="navbar-toggler m-2" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -74,17 +80,10 @@
         <a class="nav-link" href="<%= request.getContextPath()%>/ask/askList.co">질문/토론</a>
       </li>
       <li class="nav-item  m-2">
-        <a class="nav-link" href="#">채팅방</a>
-      </li>
-      <li class="nav-item  m-2">
         <a class="nav-link" href="<%= request.getContextPath()%>/qa/qaFrm.co">Q&A</a>
       </li>
       <li class="nav-item  m-2">
         <a class="nav-link" id="it-test" href="<%= request.getContextPath()%>/itLab/itLab.co">IT연구소</a>
-      </li>
-            <li class="nav-item  m-2">
-        <a class="nav-link" href="<%= request.getContextPath()%>/calendar.co">달력</a>
-      </li>
     </ul>
     
     <ul class="navbar-nav navbar-right">

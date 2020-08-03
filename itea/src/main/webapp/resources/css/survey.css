@@ -4,12 +4,14 @@
 	font-family: 'Noto Sans KR', sans-serif;
 }
 
+.survey h2{
+	font-family: 'Black Han Sans', sans-serif;
+}
 .survey-answer{
 	display:flex;
 	width:80%;
 	height:300px;
 	margin:0 auto;
-	font-family: 'Noto Sans KR', sans-serif;
 }
 
 .survey-answer a{

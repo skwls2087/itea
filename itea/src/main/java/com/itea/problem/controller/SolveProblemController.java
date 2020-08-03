@@ -14,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.itea.ask.service.AskService;
+import com.itea.dto.AskDTO;
 import com.itea.dto.ProblemDTO;
 import com.itea.problem.service.ProblemService;
 
@@ -23,6 +25,9 @@ public class SolveProblemController {
 	
 	@Autowired
 	ProblemService problemSV;
+	
+	@Autowired
+	AskService askSV;
 	
 	//문제 풀기
 	@RequestMapping("/selectForTest")
@@ -34,16 +39,17 @@ public class SolveProblemController {
 		
 		int mno=(int)session.getAttribute("MNO");
 		
-		//자격증,출제 유형및 종류 파라미터로 받기
-		String ckind=request.getParameter("Ckind");
-		String ctype=request.getParameter("Ctype");
+		//출제자 선택
 		String qtype=request.getParameter("Qtype");
-		//선택한 연도 목록 불러오기
+		
+		//선택한 연도 목록&lqno 불러오기
 		int[] qyear=pDTO.getPyearList();
+		int lqno=pDTO.getLqno();
+		
+		System.out.println("컨"+pDTO);
 		
 		HashMap tinfo=new HashMap();
-		tinfo.put("ckind", ckind); //자격증 종류
-		tinfo.put("ctype", ctype); //자격증 유형
+		tinfo.put("lqno", lqno); //자격증 종류
 		tinfo.put("qtype", qtype); //출제유형
 		tinfo.put("qyear", qyear); //출제년도
 		
@@ -153,12 +159,30 @@ public class SolveProblemController {
 		
 		int isScrap=problemSV.pScrap(map);
 		
-		pnoList.remove(0);
-		request.setAttribute("pnoList", pnoList); //문제번호리스트 보내기
 		request.setAttribute("problem", problemInfo); //1번 문제 보내기
 		request.setAttribute("interest", isScrap); //즐겨찾기 여부 보내기
 		
-		return pnoList.size();
+		if(pnoList!=null) {
+			pnoList.remove(0);
+			request.setAttribute("pnoList", pnoList); //문제번호리스트 보내기
+			return pnoList.size();
+		}
+		
+		return 0;
+	}
+	
+	//선택한 문제 하나만 풀기
+	@RequestMapping("/selectMyProblem")
+	public String selectMyProblem(HttpServletRequest request,HttpSession session) {
+		
+		System.out.println("문제 하나만 출력");
+		
+		int pno=Integer.parseInt(request.getParameter("pno"));
+		int mno=(int)session.getAttribute("MNO");
+		
+		problemLogic(pno,mno,null,request);
+		
+		return "problem/problemProc";
 	}
 	
 	//문제를 풀면 정답률에 반영하기
@@ -186,6 +210,7 @@ public class SolveProblemController {
 		System.out.println(pno);
 		problemSV.problemHate(pno);
 		int phate=problemSV.selectPhate(pno);
+		System.out.println("문제싫어요");
 		return phate;
 	}
 	
@@ -221,7 +246,7 @@ public class SolveProblemController {
 		return 1;
 	}
 	
-	//즐겨찾기 삭제 눌렀을 때
+	//문제 신고 눌렀을 때
 	@RequestMapping("/problemError")
 	@ResponseBody
 	public int problemError(int pno,String econtent,HttpSession session) {
@@ -236,5 +261,21 @@ public class SolveProblemController {
 		problemSV.problemError(map);
 		
 		return 1;
+	}
+	
+	//문제 질문하기
+	@RequestMapping("/aWriteProc")
+	@ResponseBody
+	public int aWriteProc(HttpServletRequest request,HttpSession session) {
+		
+		String atitle=request.getParameter("atitle");
+		String acontent=request.getParameter("acontent");
+		int pno=Integer.parseInt(request.getParameter("pno"));
+		
+		int mno=(Integer)session.getAttribute("MNO");
+		AskDTO askDTO= new AskDTO(mno,pno,atitle,acontent);
+		askSV.aWriteProc(askDTO);
+		
+		return 0;
 	}
 }
