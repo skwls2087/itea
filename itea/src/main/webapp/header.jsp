@@ -57,18 +57,9 @@
 
 	 /*태강-채팅*/
 		function sendMessage(form){
-			form.writer.value = form.writer.value.trim();
-			
-			form.body.value = form.body.value.trim();
-			
-			if(form.body.value.length==0){
-				alert('내용을 입력해주세요.');
-				form.body.focus();
-				return false;
-			}
-			
+
 			//서버로 전송
-			$.post('chat/addMessage.co',{
+			$.post('<%= request.getContextPath()%>/chat/addMessage.co',{
 				writer : form.writer.value,
 				body : form.body.value
 			},function(data){
@@ -76,12 +67,17 @@
 			},'json');
 			form.body.value='';
 			form.body.focus();
+			
 		}
 		
 		var Chat__lastReceivedMessageId= -1;
 		
 		function Chat__loadNewMessages(){
-			$.get('chat/getMessages.co', {
+			
+			var objDiv=document.getElementById("chat-list");
+			objDiv.scrollTop=objDiv.scrollHeight;
+			
+			$.get('<%= request.getContextPath()%>/chat/getMessages.co', {
 				from : Chat__lastReceivedMessageId+1
 			},  function(data){
 					/* data.id.sort(function(a,b){
@@ -97,6 +93,7 @@
 					setTimeout(Chat__loadNewMessages,3000);
 				
 			}, 'json');
+			
 		}
 			
 		function Chat__drawMessages(message){
@@ -127,6 +124,9 @@
 			
 			Chat__loadNewMessages();
 			
+			/*나진 채팅 js효과*/
+			
+			//텍스트 입력하면 버튼 활성화하기
 			$(document).on("keyup","#chattext",function(event){
 		        var flag = true;
 		        flag = $(this).val().length > 0 ? false : true;
@@ -139,26 +139,49 @@
 		       	}
 		    });
 			
+			//채팅 보내고나면 버튼 비활성화
 			$(document).on("click",".chat-submit",function(event){
 				$("#chat-form").submit();
+				$("#chat-submit").attr('src','${pageContext.request.contextPath}/resources/img/up.png');
+     		$("#chat-submit").removeClass();
 			});
 			
+			//엔터누르면 채팅전송
+			$(document).on("keydown","#chattext",function(key){
+          if (key.keyCode == 13) {
+        	  if($(this).val().length>0){
+        		  $("#chat-form").submit();
+        		  $("#chat-submit").attr('src','${pageContext.request.contextPath}/resources/img/up.png');
+		       		$("#chat-submit").removeClass();
+		       		return false;
+		       	}else{
+		       		return false;
+		       	}
+          }
+      });
+
+			//채팅 배너 클릭했을 때 채팅창 보이게하기
 			$("#chat-banner").click(function(){
 				$("#pop").css('display','');
 			})
 			
+			//채팅 배너 클릭했을 때 활성화
 			$(document).on("click",".chat-banner",function(event){
 				$("#pop").css('display','');
 				$("#chat-banner").removeClass();
 				$("#chat-banner").addClass('chatOn');
+				$("#chat-banner").attr('src','${pageContext.request.contextPath}/resources/img/chatclick.png');
+				
 			})
 			
+			//채팅 배너 클릭했을 때 비활성화
 			$(document).on("click",".chatOn",function(event){
 				$("#pop").css('display','none');
 				$("#chat-banner").removeClass();
 				$("#chat-banner").addClass('chat-banner');
+				$("#chat-banner").attr('src','${pageContext.request.contextPath}/resources/img/chat.png');
 			})
-
+			
 		})
 
 </script>
@@ -229,8 +252,8 @@
 	<div class="main-chat">
 		<div style="display:none" id="chatname">${MNICK}</div>
 		<div class="container" id="chatbox">
-		<div class="chat-header">아이티어 채팅<input type="button" id="close"></div>
-		<div class="chat-list" id="chat-list" style="overflow-y:scroll;height:550px; padding:4px; border:1 solid #000000;"></div>
+		<div class="chat-header">아이티어 채팅</div>
+		<div class="chat-list" id="chat-list" style="overflow-y:scroll;height:550px; border:1 solid #000000;"></div>
 		
 			<form id="chat-form" onsubmit="sendMessage(this); return false;">
 				<c:if test="${empty MNO}">
@@ -249,4 +272,4 @@
 </div>
 
 <!-- 채팅 퀵 배너 -->
-<img id="chat-banner" class="chat-banner" src="${pageContext.request.contextPath}/resources/img/chat.png" width="50"/>
+<img id="chat-banner" class="chat-banner" src="${pageContext.request.contextPath}/resources/img/chat.png" width="40"/>

@@ -43,9 +43,6 @@
 			      <option value="2012">2012년도</option>
 			      <option value="2011">2011년도</option>
 			      <option value="2010">2010년도</option>
-			      <option value="2009">2009년도</option>
-			      <option value="2008">2008년도</option>
-			      <option value="2007">2007년도</option>
 			    </select>
 			  </div>
 		  </c:if>
