@@ -38,7 +38,7 @@ public class itLabController {
 		System.out.println("결과페이지 ");
 		//1파라미터 받기
 		String test = request.getParameter("str");
-		System.out.println(test);
+		System.out.println("값="+test);
 		//2비즈니스 로직 수행
 		int result = iservice.checkResult(test);
 		//3모델
