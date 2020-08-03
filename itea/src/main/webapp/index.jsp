@@ -20,9 +20,9 @@
 	  dayMaxEventRows: true, // for all non-TimeGrid views
 	  views: {
 	    timeGrid: {
-	      dayMaxEventRows: 2 // adjust to 6 only for timeGridWeek/timeGridDay
+	      dayMaxEventRows: 6 // adjust to 6 only for timeGridWeek/timeGridDay
 	    }
-	  }	 , 
+	  }	, 
  		aspectRatio: 2,
  		contentHeight: 650,
     googleCalendarApiKey: 'AIzaSyAVIOOupclxyUQEFJ_XtOcfdc7BzbQYWgY',
