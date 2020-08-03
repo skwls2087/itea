@@ -16,7 +16,7 @@ public class itLabDAO {
 	}
 
 	public int resultCheck(String test) {
-		System.out.println("dao"+test);
+
 		int result=session.selectOne("itLab.select1", test);
 		
 		return result;

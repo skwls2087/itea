@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang = "ko">
 <head>
+<meta http-equiv="x-ua-compatible" content="IE=Edge">
 <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>아이티어</title>

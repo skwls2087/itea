@@ -6,6 +6,17 @@
 
 	<script>
 	$(function(){
+		$("#linfo").on('keyup', function() {
+			
+			   if($(this).val().length > 1000) {
+
+			alert("글자수는 1000자로 이내로 제한됩니다.");
+				
+			      $(this).val($(this).val().substring(0, 1000));
+
+			   }
+
+			});
 		$("#license-insert-button").click(function(){
 			if($("#lname").val().length==0){
 				alert("자격증 명칭을 입력하지 않았습니다.")
@@ -52,6 +63,12 @@
 				$("#linfo").focus();
 				return false;
 			}
+			if($("#lqclass").val()==''){
+				alert("자격증 시험유형을 선택하지 않으셨습니다.")
+				$("#lqclass").focus();
+				return false;
+			}
+		
 			$("#ifrm").submit();
 		});
 		
@@ -128,6 +145,7 @@
 			<tr>
 				<td colspan="2"><div class="wrap">
 						<select name="lqclass" id="lqclass" size="3">
+							<option value="" selected="selected">유형선택</option>
 							<option value="1">필기,실기</option>
 							<option value="2">1차,2차</option>
 							<option value="3">단독시험</option>
