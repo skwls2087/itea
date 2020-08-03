@@ -1,25 +1,38 @@
 
-.itea-main{
-	font-family: 'Noto Sans KR', sans-serif;
-	width:90%;
-	margin:40px auto;
-}
-.main-calendar{
-	width:70%;
-	padding:10px;
-	display:inline-block;
-	float:left;
-}
+/*헤더*/
+#main-logo{
+	font-family: 'Do Hyeon', sans-serif; 
+	font-size:30px;
+	}
+#nav-join{
+	float:right;
+	}
+#mNick{
+	color:white;
+	}
+#right-nav .container{
+	padding-left: 0px;
+	margin-left:0px;
+	}
+.dropdown-menu{
+	left:-80px;
+	}
+#it-test{
+	color:#78afea;
+	}
+.chatPop{
+	position: absolute; 
+	top: 62px; 
+	right: 0px;
+	}
 .main-chat{
 	width:30%;
 	padding:10px;
 	display:inline-block;
 	float:left;
 }
-
-/*채팅*/
 #chatbox{
-	width:100%;
+	width:300px;
 	height:700px;
 	padding:0px;
 	height:100%;
@@ -30,6 +43,7 @@
 	background:#656d78;
 	color:white;
 	padding:10px;
+	cursor:move;
 }
 .chat-footer{
 	width:100%;
@@ -39,7 +53,7 @@
 	width:100%;
 	background:#d9d9d9;
 	padding:20px;
-    scrollbar-width: none;
+   scrollbar-width: none;
 }
 #chat-list::-webkit-scrollbar{
 	display: none;
@@ -56,9 +70,66 @@
 }
 #chat-submit{
 	position:absolute;
+	z-index:10;
 	right: 8px;
-    top: 7px;
+   top: 7px;
 }
 .mychat{
 	background:
 }
+.mychat{ 
+	background:#ffd043; 
+	word-break:break-all; 
+	display:inline-block; 
+	padding:5px; 
+	border-radius:5px; 
+	text-align:right;
+	float:right;
+	margin-bottom:5px;
+}
+.myname{
+	color:black; 
+	display:inline-block; 
+	width:100%;
+	text-align:right;
+}
+.otherchat{ 
+	background:white; 
+	word-break:break-all; 
+	display:inline-block; 
+	padding:5px; 
+	border-radius:5px; 
+	text-align:left;
+	float:left;
+	margin-bottom:5px;
+}
+.othername{
+	color:black; 
+	display:inline-block; 
+	width:100%;
+	text-align:left;
+}
+
+/* 퀵 배너 */
+#chat-banner{
+	position: absolute;
+  top: 83px;
+  right: 14px;
+  cursor:pointer;
+}
+	
+#itea-header{
+	position:re
+}
+.itea-main{
+	font-family: 'Noto Sans KR', sans-serif;
+	width:90%;
+	margin:40px auto;
+}
+.main-calendar{
+	width:100%;
+	padding:10px;
+	display:inline-block;
+	float:left;
+}
+

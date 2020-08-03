@@ -51,18 +51,122 @@
 <!-- 제이쿼리 선언 -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 
-<style>
-	#main-logo{font-family: 'Do Hyeon', sans-serif; font-size:30px;}
-	#nav-join{float:right;}
-	#mNick{color:white;}
-	#right-nav .container{padding-left: 0px;margin-left:0px;}
-	.dropdown-menu{left:-80px;}
-	#it-test{color:#78afea;}
-</style>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
+
+<script>
+
+	 /*태강-채팅*/
+		function sendMessage(form){
+			form.writer.value = form.writer.value.trim();
+			
+			form.body.value = form.body.value.trim();
+			
+			if(form.body.value.length==0){
+				alert('내용을 입력해주세요.');
+				form.body.focus();
+				return false;
+			}
+			
+			//서버로 전송
+			$.post('chat/addMessage.co',{
+				writer : form.writer.value,
+				body : form.body.value
+			},function(data){
+
+			},'json');
+			form.body.value='';
+			form.body.focus();
+		}
+		
+		var Chat__lastReceivedMessageId= -1;
+		
+		function Chat__loadNewMessages(){
+			$.get('chat/getMessages.co', {
+				from : Chat__lastReceivedMessageId+1
+			},  function(data){
+					/* data.id.sort(function(a,b){
+						return b-a;
+					}); */
+					for(var i=0; i<data.length;i++){
+						var message = data[i];
+						
+						Chat__lastReceivedMessageId=message.id;
+						Chat__drawMessages(message);
+					}
+				
+					setTimeout(Chat__loadNewMessages,3000);
+				
+			}, 'json');
+		}
+			
+		function Chat__drawMessages(message){
+			
+			name=document.getElementById("chatname").innerText;
+			
+			if(name==message.writer){
+				
+				var html = 
+					'<div class="myname">'+message.writer+'</div><br/>'+
+					'<div class="mychat">'+message.body+'</div><br/>'
+					
+					$('.chat-list').append(html)
+			}else{
+				var html = 
+					'<div class="othername">'+message.writer+'</div><br/>'+
+					'<div class="otherchat">'+message.body+'</div><br/>'
+					
+					$('.chat-list').append(html)
+			}
+				
+			var objDiv=document.getElementById("chat-list");
+			objDiv.scrollTop=objDiv.scrollHeight;
+			
+		}
+		
+		$(function(){
+			
+			Chat__loadNewMessages();
+			
+			$(document).on("keyup","#chattext",function(event){
+		        var flag = true;
+		        flag = $(this).val().length > 0 ? false : true;
+		       	if(flag==true){
+		       		$("#chat-submit").attr('src','${pageContext.request.contextPath}/resources/img/up.png');
+		       		$("#chat-submit").removeClass();
+		       	}else{
+		       		$("#chat-submit").attr('src','${pageContext.request.contextPath}/resources/img/uphover.png');
+		       		$("#chat-submit").addClass('chat-submit');
+		       	}
+		    });
+			
+			$(document).on("click",".chat-submit",function(event){
+				$("#chat-form").submit();
+			});
+			
+			$("#chat-banner").click(function(){
+				$("#pop").css('display','');
+			})
+			
+			$(document).on("click",".chat-banner",function(event){
+				$("#pop").css('display','');
+				$("#chat-banner").removeClass();
+				$("#chat-banner").addClass('chatOn');
+			})
+			
+			$(document).on("click",".chatOn",function(event){
+				$("#pop").css('display','none');
+				$("#chat-banner").removeClass();
+				$("#chat-banner").addClass('chat-banner');
+			})
+
+		})
+
+</script>
+
 </head>
 <body>
 
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" id="itea-header"> 
   <a class="navbar-brand " href="<%= request.getContextPath()%>/" id="main-logo"><strong>아이티:어</strong></a>
   <button class="navbar-toggler m-2" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -84,6 +188,7 @@
       </li>
       <li class="nav-item  m-2">
         <a class="nav-link" id="it-test" href="<%= request.getContextPath()%>/itLab/itLab.co">IT연구소</a>
+      </li>
     </ul>
     
     <ul class="navbar-nav navbar-right">
@@ -119,3 +224,29 @@
     </ul>
   </div>
 </nav>
+
+<div id="pop" class="chatPop" style="display:none;">
+	<div class="main-chat">
+		<div style="display:none" id="chatname">${MNICK}</div>
+		<div class="container" id="chatbox">
+		<div class="chat-header">아이티어 채팅<input type="button" id="close"></div>
+		<div class="chat-list" id="chat-list" style="overflow-y:scroll;height:550px; padding:4px; border:1 solid #000000;"></div>
+		
+			<form id="chat-form" onsubmit="sendMessage(this); return false;">
+				<c:if test="${empty MNO}">
+					<input type="hidden" name="writer" value="비회원">
+				</c:if>
+				<c:if test="${!empty MNO}">
+					<input type="hidden" name="writer" value="${MNICK}">
+				</c:if>
+				<div class="chat-footer">
+					<textarea name="body" id="chattext" style="resize: none;" placeholder="내용을 입력해주세요"></textarea>
+					<img src="${pageContext.request.contextPath}/resources/img/up.png" width="25" id="chat-submit" style="cursor:pointer"/>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- 채팅 퀵 배너 -->
+<img id="chat-banner" class="chat-banner" src="${pageContext.request.contextPath}/resources/img/chat.png" width="50"/>
