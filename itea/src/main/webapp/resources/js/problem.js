@@ -383,9 +383,11 @@ $(function(){
 	$("#problemEssayScoring").click(function(){
 
 		//정답번호와 선택한 번호를 가져오기
-		correct=$("#shortText").val();
+		correct=$("#essayText").val();
 		pno=$("#problemPNO").html();
 
+		alert(correct)
+		alert(pno)
 		//정답을 입력했는지 확인
 		if(correct==""){
 			alert("정답을 작성해주세요")
@@ -400,9 +402,11 @@ $(function(){
 			dataType:"json",
 			success : function(data) {	
 				if(data==0){
+					alert("오답")
 					$("#problem-wrong").css('display','')
 					$("#problemEssayScoring").css('display','none')
 				}else{
+					alert("정답")
 					$("#problem-correct").css('display','')
 					$("#problemEssayScoring").css('display','none')
 				}
@@ -562,4 +566,14 @@ $(function(){
 		});
 		
 	});
+	
+	$('#p-login1').click(function(){
+		alert("로그인 후 이용해주세요")
+		return false;
+	})
+	
+	$('#p-login2').click(function(){
+		alert("로그인 후 이용해주세요")
+		return false;
+	})
 });

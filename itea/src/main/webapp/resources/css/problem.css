@@ -44,11 +44,23 @@
 	font-family: 'Noto Sans KR', sans-serif;
 	font-weight:500;
 }
-#start-button1, #start-button2, #select-test-button, #create-problem-submit, #create-text-problem-submit{
+
+@media (max-width: 900px) {
+	.createProblem{
+		width:100%;
+	}
+  .solveProblem{
+		width:100%;
+	}
+}
+
+#start-button1, #start-button2, #select-test-button, #create-problem-submit, #create-text-problem-submit,
+#p-login1,#p-login2{
 	font-weight:900;
 	background:#1f3661;
   border-color: black;
   margin:0 auto;
+  
 }
 
 /* 문제 출제하기 : problem-create */
@@ -164,7 +176,7 @@ textarea{
 	max-width:700px;
 	border:1px solid gray;
 	border-radius:10px;
-	margin:20px auto;
+	margin:80px auto;
 	font-family: 'Noto Sans KR', sans-serif;
 }
 .problemScore{
