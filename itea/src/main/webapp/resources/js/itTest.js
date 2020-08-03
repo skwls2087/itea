@@ -127,13 +127,13 @@ $(function(){
 			$("#test10").hide();
 			str=str+"0"
 			$("#test-result").show();
-			alert(str); 
+			//alert(str); 
 		})
 		$("#answer10_2").click(function(){
 			$("#test10").hide();
 			str=str+"1"
 			$("#test-result").show();
-			alert(str); 
+			//alert(str); 
 		})
 		$("#test-result").click(function(){
 			$("#str").val(str);

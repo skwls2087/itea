@@ -72,7 +72,7 @@
 				<td colspan="2" class="license-head">자격증 관련 소개</td>
 			</tr>
 			<tr>
-				<td colspan="2" style="white-space:pre-line;">${LDTO.linfo} </div>
+				<td colspan="2" style="white-space:pre-line;">${LDTO.linfo} 
 				</td>
 			</tr>
 			
@@ -81,7 +81,7 @@
 				<input type="button" class="btn btn-secondary" id="rBtn" name="rBtn" value="뒤로가기">
 				<c:if test="${MNICK=='관리자'}">
 					<input type="button" class="btn btn-info" id="mBtn" name="mBtn" value="수정하기">
-					<input type="button"class="btn btn-danger" id="dBtn" name="dBtn" value="삭제하기">
+					<input type="button" class="btn btn-danger" id="dBtn" name="dBtn" value="삭제하기">
 				</c:if>
 				</td>
 			</tr>
