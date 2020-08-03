@@ -82,18 +82,19 @@ public class AdminService<Hashmap> {
 		ArrayList list = new ArrayList();
 		ArrayList cntList = new ArrayList();
 		
-		//int sum = adminDAO.totalCount();
-		int sum = 0;
+		int sum = adminDAO.getVisitTotalCount();
+		//int sum = 0;
 		
 		for(int i=0;i<visitor.size();i++) {
 			if(i!=0) {
 				int cntstr = (int) visitor.get(i);
-				sum=sum+cntstr;
+				//System.out.println("service visitor "+(int) visitor.get(i));
+				sum=sum-cntstr;
 			}
 			list.add(sum);
 			System.out.println("service list"+list);
 		}
-		Collections.reverse(list);
+		//Collections.reverse(list);
 			for(int i=0;i<7;i++) {
 				int weekNum=today.get(Calendar.DAY_OF_WEEK)-i; //오늘부터 7일전까지의 요일 구하기
 				String week="";
@@ -131,18 +132,18 @@ public class AdminService<Hashmap> {
 		ArrayList list = new ArrayList();
 		ArrayList cntList = new ArrayList();
 		
-		//int sum = adminDAO.totalCount();
-		int sum = 0;
+		int sum = adminDAO.totalCount();
+		//int sum = 0;
 		
 		for(int i=0;i<member.size();i++) {
 			if(i!=0) {
 				int cntstr = (int) member.get(i);
-				sum=sum+cntstr;
+				sum=sum-cntstr;
 			}
 			list.add(sum);
 			//System.out.println("service list "+list);
 		}
-		Collections.reverse(list);
+		//Collections.reverse(list);
 		
 			for(int i=0;i<7;i++) {
 				int weekNum=today.get(Calendar.DAY_OF_WEEK)-i; //오늘부터 7일전까지의 요일 구하기
