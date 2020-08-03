@@ -176,7 +176,8 @@ textarea{
 	max-width:700px;
 	border:1px solid gray;
 	border-radius:10px;
-	margin:80px auto;
+	margin:0 auto;
+	margin-top:80px;
 	font-family: 'Noto Sans KR', sans-serif;
 }
 .problemScore{
@@ -224,6 +225,7 @@ textarea{
 #problemScore-right{
 	float:left;
 	width:70%;
+	margin-bottom:80px;
 }
 #next-problem-submit{
 	float:right;
@@ -302,4 +304,7 @@ textarea{
 #selectSearch{
   width: 80px;
   margin-right:5px;
+}
+#essayText{
+	
 }

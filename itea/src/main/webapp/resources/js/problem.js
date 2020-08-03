@@ -184,6 +184,10 @@ $(function(){
 		$(this).height(1).height( $(this).prop('scrollHeight')+40 );	
 	});
 	
+	$("#problem-proc").find("textarea").on('keydown keyup', function () {
+		$(this).height(1).height( $(this).prop('scrollHeight')+30 );	
+	});
+	
 	
 	$("#create-text-problem-submit").click(function(){
 		
@@ -386,8 +390,6 @@ $(function(){
 		correct=$("#essayText").val();
 		pno=$("#problemPNO").html();
 
-		alert(correct)
-		alert(pno)
 		//정답을 입력했는지 확인
 		if(correct==""){
 			alert("정답을 작성해주세요")
@@ -402,11 +404,9 @@ $(function(){
 			dataType:"json",
 			success : function(data) {	
 				if(data==0){
-					alert("오답")
 					$("#problem-wrong").css('display','')
 					$("#problemEssayScoring").css('display','none')
 				}else{
-					alert("정답")
 					$("#problem-correct").css('display','')
 					$("#problemEssayScoring").css('display','none')
 				}

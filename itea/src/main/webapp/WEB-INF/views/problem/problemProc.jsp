@@ -37,7 +37,7 @@
 	</div>
 	<div id="problem-question">Q. ${problem.pdetail}</div>
 	<c:if test="${!empty problem.pimg}">
-		<img src="${pageContext.request.contextPath}/resources/${problem.pimg}"><br/>
+		<img src="${pageContext.request.contextPath}/resources/files/${problem.pimg}"><br/>
 	</c:if>
 	
 	<!-- 객관식일때 -->
@@ -56,10 +56,10 @@
 	
 	<!-- 주관,서술형일때 -->
 	<c:if test="${problem.ptype==2}">
-		<input type="text" id="shortText"/>
+		<textarea id="shortText" style="width:100%;margin-bottom:10px;"></textarea>
 	</c:if>
 	<c:if test="${problem.ptype==3}">
-		<textarea id="essayText"></textarea>
+		<textarea id="essayText" style="width:100%;margin-bottom:10px;"></textarea>
 	</c:if>
 	
 	<form id="nextProblem" action="nextProblem.co" method="post">

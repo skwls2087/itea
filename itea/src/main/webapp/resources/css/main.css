@@ -21,12 +21,19 @@
 	color:#78afea;
 	}
 	
-	/*채팅 서비스*/
+/*채팅 서비스*/
 .chatPop{
 	position: absolute; 
 	top: 62px; 
 	right: 0px;
 	}
+	
+@media (max-width: 700px) {
+  #chatbox{
+		width:50px;
+	}
+}
+	
 .main-chat{
 	width:30%;
 	padding:10px;
@@ -123,7 +130,7 @@
 }
 	
 #itea-header{
-	position:re
+	z-index: 15;
 }
 .itea-main{
 	font-family: 'Noto Sans KR', sans-serif;
