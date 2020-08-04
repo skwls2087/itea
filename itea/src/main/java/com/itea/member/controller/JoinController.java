@@ -59,7 +59,7 @@ public class JoinController {
 		System.out.println("mDto"+mDto);
 		jDao.joinProcSNS(mDto);
 		
-		return "../../index";
+		return "../index";
 	}
 	
 	@RequestMapping("snsjoin")
