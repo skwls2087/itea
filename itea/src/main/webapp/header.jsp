@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ page import="java.util.Date"  %>
 <!DOCTYPE html>
 <html lang = "ko">
 <head>
@@ -43,6 +43,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300;500&display=swap" rel="stylesheet">
 <!-- font-family: 'Sunflower', sans-serif; -->
 
+<!-- 흘겨쓰는 글씨 -->
+<link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap" rel="stylesheet">
+<!-- font-family: 'East Sea Dokdo', cursive; -->
+
+<!-- 진지한 글씨 -->
+<link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
+<!-- font-family: 'Yeon Sung', cursive; -->
+
 <!-- JSTL 선언 -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -56,10 +64,8 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
 
 <script>
-
 	 /*태강-채팅*/
 		function sendMessage(form){
-
 			//서버로 전송
 			$.post('<%= request.getContextPath()%>/chat/addMessage.co',{
 				writer : form.writer.value,
@@ -92,13 +98,21 @@
 						Chat__drawMessages(message);
 					}
 				
-					setTimeout(Chat__loadNewMessages,3000);
+					setTimeout(Chat__loadNewMessages,2000);
 				
 			}, 'json');
 			
 		}
 			
 		function Chat__drawMessages(message){
+
+		 	var d = new Date();
+
+		 	/* var d = message.time
+			var h = d.getHours();
+			var m = d.getMinutes(); 
+			var hm = h+':'+m;
+			alert(message.time) */
 			
 			name=document.getElementById("chatname").innerText;
 			
@@ -106,14 +120,16 @@
 				
 				var html = 
 					'<div class="myname">'+message.writer+'</div><br/>'+
-					'<div class="mychat">'+message.body+'</div><br/>'
-					
+					'<div class="my"><div class="mychat">'+message.body+'</div>'+
+					'<div class="mytime"><table><td class="mytimetd">'+message.time+'</td></table></div></div>'
+
 					$('.chat-list').append(html)
 			}else{
 				var html = 
 					'<div class="othername">'+message.writer+'</div><br/>'+
-					'<div class="otherchat">'+message.body+'</div><br/>'
-					
+					'<div class="other"><div class="otherchat">'+message.body+'</div>'+
+					'<div class="othertime"><table><td class="othertimetd">'+message.time+'</td></table></div></div>'
+
 					$('.chat-list').append(html)
 			}
 				
@@ -220,10 +236,10 @@
     	 <!-- 비로그인시 -->
 	     <c:if test="${empty MNO}">
 	      <li class="nav-item m-1">
-	        <a class="nav-link" href="<%= request.getContextPath()%>/member/joinFrm.co">회원가입</a>
+	        <a class="nav-link" href="<%= request.getContextPath()%>/member/joinFrm.co" style="padding-left:0px;">회원가입</a>
 	      </li>
 	      <li class="nav-item m-1">
-	        <a class="nav-link" href="<%= request.getContextPath()%>/member/loginFrm.co">로그인</a>
+	        <a class="nav-link" href="<%= request.getContextPath()%>/member/loginFrm.co" style="padding-left:0px;">로그인</a>
 	      </li>
 	     </c:if>
 	     

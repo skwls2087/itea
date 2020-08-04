@@ -135,8 +135,7 @@
 				<td colspan="2" class="license-head">자격증 관련 소개</td>
 			</tr>
 			<tr>
-				<td colspan="2"><div class="wrap"><textarea id="linfo" name="linfo"
-			placeholder="자격증에 대한 전반적 소개를 입력하세요" cols="50" rows="10"></textarea> </div>
+				<td colspan="2"><div class="wrap"><textarea id="linfo" name="linfo"	placeholder="자격증에 대한 전반적 소개를 입력하세요" cols="50" rows="10"></textarea> </div>
 				</td>
 			</tr>
 			<tr>

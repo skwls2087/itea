@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/join.css">
 
 <div class="container">
+
 	<table class="table">
 
 	<form id="sns-join" class="form-signup" method="post" action="<%= request.getContextPath()%>/member/joinProcSNS.co">

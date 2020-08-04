@@ -24,8 +24,14 @@ public class JoinController {
 	@RequestMapping("/member/joinFrm")
 	public void joinFrm() {
 		
-		
 	}
+	
+	/*@RequestMapping("/member/snsjoin")
+	public String snsjoin(HttpServletRequest request) {
+		request.setAttribute("email", "skwls2087@naver.com");
+		
+		return "member/joinFrmSNS";
+	}*/
 	
 	@RequestMapping("/member/joinProc")
 	public String joinProc(MemberDTO mDto) {
@@ -39,6 +45,15 @@ public class JoinController {
 	}
 	
 	@RequestMapping("member/joinProcSNS")
+	public String memjoinProcSNS(MemberDTO mDto) {
+		System.out.println("joinProcSNS 진입");
+		System.out.println("mDto"+mDto);
+		jDao.joinProcSNS(mDto);
+		
+		return "../../index";
+	}
+	
+	@RequestMapping("joinProcSNS")
 	public String joinProcSNS(MemberDTO mDto) {
 		System.out.println("joinProcSNS 진입");
 		System.out.println("mDto"+mDto);
@@ -80,9 +95,27 @@ public class JoinController {
     }
     
     //닉네임이 존재하는 닉네임인지 확인
-    @RequestMapping("member/checkNick")
+    @RequestMapping("checkNick")
     @ResponseBody
 	public int checkNick(HttpServletRequest request) throws Exception {
+		
+    	String mnick=request.getParameter("nick");
+    	
+		int isNick=joinSV.checkNick(mnick);
+		
+		if(isNick==0) {//같은 닉네임이 없을 때
+			
+			return 0;
+		}else {//같은 닉네임이 있을 때
+			
+			return 1;
+		}
+    }
+    
+  //닉네임이 존재하는 닉네임인지 확인
+    @RequestMapping("member/checkNick")
+    @ResponseBody
+	public int memcheckNick(HttpServletRequest request) throws Exception {
 		
     	String mnick=request.getParameter("nick");
     	

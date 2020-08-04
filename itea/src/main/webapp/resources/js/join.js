@@ -29,8 +29,6 @@ $(function(){
 	 		} 
 	});
 	
-	
-	
 	//가입눌렀을때
 	$("#join").submit(function(){
 		var mphone1=$("#mphone1").val();

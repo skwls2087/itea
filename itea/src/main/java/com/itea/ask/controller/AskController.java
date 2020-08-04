@@ -2,6 +2,7 @@ package com.itea.ask.controller;
 
 import java.util.ArrayList;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -67,7 +68,7 @@ public class AskController {
 		return 0;
 	}
 	
-	
+
 	//글 상세보기  && 댓글 리스트
 	@RequestMapping("ask/askDetail")
 	public void askDetail(HttpServletRequest request,HttpSession session) throws Exception{
@@ -76,6 +77,7 @@ public class AskController {
 		String userNick=(String) session.getAttribute("MNICK");
 		AskDTO askDTO = askSV.askDetail(ano);
 		ArrayList<ReplyDTO> list = askSV.replyList(ano);
+		System.out.println("askDTO="+askDTO);
 		askDTO.setNowPage(nowPage);
 		request.setAttribute("list", list);
 		request.setAttribute("userNick", userNick);
@@ -143,6 +145,8 @@ public class AskController {
 		return mv;
 	}
 	
+	//대댓글 삭제
+	
 	
 	//글 수정폼
 	@RequestMapping("ask/askModifyFrm")
@@ -201,19 +205,25 @@ public class AskController {
 	//검색
 	@RequestMapping("ask/askSearch")
 	public String askSearch(HttpServletRequest request,HttpSession session) {
-		String search = request.getParameter("asearch");
+		String asearch = request.getParameter("asearch");
 		String category = request.getParameter("category");
 		int nowPage=1;
 		if(request.getParameter("nowPage")!=null) {
 			nowPage=Integer.parseInt(request.getParameter("nowPage"));
 		}
-		String mnick=(String) session.getAttribute("MNICK");
-		PageUtil pInfo = askSV.getPageInfo(nowPage);
+		String mnick=(String)session.getAttribute("MNICK");
+		PageUtil pInfo=null;
 		ArrayList<AskDTO> list=null;
+		System.out.println("asearch="+asearch);
+		System.out.println("category="+category);
 		if(category.equals("title")) {
-			list = askSV.askSearchT(search,pInfo);
-		}else if(category.equals("ano")) {
-			list = askSV.askSearchA(search,pInfo);
+			pInfo=askSV.getPageInfoT(nowPage,asearch);
+			list=askSV.askSearchT(asearch,pInfo);
+			System.out.println("pInfoT="+pInfo);
+		}else if(category.equals("pno")) {
+			pInfo = askSV.getPageInfoA(nowPage,asearch);
+			list = askSV.askSearchA(asearch,pInfo);
+			System.out.println("pInfoA="+pInfo);
 		}
 		System.out.println("list="+list);
 		request.setAttribute("category", category);
@@ -222,6 +232,12 @@ public class AskController {
 		request.setAttribute("list", list);
 		return "ask/askList";
 	}
+	
+	
+	
+	
+	
+	
 	
 	//문제풀기에서 넘어오기
 	@RequestMapping("ask/problemBoard")

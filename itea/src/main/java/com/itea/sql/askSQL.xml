@@ -9,6 +9,18 @@
 		select count(*) from askboard
 	</select>
 	
+	<!-- 문제번호로 검색 페이징 처리 -->
+	<select id="getTotalCntA" resultType="int">
+		select count(*) from askboard
+		where pno=#{asearch}
+	</select>
+	
+	<!-- 제목으로 검색 페이징 처리 -->
+	<select id="getTotalCntT" resultType="int">
+		select count(*) from askboard
+		where atitle like concat('%',#{asearch},'%')
+	</select>
+
 	<!-- 검색 제목 -->
 	<select id="searchT" resultType="askDTO">
 		SELECT k.ano,atitle,k.pno,p.mnick,k.lname,adate,ahit FROM
@@ -22,7 +34,7 @@
 		(SELECT ano, a.mno, m.mnick from
 		askboard a JOIN member m ON a.mno=m.mno) p
 		ON p.ano=k.ano
-		where atitle like '%${search}%'
+		where atitle like concat('%',#{asearch},'%')
 		ORDER BY k.ano desc	
 		LIMIT #{start}, #{size}
 	</select>
@@ -40,7 +52,7 @@
 		(SELECT ano, a.mno, m.mnick from
 		askboard a JOIN member m ON a.mno=m.mno) p
 		ON p.ano=k.ano
-		where k.ano = #{search}
+		where k.pno = #{asearch}
 		ORDER BY k.ano desc	
 		LIMIT #{start}, #{size}
 	</select>
@@ -71,7 +83,7 @@
 	
 	<!-- 상세보기 -->
 	<select id="askDetail" resultType="askDTO">
-		select ano,atitle,a.pno,l.lname,mnick,acontent
+		select ano,atitle,a.pno,l.lname,mnick,acontent,adate,ahit
 		from askboard a ,problem p ,license l, member m, licenseclass lc
 		where a.pno=p.pno and lc.lqno=p.lqno and lc.lno=l.lno and a.mno=m.mno and a.ano=#{ano} 
 	</select>
@@ -131,7 +143,7 @@
 	<!-- 대댓글 삭제 -->
 	<delete id="askcoReplyDelete">
 		delete from askcoment
-		wehre acno=#{acno}
+		where acno=#{acno}
 	</delete>
 	
 	<!-- 문제풀기 게시판 검색 -->
