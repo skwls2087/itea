@@ -1,6 +1,8 @@
 package com.itea.problem.controller;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,8 +35,11 @@ public class ProblemController {
 	
 	//문제풀이 메인화면
 	@RequestMapping("/problemMain")
-	public void problemMain() {
+	public void problemMain(HttpServletRequest request) {
 		System.out.println("문제 메인화면 진입");
+		Path relativePath = Paths.get("");
+		String path = relativePath.toAbsolutePath().toString()+"/tomcat/webapps/ROOT/resources/files";
+		request.setAttribute("path", path);
 	}
 
 	//문제 유형 고르기

@@ -114,6 +114,8 @@
 		      }
 		   </script>  
 		</div>	  
+		
+		<a href="<%= request.getContextPath()%>/member/snsjoin.co">sns로그인</a>
 </div>
 			
 			 

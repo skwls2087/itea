@@ -24,7 +24,13 @@ public class JoinController {
 	@RequestMapping("/member/joinFrm")
 	public void joinFrm() {
 		
+	}
+	
+	@RequestMapping("/member/snsjoin")
+	public String snsjoin(HttpServletRequest request) {
+		request.setAttribute("email", "skwls2087@naver.com");
 		
+		return "member/joinFrmSNS";
 	}
 	
 	@RequestMapping("/member/joinProc")

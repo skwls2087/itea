@@ -29,8 +29,6 @@ $(function(){
 	 		} 
 	});
 	
-	
-	
 	//가입눌렀을때
 	$("#join").submit(function(){
 		var mphone1=$("#mphone1").val();
@@ -252,7 +250,7 @@ $(function(){
 		
 		//닉네임 DB확인
 		$.ajax({
-			url : 'checkNick.co?nick='+ nick,
+			url : '/member/checkNick.co?nick='+ nick,
 			type : 'post',
 			success : function(data) {					
 				

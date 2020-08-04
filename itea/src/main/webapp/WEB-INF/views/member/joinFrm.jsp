@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     
 <!-- js/css 참조 -->
-<script src="${pageContext.request.contextPath}/resources/js/join.js" type="text/javascript"></script>
+<script src="../resources/js/join.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/join.css">
 
 <div class="container">
