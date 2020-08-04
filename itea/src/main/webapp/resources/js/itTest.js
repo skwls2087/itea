@@ -135,7 +135,7 @@ $(function(){
 			$("#test-result").show();
 			//alert(str); 
 		})
-		$("#test-result").click(function(){
+		$("#test-result-button").click(function(){
 			$("#str").val(str);
 			$("#testfrm").submit();
 			

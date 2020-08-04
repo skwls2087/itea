@@ -13,6 +13,12 @@
 	.form-signin>*{margin:10px;}
 	#login-main{text-align:center}
 	
+	#naverIdLogin img{
+		height: 52px;
+    width: 219px;
+    margin-bottom:10px;
+	}
+	
 </style>
 
 <div class="container" id="login-main">
@@ -51,7 +57,6 @@
 		   naverLogin.init();
 		</script>
 
-		<br/>
 		<!-- 2.카카오 -->
 		<!-- 카카오톡 아이디 연동해서 로그인 -->
 

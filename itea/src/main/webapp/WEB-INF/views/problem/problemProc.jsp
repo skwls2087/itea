@@ -37,7 +37,7 @@
 	</div>
 	<div id="problem-question">Q. ${problem.pdetail}</div>
 	<c:if test="${!empty problem.pimg}">
-		<img src="${pageContext.request.contextPath}/resources/files/${problem.pimg}"><br/>
+		<img src="${pageContext.request.contextPath}/resources/files/${problem.pimg}" id="problem-img"><br/>
 	</c:if>
 	
 	<!-- 객관식일때 -->

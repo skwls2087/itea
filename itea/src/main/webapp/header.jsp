@@ -43,6 +43,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300;500&display=swap" rel="stylesheet">
 <!-- font-family: 'Sunflower', sans-serif; -->
 
+<!-- 흘겨쓰는 글씨 -->
+<link href="https://fonts.googleapis.com/css2?family=East+Sea+Dokdo&display=swap" rel="stylesheet">
+<!-- font-family: 'East Sea Dokdo', cursive; -->
+
+<!-- 진지한 글씨 -->
+<link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap" rel="stylesheet">
+<!-- font-family: 'Yeon Sung', cursive; -->
+
 <!-- JSTL 선언 -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>

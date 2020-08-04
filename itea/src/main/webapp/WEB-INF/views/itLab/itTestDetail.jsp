@@ -7,106 +7,107 @@
 	
 <div class="survey" id="test1">	
 	 <h2>1/10</h2>
-   <h4>나는 문제에 직면했을때,</h4>
+   <h4>어려운 업무를 맡게 된 당신 에러를 마주친다면,</h4>
    <br/>
    <br/>
    <div class="survey-answer"> 
-         	<a><div id=answer1_1 name="answer1" class="survey1" >직접 해결하기를 선호한다.</div></a>
-         	<a><div id=answer1_2 name="answer1" class="survey2" >전문가에게 알리고 해결을 기다린다.</div></a>  
+         	<div id=answer1_1 class="survey1"><a>내 에러는 나의 것, 직접 해결한다.</a></div>
+         	<div id=answer1_2 class="survey2"><a>직장 동료에게 도움을 요청한다.</a></div>  
    </div>
 </div>
 <div class="survey" id="test2">	
    <h2>2/10</h2>
-   <h4>새롭게 이사를 한 당신, 가구를 산다면 (단 가구의 가격은 같다.)</h4>
+   <h4>새롭게 이사를 한 당신 가구를 산다면,</h4>
    <br/>
    <br/>
    <div class="survey-answer">
-   				<a><div id=answer2_1 name="answer1" class="survey1">DIY를 사서 직접 조립하여 가구를 배치한다.</div></a>
-         	<a><div id=answer2_2 name="answer1" class="survey2">기성품을 사서 가구를 배치한다. </div></a>  
+   				<div id=answer2_1 class="survey1"><a>DIY제품을 구입해 직접 조립한다.</a></div>
+         	<div id=answer2_2 class="survey2"><a>가구 매장에 가서 완제품을 구입한다.</a></div>
    </div>
 </div>
 <div class="survey"id="test3">	
    <h2>3/10</h2>
-   <h4>현재 연말 결산일 마지막날 장부정리에 힘을 쓰던 당신, 좀더 빠른 방법을 알려준다면,</h4>
+   <h4>오랜만에 출근을 한 당신 밀려있는 업무를 본다면,</h4>
    <br/>
    <br/>
    <div class="survey-answer">
-  				<a><div id=answer3_1 name="answer1" class="survey1">빠른 방법을 배운후 사용하여 정리를 마무리한다.</div></a>
-         	<a><div id=answer3_2 name="answer1" class="survey2">예전에 사용하던 방법을 사용하여 정리를 한다.</div></a>  
+  				<div id="answer3_1" class="survey1"><a>인터넷에 빠르게 할 수 있는 새로운 방법을 찾아본다.</a></div>
+         	<div id="answer3_2" class="survey2"><a>평소에 하던대로 하나씩 천천히 해결한다.</a></div>
    </div>
 </div>
 <div class="survey"id="test4">	
    <h2>4/10</h2>
-   <h4>프로그램 구현에 있어서</h4>
+   <h4>개발자로 취업한 당신 프로그램을 개발한다면,</h4>
    <br/>
    <br/>
    <div class="survey-answer">
-   			<a><div id=answer4_1 name="answer1" class="survey1">활용할 부분에 대해 관심이 더 간다.</div></a>
-    		<a><div id=answer4_2 name="answer1" class="survey2">오류없이 구현되기 위해 세부사항을 확인하는 것이 좋다.</div></a>  
+   			<div id="answer4_1" class="survey1"><a>속도는 조금 느리지만 볼거리가 다양한 프로그램</a></div>
+    		<div id="answer4_2" class="survey2"><a>필요한 기능만 심플하게 구현된 안정적인 프로그램</a> </div> 
    </div>
 </div>		
 <div class="survey"id="test5">	
    <h2>5/10</h2>
-   <h4>내가 일하는 직장분위기는</h4>
+   <h4>당신이 원하는 회사 분위기는,</h4>
    <br/>
    <br/>
    <div class="survey-answer">
-   			<a><div id=answer5_1 name="answer1" class="survey1">새롭고 다양함이 있는 것이 중요하다.</div></a>
-    		<a><div id=answer5_2 name="answer1" class="survey2">체계적이고 규칙적인 것이 좋다.</div></a>  
+   			<div id="answer5_1" class="survey1"><a>새롭고 다양함이 있는 자유로운 회사</a></div>
+    		<div id="answer5_2" class="survey2"><a>체계적이고 규칙적인 편안한 회사</a></div> 
    </div>
 </div>	
 <div class="survey"id="test6">	
    <h2>6/10</h2>
-   <h4>요리사로써 명성을 쌓은 당신, 요리를 할때마다 당신의 칼이 거슬린다면</h4>
+   <h4>노트북을 산 당신 키보드가 잘 눌리지 않는다면,</h4>
    <br/>
    <br/>
    <div class="survey-answer">
-   			<a><div id=answer6_1 name="answer1" class="survey1">그 칼의 능력이 떨어지는 것이므로 바꾼다.</div></a>
-    		<a><div id=answer6_2 name="answer1" class="survey2">손에 익은 칼이므로 주의하며 쓴다.</div></a>  
+   			<div id="answer6_1" class="survey1"><a>키보드는 노트북의 생명, 당장 다른 제품을 산다.</a></div>
+    		<div id="answer6_2" class="survey2"><a>비싸게 주고 산 노트북이니 주의해서 사용한다.</a></div>
    </div>
 </div>	
 <div class="survey"id="test7">	
    <h2>7/10</h2>
-   <h4>오랜만에 가족들과 외식을 했다. 외식을 한후 가족이 식당에 대해 물어본다면?</h4>
+   <h4>팀원들과 오랜만에 회식을 하는 당신 식당을 검색할 때,</h4>
    <br/>
    <br/>
    <div class="survey-answer">
-   			<a><div id=answer7_1 name="answer1" class="survey1">오로지 맛으로 평가를 해준다.</div></a>
-    		<a><div id=answer7_2 name="answer1" class="survey2">외식한 곳의 전반적인 생각을 설명해준다.</div></a>  
+   			<div id="answer7_1" class="survey1"><a>주변의 가장 맛있는 식당을 검색한다.</a></div>
+    		<div id="answer7_2" class="survey2"><a>맛과 분위기, 서비스를 모두 고려한다.</a></div>
    </div>
 </div>
 <div class="survey"id="test8">	
    <h2>8/10</h2>
-   <h4>"1"+"1"=</h4>
+   <h4>Q.'1'+'1'=?</h4>
    <br/>
    <br/>
    <div class="survey-answer">
-   			<a><div id=answer8_1 name="answer1" class="survey1">2</div></a>
-    		<a><div id=answer8_2 name="answer1" class="survey2">11</div></a>  
+   			<div id="answer8_1" class="survey1"><a>2</a></div>
+    		<div id="answer8_2" class="survey2"><a>11</a></div>  
    </div>
 </div>
 <div class="survey"id="test9">	
    <h2>9/10</h2>
-   <h4>내가 일할때 사용하는 도구에 대해서 배워야 한다면,</h4>
+   <h4>새로운 프로그래밍 언어를 배우게 된 당신,</h4>
    <br/>
    <br/>
    <div class="survey-answer">
-   			<a><div id=answer9_1 name="answer1" class="survey1">많은 시간을 투자하여 도구에 대한 확실한 이해를 하고 배우고 싶다.</div></a>
-    		<a><div id=answer9_2 name="answer1" class="survey2">내가 정말 필요한 부분만을 배우고 실생활 활용에 힘쓴다.</div></a> 
+   			<div id="answer9_1" class="survey1"><a>"Hello World"부터 천천히 배워가야지</a></div>
+    		<div id="answer9_2" class="survey2"><a>시작부터 고급 버전, 일단 다 쓰고보자!</a></div>
    </div>
 </div>
-<div class="survey"id="test10">	
+<div class="survey" id="test10">	
    <h2>10/10</h2>
-   <h4>팀프로젝트를 할 때 나는</h4>
+   <h4>팀프로젝트를 할 때 당신은 팀에서,</h4>
    <br/>
    <br/>
    <div class="survey-answer">
-   			<a><div id=answer10_1 name="answer1" class="survey1">리더가 되어 주도적으로 이끌고 싶다.</div></a>
-    		<a><div id=answer10_2 name="answer1" class="survey2">리더의 든든한 조력자가 되고 싶다.</div></a> 
+   			<div id="answer10_1" class="survey1"><a>팀장이 되어 팀을 주도적으로 이끌고 싶다.</a></div>
+    		<div id="answer10_2" class="survey2"><a>팀장의 든든한 조력자가 되고 싶다.</a></div> 
    </div>
 </div>
 <div id="test-result">
-	<%-- <a href="<%= request.getContextPath()%>/itLab/itTestResult.co"> --%><input type="button" id="test-result" class="survey1" value="결과보기"><!-- </a> -->
+	<div><img src="<%= request.getContextPath()%>/resources/img/question2.png"/></div>
+	<input type="button" id="test-result-button" class="survey-result-button" value="결과보기">
 </div>
 <form name="testfrm" id="testfrm" action="<%= request.getContextPath()%>/itLab/itTestResult.co" method="post">
 	<input type="hidden" id="str" name="str"/>
