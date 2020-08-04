@@ -1,9 +1,11 @@
 package com.itea.chat.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,7 +29,11 @@ public class ChatController {
 	@ResponseBody
 	public Map addMessage(String writer, String body) {
 		long id = messages.size();
-		ChatDTO chatMessage = new ChatDTO(id,writer,body);		
+		Date date = new Date();
+		int hh=date.getHours();
+		int mm=date.getMinutes();
+		String time = hh+":"+mm;
+		ChatDTO chatMessage = new ChatDTO(id,writer,body,time);		
 		
 		messages.add(chatMessage);
 		
