@@ -133,6 +133,8 @@ public class LoginController {
 		session.setAttribute("kname", kname);
 		mav.setViewName("main");
 		
+		
+		
 		return mav;	
 	}
 	
