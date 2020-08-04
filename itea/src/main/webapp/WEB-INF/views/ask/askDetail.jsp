@@ -29,17 +29,10 @@
 		});
 		
 		$("#dBtn").click(function(){
-			if(${askDTO.mnick ne userNick}){
-				alert("작성자만이 게시글을 삭제할 수 있습니다.");
-				return false;
-			};
-			
-			if(${askDTO.mnick eq userNick}){
+			if(${askDTO.mnick eq userNick || userNick == "관리자"}){
 				confirm("정말로 삭제하시겠습니까?");
-				return false;
-			}else{
 				location.href="../ask/askDelete.co?ano=${askDTO.ano}";
-			};
+			}
 		});	
 			
 		$("#sBtn").click(function(){
@@ -83,9 +76,9 @@
 		<td valign=top rowspan="2" class="ask-pno">#${askDTO.pno}</td>
 		<td class="ask-title" colspan="2">${askDTO.atitle}</td>
 	</tr>
-	<tr><td class="ask-info"><span>작성자 ${askDTO.mnick} | 자격증 ${askDTO.lname} | 작성일자 ???????? | 조회수 ??????</span></td>
+	<tr><td class="ask-info"><span>작성자 ${askDTO.mnick} | 자격증 ${askDTO.lname} | 작성일자 <fmt:formatDate value="${askDTO.adate}" pattern="yy-MM-dd"/>  | 조회수 ${askDTO.ahit}</span></td>
 	<td id="ask-modify">
-	<c:if test="${userNick==askDTO.mnick}">
+	<c:if test="${userNick==askDTO.mnick || userNick=='관리자'}">
 		<img src="${pageContext.request.contextPath}/resources/img/edit.png" width="20" id="mBtn" style="cursor:pointer;"/>
 		<img src="${pageContext.request.contextPath}/resources/img/trash.png" width="20" id="dBtn" style="cursor:pointer;"/>
 	</c:if>
@@ -121,7 +114,7 @@
 				<u:pre value="${reply.accontent}"/>
 				<br>
 				<div class="tog"><span id="ask-reply">답글쓰기</span>
-				<c:if test="${userNick eq reply.mnick}">
+				<c:if test="${userNick eq reply.mnick || userNick=='관리자'}">
 					<a href="askReplyDelete.co?acdepth=${reply.acdepth}&acno=${reply.acno}&nowPage=${askDTO.nowPage}&ano=${askDTO.ano}" id="ask-delete">삭제</a>
 				</c:if>
 				</div>
@@ -149,7 +142,7 @@
 				<br>
 				<u:pre value="${reply.accontent}"/>
 				<br>
-				<c:if test="${userNick eq reply.mnick}">
+				<c:if test="${userNick eq reply.mnick || userNick=='관리자'}">
 					<a href="askReplyDelete.co?acdepth=${reply.acdepth}&acno=${reply.acno}&nowPage=${askDTO.nowPage}&ano=${askDTO.ano}" id="reply-delete">삭제</a>
 				</c:if>
 			</td>
