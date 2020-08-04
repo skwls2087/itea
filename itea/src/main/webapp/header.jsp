@@ -108,6 +108,7 @@
 		}
 			
 		function Chat__drawMessages(message){
+			
 		 	var d = new Date();
 			var h = d.getHours();
 			var m = d.getMinutes(); 
@@ -119,12 +120,16 @@
 				
 				var html = 
 					'<div class="myname">'+message.writer+'</div><br/>'+
-					'<div class="mychat">'+message.body+'</div>'+time
+					'<div class="my"><div class="mychat">'+message.body+'</div>'+
+					'<div class="mytime"><table><td class="mytimetd">'+time+'</td></table></div></div>'
+					
 					$('.chat-list').append(html)
 			}else{
 				var html = 
 					'<div class="othername">'+message.writer+'</div><br/>'+
-					'<div class="otherchat">'+message.body+'</div>'+time
+					'<div class="other"><div class="otherchat">'+message.body+'</div>'+
+					'<div class="othertime"><table><td class="othertimetd">'+time+'</td></table></div></div>'
+					
 					$('.chat-list').append(html)
 			}
 				
@@ -231,10 +236,10 @@
     	 <!-- 비로그인시 -->
 	     <c:if test="${empty MNO}">
 	      <li class="nav-item m-1">
-	        <a class="nav-link" href="<%= request.getContextPath()%>/member/joinFrm.co">회원가입</a>
+	        <a class="nav-link" href="<%= request.getContextPath()%>/member/joinFrm.co" style="padding-left:0px;">회원가입</a>
 	      </li>
 	      <li class="nav-item m-1">
-	        <a class="nav-link" href="<%= request.getContextPath()%>/member/loginFrm.co">로그인</a>
+	        <a class="nav-link" href="<%= request.getContextPath()%>/member/loginFrm.co" style="padding-left:0px;">로그인</a>
 	      </li>
 	     </c:if>
 	     

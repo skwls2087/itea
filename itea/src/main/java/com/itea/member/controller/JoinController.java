@@ -45,6 +45,15 @@ public class JoinController {
 	}
 	
 	@RequestMapping("member/joinProcSNS")
+	public String memjoinProcSNS(MemberDTO mDto) {
+		System.out.println("joinProcSNS 진입");
+		System.out.println("mDto"+mDto);
+		jDao.joinProcSNS(mDto);
+		
+		return "../../index";
+	}
+	
+	@RequestMapping("joinProcSNS")
 	public String joinProcSNS(MemberDTO mDto) {
 		System.out.println("joinProcSNS 진입");
 		System.out.println("mDto"+mDto);
