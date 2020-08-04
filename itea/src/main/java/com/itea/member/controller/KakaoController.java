@@ -15,17 +15,20 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+
+@RequestMapping("kakao.co")
 public class KakaoController {
 
 	//KAKAO REST API KEY
 	private final static String K_CLIENT_ID    = "dddf9e1f05cdd30409acd606d146afe9";
 	
 	//KAKAO API Redirect URI	
-	private final static String K_REDIRECT_URI = "http://localhost:8080/spring";
+	private final static String K_REDIRECT_URI = "http://itealab.com/";
 	
 	public static String getAuthiruzationURI(HttpSession session) {
 		String kakaoUrl 
@@ -42,9 +45,9 @@ public class KakaoController {
 		
 		postParams.add(new BasicNameValuePair("grant_type :", "autorization_code"));
 		//KAKAO REST API KEY
-		postParams.add(new BasicNameValuePair("client_id", "dddf9e1f05cdd30409acd606d146afe9"));
+		postParams.add(new BasicNameValuePair("client_id", K_CLIENT_ID));
 		//KAKAO API Redirect URI	
-		postParams.add(new BasicNameValuePair("redirect_uri", "http://localhost:8080/spring"));
+		postParams.add(new BasicNameValuePair("redirect_uri", K_REDIRECT_URI));
 		//Login 중 받은 code값.
 		postParams.add(new BasicNameValuePair("code", autorize_code));
 		

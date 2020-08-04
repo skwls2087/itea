@@ -86,14 +86,14 @@ public class AskService {
 	}
 	
 	//검색 제목
-	public ArrayList<AskDTO> askSearchT(String search, PageUtil pInfo) {
+	public ArrayList<AskDTO> askSearchT(String asearch, PageUtil pInfo) {
 		int start = 
 				(pInfo.getNowPage()-1)*pInfo.getLineCount();
 		int end   = start+pInfo.getLineCount()-1;
 		AskDTO askDTO = new AskDTO();
 		askDTO.setStart(start);
 		askDTO.setEnd(end);
-		askDTO.setSearch(search);
+		askDTO.setAsearch(asearch);
 		ArrayList<AskDTO> list = 
 				askDAO.askSearchT(askDTO);
 		return list;
@@ -101,14 +101,14 @@ public class AskService {
 	}
 	
 	//검색 번호
-	public ArrayList<AskDTO> askSearchA(String search,PageUtil pInfo) {
+	public ArrayList<AskDTO> askSearchA(String asearch,PageUtil pInfo) {
 		int start = 
 				(pInfo.getNowPage()-1)*pInfo.getLineCount();
 		int end   = start+pInfo.getLineCount()-1;
 		AskDTO askDTO = new AskDTO();
 		askDTO.setStart(start);
 		askDTO.setEnd(end);
-		askDTO.setSearch(search);
+		askDTO.setAsearch(asearch);
 		ArrayList<AskDTO> list = 
 				askDAO.askSearchA(askDTO);
 		return list;
@@ -155,6 +155,23 @@ public class AskService {
 				askDAO.problemBoard(askDTO);
 		return list;
 		
+	}
+
+
+
+	//토탈페이지 문제번호 검색
+	public PageUtil getPageInfoA(int nowPage,String asearch) {
+		int totalCount=askDAO.getTotalCntA(asearch);
+		System.out.println("totalCount="+totalCount);
+		PageUtil pInfo = new PageUtil(nowPage,totalCount,5,3);
+		return pInfo;
+	}
+
+	public PageUtil getPageInfoT(int nowPage, String asearch) {
+		int totalCount=askDAO.getTotalCntT(asearch);
+		System.out.println("totalCount="+totalCount);
+		PageUtil pInfo = new PageUtil(nowPage,totalCount,5,3);
+		return pInfo;
 	}
 
 	
