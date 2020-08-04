@@ -76,6 +76,7 @@ public class AskController {
 		String userNick=(String) session.getAttribute("MNICK");
 		AskDTO askDTO = askSV.askDetail(ano);
 		ArrayList<ReplyDTO> list = askSV.replyList(ano);
+		System.out.println("askDTO="+askDTO);
 		askDTO.setNowPage(nowPage);
 		request.setAttribute("list", list);
 		request.setAttribute("userNick", userNick);
@@ -143,6 +144,8 @@ public class AskController {
 		return mv;
 	}
 	
+	//대댓글 삭제
+	
 	
 	//글 수정폼
 	@RequestMapping("ask/askModifyFrm")
@@ -201,7 +204,7 @@ public class AskController {
 	//검색
 	@RequestMapping("ask/askSearch")
 	public String askSearch(HttpServletRequest request,HttpSession session) {
-		String search = request.getParameter("asearch");
+		String asearch = request.getParameter("asearch");
 		String category = request.getParameter("category");
 		int nowPage=1;
 		if(request.getParameter("nowPage")!=null) {
@@ -210,14 +213,16 @@ public class AskController {
 		String mnick=(String) session.getAttribute("MNICK");
 		PageUtil pInfo=null;
 		ArrayList<AskDTO> list=null;
+		System.out.println("asearch="+asearch);
+		System.out.println("category="+category);
 		if(category.equals("title")) {
-			pInfo = askSV.getPageInfoT(nowPage);
-			list = askSV.askSearchT(search,pInfo);
-			System.out.println("pIngoT="+pInfo);
+			pInfo=askSV.getPageInfoT(nowPage,asearch);
+			list=askSV.askSearchT(asearch,pInfo);
+			System.out.println("pInfoT="+pInfo);
 		}else if(category.equals("pno")) {
-			pInfo = askSV.getPageInfoA(nowPage);
-			list = askSV.askSearchA(search,pInfo);
-			System.out.println("pIngoA="+pInfo);
+			pInfo = askSV.getPageInfoA(nowPage,asearch);
+			list = askSV.askSearchA(asearch,pInfo);
+			System.out.println("pInfoA="+pInfo);
 		}
 		System.out.println("list="+list);
 		request.setAttribute("category", category);
@@ -226,6 +231,12 @@ public class AskController {
 		request.setAttribute("list", list);
 		return "ask/askList";
 	}
+	
+	
+	
+	
+	
+	
 	
 	//문제풀기에서 넘어오기
 	@RequestMapping("ask/problemBoard")

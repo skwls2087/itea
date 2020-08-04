@@ -95,14 +95,15 @@ public class AskDAO {
 		return (ArrayList) session.selectList("ask.problemBoard",askDTO);
 	}
 
-	//토탈 페이지 제목 검색
-	public int getTotalCntT() {
-		return session.selectOne("ask.getTotalCntT");
-	}
 
 	//토탈 페이지 문제번호 검색
-	public int getTotalCntA() {
-		return session.selectOne("ask.getTotalCntA");
+	public int getTotalCntA(String asearch) {
+		return session.selectOne("ask.getTotalCntA",asearch);
+	}
+
+	//토탈 페이지 제목 검색
+	public int getTotalCntT(String asearch) {
+		return session.selectOne("ask.getTotalCntT",asearch);
 	}
 
 

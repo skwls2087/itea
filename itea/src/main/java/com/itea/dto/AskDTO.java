@@ -13,7 +13,8 @@ public class AskDTO {
 	 private int 	pno;		//문제번호
 	 private Date	adate; 
 	 private int	ahit;
-	 private String search;
+	 private String asearch;
+
 	 private String category;	//검색 구분 카테고리
 	 private int    start;	 	 //시작 글번호
 	 private int    end;		 //끝 글번호
@@ -120,28 +121,25 @@ public class AskDTO {
 	
 	
 
+	public String getAsearch() {
+		return asearch;
+	}
+
+	public void setAsearch(String asearch) {
+		this.asearch = asearch;
+	}
+
 	public String getMnick() {
 		return mnick;
 	}
 
-	public String getSearch() {
-		return search;
-	}
-
-	public void setSearch(String search) {
-		this.search = search;
-	}
+	
 
 	public void setMnick(String mnick) {
 		this.mnick = mnick;
 	}
 	
-	
-	
-	
-	
-	
-	
+
 
 	public String getCategory() {
 		return category;
@@ -154,8 +152,8 @@ public class AskDTO {
 	@Override
 	public String toString() {
 		return "AskDTO [ano=" + ano + ", atitle=" + atitle + ", acontent=" + acontent + ", mno=" + mno + ", mnick="
-				+ mnick + ", lname=" + lname + ", pno=" + pno + ", adate=" + adate + ", ahit=" + ahit + ", search="
-				+ search + ", category=" + category + ", start=" + start + ", end=" + end + ", nowPage=" + nowPage
+				+ mnick + ", lname=" + lname + ", pno=" + pno + ", adate=" + adate + ", ahit=" + ahit + ", asearch="
+				+ asearch + ", category=" + category + ", start=" + start + ", end=" + end + ", nowPage=" + nowPage
 				+ ", size=" + size + "]";
 	}
 
