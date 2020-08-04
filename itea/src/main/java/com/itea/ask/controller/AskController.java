@@ -210,7 +210,7 @@ public class AskController {
 		if(request.getParameter("nowPage")!=null) {
 			nowPage=Integer.parseInt(request.getParameter("nowPage"));
 		}
-		String mnick=(String) session.getAttribute("MNICK");
+		String mnick=(String)session.getAttribute("MNICK");
 		PageUtil pInfo=null;
 		ArrayList<AskDTO> list=null;
 		System.out.println("asearch="+asearch);

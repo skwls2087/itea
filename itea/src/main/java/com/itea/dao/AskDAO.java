@@ -103,7 +103,9 @@ public class AskDAO {
 
 	//토탈 페이지 제목 검색
 	public int getTotalCntT(String asearch) {
-		return session.selectOne("ask.getTotalCntT",asearch);
+		int count = session.selectOne("ask.getTotalCntT",asearch);
+		System.out.println("count="+count);
+		return count;
 	}
 
 

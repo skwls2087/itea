@@ -18,7 +18,7 @@
 	<!-- 제목으로 검색 페이징 처리 -->
 	<select id="getTotalCntT" resultType="int">
 		select count(*) from askboard
-		where atitle like '%${asearch}%'
+		where atitle like concat('%',#{asearch},'%')
 	</select>
 
 	<!-- 검색 제목 -->
@@ -34,7 +34,7 @@
 		(SELECT ano, a.mno, m.mnick from
 		askboard a JOIN member m ON a.mno=m.mno) p
 		ON p.ano=k.ano
-		where atitle like '%${asearch}%'
+		where atitle like concat('%',#{asearch},'%')
 		ORDER BY k.ano desc	
 		LIMIT #{start}, #{size}
 	</select>
