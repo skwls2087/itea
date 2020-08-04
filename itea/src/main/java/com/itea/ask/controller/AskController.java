@@ -202,12 +202,16 @@ public class AskController {
 			nowPage=Integer.parseInt(request.getParameter("nowPage"));
 		}
 		String mnick=(String) session.getAttribute("MNICK");
-		PageUtil pInfo = askSV.getPageInfo(nowPage);
+		PageUtil pInfo=null;
 		ArrayList<AskDTO> list=null;
 		if(category.equals("title")) {
+			pInfo = askSV.getPageInfoT(nowPage);
 			list = askSV.askSearchT(search,pInfo);
-		}else if(category.equals("ano")) {
+			System.out.println("pIngoT="+pInfo);
+		}else if(category.equals("pno")) {
+			pInfo = askSV.getPageInfoA(nowPage);
 			list = askSV.askSearchA(search,pInfo);
+			System.out.println("pIngoA="+pInfo);
 		}
 		System.out.println("list="+list);
 		request.setAttribute("category", category);

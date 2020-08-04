@@ -157,6 +157,21 @@ public class AskService {
 		
 	}
 
+	//토탈페이지 제목검색
+	public PageUtil getPageInfoT(int nowPage) {
+		int totalCount=askDAO.getTotalCntT();
+		System.out.println("totalCount="+totalCount);
+		PageUtil pInfo = new PageUtil(nowPage,totalCount,5,3);
+		return pInfo;
+	}
+
+	//토탈페이지 문제번호 검색
+	public PageUtil getPageInfoA(int nowPage) {
+		int totalCount=askDAO.getTotalCntA();
+		PageUtil pInfo = new PageUtil(nowPage,totalCount,5,3);
+		return pInfo;
+	}
+
 	
 
 }

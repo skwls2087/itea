@@ -5,7 +5,7 @@
 	<form action="../ask/asksearch.co">
 		<select id="category" name="category">
 			<option value="title" selected>제목</option>
-			<option value="ano">번호</option>
+			<option value="pno">번호</option>
 		</select>
 		<input type="text" id="asearch" name="asearch" placeholder="검색어를 입력하세요"/>
 		<input type="button" id="sBtn" value="검색"/>

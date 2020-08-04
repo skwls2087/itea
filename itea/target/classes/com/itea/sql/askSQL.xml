@@ -9,6 +9,18 @@
 		select count(*) from askboard
 	</select>
 	
+	<!-- 제목으로 검색 페이징 처리 -->
+	<select id="getTotalCntT" resultType="int">
+		SELECT count(*)	 FROM askboard
+		where atitle like '%${search}%'
+	</select>
+	
+	<!-- 문제번호로 검색 페이징 처리 -->
+	<select id="getTotalCntA" resultType="int">
+		select count(*) from askboard
+		where pno=#{search}
+	</select>
+	
 	<!-- 검색 제목 -->
 	<select id="searchT" resultType="askDTO">
 		SELECT k.ano,atitle,k.pno,p.mnick,k.lname,adate,ahit FROM
@@ -40,7 +52,7 @@
 		(SELECT ano, a.mno, m.mnick from
 		askboard a JOIN member m ON a.mno=m.mno) p
 		ON p.ano=k.ano
-		where k.ano = #{search}
+		where k.pno = #{search}
 		ORDER BY k.ano desc	
 		LIMIT #{start}, #{size}
 	</select>
