@@ -64,15 +64,12 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
 
 <script>
-
 	 /*태강-채팅*/
 		function sendMessage(form){
-
 			//서버로 전송
 			$.post('<%= request.getContextPath()%>/chat/addMessage.co',{
 				writer : form.writer.value,
-				body : form.body.value,
-				time : form.body.value
+				body : form.body.value
 			},function(data){
 
 			},'json');
@@ -82,7 +79,7 @@
 		}
 		
 		var Chat__lastReceivedMessageId= -1;
-	
+		
 		function Chat__loadNewMessages(){
 			
 			var objDiv=document.getElementById("chat-list");
@@ -108,11 +105,14 @@
 		}
 			
 		function Chat__drawMessages(message){
-			
+
 		 	var d = new Date();
+
+		 	/* var d = message.time
 			var h = d.getHours();
 			var m = d.getMinutes(); 
-			var time = h+':'+m;
+			var hm = h+':'+m;
+			alert(message.time) */
 			
 			name=document.getElementById("chatname").innerText;
 			
@@ -121,15 +121,15 @@
 				var html = 
 					'<div class="myname">'+message.writer+'</div><br/>'+
 					'<div class="my"><div class="mychat">'+message.body+'</div>'+
-					'<div class="mytime"><table><td class="mytimetd">'+time+'</td></table></div></div>'
-					
+					'<div class="mytime"><table><td class="mytimetd">'+message.time+'</td></table></div></div>'
+
 					$('.chat-list').append(html)
 			}else{
 				var html = 
 					'<div class="othername">'+message.writer+'</div><br/>'+
 					'<div class="other"><div class="otherchat">'+message.body+'</div>'+
-					'<div class="othertime"><table><td class="othertimetd">'+time+'</td></table></div></div>'
-					
+					'<div class="othertime"><table><td class="othertimetd">'+message.time+'</td></table></div></div>'
+
 					$('.chat-list').append(html)
 			}
 				
