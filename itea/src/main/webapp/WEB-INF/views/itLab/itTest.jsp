@@ -8,7 +8,7 @@
 	<p class="font">개발자 직업 만족도 TEST</p>
 	<p class="font1">당신은 개발자로써 만족하며 살 수 있을까요?</p><br/>
 	<img src="<%= request.getContextPath()%>/resources/img/question2.png" class="img"/><br/><br/>
-	<p class="font1">당신이 스스로를 바라볼 때,<br/>
+	<p class="font2">당신이 스스로를 바라볼 때,<br/>
 	해당 질문에 대해 가장 적합한 문장을 선택해주세요. </p>
 	<br/>
 	<a href="<%= request.getContextPath()%>/itLab/itTestDetail.co">

@@ -76,7 +76,7 @@
 		<td valign=top rowspan="2" class="ask-pno">#${askDTO.pno}</td>
 		<td class="ask-title" colspan="2">${askDTO.atitle}</td>
 	</tr>
-	<tr><td class="ask-info"><span>작성자 ${askDTO.mnick} | 자격증 ${askDTO.lname} | 작성일자 <fmt:formatDate value="${askDTO.adate}" pattern="yy-MM-dd"/>  | 조회수 ${askDTO.ahit}</span></td>
+	<tr><td class="ask-info"><span>작성자 ${askDTO.mnick} | ${askDTO.lname} | 작성일자 <fmt:formatDate value="${askDTO.adate}" pattern="yy-MM-dd"/>  | 조회수 ${askDTO.ahit}</span></td>
 	<td id="ask-modify">
 	<c:if test="${userNick==askDTO.mnick || userNick=='관리자'}">
 		<img src="${pageContext.request.contextPath}/resources/img/edit.png" width="20" id="mBtn" style="cursor:pointer;"/>

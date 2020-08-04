@@ -1,20 +1,69 @@
-@media (max-width: 890px) {
+
+/*itTest 테스트 첫 화면*/
+@media (min-width:660px) {
+.itTest{
+	text-align:center;
+	margin:20px auto;
+	padding-top:50px;
+	padding:20px;
+	font-family: 'Sunflower', sans-serif;
+}
+.font{
+	font-size:50px;
+	color:#2f67a2;
+	font-family: 'Do Hyeon', sans-serif;
+}
+.font1{
+	font-size:30px;
+   box-sizing: border-box;
+   color:#3c3c40;
+}
+.font2{
+	font-size:20px;
+   color:gray;
+}
+.img{
+	width:200px;
+}	
+#startBtn{
+	font-size: 20px;
+	text-align: center;
+	border-radius: 10px;
+	padding:10px 30px;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight:bold;
+}
+#startBtn:hover{
+	font-size: 20px;
+	background-color: #008CBA;
+	text-align: center;
+	border-radius: 10px;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight:bold;
+	color:white;
+}
+}
+@media (max-width:660px) {
    .itTest{
 		text-align:center;
-		margin:5px auto;
+		margin:40px auto;
 		padding-top:5px;
 		padding:5px;
 		font-family: 'Sunflower', sans-serif;
 	}
 	.font{
-		font-size:25px;
+		font-size:40px;
 		color:#2f67a2;
 		font-family: 'Do Hyeon', sans-serif;
 	}
 	.font1{
+		font-size:20px;
+	  box-sizing: border-box;
+	  color:#3c3c40;
+	}
+	.font2{
+		color:gray;
 		font-size:15px;
-	   box-sizing: border-box;
-	   color:#3c3c40;
 	}
 	.img{
 		width:100px;
@@ -36,46 +85,5 @@
 		font-family: 'Noto Sans KR', sans-serif;
 		font-weight:bold;
 		color:white;
-	}
-}
-
-@media only screen and (min-width : 1224px) {
-	.itTest{
-		text-align:center;
-		margin:20px auto;
-		padding-top:50px;
-		padding:20px;
-		font-family: 'Sunflower', sans-serif;
-	}
-	.font{
-		font-size:50px;
-		color:#2f67a2;
-		font-family: 'Do Hyeon', sans-serif;
-	}
-	.font1{
-		font-size:30px;
-	   box-sizing: border-box;
-	   color:#3c3c40;
-	}
-	.img{
-		width:200px;
-	}	
-	#startBtn{
-		font-size: 20px;
-		text-align: center;
-		border-radius: 10px;
-		padding:20px 40px;
-		font-family: 'Noto Sans KR', sans-serif;
-		font-weight:bold;
-	}
-	#startBtn:hover{
-		font-size: 20px;
-		background-color: #008CBA;
-		text-align: center;
-		border-radius: 10px;
-		padding:20px 40px;
-		font-family: 'Noto Sans KR', sans-serif;
-		font-weight:bold;
-		color:white;
-	}
+	} 
 }
