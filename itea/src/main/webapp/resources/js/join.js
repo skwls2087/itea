@@ -250,7 +250,7 @@ $(function(){
 		
 		//닉네임 DB확인
 		$.ajax({
-			url : '/member/checkNick.co?nick='+ nick,
+			url : 'checkNick.co?nick='+ nick,
 			type : 'post',
 			success : function(data) {					
 				
