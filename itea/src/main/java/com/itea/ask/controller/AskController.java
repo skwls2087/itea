@@ -2,6 +2,7 @@ package com.itea.ask.controller;
 
 import java.util.ArrayList;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -67,7 +68,7 @@ public class AskController {
 		return 0;
 	}
 	
-	
+
 	//글 상세보기  && 댓글 리스트
 	@RequestMapping("ask/askDetail")
 	public void askDetail(HttpServletRequest request,HttpSession session) throws Exception{

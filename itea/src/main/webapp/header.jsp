@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ page import="java.util.Date"  %>
 <!DOCTYPE html>
 <html lang = "ko">
 <head>
@@ -71,7 +71,8 @@
 			//서버로 전송
 			$.post('<%= request.getContextPath()%>/chat/addMessage.co',{
 				writer : form.writer.value,
-				body : form.body.value
+				body : form.body.value,
+				time : form.body.value
 			},function(data){
 
 			},'json');
@@ -81,7 +82,7 @@
 		}
 		
 		var Chat__lastReceivedMessageId= -1;
-		
+	
 		function Chat__loadNewMessages(){
 			
 			var objDiv=document.getElementById("chat-list");
@@ -100,13 +101,17 @@
 						Chat__drawMessages(message);
 					}
 				
-					setTimeout(Chat__loadNewMessages,3000);
+					setTimeout(Chat__loadNewMessages,2000);
 				
 			}, 'json');
 			
 		}
 			
 		function Chat__drawMessages(message){
+		 	var d = new Date();
+			var h = d.getHours();
+			var m = d.getMinutes(); 
+			var time = h+':'+m;
 			
 			name=document.getElementById("chatname").innerText;
 			
@@ -114,14 +119,12 @@
 				
 				var html = 
 					'<div class="myname">'+message.writer+'</div><br/>'+
-					'<div class="mychat">'+message.body+'</div><br/>'
-					
+					'<div class="mychat">'+message.body+'</div>'+time
 					$('.chat-list').append(html)
 			}else{
 				var html = 
 					'<div class="othername">'+message.writer+'</div><br/>'+
-					'<div class="otherchat">'+message.body+'</div><br/>'
-					
+					'<div class="otherchat">'+message.body+'</div>'+time
 					$('.chat-list').append(html)
 			}
 				
