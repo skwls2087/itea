@@ -83,7 +83,7 @@
 	
 	<!-- 상세보기 -->
 	<select id="askDetail" resultType="askDTO">
-		select ano,atitle,a.pno,l.lname,mnick,acontent,adate
+		select ano,atitle,a.pno,l.lname,mnick,acontent,adate,ahit
 		from askboard a ,problem p ,license l, member m, licenseclass lc
 		where a.pno=p.pno and lc.lqno=p.lqno and lc.lno=l.lno and a.mno=m.mno and a.ano=#{ano} 
 	</select>
