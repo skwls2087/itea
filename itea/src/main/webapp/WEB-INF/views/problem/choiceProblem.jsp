@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/problem.css">
 
 <div id="problem-create">
-	<span id="problem-header">서술형 출제</span><br/><br/>
+	<span id="problem-header">객관식 출제</span><br/><br/>
 	<form id="choice-problem-create" method="post" action="createProblemProc.co" encType="multipart/form-data">
 		<table width="100%">
 		<!-- 문제 -->

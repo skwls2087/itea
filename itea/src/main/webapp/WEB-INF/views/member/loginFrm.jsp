@@ -34,12 +34,16 @@
 
 	    <!-- 1.네이버 -->
 		<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+		
+		<!-- 네아로 버튼 -->
 		<div id="naverIdLogin"></div>
+		
+		<!-- 네아로 설정 스크립트 -->
 		<script type="text/javascript">
 		   var naverLogin = new naver.LoginWithNaverId(
 		      {
-		         clientId: "68tNfP0GUh1VB4b0suSF",
-		         callbackUrl: "http://localhost:8080/spring/callback.co",
+		         clientId: "d2LqO26x_yJC_yXrKI3h",
+		         callbackUrl: "http://itealab.com/callback.co",
 		         isPopup: false,
 		         loginButton: {color: "green", type: 3, height: 60}
 		      }

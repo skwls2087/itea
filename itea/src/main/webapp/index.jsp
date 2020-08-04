@@ -1,27 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-
+<!-- 참조 문서 링크 -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
-
-<!DOCTYPE html>
-<html lang='en'>
-  <head>
-    <meta charset='utf-8' />
 <link href='${pageContext.request.contextPath}/resources/fullcalendar-5.1.0/lib/main.css' rel='stylesheet' />
 <script src='${pageContext.request.contextPath}/resources/fullcalendar-5.1.0/lib/main.js'></script>
+
 <script type='text/javascript'>
 
-document.addEventListener('DOMContentLoaded', function() {
-  var calendarEl = document.getElementById('calendar');
+	/* 예인-달력 */
+	document.addEventListener('DOMContentLoaded', function() {
+  	var calendarEl = document.getElementById('calendar');
 
-  var calendar = new FullCalendar.Calendar(calendarEl, {
+ 	var calendar = new FullCalendar.Calendar(calendarEl, {
+ 		/*Boolean, default: true,
+		windowResize: function(arg) {
+			    alert('The calendar has adjusted to a window resize. Current view: ' + arg.view.type);
+			  },*/
+	  dayMaxEventRows: true, // for all non-TimeGrid views
+	  views: {
+	    timeGrid: {
+	      dayMaxEventRows: 6 // adjust to 6 only for timeGridWeek/timeGridDay
+	    }
+	  }	, 
+ 		aspectRatio: 2,
+ 		contentHeight: 650,
     googleCalendarApiKey: 'AIzaSyAVIOOupclxyUQEFJ_XtOcfdc7BzbQYWgY',
     eventSources: [
       {
          googleCalendarId: 'bockikpkbi8al3sq8u5c74ik6c@group.calendar.google.com',
          className: '네트워크관리사',
-       	 color: '848ccf',
-         //textColor: 'black' 
+       	 color: '#848ccf',
+         //textColor: 'black',
       },
       {
           googleCalendarId: 'p6vuu22cdfbbtof421l05u2v20@group.calendar.google.com',
@@ -81,107 +90,19 @@ document.addEventListener('DOMContentLoaded', function() {
          googleCalendarId: '687kr198d3f0uv22u8t8uh4na0@group.calendar.google.com',
          className: 'SQL 전문가/개발자',
        	color: '#127681',
-       	//textColor: 'black' 
+       	//textColor: 'black' ,
        }
     ]
   
-  });
-  calendar.render();
-});
-</script>
-<style>
-#calendar{
-	width:60%;
-	margin:20px auto;
-}
-</style>
-  </head>
-  <body>
-    <div id='calendar'></div>
-  </body>
-</html>
-
-
-<script>
-
-	/*태강-채팅*/
-	function sendMessage(form){
-		form.writer.value = form.writer.value.trim();
-		
-		form.body.value = form.body.value.trim();
-		
-		if(form.body.value.length==0){
-			alert('내용을 입력해주세요.');
-			form.body.focus();
-			return false;
-		}
-		
-		//서버로 전송
-		$.post('chat/addMessage.co',{
-			writer : form.writer.value,
-			body : form.body.value
-		},function(data){
-
-		},'json');
-		form.body.value='';
-		form.body.focus();
-	}
-	
-	var Chat__lastReceivedMessageId= -1;
-	
-	function Chat__loadNewMessages(){
-		$.get('chat/getMessages.co', {
-			from : Chat__lastReceivedMessageId+1
-		},  function(data){
-				/* data.id.sort(function(a,b){
-					return b-a;
-				}); */
-				for(var i=0; i<data.length;i++){
-					var message = data[i];
-					
-					Chat__lastReceivedMessageId=message.id;
-					Chat__drawMessages(message);
-				}
-			
-				setTimeout(Chat__loadNewMessages,3000);
-			
-		}, 'json');
-	}
-		
-	function Chat__drawMessages(message){
-		var html = '['+message.id+']('+message.writer+'):'+message.body;
-		$('.chat-list').append('<div>'+html+'</div>')
-	}
-		
-
-	$(function(){
-		Chat__loadNewMessages();
+  	});
+  		calendar.render();
 	});
-	
-</script>
 
+</script>
 
 <div class="itea-main">
 	<div class="main-calendar">
-	달력
+		<div id='calendar'></div>
 	</div>
-	<div class="main-chat">
-	<h1>채팅</h1>
-		<div class="container" id="chatbox">
-		
-		<div class="chat-list" style="overflow-y:scroll; width:300px; height:550px; padding:4px; border:1 solid #000000;"></div>
-		
-			<form onsubmit="sendMessage(this); return false;">
-				<c:if test="${empty MNO}">
-					<input type="hidden" name="writer" value="비회원">
-				</c:if>
-				<c:if test="${!empty MNO}">
-					<input type="hidden" name="writer" value="${MNICK}">
-				</c:if>
-				<input type="text" name="body" placeholder="내용을 입력해주세요"/>
-				<input type="submit" value="입력"/>
-			</form>
-		</div>
-	</div>
-
+	
 </div>

@@ -4,12 +4,14 @@
 	font-family: 'Noto Sans KR', sans-serif;
 }
 
+.survey h2{
+	font-family: 'Black Han Sans', sans-serif;
+}
 .survey-answer{
 	display:flex;
 	width:80%;
 	height:300px;
 	margin:0 auto;
-	font-family: 'Noto Sans KR', sans-serif;
 }
 
 .survey-answer a{
@@ -17,6 +19,7 @@
 }
 
 .survey1{
+	height:50px;
 	width: 80%;
   margin: 5%;
   float: left;
@@ -28,6 +31,7 @@
 }
 
 .survey1:hover{
+	height:50px;
 	width: 80%;
   margin: 5%;
   float: left;
@@ -40,6 +44,7 @@
 }
 
 .survey2{
+	height:50px;
 	width: 80%;
   margin: 5%;
   float: left;
@@ -51,6 +56,7 @@
 }
 
 .survey2:hover{
+	height:50px;
 	width: 80%;
   margin: 5%;
   float: left;

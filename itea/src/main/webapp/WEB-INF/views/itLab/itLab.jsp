@@ -8,7 +8,7 @@ $(function(){
    
    var date = new Date();
    var year=date.getFullYear();
-   var month=date.getMonth()+1;
+   var month=date.getMonth();
    moveyear=year;
    movemonth=month;
    
@@ -98,11 +98,14 @@ $(function(){
 			<a href="http://www.inews24.com/list/it" target="_blank">아이뉴스24</a><br/>
 		</div>
 		<div id="itKeyword-right">
-
-			<p><span id="wordYear">2020</span>년 <span id="wordMonth">7</span>월</p>
+		<div id="itKeyword-right-top">
 			<img class="wordcloudArrow" id="pre" src="${pageContext.request.contextPath}/resources/img/pre.png" style="cursor:pointer">
-      <img class="" id="wordcloud" src="">
-      <img class="wordcloudArrow" id="post" src="${pageContext.request.contextPath}/resources/img/post.png" style="cursor:pointer">
+			<p id="wordcloudDate"><span id="wordYear">2020</span>년 <span id="wordMonth">7</span>월</p>
+		 	<img class="wordcloudArrow" id="post" src="${pageContext.request.contextPath}/resources/img/post.png" style="cursor:pointer">
+		 </div>
+		 <div id="itKeyword-right-top">
+      		<img class="" id="wordcloud" src="">
+     	 </div>
 
 		</div>
 	</div>

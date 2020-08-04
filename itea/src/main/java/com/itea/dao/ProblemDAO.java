@@ -6,9 +6,11 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.itea.dto.ErrorDTO;
 import com.itea.dto.ProblemDTO;
 import com.itea.dto.QaDTO;
 import com.itea.dto.licenseDTO;
+import com.itea.util.PageUtil;
 
 public class ProblemDAO {
 
@@ -52,6 +54,7 @@ public class ProblemDAO {
 	}
 
 	public void insertEssay(ProblemDTO pDTO) {
+		System.out.println("DAO에서의 디티오"+pDTO);
 		session.insert("problem.insertProblem",pDTO);
 		int pno= session.selectOne("problem.selectPno");
 		pDTO.setPno(pno);
@@ -60,6 +63,7 @@ public class ProblemDAO {
 	}
 
 	public List<String> selectPnoList(HashMap tinfo) {
+		System.out.println("tinfo="+tinfo);
 		return session.selectList("problem.selectPnoList",tinfo);
 	}
 	public ProblemDTO problemInfo(int pno) {
@@ -119,13 +123,112 @@ public class ProblemDAO {
 	}
 
 	
-	public int getmyTotalCnt(int mno) {
-		int qcnt=session.selectOne("problem.cProblemListCnt",mno);
+	public int getmyTotalCnt(HashMap cert) {
+		
+		int selectKind=(int) cert.get("selectKind");
+		int mno=(int) cert.get("mno");
+		String search=(String) cert.get("search");
+		String scontent=(String) cert.get("scontent");
+		
+		if(selectKind==0) {
+			if(search.equals("")) {
+				return session.selectOne("problem.cProblemListCnt",cert);
+			}else {
+				if(search.equals("pno")) {
+					return session.selectOne("problem.pnosearchedProblemListCnt",cert);
+				}else {
+					return session.selectOne("problem.pdetailsearchedProblemListCnt",cert);
+				}
+			}
+		}else {
+			if(search.equals("")) {
+				return session.selectOne("problem.selectedProblemListCnt",cert);
+			}else {
+				if(search.equals("pno")) {
+					return session.selectOne("problem.pnoselectedSearchProblemListCnt",cert);
+				}else {
+					return session.selectOne("problem.pdetailselectedSearchProblemListCnt",cert);
+				}
+			}
+		}
+
+	}
+
+	public ArrayList<ProblemDTO> myProblemList(HashMap cert) {
+		
+		int lqno=(int) cert.get("selectKind");
+		String search=(String) cert.get("search");
+		
+		if(lqno==0) {
+			if(search.equals("")){
+				return  (ArrayList)session.selectList("problem.myProblemList", cert);
+			}else {
+				if(search.equals("pno")) {
+					return  (ArrayList)session.selectList("problem.pnosearchmyProblemList", cert);
+				}else {
+					return  (ArrayList)session.selectList("problem.pdetailsearchmyProblemList", cert);
+				}
+			}
+		}else {
+			if(search.equals("")){
+				return  (ArrayList)session.selectList("problem.selectedmyProblemList", cert);
+			}else {
+				if(search.equals("pno")) {
+					return  (ArrayList)session.selectList("problem.pnoselectedsearchmyProblemList", cert);
+				}else {
+					return  (ArrayList)session.selectList("problem.pdetailselectedsearchmyProblemList", cert);
+				}
+			}
+		}
+	}
+	
+	public int getScrapTotalCnt(HashMap cert) {
+		
+		int qcnt;
+		
+		int selectKind=(int) cert.get("selectKind");
+		int mno=(int) cert.get("mno");
+		String search=(String) cert.get("search");
+		String scontent=(String) cert.get("scontent");
+		
+		if(selectKind==0) {
+			if(search.equals("")) {
+				qcnt=session.selectOne("problem.cProblemListCnt",mno);
+			}else {
+				if(search.equals("pno")) {
+					qcnt=session.selectOne("problem.pnosearchedProblemListCnt",cert);
+				}else {
+					qcnt=session.selectOne("problem.pdetailsearchedProblemListCnt",cert);
+				}
+			}
+		}else {
+			if(search.equals("")) {
+				qcnt=session.selectOne("problem.selectedProblemListCnt",cert);
+			}else {
+				if(search.equals("pno")) {
+					qcnt=session.selectOne("problem.pnoselectedSearchProblemListCnt",cert);
+				}else {
+					qcnt=session.selectOne("problem.pdetailselectedSearchProblemListCnt",cert);
+				}
+			}
+		}
 		return qcnt;
 	}
 
-	public ArrayList<ProblemDTO> getcProblemList(ProblemDTO ProblemDTO) {
-			return  (ArrayList)session.selectList("problem.getcProblemList", ProblemDTO);
+	public List<String> selectPnoCorrects(int pno) {
+		return session.selectList("problem.selectCorrectList",pno);
+	}
+
+	public void deleteProblem(int pno) {
+		session.selectList("problem.deleteProblem",pno);
+	}
+
+	public int getErrorTotalCnt() {
+		return session.selectOne("problem.getErrorTotalCnt");
+	}
+
+	public ArrayList<ErrorDTO> errorProblemList(HashMap page) {
+		return  (ArrayList)session.selectList("problem.errorProblemList", page);
 	}
 		
 

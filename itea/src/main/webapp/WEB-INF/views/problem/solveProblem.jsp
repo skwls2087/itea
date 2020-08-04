@@ -3,33 +3,21 @@
 <!-- js/css 참조 -->
 <script src="${pageContext.request.contextPath}/resources/js/problem.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/problem.css">
-	
-1.자격증별 문제
-<a href="${pageContext.request.contextPath}/problem/cProblemList.co">2.내가 만든 문제</a>
-3.즐겨찾기 문제
-		  
+	  
 <div id="problem-solve-container">
 	<div id="problem-solve">
 	<form action="selectForTest.co" method="post">
 		<span id="problem-header">시험 선택</span><br/><br/>
 		<hr><br/>
 	    <div class="form-group">
-		    <select id="Ckind" name="Ckind" class="custom-select">
+		    <select id="Ckind" name="lqno" class="custom-select">
 		      <option value="" selected="">자격증 종류</option>
 		      <c:forEach var="ckind" items="${ckind}">
-			      <option value="${ckind.lno}">${ckind.lname}</option>
+			      <option value="${ckind.lqno}">${ckind.lname}<c:if test="${ckind.lqclass!='단독'}">(${ckind.lqclass})</c:if></option>
 		      </c:forEach>
 		    </select>
 		  </div>
-		  
-		  <div class="form-group" id="ctype-select">
-		    <select id="Ctype" name="Ctype" class="custom-select">
-		      <option id="type0" value="" selected="">문제 유형</option>
-		      <option id="type1" value=""></option>
-		      <option id="type2" value=""></option>
-		    </select>
-		  </div>
-		  
+
 		  <div class="form-group">
 		    <select id="Qtype" name="Qtype" class="custom-select">
 		      <option value="1">기출문제만 풀기</option>
@@ -37,10 +25,9 @@
 		      <option value="3">종합문제</option>
 		    </select>
 		  </div>
-		  
+		  <div style="color:gray;text-align:left;margin-bottom:10px;">출제년도는 중복 선택 가능합니다.</div>
 		  <div class="form-group">
 		    <select id="Qyear" name="pyearList" size="10" class="custom-select" multiple>
-		      <option value="" selected="">출제년도</option>
 		      <option value="2020">2020년도</option>
 		      <option value="2019">2019년도</option>
 		      <option value="2018">2018년도</option>

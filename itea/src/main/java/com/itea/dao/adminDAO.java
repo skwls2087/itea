@@ -1,6 +1,7 @@
 package com.itea.dao;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,8 @@ public class adminDAO {
 	public ArrayList<MemberDTO> WeekVisitor(Visitor vo) throws Exception {
 		ArrayList<MemberDTO> visitor = null;
 		visitor=(ArrayList)session.selectList("admin.WeekVisitor", vo);
+		//Collections.reverse(visitor); //리스트 순서를 반대로
+		//System.out.println("dao visitor "+visitor);
 		return visitor;
 	}
 	
@@ -56,7 +59,8 @@ public class adminDAO {
 	public ArrayList<MemberDTO> WeekMember(MemberDTO mdto) throws Exception {
 		ArrayList<MemberDTO> member = null;
 		member=(ArrayList)session.selectList("admin.WeekMember",mdto);
-		System.out.println("dao "+member);
+		//Collections.reverse(member); //리스트 순서를 반대로
+		//System.out.println("dao member "+member);
 		return member;
 	}
 	

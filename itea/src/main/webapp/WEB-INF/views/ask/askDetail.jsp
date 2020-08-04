@@ -2,15 +2,18 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="u" tagdir="/WEB-INF/tags" %>
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/ask.css">
+
 <style>
 
 	th{text-align:center}
-	.table{margin-top:100px}
 	#sBtn{height:85px;width:120px;}
 	#sBtn1{height:85px;width:120px;}
 	.show {display:block}
 	.hide {display:none}
 </style>
+
 <script>
 	$(function(){
 		$("#lBtn").click(function(){
@@ -73,45 +76,39 @@
 	
 </script>
 <div class="container" style="margin-bottom:150px;">
-	<table class="table" style="margin-top:0px">
-		<tr>
-			<th>번호</th>
-			<td>${askDTO.ano}</td>
-			<th>작성자</th>
-			<td>${askDTO.mnick}</td>
-		</tr>
-		<tr>
-			<th>문제번호</th>
-			<td>${askDTO.pno}</td>
-			<th>자격증</th>
-			<td>${askDTO.lname}</td>
-		</tr>
-		<tr>
-			<th>제목</th>
-			<td colspan="3">${askDTO.atitle}</td>
-		</tr>
-		<tr>
-			<td colspan="4"></br><u:pre value="${askDTO.acontent}"/></td>
-		</tr>
-		<tr>
-			<td colspan="4" class="text-right">
-				<input type="button" id="lBtn" value="목록"/>
-				<c:if test="${userNick==askDTO.mnick}">
-				<input type="button" id="mBtn" value="수정"/>
-				<input type="button" id="dBtn" value="삭제"/>
-				</c:if>
-			</td>
-		</tr>
+	<h2 class="ask-heading">질문/토론 게시판</h2>
+	
+	<table class="ask-board-heading">
+	<tr>
+		<td valign=top rowspan="2" class="ask-pno">#${askDTO.pno}</td>
+		<td class="ask-title" colspan="2">${askDTO.atitle}</td>
+	</tr>
+	<tr><td class="ask-info"><span>작성자 ${askDTO.mnick} | 자격증 ${askDTO.lname} | 작성일자 ???????? | 조회수 ??????</span></td>
+	<td id="ask-modify">
+	<c:if test="${userNick==askDTO.mnick}">
+		<img src="${pageContext.request.contextPath}/resources/img/edit.png" width="20" id="mBtn" style="cursor:pointer;"/>
+		<img src="${pageContext.request.contextPath}/resources/img/trash.png" width="20" id="dBtn" style="cursor:pointer;"/>
+	</c:if>
+	</td>
+	</tr>
 	</table>
+	
+	<br/>
+	<u:pre value="${askDTO.acontent}"/>
+	
+	<div><input type="button" id="lBtn" value="목록" class="btn btn-secondary"/></div>
+	
 	<form action="askReplyInsert.co">
 	<input type="hidden" name="ano" value="${askDTO.ano}"/>
 	<input type="hidden" name="nowPage" value="${askDTO.nowPage}"/>
+	
 	<table class="table">
 		<tr>
 			<td colspan="2"><textarea name="accontent" id="accontent" cols="70" rows="3" class="form-control" placeholder="댓글 내용을 입력하세요"></textarea></td>
 			<td><input type="submit" id="sBtn" value="등록" class="form-control"></td>
 		</tr>
 	</table>
+	
 	</form>
 	<c:forEach var="reply" items="${list}">
 	<c:if test="${reply.acdepth==0}">
@@ -123,9 +120,9 @@
 				<br>
 				<u:pre value="${reply.accontent}"/>
 				<br>
-				<div class="tog">답글쓰기
+				<div class="tog"><span id="ask-reply">답글쓰기</span>
 				<c:if test="${userNick eq reply.mnick}">
-					<a href="askReplyDelete.co?acdepth=${reply.acdepth}&acno=${reply.acno}&nowPage=${askDTO.nowPage}&ano=${askDTO.ano}">삭제</a>
+					<a href="askReplyDelete.co?acdepth=${reply.acdepth}&acno=${reply.acno}&nowPage=${askDTO.nowPage}&ano=${askDTO.ano}" id="ask-delete">삭제</a>
 				</c:if>
 				</div>
 			</td>
@@ -153,7 +150,7 @@
 				<u:pre value="${reply.accontent}"/>
 				<br>
 				<c:if test="${userNick eq reply.mnick}">
-					<a href="askReplyDelete.co?acdepth=${reply.acdepth}&acno=${reply.acno}&nowPage=${askDTO.nowPage}&ano=${askDTO.ano}">삭제</a>
+					<a href="askReplyDelete.co?acdepth=${reply.acdepth}&acno=${reply.acno}&nowPage=${askDTO.nowPage}&ano=${askDTO.ano}" id="reply-delete">삭제</a>
 				</c:if>
 			</td>
 		</tr>

@@ -1,0 +1,63 @@
+
+textarea{
+	resize:none;
+}
+.container{
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.custom-select{
+	width:100px;
+    margin-bottom: 5px;
+}
+#asearch{
+	width:200px;
+	display:inline-block;
+	position:relative;
+}
+#askSearch{
+	position:relative;
+    right: 34px;
+    top: -3px;
+}
+.ask-heading{
+	font-size:30px;
+	margin:30px auto;
+	margin-top:58px ;
+	max-width:1000px;
+	font-family: 'Do Hyeon', sans-serif;
+	
+}
+
+.ask-board-heading{
+	background:#f5f5f5;
+	padding:20px 20px;
+	width:100%;
+}
+.ask-board-heading td{
+	padding:10px;
+	padding-right:0px;
+}
+.ask-pno{
+	font-family: 'Do Hyeon', sans-serif;
+	font-size:30px;
+	width:75px;
+}
+.ask-title{
+	padding-right:10px;
+}
+.ask-info{
+	margin-top:5px;
+	color:gray;
+}
+#ask-modify{
+	width:75px;
+	text-align:right;
+}
+#ask-modify img{
+	margin-right:10px;
+}
+#lBtn{
+	float:right;
+	margin:20px 0;
+}

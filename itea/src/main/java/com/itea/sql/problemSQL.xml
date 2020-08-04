@@ -5,9 +5,35 @@
 <!-- myBatis-config.xml의     mapper로 반드시 등록되어야 한다 --> 
 <mapper namespace="problem">
 
+	<sql id="selectProblemList">
+		SELECT p.pno, p.lqno,lc.lqclass,m.mno, p.ptype,p.plike,p.phate,p.pdetail,l.lname,ifnull(e.perror,0) as perror
+		FROM problem AS p
+		JOIN member AS m
+		ON p.mno=m.mno
+		join licenseclass as lc
+		on p.lqno=lc.lqno
+		join license as l
+		on lc.lno=l.lno
+		left outer JOIN (select pno,COUNT(*) AS perror from error GROUP BY pno) AS e
+		ON e.pno=p.pno
+	</sql>
+	
+	<sql id="selectProblemCnt">
+		select count(*) from problem as p
+	</sql>
+	
+	<sql id="joinInterest">
+		inner JOIN interest AS i
+		ON i.pno=p.pno
+	</sql>
+	
+
 	<!-- 문제 출제 자격증 종류 -->
 	<select id="selectCkind" resultType="licenseDTO">
-		select lname,lno from license
+		select lname,lc.lqclass,lc.lqno
+		from license AS l
+		JOIN licenseclass AS lc
+		ON l.lno=lc.lno
 	</select>
 	
 	<!-- 문제 출제 자격증 시험 유형 -->
@@ -31,22 +57,191 @@
 		ORDER BY pno desc
 		LIMIT 1
 	</select>
-	<!-- 내가 작성한 질문 개수 구하기 -->
+	
+	
+	
+	<!-- 1.자격증 필터 x 내용 검색 x -->
 	<select id="cProblemListCnt" parameterType="int" resultType="int">
-		select count(*) from problem where mno=#{mno}
+		<include refid="selectProblemCnt" /> 
+		<if test='type=="my"'>
+			where mno=#{mno}
+		</if> 
+		<if test='type=="scrap"'>
+			<include refid="joinInterest" />
+			WHERE i.mno=#{mno}
+		</if>
 	</select>
-	<!-- 해당 페이지에 맞는 내가 선택한 질문리스트 구하기 -->
-	<select id="getcProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
-		SELECT p.pno, p.lqno,l.lqclass,m.mno, p.ptype,p.pcomment,p.pcorrect,p.psolve,p.plike,p.phate
-		FROM problem AS p
-		JOIN member AS m
-		ON p.mno=m.mno
-		join licenseclass as l
-		on p.lqno=l.lqno
-		WHERE m.mno=#{logno}
-		ORDER BY p.pno desc
-	<!-- 	limit #{start}, #{size} -->
+	
+	<select id="myProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
+	  <include refid="selectProblemList" />
+	  <if test='type=="my"'>
+			WHERE m.mno=#{mno}
+			ORDER BY p.pno desc
+			limit #{start}, #{size}
+		</if> 
+		<if test='type=="scrap"'>
+			<include refid="joinInterest" />
+			WHERE i.mno=#{mno}
+			ORDER BY p.pno desc
+			limit #{start}, #{size}
+		</if>
+		 
 	</select>
+	
+	<!-- 2.자격증 필터 x 내용 검색 o -->
+	<select id="pnosearchedProblemListCnt" parameterType="Hashmap" resultType="int">
+		<include refid="selectProblemCnt" /> 
+		<if test='type=="my"'>
+			where mno=#{mno} and pno=#{scontent}
+		</if> 
+		<if test='type=="scrap"'>
+			<include refid="joinInterest" />
+			WHERE i.mno=#{mno} and i.pno=#{scontent}
+		</if>
+	</select>
+	<select id="pdetailsearchedProblemListCnt" parameterType="Hashmap" resultType="int">
+		<include refid="selectProblemCnt" /> 
+		<if test='type=="my"'>
+			where mno=#{mno} and pdetail like CONCAT('%',#{scontent},'%') 
+		</if> 
+		<if test='type=="scrap"'>
+			<include refid="joinInterest" />
+			WHERE i.mno=#{mno} and pdetail like CONCAT('%',#{scontent},'%') 
+		</if>
+		
+	</select>
+	<select id="pnosearchmyProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
+	  <include refid="selectProblemList" />
+	  <if test='type=="my"'>
+			WHERE m.mno=#{mno} and p.pno =#{scontent}
+			ORDER BY p.pno desc
+			limit #{start}, #{size}
+		</if> 
+		<if test='type=="scrap"'>
+			<include refid="joinInterest" />
+			WHERE i.mno=#{mno} and p.pno =#{scontent}
+			ORDER BY p.pno desc
+			limit #{start}, #{size}
+		</if>
+		
+	</select>
+	<select id="pdetailsearchmyProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
+	  <include refid="selectProblemList" />
+	  <if test='type=="my"'>
+			WHERE m.mno=#{mno} and pdetail like CONCAT('%',#{scontent},'%') 
+			ORDER BY p.pno desc
+			limit #{start}, #{size}
+		</if> 
+		<if test='type=="scrap"'>
+			<include refid="joinInterest" />
+			WHERE i.mno=#{mno} and pdetail like CONCAT('%',#{scontent},'%') 
+			ORDER BY p.pno desc
+			limit #{start}, #{size}
+		</if>
+		
+	</select>
+	
+	<!-- 자격증 필터 o 내용 검색 x -->
+	<select id="selectedProblemListCnt" parameterType="Hashmap" resultType="int">
+		<include refid="selectProblemCnt" /> 
+		<if test='type=="my"'>
+			WHERE mno=#{mno} AND p.lqno=#{selectKind}
+		</if> 
+		<if test='type=="scrap"'>
+			<include refid="joinInterest" />
+			WHERE i.mno=#{mno} AND p.lqno=#{selectKind}
+		</if>
+		
+	</select>
+	<select id="selectedmyProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
+	  <include refid="selectProblemList" />
+	   <if test='type=="my"'>
+			WHERE m.mno=#{mno} and p.lqno=#{selectKind}
+			ORDER BY p.pno desc
+			limit #{start}, #{size}
+		</if> 
+		<if test='type=="scrap"'>
+			<include refid="joinInterest" />
+			WHERE i.mno=#{mno} and p.lqno=#{selectKind}
+			ORDER BY p.pno desc
+			limit #{start}, #{size}
+		</if>
+		
+	</select>
+
+	<!-- 자격증 필터 o 내용 검색 o -->
+	<select id="pnoselectedSearchProblemListCnt" parameterType="Hashmap" resultType="int">
+		<include refid="selectProblemCnt" /> 
+		<if test='type=="my"'>
+			WHERE mno=#{mno} AND p.lqno=#{selectKind} and pno=#{scontent}
+		</if> 
+		<if test='type=="scrap"'>
+			<include refid="joinInterest" />
+			WHERE i.mno=#{mno} AND p.lqno=#{selectKind} and pno=#{scontent}
+		</if>
+		
+	</select>
+	<select id="pdetailselectedSearchProblemListCnt" parameterType="Hashmap" resultType="int">
+		<include refid="selectProblemCnt" /> 
+		<if test='type=="my"'>
+			WHERE mno=#{mno} AND p.lqno=#{selectKind} and pdetail like CONCAT('%',#{scontent},'%') 
+		</if> 
+		<if test='type=="scrap"'>
+			<include refid="joinInterest" />
+			WHERE i.mno=#{mno} AND p.lqno=#{selectKind} and pdetail like CONCAT('%',#{scontent},'%') 
+		</if>
+	</select>
+	<select id="pdetailselectedsearchmyProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
+	  <include refid="selectProblemList" />
+	  <if test='type=="my"'>
+			WHERE m.mno=#{mno} and p.lqno=#{selectKind} and pdetail like CONCAT('%',#{scontent},'%') 
+			ORDER BY p.pno desc
+			limit #{start}, #{size}
+		</if> 
+		<if test='type=="scrap"'>
+			<include refid="joinInterest" />
+			WHERE i.mno=#{mno} and p.lqno=#{selectKind} and pdetail like CONCAT('%',#{scontent},'%') 
+			ORDER BY p.pno desc
+			limit #{start}, #{size}
+		</if>
+	</select>
+	
+	<select id="pnoselectedsearchmyProblemList" parameterType="ProblemDTO" resultType="ProblemDTO">
+	  <include refid="selectProblemList" />
+	  <if test='type=="my"'>
+			WHERE m.mno=#{mno} and p.lqno=#{selectKind} and p.pno=#{scontent}
+			ORDER BY p.pno desc
+			limit #{start}, #{size}
+		</if> 
+		<if test='type=="scrap"'>
+			<include refid="joinInterest" />
+			WHERE i.mno=#{mno} and p.lqno=#{selectKind} and p.pno=#{scontent}
+			ORDER BY p.pno desc
+			limit #{start}, #{size}
+		</if>
+		
+	</select>
+	
+	
+	<!-- 신고된 문제 관리 -->
+	<select id="getErrorTotalCnt" resultType="int">
+			SELECT COUNT(*)
+			FROM error
+	</select>
+	<select id="errorProblemList" parameterType="Hashmap" resultType="errorDTO">
+			SELECT e.pno,econtent,c.cnt,p.plike,p.phate
+			FROM error AS e
+			JOIN 
+			(SELECT pno,COUNT(*) AS cnt
+			FROM error
+			GROUP BY pno) AS c
+			ON c.pno=e.pno
+			JOIN problem AS p
+			ON p.pno=e.pno
+			limit #{start},#{size}
+	</select>
+	
+	
 	<!-- 문제 입력 -->
 	<insert id="insertProblem" parameterType="problemDTO">
 		INSERT INTO problem (lqno,pyear,ptype,mno,pdetail,pcomment,pimg) VALUES (#{lqno},#{pyear},#{ptype},#{mno},#{pdetail},#{pcomment},#{pimg})
@@ -77,11 +272,11 @@
 	
 	<!-- 문제풀기-문제번호리스트 -->
 	<select id="selectPnoList" parameterType="Hashmap" resultType="string">
-		SELECT p.pno
+		SELECT p.pno,lc.lqno
 		FROM problem AS p
-		join licenseclass AS l ON p.lqno=l.lqno
+		join licenseclass AS lc ON p.lqno=lc.lqno
 		join member AS m ON m.mno=p.mno
-		WHERE l.lno=#{ckind} AND l.lqclass=#{ctype} and (p.pyear=0
+		WHERE lc.lqno=#{lqno} AND (p.pyear=0
 		<foreach collection="qyear" item="item">
 			or pyear=#{item}
 		</foreach>
@@ -162,5 +357,10 @@
 		INSERT INTO error (mno,pno,econtent) 
 		VALUES (#{mno},#{pno},#{econtent})
 	</insert>
+	
+	<!-- 문제 삭제하기 -->
+	<delete id="deleteProblem" parameterType="int">
+		DELETE FROM problem WHERE pno=#{pno}
+	</delete>
 	
 </mapper>

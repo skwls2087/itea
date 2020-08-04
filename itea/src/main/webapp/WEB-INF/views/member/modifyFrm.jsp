@@ -108,6 +108,8 @@ $(function(){
 		isnick=false;
 		$("#changeNick").css('display','none');
 		$("#checkNick").css('display','');
+		$(".myNick").css('display','none');
+		$(".modifyNick").css('display','');
 		$("#mnick").attr("readonly",false);
 		
 	});
@@ -205,7 +207,9 @@ $(function(){
 					<c:if test="${mDto.modifydate>=30}"><!-- 변경가능 닉네임 변경일이 30일 이후  -->
 					<tr>
 						<th>닉네임</th>
-						<td><input type="text" id="mnick" name="mnick" size="20" value="${mDto.mnick}">
+						<td>
+						<span class="myNick">${mDto.mnick}</span>
+						<input type="text" id="mnick" name="mnick" size="20" value="${mDto.mnick}" class="modifyNick" style="display:none;">
 						<button class="btn btn-outline-secondary" type="button" id="changeNick">변경</button>
 						<button class="btn btn-outline-secondary" type="button" id="checkNick">중복확인</button></td>
 					</tr>

@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!-- js/css 참조 -->
 <script src="${pageContext.request.contextPath}/resources/js/problem.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/problem.css">
 
 <div id="problem-proc">
-	<a href="${pageContext.request.contextPath}/ask/problemBoard.co?pno=${problem.pno}" id="problem-board">
+	<a href="${pageContext.request.contextPath}/ask/problemBoard.co?pno=${problem.pno}" id="problem-board" target="_blank">
 	<div id="problem-pno">#<span id="problemPNO">${problem.pno}</span></div></a>
-	<a href="${pageContext.request.contextPath}/ask/problemAsk.co?pno=${problem.pno}" id="problem-ask">질문하기</a>
+	<a id="problem-ask" data-toggle="modal" href="#ask-Modal" target="_blank">질문하기</a>
 
+	
 	<div class="processing">
 		<span id="psolve">${solve+1}</span>/<span id="ptotal">${total+1}</span>
 	</div>
@@ -36,8 +36,9 @@
 		</div>
 	</div>
 	<div id="problem-question">Q. ${problem.pdetail}</div>
-	${problem.pimg}
-	<%-- <img src="${pageContext.request.contextPath}/upload/dd.jsp"> --%><br/>
+	<c:if test="${!empty problem.pimg}">
+		<img src="${pageContext.request.contextPath}/resources/files/${problem.pimg}"><br/>
+	</c:if>
 	
 	<!-- 객관식일때 -->
 	<table>
@@ -54,12 +55,27 @@
 	<br/>
 	
 	<!-- 주관,서술형일때 -->
-	<c:if test="${problem.ptype!=1}">
-		<input type="text"/>
+	<c:if test="${problem.ptype==2}">
+		<textarea id="shortText" style="width:100%;margin-bottom:10px;"></textarea>
+	</c:if>
+	<c:if test="${problem.ptype==3}">
+		<textarea id="essayText" style="width:100%;margin-bottom:10px;"></textarea>
 	</c:if>
 	
 	<form id="nextProblem" action="nextProblem.co" method="post">
-	<input type="button" class="btn btn-success center" id="problemScoring" value="채점하기" >
+	
+	<c:if test="${problem.ptype==1}">
+		<input type="button" class="btn btn-success center" id="problemScoring" value="채점하기" >
+	</c:if>
+	
+	<c:if test="${problem.ptype==2}">
+		<input type="button" class="btn btn-success center" id="problemShortScoring" value="채점하기" >
+	</c:if>
+	
+	<c:if test="${problem.ptype==3}">
+		<input type="button" class="btn btn-success center" id="problemEssayScoring" value="채점하기" >
+	</c:if>
+	
 		<c:forEach items="${pnoList}" var="pno">
 			<input type="hidden" name="pnoList" value="${pno}"/>
 		</c:forEach>
@@ -93,12 +109,10 @@
 	
 	<!-- 문제 신고하기 -->
 	<div id="problem-sub-right">
-		<a data-toggle="modal" href="#e-Modal">
+		<a id="error-modal" data-toggle="modal" href="#e-Modal">
 		<img id="error" src="${pageContext.request.contextPath}/resources/img/error.png" style="cursor:pointer" width="40"/></a>
 	</div>
-	
 </div>
-
 </div>
 
 <div class="problemScore" id="problem-wrong" style="display:none">
@@ -107,15 +121,32 @@
 			틀렸습니다!
 		</div>
 		<div id="problemScore-right">
+			<!-- 객관식 정답 표시 -->
+		<c:if test="${problem.ptype==1}">
 			정답:<span id="problem-choice-correct">${problem.correct}</span><br/>
 			해설:${problem.pcomment}<br/>
-			<c:if test="${problem.ptype!=1}">
-				<c:forEach items="${problem.correctList}" var="correct">
-				핵심키워드:${correct} 
-				</c:forEach>
-			</c:if>
-		</div>
+		</c:if>
+		
+		<!-- 단답형 정답 표시 -->
+		<c:if test="${problem.ptype==2}">
+			정답:
+			<c:forEach items="${problem.correctList}" var="correct" varStatus="status">
+				${correct}<c:if test="${!status.last}"> || </c:if> 
+				
+			</c:forEach>
+			<br/>해설:${problem.pcomment}<br/>
+		</c:if>
+		
+		<!-- 서술형 정답 표시 -->
+		<c:if test="${problem.ptype==3}">
+			핵심 키워드:
+			<c:forEach items="${problem.correctList}" var="correct" varStatus="status">
+				${correct}<c:if test="${!status.last}"> && </c:if> 
+			</c:forEach>
+			<br/>정답:${problem.pcomment}<br/>
+		</c:if>
 	</div>
+</div>
 	
 <div class="problemScore" id="problem-correct" style="display:none">
 	<div id="problemScore-left">
@@ -123,12 +154,29 @@
 		정답입니다!
 	</div>
 	<div id="problemScore-right">
-		정답:<span id="problem-choice-correct">${problem.correct}</span><br/>
-		해설:${problem.pcomment}<br/>
-		<c:if test="${problem.ptype!=1}">
-			<c:forEach items="${problem.correctList}" var="correct">
-			핵심키워드:${correct} 
+	
+		<!-- 객관식 정답 표시 -->
+		<c:if test="${problem.ptype==1}">
+			정답:<span id="problem-choice-correct">${problem.correct}</span><br/>
+			해설:${problem.pcomment}<br/>
+		</c:if>
+		
+		<!-- 단답형 정답 표시 -->
+		<c:if test="${problem.ptype==2}">
+			정답:
+			<c:forEach items="${problem.correctList}" var="correct" varStatus="status">
+				${correct}<c:if test="${!status.last}"> || </c:if> 
 			</c:forEach>
+			<br/>해설:${problem.pcomment}<br/>
+		</c:if>
+		
+		<!-- 서술형 정답 표시 -->
+		<c:if test="${problem.ptype==3}">
+			핵심 키워드:
+			<c:forEach items="${problem.correctList}" var="correct" varStatus="status">
+				${correct}<c:if test="${!status.last}"> && </c:if> 
+			</c:forEach>
+			<br/>정답:${problem.pcomment}<br/>
 		</c:if>
 	</div>
 </div>
@@ -149,8 +197,6 @@
 	
 				<form id="error-form" method="post" action="aInsert.co">
 				
-					<input type='hidden' name='nowPage' value='${PINFO.nowPage}'/>
-					<input type='hidden' id='aaa' name='qno' value=''/>
         	<div class="form-group">
 			      <textarea class="form-control" placeholder="신고내용을 입력해주세요" id="errorTextarea" name="acont" rows="3"></textarea>
 			    </div>
@@ -165,9 +211,44 @@
 	        
 	        </div>
 	    </div>
-	  </div>
+  </div>
 
+<!-- 질문 등록하기 -->
+	<div class="modal fade" id="ask-Modal" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <h4 class="modal-title">질문 등록하기</h4>
+	          <button type="button" class="close" data-dismiss="modal">×</button>
+	        </div>
+	        <div class="modal-body">
+	        <div class="problem-ask-container">
 
+				<form id="ask-form" method="post" action="aWriteProc.co">
+				
+				<table style="width:100%">
+					<tr>
+						<th width="10%">제목</th>
+						<td><input type="text" id="atitle" name="atitle" value="${askDTO.atitle}" style="width:100%"/></td>
+					</tr>
+					<tr>
+						<th>내용</th>
+						<td><textarea id="acontent" name="acontent" rows="10" style="width:100%">${askDTO.acontent}</textarea></td>
+					</tr>
+				</table>
 	
+	        <div class="modal-footer">
+	      		<input type="button" class="btn btn-info" id="a-submit" value="등록하기"/>
+	        </div>
+	      </div>
+	      
+	      </form>
+	      
+        </div>
+    	</div>
+   	</div>
+</div>
 
-    
+

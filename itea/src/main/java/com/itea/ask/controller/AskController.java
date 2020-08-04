@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itea.ask.service.AskService;
@@ -49,16 +50,21 @@ public class AskController {
 	
 	//글 쓰기 처리
 	@RequestMapping("ask/aWriteProc")
-	public ModelAndView aWriteProc(HttpServletRequest request,HttpSession session,
-			ModelAndView mv) {
+	@ResponseBody
+	public int aWriteProc(HttpServletRequest request,HttpSession session) {
+		
 		String atitle=request.getParameter("atitle");
 		String acontent=request.getParameter("acontent");
-		int pno=Integer.parseInt(request.getParameter("pno"));
-		int mno=(Integer)session.getAttribute("MNO");
-		AskDTO askDTO= new AskDTO(mno,pno,atitle,acontent);
-		askSV.aWriteProc(askDTO);
-		mv.setViewName("redirect:/ask/askList.co");
-		return mv;
+		String pno=request.getParameter("pno");
+		
+		System.out.println(pno+atitle+acontent);
+		//int pno=Integer.parseInt(request.getParameter("pno"));
+		
+		//int mno=(Integer)session.getAttribute("MNO");
+		//AskDTO askDTO= new AskDTO(mno,pno,atitle,acontent);
+		//askSV.aWriteProc(askDTO);
+		
+		return 0;
 	}
 	
 	

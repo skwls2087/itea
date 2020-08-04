@@ -6,6 +6,9 @@ th {
 	text-align: center;
 }
 </style>
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/ask.css">
+
 <script>
 $(function(){
 	$("#sBtn").click(function(){
@@ -34,30 +37,26 @@ $(function(){
 </script>
 
 <div class="container">
+	<h2 class="ask-heading">질문/토론 게시판</h2>
 	<form id="aWriteFrm" action="../ask/askModifyProc.co">
 	<input type="hidden" name="nowPage" value="${askDTO.nowPage}"/>
 		<table class="table">
 			<tr>
-				<th>제목</th>
-				<td width="200"><input type="text" id="atitle" name="atitle"
-					size="50" value="${askDTO.atitle}"/></td>
-				<th>문제번호</th>
-				<td>
-					<input type="text" id="pno" name="pno" value="${askDTO.pno}" readonly="readonly"/>
-					<input type="hidden" id="ano" name="ano" value="${askDTO.ano}"/>
-				</td>
-				
+				<th width="10%">제목</th>
+				<td><input type="text" id="atitle" name="atitle" value="${askDTO.atitle}" style="width:100%"/></td>
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td colspan="3"><textarea id="acontent" name="acontent" cols="100" rows="10">${askDTO.acontent}</textarea></td>
+				<td><textarea id="acontent" name="acontent" rows="10" style="width:100%">${askDTO.acontent}</textarea></td>
 			</tr>
-			<tr>
-				<td colspan="4">
-					<input type="submit" id="sBtn" value="확인" onclick="return validateForm()"/> 
-					<input type="reset" id="rBtn" value="취소" />
+			<tr style="text-align:center;">
+				<td colspan="2">
+					<input type="submit" class="btn btn-info" id="sBtn" value="수정" onclick="return validateForm()"/> 
+					<input type="reset" class="btn btn-secondary" id="rBtn" value="취소" />
 				</td>
 			</tr>
 		</table>
+		<input type="hidden" id="pno" name="pno" value="${askDTO.pno}"/>
+		<input type="hidden" id="ano" name="ano" value="${askDTO.ano}"/>
 	</form>
 </div>

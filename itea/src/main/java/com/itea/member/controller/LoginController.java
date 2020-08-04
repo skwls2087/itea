@@ -58,7 +58,7 @@ public class LoginController {
 	//네이버로그인
 	@RequestMapping(value = "/callback")
 	public String loginPOSTNaver(HttpSession session) {
-		
+		System.out.println("네아로");
 		return "member/navercallback";
 	}
 	
