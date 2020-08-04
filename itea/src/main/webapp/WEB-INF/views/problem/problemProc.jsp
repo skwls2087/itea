@@ -157,8 +157,10 @@
 	
 		<!-- 객관식 정답 표시 -->
 		<c:if test="${problem.ptype==1}">
-			정답:<span id="problem-choice-correct">${problem.correct}</span><br/>
-			해설:${problem.pcomment}<br/>
+			정답:<span id="problem-choice-correct">${problem.correct}번</span><br/>
+			<c:if test="${!empty problem.pcomment}">
+				해설:${problem.pcomment}<br/>
+			</c:if>
 		</c:if>
 		
 		<!-- 단답형 정답 표시 -->
@@ -167,7 +169,9 @@
 			<c:forEach items="${problem.correctList}" var="correct" varStatus="status">
 				${correct}<c:if test="${!status.last}"> || </c:if> 
 			</c:forEach>
-			<br/>해설:${problem.pcomment}<br/>
+			<c:if test="${!empty problem.pcomment}">
+				<br/>해설:${problem.pcomment}<br/>
+			</c:if>
 		</c:if>
 		
 		<!-- 서술형 정답 표시 -->
