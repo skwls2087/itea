@@ -113,7 +113,9 @@
 		    	  xhr.send('idtoken=' + id_token);
 		      }
 		   </script>  
-		</div>	  
+		</div>
+		
+		<%-- <a href="<%= request.getContextPath()%>/member/snsjoin.co">로그인테스트</a> --%>
 </div>
 			
 			 

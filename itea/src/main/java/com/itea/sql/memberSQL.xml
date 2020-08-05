@@ -95,7 +95,7 @@
 	
 	<!-- 회원가입 SNS-->
 	<insert id="joinProcSNS" parameterType="memberDTO">
-		insert into member(mclass,mmail,mname,mnick,mphone,mbirth,msex,mgradu,madate,mnickdate)
+		insert into member(mclass,mmail,mname,mnick,mphone,mbirth,msex,mgradu,mdate,mnickdate)
 		values(#{mclass},#{mmail},#{mname},#{mnick},#{mphone},#{mbirth},#{msex},#{mgradu},now(),now())
 	</insert>
 	

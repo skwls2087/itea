@@ -32,7 +32,7 @@
        			success : function(data) {		
        				
        				if(data==1){//이미 회원이면 -> 로그인처리
-       					location.href="snslogin.co";
+       					location.href='index.jsp';
        					
        				}else{//회원이 아니라면 -> 회원가입 추가정보입력페이지로
        					$("#navermail").val(email);
