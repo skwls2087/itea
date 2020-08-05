@@ -28,7 +28,7 @@
 	      <option value="pno" selected="selected">번호</option>
 	      <option value="pdetail" selected="">내용</option>
 	    </select>
-	  	<input type="text" name="scontent" class="form-control" style="padding-right:35px;margin-bottom:10px;"/>
+	  	<input type="text" name="scontent" class="form-control"/>
 	  	<input type="hidden" name="lqno" value="${lqno}"/>
 	  	<img src="${pageContext.request.contextPath}/resources/img/search.png" id="problemContentSearchClick" 
 	  		style="cursor:pointer" width="20" onclick="document.getElementById('problemContentSearch').submit();"/>
@@ -51,7 +51,6 @@
         	<img src="${pageContext.request.contextPath}/resources/img/errorhover.png" width="25"/>
         </td>
     </tr>
-    <c:if test="${PINFO.totalCount!=0}">
     <c:forEach items="${LIST}" var="list" varStatus="status">
     <tr>
         <td>
@@ -59,7 +58,7 @@
         		${list.pno }
        		</a>
         </td>
-        <td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
+        <td>
         ${list.lname}<c:if test="${list.lqclass!='단독'}">_${list.lqclass}</c:if>
         </td>
         <td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
@@ -81,7 +80,7 @@
         <tr>
 				<td colspan="7">
 				<div>
-  				<ul class="pagination" id="p-paging">
+  				<ul class="pagination" id="q-paging">
   				
   				<!-- 이전페이지 -->
   				<c:if test="${PINFO.nowPage ne 1}">
@@ -123,12 +122,6 @@
 					</div>
 				</td>
 			</tr> 
-			</c:if>
-			<c:if test="${PINFO.totalCount==0}">
-			<tr>
-				<td colspan="8" style="text-align:center">등록된 문제가 없습니다.</td>
-			</tr>
-		</c:if> 
 	</table>
 </div>
 </div>

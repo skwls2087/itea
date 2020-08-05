@@ -26,7 +26,6 @@
         <td width="5%"></td>
         <td width="5%"></td>
     </tr>
-    <c:if test="${PINFO.totalCount!=0}">
     <c:forEach items="${LIST}" var="list" varStatus="status">
     <tr>
         <td>
@@ -47,7 +46,7 @@
         <tr>
 				<td colspan="7">
 				<div>
-  				<ul class="pagination" id="p-paging">
+  				<ul class="pagination" id="q-paging">
   				
   				<!-- 이전페이지 -->
   				<c:if test="${PINFO.nowPage ne 1}">
@@ -89,12 +88,6 @@
 					</div>
 				</td>
 			</tr> 
-			</c:if>
-			<c:if test="${PINFO.totalCount==0}">
-			<tr>
-				<td colspan="8" style="text-align:center">등록된 문제가 없습니다.</td>
-			</tr>
-		</c:if> 
 	</table>
 </div>
 </div>

@@ -284,7 +284,6 @@ textarea{
 /*특정 문제 리스트*/
 #selectKind{
 	width:250px;
-	margin-top: -10px;
 }
 .ptype-search{
 	float:left;
@@ -308,8 +307,4 @@ textarea{
 }
 #problem-img{
 	width: 100%;
-}
-#p-paging{
-  margin: 0 auto;
-  width: 234px;
 }

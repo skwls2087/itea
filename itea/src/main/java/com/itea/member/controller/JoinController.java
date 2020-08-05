@@ -26,11 +26,12 @@ public class JoinController {
 		
 	}
 	
-	@RequestMapping("/member/snsjoin")
+	/*@RequestMapping("/member/snsjoin")
 	public String snsjoin(HttpServletRequest request) {
+		request.setAttribute("email", "skwls2087@naver.com");
 		
 		return "member/joinFrmSNS";
-	}
+	}*/
 	
 	@RequestMapping("/member/joinProc")
 	public String joinProc(MemberDTO mDto) {
@@ -49,7 +50,7 @@ public class JoinController {
 		System.out.println("mDto"+mDto);
 		jDao.joinProcSNS(mDto);
 		
-		return "redirect:/member/loginFrm.co";
+		return "../../index";
 	}
 	
 	@RequestMapping("joinProcSNS")
@@ -58,7 +59,7 @@ public class JoinController {
 		System.out.println("mDto"+mDto);
 		jDao.joinProcSNS(mDto);
 		
-		return "redirect:/member/loginFrm.co";
+		return "../../index";
 	}
 	
 	@RequestMapping("snsjoin")
@@ -68,15 +69,6 @@ public class JoinController {
 		request.setAttribute("email", email);
 		
 		return "member/joinFrmSNS";
-	}
-	
-	@RequestMapping("snslogin")
-	public String snslogin(@RequestParam String email,HttpServletRequest request) {
-		
-		System.out.println("sns로그인 와써요");
-		request.setAttribute("email", email);
-		
-		return "redirect:/";
 	}
 	
     //이메일이 존재하는 이메일인지 확인하고 인증코드 발송

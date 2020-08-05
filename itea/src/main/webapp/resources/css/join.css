@@ -11,15 +11,6 @@ th{
 #join-table{
 	max-width:600px;
 }
-
-@media (max-width: 500px) {
-   #join-table th{
-   	width:68px;
-    padding: 5px 0px;
-	}
-}
-
-
 #mail-button{
 	height:30px;
 	width:50px;

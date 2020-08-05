@@ -17,38 +17,36 @@
 
 	<h2 class="ask-heading">질문/토론 게시판</h2>
 
-	<form action="../ask/askSearch.co" style="text-align: right" id="askSearchFrm">
+	<form action="../ask/askSearch.co" style="text-align: right"
+		id="askSearchFrm">
 		<select id="category" class="custom-select" name="category">
 			<option value="title" selected>제목</option>
 			<option value="pno">문제번호</option>
-		</select> 
-		<input type="text" class="form-control" id="asearch" name="asearch" 
-				style="padding-right:35px;"/>
+		</select> <input type="text" class="form-control" id="asearch" name="asearch" />
 		<img src="${pageContext.request.contextPath}/resources/img/search.png"
 			id="askSearch" width="20" style="cursor: pointer;">
 	</form>
 
 	<br>
-	<table class="table" style="table-layout:fixed">
+	<table class="table" style="text-align: center">
 		<thead class="thead-light">
 			<tr>
-				<th>#</th>
-				<th width="50%">제목</th>
-				<th width="15%">자격증</th>
-				<th>작성자</th>
-				<th width="10%">등록일</th>
-				<th>조회수</th>
+				<th width="100">문제번호</th>
+				<th width="280">제목</th>
+				<th width="150">자격증</th>
+				<th width="90">작성자</th>
+				<th width="100">등록일</th>
+				<th width="70">조회수</th>
 			</tr>
 		</thead>
 		<c:forEach var="ask" items="${list}">
 			<tr>
 				<td>${ask.pno}</td>
-				<td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;"><a
+				<td><a
 					href="../ask/askCnt.co?ano=${ask.ano}&nowPage=${pInfo.nowPage}">${ask.atitle}</a></td>
-				<td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">${ask.lname}</td>
-				<td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">${ask.mnick}</td>
-				<td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
-				<fmt:formatDate value="${ask.adate}" pattern="yyyy-MM-dd" /></td>
+				<td>${ask.lname}</td>
+				<td>${ask.mnick}</td>
+				<td><fmt:formatDate value="${ask.adate}" pattern="yyyy-MM-dd" /></td>
 				<td>${ask.ahit}</td>
 			</tr>
 		</c:forEach>
