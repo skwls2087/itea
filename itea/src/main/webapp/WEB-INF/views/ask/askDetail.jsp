@@ -21,7 +21,7 @@
 		});
 		
 		$("#mBtn").click(function(){
-			 if(${askDTO.mnick ne userNick}){
+			 if(${askDTO.mnick ne userNick && userNick!="관리자"}){
 				alert("작성자만이 게시글을 수정할 수 있습니다.");
 				return false;
 			};  
