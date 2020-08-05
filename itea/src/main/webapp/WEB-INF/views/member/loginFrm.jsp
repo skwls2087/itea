@@ -57,32 +57,52 @@
 		<div id="kakao_login" align="center">
 			<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js" charset="utf-8"></script>
 			<a id="custom-login-btn" href="javascript:loginWithKakao()">
-	 		<img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="280" /></a>
+  				<img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="280" />
+			</a>
 			<p id="token-result"></p>
-			<script type='text/javascript'>
-			Kakao.init('cbcf1139dc760ede7c25db96a9eae901'); //아까 카카오개발자홈페이지에서 발급받은 자바스크립트 키를 입력함
-			//카카오 로그인 버튼을 생성합니다. 
-			function loginWithKakao() {
-			  Kakao.Auth.authorize({
-			    // 초기화한 앱의 로그인 Redirect URI에 등록된 URI여야 합니다.
-			    redirectUri: 'https://itealab.com/kakao.co'
-			  })
-			}
-			getToken()
-		    function getToken() {
-			  const token = getCookie('authorize-access-token')
-			  if(token) {
-			    Kakao.Auth.setAccessToken(token)
-			    document.getElementById('token-result').innerText = 'login success. token: ' + Kakao.Auth.getAccessToken()
-			  }
-			}
-			function getCookie(name) {
-			  const value = "; " + document.cookie;
-			  const parts = value.split("; " + name + "=");
-			  if (parts.length === 2) return parts.pop().split(";").shift();
-		 	}
-			</script>
+		<script type="text/javascript">
+			const kakao = {
+				clientID: "cbcf1139dc760ede7c25db96a9eae901",
+			    clientSecret: "vz7AS4l94wIkg6WxpJ9wWi8PxXeaHkfA",
+				edirectUri: "http://localhost:8080/callback"
+			};
+		
+		  // 웹 플랫폼 도메인 등 초기화한 앱의 설정이 그대로 적용됩니다.
+		  // 초기화한 앱에 현재 도메인이 등록되지 않은 경우 에러가 발생합니다.
+		  Kakao.init('cbcf1139dc760ede7c25db96a9eae901')
+		  
+		  function loginWithKakao() {
+		    Kakao.Auth.authorize({
+		      // 초기화한 앱의 로그인 Redirect URI에 등록된 URI여야 합니다.
+		      redirectUri: 'http://localhost:8080/kakao.co'
+		    })
+		  }
+		  
+		  Kakao.Auth.createLoginButton({
+			    container: '#kakao-login-btn',
+			    success: function(authObj) {
+			      Kakao.API.request({
+			        url: '/v2/user/me',
+			        success: function(res) {
+			          alert(JSON.stringify(res))
+			        },
+			        fail: function(error) {
+			          alert(JSON.stringify(error)
+			          )
+			        },
+			      })
+			    },
+			    fail: function(err) {
+			      alert('failed to login: ' + JSON.stringify(err))
+			    },
+		 })
+		 
+		</script>
+
 	 	</div>
+	 	
+	 	
+	 	<br/>
 	 	
 		<!-- 3.구글 -->
 		<div id="google_id_login" align="center" class="g-signin2" data-width="280" data-height="60" data-theme="dark" data-longtitle="true" data-onsuccess="onSignIn" >
@@ -97,7 +117,7 @@
 		        console.log("ID: " + profile.getId()); 		// Don't send this directly to your server!
 		        console.log('Image URL: ' + profile.getImageUrl());
 		        console.log("Email: " + profile.getEmail());
-		
+				
 		        // The ID token you need to pass to your backend:
 		        var id_token = googleUser.getAuthResponse().id_token;
 		        console.log("ID Token: " + id_token);
@@ -105,7 +125,7 @@
 		      function onSignIn(googleUser) {
 		    	  var id_token = googleUser.getAuthResponse().id_token;
 		    	  var xhr = new XMLHttpRequest();
-		    	  xhr.open('POST', 'https://itealab.com/tokensignin');
+		    	  xhr.open('POST', 'http://localhost:8080/tokensignin');
 		    	  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		    	  xhr.onload = function() {
 		    	    console.log('Signed in as: ' + xhr.responseText);
