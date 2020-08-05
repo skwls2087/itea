@@ -28,17 +28,17 @@
 	      <option value="pno" selected="selected">#</option>
 	      <option value="pdetail" selected="">내용</option>
 	    </select>
-	  	<input type="text" name="scontent" class="form-control"/>
+	  	<input type="text" name="scontent" class="form-control" style="padding-right:35px;margin-bottom:10px;"/>
 	  	<input type="hidden" name="lqno" value="${lqno}"/>
 	  	<img src="${pageContext.request.contextPath}/resources/img/search.png" id="problemContentSearchClick" 
 	  		style="cursor:pointer" width="20" onclick="document.getElementById('problemContentSearch').submit();"/>
 	  </form>
 	  </div>
 	  
-	<table class="table" style="table-layout:fixed">
+	<table class="table" id="listTable" style="table-layout:fixed">
     <tr>
         <td width="10%">번호</td>
-        <td width="20%">자격증</td>
+        <td width="20%" class="listLicense">자격증</td>
         <td width="40%">문제</td>
         <td width="10%">정답률</td>
         <td width="5%">
@@ -52,14 +52,15 @@
         </td>
         <td width="5%"></td>
     </tr>
+    <c:if test="${PINFO.totalCount!=0}">
     <c:forEach items="${LIST}" var="list" varStatus="status">
     <tr>
         <td>
         	<a href="${pageContext.request.contextPath}/ask/problemBoard.co?pno=${list.pno }" id="problem-board" target="_blank">
-        		${list.pno }
+        		${list.pno}
        		</a>
         </td>
-        <td>
+        <td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
         ${list.lname}<c:if test="${list.lqclass!='단독'}">_${list.lqclass}</c:if>
         </td>
         <td style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">
@@ -86,7 +87,7 @@
         <tr>
 				<td colspan="8">
 				<div>
-  				<ul class="pagination" id="q-paging">
+  				<ul class="pagination" id="p-paging">
   				
   				<!-- 이전페이지 -->
   				<c:if test="${PINFO.nowPage ne 1}">
@@ -127,7 +128,13 @@
 				  </ul>
 					</div>
 				</td>
-			</tr> 
+			</tr>
+			</c:if>
+			<c:if test="${PINFO.totalCount==0}">
+			<tr>
+				<td colspan="8" style="text-align:center">등록된 문제가 없습니다.</td>
+			</tr>
+		</c:if> 
 	</table>
 </div>
 </div>

@@ -15,8 +15,8 @@
 		<input type="hidden" id="mmail" name="mmail" value="${email}"/>
 		<input type="hidden" id="class" name="mclass" value="2"/>
 		<tr>
-			<th>이메일</th>
-			<td>${email}</td>
+			<th width="30%">이메일</th>
+			<td width="70%">${email}</td>
 		</tr>
 		<tr>
 			<th><label for="mname">이름</label></th>
@@ -24,7 +24,7 @@
 		</tr>
 		<tr>
 			<th><label for="mnick">닉네임</label></th>
-			<td><input type="text" id="mnick" name="mnick" style="width:200px;"/>
+			<td><input type="text" id="mnick" name="mnick"/>
 			<button class="btn btn-outline-secondary" type="button" id="check_nickname">중복확인</button></td>
 		</tr>
 		<tr>
