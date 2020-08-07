@@ -152,15 +152,15 @@ $(function(){
 					<c:when test="${member.mclass==1}">일반
 					</c:when>
 					<c:when test="${member.mclass==2}">
-						&nbsp<img src="${pageContext.request.contextPath}/resources/img/naver-logo2.png" 
+						&nbsp<img src="${pageContext.request.contextPath}/resources/img/naver-logo.png" 
 						width="20"/>
 					</c:when>
 					<c:when test="${member.mclass==3}">
-						&nbsp<img src="${pageContext.request.contextPath}/resources/img/kakao-logo3.png"
+						&nbsp<img src="${pageContext.request.contextPath}/resources/img/kakao-logo.png"
 						width="20"/>
 					</c:when>
 					<c:when test="${member.mclass==4}">
-						&nbsp<img src="${pageContext.request.contextPath}/resources/img/google-logo2.png"
+						&nbsp<img src="${pageContext.request.contextPath}/resources/img/google-logo.png"
 						width="20"/>
 					</c:when>
 				</c:choose>
