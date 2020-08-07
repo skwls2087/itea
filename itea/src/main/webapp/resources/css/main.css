@@ -177,3 +177,26 @@
 	float:left;
 }
 
+.button#todayButton1.today-button{
+	width:20px;
+	height:20px;
+	pargin:20px auto;
+	font-size:14px;
+	font: Arial;
+}
+
+#todayButton1{
+	width:20px;
+	height:20px;
+	pargin:20px auto;
+	font-size:14px;
+	font: Arial;
+}
+
+.today-button{
+	width:20px;
+	height:20px;
+	pargin:20px auto;
+	font-size:14px;
+	font: Arial;
+}

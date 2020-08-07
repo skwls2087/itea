@@ -92,8 +92,8 @@ public class LoginController {
 	}
 	
 	//sns로그인
-	@RequestMapping(value="member/snsloginFrm", method=RequestMethod.GET)
-	public ModelAndView snslogin(HttpSession session) {
+	@RequestMapping(value="/member/snsloginFrm", method=RequestMethod.GET)
+	public int snslogin(HttpSession session) {
 		System.out.println("SNS LoginFrm 진입");
 		ModelAndView mav = new ModelAndView();
 		
@@ -102,12 +102,12 @@ public class LoginController {
 		mav.setViewName("loginFrm");
 		mav.addObject("kakao_url", kakaoUrl);
 		
-		return mav;
+		return snslogin(session);
 	}
 	
-	@RequestMapping(value="member/kakaologin", 
+	@RequestMapping(value="/member/kakao.co", 
 			produces="application/json", method={RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView KakaoLogin(@RequestParam("code") String code, 
+	public int KakaoLogin(@RequestParam("code") String code, 
 			HttpServletRequest request, HttpServletResponse response, 
 			HttpSession session) throws Exception {
 		System.out.println("KakaoLogin 진입");
@@ -131,11 +131,35 @@ public class LoginController {
 		kname  = kakao_account.path("nickname").asText();
 		session.setAttribute("kemail", kemail);
 		session.setAttribute("kname", kname);
-		mav.setViewName("main");
 		
+		//MemberDTO 연동
+		MemberDTO memberDTO = new MemberDTO();
 		
+		System.out.println("조인체크");
 		
-		return mav;	
+		memberDTO.setMclass(2);
+		memberDTO.setMmail(kemail);
+			
+		//해당 이메일이 회원 테이블에 있는지 검색
+		MemberDTO member=loginSV.snsLogin(memberDTO);
+		
+		if(member!=null) { //회원이면 로그인 처리 완료
+			
+			session.setAttribute("MNO", member.getMno());
+			session.setAttribute("MNICK", member.getMnick());
+			
+			return 1;
+			
+		}else { //회원이 아니면 회원가입페이지로 이동
+			System.out.println("회원아냐");
+		
+			return 0;
+		}	
+	}
+	
+	@RequestMapping(value="/member/GoogleLogin", method={RequestMethod.GET, RequestMethod.POST})
+	public String GoogleLogin(HttpSession session) {
+		return "redirect:/member/GoogleLogin";
 	}
 	
 	

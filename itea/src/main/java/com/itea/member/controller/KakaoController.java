@@ -28,7 +28,7 @@ public class KakaoController {
 	private final static String K_CLIENT_ID    = "dddf9e1f05cdd30409acd606d146afe9";
 	
 	//KAKAO API Redirect URI	
-	private final static String K_REDIRECT_URI = "http://itealab.com/";
+	private final static String K_REDIRECT_URI = "http://localhost:8080/kakao.co";
 	
 	public static String getAuthiruzationURI(HttpSession session) {
 		String kakaoUrl 
