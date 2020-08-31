@@ -38,9 +38,7 @@
 	<!-- 로그인 체크 인터셉터 추가 -->
 	<interceptors>
 		<interceptor>
-			<mapping path="/problem/createProblem.co"/>
-			<mapping path="/problem/selectProblem.co"/>
-			
+			<mapping path="/license/licenseDelete.co"/>
 			<beans:bean class="com.itea.util.LoginCheck" />
 		</interceptor>
 	</interceptors>
