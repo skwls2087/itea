@@ -460,6 +460,18 @@ $(function(){
 		$('#problemScrap').attr('src','../resources/img/star.png');
 	});
 	
+	
+	$('.nolikeimg').mouseenter(function(){
+		$('#nolikeimg').attr('src','../resources/img/star-click.png');
+	});
+	$('.nolikeimg').mouseleave(function(){
+		$('#nolikeimg').attr('src','../resources/img/star.png');
+	});
+	$('.nolikeimg').click(function(){
+		alert('로그인 후 이용해주세요')
+	});
+		
+	
 	//해당 문제 즐겨찾기로 추가하기
 	$(document).on("click",".problemScrap",function(event){
 

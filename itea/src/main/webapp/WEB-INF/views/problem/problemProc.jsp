@@ -8,8 +8,10 @@
 <div id="problem-proc">
 	<a href="${pageContext.request.contextPath}/ask/problemBoard.co?pno=${problem.pno}" id="problem-board" target="_blank">
 	<div id="problem-pno">#<span id="problemPNO">${problem.pno}</span></div></a>
-	<a id="problem-ask" data-toggle="modal" href="#ask-Modal" target="_blank">질문하기</a>
-
+	
+	<c:if test="${MNO!=null}">
+		<a id="problem-ask" data-toggle="modal" href="#ask-Modal" target="_blank">질문하기</a>
+	</c:if>
 	
 	<div class="processing">
 		<span id="psolve">${solve+1}</span>/<span id="ptotal">${total+1}</span>
@@ -46,7 +48,7 @@
 		<c:forEach items="${problem.choice}" var="choice" varStatus="status">
 		<tr>
 			<td valign=top>${status.count}. </td>
-			<td><span id="solveChoice${status.count}">${choice}
+			<td><span id="solveChoice${status.count}" style="cursor:pointer">${choice}
 				</span></td>
 		</tr>
 		</c:forEach>
@@ -89,12 +91,18 @@
 
 	<!-- 문제 즐겨찾기 -->
 	<div id="problem-sub-left">
+	<c:if test="${MNO==null}">
+		<img class="nolikeimg" id="nolikeimg" src="${pageContext.request.contextPath}/resources/img/star.png" style="cursor:pointer" width="30"/>
+	</c:if>
+	<c:if test="${MNO!=null}">
 	<c:if test="${interest==0}">
 		<img class="problemScrap" id="problemScrap" src="${pageContext.request.contextPath}/resources/img/star.png" style="cursor:pointer" width="30"/>
 	</c:if>
 	<c:if test="${interest!=0}">
 		<img class="problemNonScrap" id="problemNonScrap" src="${pageContext.request.contextPath}/resources/img/star-click.png" style="cursor:pointer" width="30"/>
 	</c:if>
+	</c:if>
+
 	</div>
 	
 	<!-- 문제 좋아요 싫어요 -->
@@ -109,7 +117,12 @@
 	
 	<!-- 문제 신고하기 -->
 	<div id="problem-sub-right">
+	<c:if test="${MNO!=null}">
 		<a id="error-modal" data-toggle="modal" href="#e-Modal">
+	</c:if>
+	<c:if test="${MNO==null}">
+		<a id="error-modal" data-toggle="modal" href="void(0);" onclick="alert('로그인 후 이용해주세요');return false;">
+	</c:if>
 		<img id="error" src="${pageContext.request.contextPath}/resources/img/error.png" style="cursor:pointer" width="40"/></a>
 	</div>
 </div>

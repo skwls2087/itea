@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="x-ua-compatible" content="IE=Edge">
 <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="mwbeUePaktZ3bomMTldsxyQkKR0nLFOtEPsLnNCLnJY" />
 
 <title>아이티어</title>
 <link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/img/itea.png">
@@ -64,6 +65,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
 
 <script>
+
 	 /*태강-채팅*/
 		function sendMessage(form){
 			//서버로 전송
@@ -107,6 +109,7 @@
 		function Chat__drawMessages(message){
 
 		 	var d = new Date();
+		 	today=d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate()+' '
 
 		 	/* var d = message.time
 			var h = d.getHours();
@@ -121,14 +124,14 @@
 				var html = 
 					'<div class="myname">'+message.writer+'</div><br/>'+
 					'<div class="my"><div class="mychat">'+message.body+'</div>'+
-					'<div class="mytime"><table><td class="mytimetd">'+message.time+'</td></table></div></div>'
+					'<div class="mytime"><table><td class="mytimetd">'+today+message.time+'</td></table></div></div>'
 
 					$('.chat-list').append(html)
 			}else{
 				var html = 
 					'<div class="othername">'+message.writer+'</div><br/>'+
 					'<div class="other"><div class="otherchat">'+message.body+'</div>'+
-					'<div class="othertime"><table><td class="othertimetd">'+message.time+'</td></table></div></div>'
+					'<div class="othertime"><table><td class="othertimetd">'+today+message.time+'</td></table></div></div>'
 
 					$('.chat-list').append(html)
 			}

@@ -37,7 +37,13 @@ public class SolveProblemController {
 		
 		System.out.println("문제풀기페이지 첫화면 진입");
 		
-		int mno=(int)session.getAttribute("MNO");
+		int mno;
+		
+		if(session.getAttribute("MNO")!=null) {
+			mno=(int)session.getAttribute("MNO");
+		}else {
+			mno=0;
+		}
 		
 		//출제자 선택
 		String qtype=request.getParameter("Qtype");
